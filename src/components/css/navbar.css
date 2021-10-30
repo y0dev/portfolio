@@ -1,8 +1,12 @@
+:root {
+   --menu-background-color: #FFFFFF;
+   --menu-color: #000000;
+}
 .navbar
 {
    /* position: fixed; */
    z-index: 100;
-   background-color: #FFFFFF;
+   background-color: var(--menu-background-color);
    height: 70px;
    width: 100%;
 }
@@ -25,7 +29,7 @@
 
 .navbar nav ul li a {
    padding: 0 20px;
-   color: black;
+   color: var(--menu-color);
    text-transform: uppercase;
 }
 
@@ -43,6 +47,7 @@
    text-transform: uppercase;
    font-weight: 700;
    padding-left: 20px;
+   color: var(--menu-color);
 }
 
 .hamburger-menu {
@@ -61,7 +66,7 @@
       display: block;
       width: 30px;
       height: 5px;
-      background-color: #000;
+      background-color: var(--menu-color);
       border-radius: 10px;
    }
 
@@ -71,7 +76,7 @@
       top: calc(30%);
       width: 30px;
       height: 5px;
-      background-color: #000;
+      background-color: var(--menu-color);
       border-radius: 10px;
    }
 
@@ -81,7 +86,7 @@
       top: calc(50% + 10px);
       width: 30px;
       height: 5px;
-      background-color: #000;
+      background-color: var(--menu-color);
       border-radius: 10px;
    }
 }

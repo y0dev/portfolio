@@ -41,3 +41,16 @@
 .module:hover {
    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
 }
+
+
+@media (max-width: 700px) {
+   .criteria-list {
+     width: 90vw;
+     grid-template-columns: repeat(1,1fr);
+     grid-template-rows: repeat(3, 1fr);
+   }
+   .criteria-list li {
+     margin-bottom: 1em;
+     font-size: 14px;
+   }
+ }

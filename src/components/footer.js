@@ -12,7 +12,9 @@ function Footer() {
                <div className='socials'>
                   <h2>Social</h2>
                   <ul>
+                     <li><a href='https://www.linkedin.com/in/devontaereid/'><ion-icon name="logo-linkedin"></ion-icon></a></li>
                      <li><a href='https://twitter.com/_yodev_'><ion-icon name="logo-twitter"></ion-icon></a></li>
+                     <li><a href='https://github.com/y0dev'><ion-icon name="logo-github"></ion-icon></a></li>
                   </ul>
                </div>
             </div>
