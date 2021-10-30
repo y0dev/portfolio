@@ -1,9 +1,9 @@
-section {
+#intro {
    background-image: url("../../assets/backgrounds/desk01.JPG");
    background-size: cover;
    position: relative;
    width: 100%;
-   height: 100%;
+   height: 100vh;
    color: #FFFFFF;
 }
 
@@ -59,11 +59,12 @@ section {
    .mouse {
       position: relative;
       margin: 0 auto;
-      width: 35px;
+      width: 30px;
       height: 50px;
       top: 40%;
       border: 1px solid #FFFFFF;
       border-radius: 20px;
+      overflow: hidden;
    }
 
    .mouse::before {
@@ -72,12 +73,13 @@ section {
       background-color: #FFFFFF;
       top: 5px;
       left: 45%;
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       transform: translateX(-60%);
       animation: wheel 1.7s infinite;
       -webkit-animation: wheel 1.7s infinite;
+      box-shadow: 0px -5px 3px 1px #ffffff66;
    }
 
    @keyframes wheel {

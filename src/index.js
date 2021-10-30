@@ -6,11 +6,15 @@ import NavBar from './components/navbar';
 import reportWebVitals from './reportWebVitals';
 import Footer from './components/footer';
 import Intro from './sections/intro';
+import AboutMe from './sections/about_me';
+import Projects from './sections/projects';
 
 ReactDOM.render(
   <React.StrictMode>
     <NavBar />
     <Intro />
+    <AboutMe />
+    <Projects />
     <Footer />
     {/* <App /> */}
   </React.StrictMode>,

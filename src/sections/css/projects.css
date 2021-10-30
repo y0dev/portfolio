@@ -1,0 +1,43 @@
+#projects {
+   background-image: url("../../assets/backgrounds/pattern/graph-paper.png");
+   background-color: #3f3f3f;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+#projects .section-title {
+   padding: 20px;
+   font-size: clamp(80px, 5vw, 5vw); 
+   text-transform: uppercase;
+}
+
+.criteria-list {
+   padding: 0;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(50px, 200px));
+   width: 70vw;
+   max-width: 1000px;
+   list-style-type: none;
+ }
+ .criteria-list li {
+   margin-right: 1em;
+   text-align: center;
+ }
+
+
+.project-container {
+   margin-top: 2em;
+}
+
+
+.module {
+   margin-bottom: 10em;
+   transition: box-shadow 0.4s ease-in-out;
+}
+
+.module:hover {
+   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+}

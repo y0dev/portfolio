@@ -10,3 +10,16 @@
 a {
   text-decoration: none;
 }
+
+h2 {
+  font-size: clamp(24px, 3vw, 3vw);
+  font-weight: 300;
+  margin: 0;
+}
+
+p {
+  font-size: clamp(16px, 1.2vw, 1.2vw);
+  line-height: 2;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
