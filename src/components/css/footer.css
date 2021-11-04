@@ -40,17 +40,7 @@ h2 {
    width: 30px;
    height: 30px;
 }
-@media only screen and (max-width: 700px) {
-   .footer footer {
-      align-items: center;
-   }
-   .footer footer .upper-section {
-      flex-direction: column;
-   }
-   .my-info p {
-      width: 100%;
-   }
-}
+
 .my-info p {
    width: 350px;
    font-size: 13px;
@@ -64,3 +54,23 @@ h2 {
    font-weight: 700;
 }
 
+
+@media only screen and (max-width: 700px) {
+   .footer footer {
+      align-items: center;
+   }
+   .footer footer .upper-section {
+      flex-direction: column;
+      padding: 30px 0;
+   }
+   .footer h2,
+   .footer p {
+      text-align: center;
+   }
+   .my-info p {
+      width: 100%;
+   }
+   .socials ul {
+      justify-content: center;
+   }
+}

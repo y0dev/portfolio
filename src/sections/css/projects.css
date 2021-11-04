@@ -10,7 +10,8 @@
 
 #projects .section-title {
    padding: 20px;
-   font-size: clamp(80px, 5vw, 5vw); 
+   font-size: clamp(40px, 3vw, 3vw);
+   font-weight: 300;
    text-transform: uppercase;
 }
 

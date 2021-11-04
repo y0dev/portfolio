@@ -44,7 +44,7 @@ function AboutMe() {
                   <img id='python' src='assets/icons/python.png' alt='python'/>
                </li>
                <li>
-                  <a href="assets/Devontae+Reid+Resume.pdf" download>
+                  <a href="assets/Devontae+Reid+Resume.pdf" className='reflective_bttn' download>
                      <span></span>
                      <span></span>
                      <span></span>

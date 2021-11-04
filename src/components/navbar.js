@@ -15,19 +15,30 @@ class NavBar extends Component {
       // console.log(navbar)
       navbar.style.cssText = 'background-color: rgba(255, 255, 255, 0); transition: background-color 0.5s cubic-bezier(0.29, 0.26, 0.54, 1.19);';
       navbar.style.position = 'fixed';
+      navbar.style.top = 20;
+      navbar.style.left = 0;
+      // console.log(this.window.scrollY);
       if(this.window.scrollY === 0) {
          navbar.style.backgroundColor = 'rgb(255, 255, 255,0)';
          navbar.style.position = 'relative';
-      } else if (this.window.scrollY >= 1 && this.window.scrollY < 150){
+      } else if (this.window.scrollY >= 1 && this.window.scrollY < 500){
          document.documentElement.style.setProperty('--menu-color', '#FFFFFF');
-      } else if (this.window.scrollY >= 150 && this.window.scrollY < 200) {
+      } else if (this.window.scrollY >= 500 && this.window.scrollY < 550) {
          navbar.style.backgroundColor = 'rgb(255, 255, 255,0.43)'
-      } else if (this.window.scrollY >= 200 && this.window.scrollY < 300) {
+      } else if (this.window.scrollY >= 550 && this.window.scrollY < 600) {
          navbar.style.backgroundColor = 'rgb(255, 255, 255,0.863)';
-      } else if (this.window.scrollY >= 300) {
+      } else if (this.window.scrollY >= 600) {
          navbar.style.backgroundColor = 'rgb(255, 255, 255,0.992)';
       }
   }
+
+  toggleMenu(event) {
+     if(event.target.id === 'menu-button') {
+      let menu = document.getElementById(event.target.id);
+      menu.classList.toggle('active');
+     }
+  }
+
   render() {
       return (
          <div id='nav-bar' onScroll={this.handleScroll} className="navbar">
@@ -44,7 +55,12 @@ class NavBar extends Component {
                   <li><a href="#blogs">Blog</a></li>
                   <li><a href="#contact">Contact</a></li>
                </ul>
-               <div id='menu-button' className='hamburger-menu'></div>
+               <div id='menu-button' className='hamburger-menu' onClick={this.toggleMenu}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               </div>
             </nav>
          </div>
       )
