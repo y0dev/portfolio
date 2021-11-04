@@ -51,9 +51,9 @@ class NavBar extends Component {
                   <li><a href="#intro">Home</a></li>
                   <li><a href="#about-me">About</a></li>
                   <li><a href="#projects">Projects</a></li>
-                  <li><a href="#theology">Theology</a></li>
-                  <li><a href="#blogs">Blog</a></li>
-                  <li><a href="#contact">Contact</a></li>
+                  {/* <li><a href="#theology">Theology</a></li> */}
+                  <li><a href="https://devssite.net/">Blog</a></li>
+                  <li><a href="#contact-me">Contact</a></li>
                </ul>
                <div id='menu-button' className='hamburger-menu' onClick={this.toggleMenu}>
                   <span></span>

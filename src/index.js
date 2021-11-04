@@ -9,12 +9,14 @@ import Intro from './sections/intro';
 import AboutMe from './sections/about_me';
 import Projects from './sections/projects';
 import './sections/css/utilities.css';
+import ContactMe from './sections/contact_me';
 ReactDOM.render(
   <React.StrictMode>
     <NavBar />
     <Intro />
     <AboutMe />
     <Projects />
+    <ContactMe />
     <Footer />
     {/* <App /> */}
   </React.StrictMode>,

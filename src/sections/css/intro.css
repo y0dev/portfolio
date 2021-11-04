@@ -35,10 +35,13 @@
 
 .container .name {
    text-align: center;
-   margin: 20px;
+   margin: 20px;    
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 .container .name h2 {
-   font-size: 70px;
+   font-size: clamp(50px, 4vw, 4vw);
 }
 .container .name p,
 .container .name h2 { 
@@ -55,7 +58,7 @@
    }
 }
 
-@media only screen and (min-width: 699px) {
+@media only screen and (min-width: 1199px) {
    .container .name p,
    .container .name h2 { 
       width: 700px;
@@ -66,7 +69,7 @@
       margin: 0 auto;
       width: 30px;
       height: 50px;
-      top: 40%;
+      top: 35%;
       border: 1px solid #FFFFFF;
       border-radius: 20px;
       overflow: hidden;
