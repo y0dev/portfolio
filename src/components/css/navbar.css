@@ -2,6 +2,7 @@
    --menu-background-color: #FFFFFF;
    --menu-color: #000000;
    --menu-shadow: #555555;
+   --side-menu-tint: rgba(150,150,150,0.7);
 }
 .navbar
 {
@@ -10,9 +11,13 @@
    background-color: var(--menu-background-color);
    height: 70px;
    width: 100%;
+   transition: background-color 0.5s cubic-bezier(0.29, 0.26, 0.54, 1.19);
+}
+.navbar nav {
+   height: 100%;
 }
 
-.navbar nav {
+.main-menu {
    margin: 0 20px;
    display: flex;
    position: relative;
@@ -21,19 +26,45 @@
    height: 100%;
 }
 
-.navbar nav ul {
+.main-menu ul {
    display: flex;
    list-style: none;
    justify-content: space-between;
    align-items: center;
 }
 
-.navbar nav ul li a {
+.main-menu ul li a {
    padding: 0 20px;
    color: var(--menu-color);
    text-transform: uppercase;
 }
 
+.side-menu {
+   display: none;
+   z-index: 100;
+   position: absolute;
+   right: 0;
+   width: 100%;
+   background-color: var(--side-menu-tint);
+   transition: 0.5s;
+   /* transform: translateY(-400px); */
+}
+
+.side-menu ul {
+   display: flex;
+   list-style: none;
+   flex-direction: column;
+   align-items: center;
+}
+.side-menu ul li {
+   margin: 20px 0;
+   /* padding: 20px 0; */
+}
+.side-menu ul li a {
+   padding: 0 20px;
+   color: var(--menu-color);
+   text-transform: uppercase;
+}
 .logo {
    display: flex;
    align-items: center;
@@ -56,8 +87,12 @@
 }
 
 @media only screen and (max-width: 1000px) {
-   .navbar nav ul {
+   .main-menu ul {
       display: none;
+   }
+
+   .side-menu.show {
+      display: block;
    }
 
    .logo {
