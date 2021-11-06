@@ -2,6 +2,15 @@ import './css/navbar.css';
 import {Component} from 'react';
 
 class NavBar extends Component {
+   constructor() {
+      super();
+      this.state = {
+         menu_color: '',
+         menu_bg_color: ''
+      };
+      this.handleScroll = this.handleScroll.bind(this);
+      this.toggleMenu = this.toggleMenu.bind(this);
+   }
    componentDidMount() {
       window.addEventListener('scroll', this.handleScroll);
   }
@@ -18,28 +27,43 @@ class NavBar extends Component {
       navbar.style.top = 20;
       navbar.style.left = 0;
       // console.log(this.window.scrollY);
-      if(this.window.scrollY === 0) {
+      if(window.scrollY === 0) {
          document.documentElement.style.setProperty('--menu-background-color', '#FFFFFF');
          navbar.style.position = 'relative';
-      } else if (this.window.scrollY >= 1 && this.window.scrollY < 500){
+      } else if (window.scrollY >= 1 && window.scrollY < 500){
          document.documentElement.style.setProperty('--menu-color', '#FFFFFF');
-      } else if (this.window.scrollY >= 500 && this.window.scrollY < 550) {
+      } else if (window.scrollY >= 500 && window.scrollY < 550) {
          document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 0.43)');
-      } else if (this.window.scrollY >= 550 && this.window.scrollY < 600) {
+      } else if (window.scrollY >= 550 && window.scrollY < 600) {
          document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 0.863)');
-      } else if (this.window.scrollY >= 600) {
-         document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 0.992)');
+      } else if (window.scrollY >= 600) {
+         document.documentElement.style.setProperty('--menu-background-color', '#FFFFFF');
       }
+      this.setState({
+         menu_color: document.documentElement.style.getPropertyValue('--menu-color'),
+         menu_bg_color: document.documentElement.style.getPropertyValue('--menu-background-color')
+      })
   }
 
   toggleMenu(event) {
+   const menu = document.getElementById('menu-button');
+   const side_menu = document.getElementById('side-menu'); 
    //   console.log(event.target) 
      if(event.target.id === 'menu-button' 
         || event.target.className === 'menu-line') {
-      let menu = document.getElementById('menu-button');
-      let side_menu = document.getElementById('side-menu'); 
       menu.classList.toggle('active');
       side_menu.classList.toggle('show');
+     }
+
+     const menu_color = document.documentElement.style.getPropertyValue('--menu-color');
+     const menu_bg_color = document.documentElement.style.getPropertyValue('--menu-background-color');
+     console.log(menu_color,menu_bg_color);
+     if(menu.classList.contains('active') && (menu_color === '#FFFFFF' && menu_bg_color === 'rgba(255, 255, 255, 0)')) {
+         document.documentElement.style.setProperty('--menu-color', '#000000');
+         document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 1)');
+     } else if (!menu.classList.contains('active')) {
+         document.documentElement.style.setProperty('--menu-color', this.state.menu_color);
+         document.documentElement.style.setProperty('--menu-background-color', this.state.menu_bg_color);
      }
   }
 

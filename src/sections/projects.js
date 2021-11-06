@@ -9,19 +9,8 @@ class Projects extends React.Component {
       this.state = {
          selectedType: 'In Production',
          criteria: ["In Production", "Programming"],
-         filterTags: [],
-         projectModules: []
       };
       this.toggleCriteria = this.toggleCriteria.bind(this);
-      
-      // console.log(filtered);
-      for (let i = 0; i < this.filtered().length; i++) {
-         this.state.projectModules.push(<ProjectModule key={i} project={this.filtered()[i]} />)
-      }
-      
-      for (let i = 0; i < this.state.criteria.length; i++) {
-         this.state.filterTags.push(<li onClick={this.toggleCriteria} key={i}><FilterTag type={this.state.criteria[i]} state={this.state.criteria[i] === this.state.selectedType} /></li>);
-      }
    }
    filtered() {
       return projects.filter((project) => {
@@ -31,31 +20,31 @@ class Projects extends React.Component {
          return project.category === this.state.selectedType;
       })
    }
+   // https://www.freecodecamp.org/news/updating-state-from-child-component-onclick/
    toggleCriteria(event) {
-      // console.log(event.target);
-      // console.log(event.target.innerHTML);
-
-      let newFilterTags = [];
-      for (let i = 0; i < this.state.criteria.length; i++) {
-         newFilterTags.push(<li onClick={this.toggleCriteria} key={i}><FilterTag type={this.state.criteria[i]} state={this.state.criteria[i] === this.state.selectedType} /></li>);
-      }
-      let newProjectModules = [];
-      for (let i = 0; i < this.filtered().length; i++) {
-         newProjectModules.push(<ProjectModule key={i} project={this.filtered()[i]} />)
-      }
-      this.setState({selectedType: event.target.innerHTML,
-                     filterTags: newFilterTags,
-                     projectModules: newProjectModules});
+      this.setState({selectedType: event.target.innerHTML});
    }
+
    render() {
+      const tags = this.state.criteria.map((type,idx) => (
+         <li key={idx}><FilterTag 
+                        type={type} 
+                        state={type === this.state.selectedType}
+                        handleChange={this.toggleCriteria} /></li>
+      ));
+
+      const projects = this.filtered().map((project,idx) => (
+         <ProjectModule key={idx} project={project} />
+      ));
+      
       return (
          <section id='projects'>
             <h1 className='section-title'>Projects</h1>
             <ul className='criteria-list'>
-               {this.state.filterTags}
+               {tags}
             </ul>
             <div className='project-container'>
-               {this.state.projectModules}
+               {projects}
             </div>
          </section>
       );
