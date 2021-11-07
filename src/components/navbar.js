@@ -13,10 +13,16 @@ class NavBar extends Component {
    }
    componentDidMount() {
       window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener("hashchange", this.addPixels);
   }
   
   componentWillUnmount() {
       window.removeEventListener('scroll', this.handleScroll);
+      window.removeEventListener("hashchange", this.addPixels);
+  }
+  addPixels(event) {
+   //   console.log(window.screen.width);
+      window.scrollTo(window.scrollX, window.scrollY - 100);
   }
    handleScroll(event){
       let navbar = document.getElementById('nav-bar');
@@ -57,7 +63,7 @@ class NavBar extends Component {
 
      const menu_color = document.documentElement.style.getPropertyValue('--menu-color');
      const menu_bg_color = document.documentElement.style.getPropertyValue('--menu-background-color');
-     console.log(menu_color,menu_bg_color);
+   //   console.log(menu_color,menu_bg_color);
      if(menu.classList.contains('active') && (menu_color === '#FFFFFF' && menu_bg_color === 'rgba(255, 255, 255, 0)')) {
          document.documentElement.style.setProperty('--menu-color', '#000000');
          document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 1)');

@@ -6,15 +6,16 @@ function AboutMe() {
          <div className='content'>
             <h2>A Glisp of Who I Am</h2>
             <p>
-               I am a Software Engineer currently working in embedded systems. From the start I started off in iOS development and from there grew to enjoy
-               web development both Front-End and Back-End. Who would have known User Interface would be a love/hate relationship. The struggle of coming 
-               up with inspiration while at the same time enjoying the finish product. I am proficient in the following languages: 
+               I am a Software Engineer currently working in embedded systems. From the start, I started off in iOS development and from there grew to enjoy
+               web development both Front-End and Back-End. Who would have known User Interface would be a love/hate relationship. There's a struggle of coming 
+               up with inspiration while at the same time enjoying the finish product. While trying to figure out inspiration for web design I spend most of 
+               my time creating RESTful APIs. I am proficient in the following languages: 
                <span className='highlight'>HTML, CSS, JavaScript, C/C++, and Python</span>
                The frameworks I currently work in is <span className='highlight'>ReactJS and VueJs</span>.</p>
             <p>
-               In my free time I work on cool projects while experimenting with new
-               technologies. Currently I'm working on an some api's that will also
-               include a chrome extension the will be written in NodeJS.
+               In my free time, I work on interesting projects while also experimenting with new
+               technologies. Currently I'm working on various APIs written in NodeJS that will 
+               include a browser extensions.
             </p>
             <p>
                If I'm not programming you will find me reading my bible or spending time
