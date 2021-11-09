@@ -30,9 +30,9 @@ class ContactMe extends React.Component {
                      <div className='col'>
                         <div className='inputBox'>
                            <input type="tel" id="phone" name="phone"
-                              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                               required/>
-                           <span className='text'>Phone<span className='tempVal'>: 123-456-7890</span></span>
+                           <span className='text'>Phone<span className='tempVal'>: 1234567890</span></span>
                            <span className='line'></span>
                         </div>
                      </div>

@@ -22,7 +22,7 @@ class NavBar extends Component {
   }
   addPixels(event) {
    //   console.log(window.screen.width);
-      window.scrollTo(window.scrollX, window.scrollY - 100);
+      window.scrollTo(window.scrollX, window.scrollY - 70);
   }
    handleScroll(event){
       let navbar = document.getElementById('nav-bar');
@@ -101,9 +101,9 @@ class NavBar extends Component {
                      <li><a href="#intro">Home</a></li>
                      <li><a href="#about-me">About</a></li>
                      <li><a href="#projects">Projects</a></li>
+                     <li><a href="#contact-me">Contact</a></li>
                      {/* <li><a href="#theology">Theology</a></li> */}
                      <li><a href="https://devssite.net/">Blog</a></li>
-                     <li><a href="#contact-me">Contact</a></li>
                   </ul>
                </div>
                <div id='side-menu' className='side-menu'>
@@ -111,9 +111,9 @@ class NavBar extends Component {
                      <li><a className='side-link' onClick={this.closeMenu} href="#intro">Home</a></li>
                      <li><a className='side-link' onClick={this.closeMenu} href="#about-me">About</a></li>
                      <li><a className='side-link' onClick={this.closeMenu} href="#projects">Projects</a></li>
+                     <li><a className='side-link' onClick={this.closeMenu} href="#contact-me">Contact</a></li>
                      {/* <li><a className='side-link' onClick={this.closeMenu} href="#theology">Theology</a></li> */}
                      <li><a className='side-link' onClick={this.closeMenu} href="https://devssite.net/">Blog</a></li>
-                     <li><a className='side-link' onClick={this.closeMenu} href="#contact-me">Contact</a></li>
                   </ul>
                </div>
             </nav>
