@@ -1,6 +1,18 @@
 [
   {
       
+    "title": "Home Deal Finder",
+    "category": "Programming",
+    "content":
+      "Looking for homes and organizing them in an excel document hasn't become more easier with this browser extension. This tool allows you to visit Zillow, Redfin, and Trulia, and gather the information (Address, Selling Price, Rooms and Square Footage) to place into an excel sheet and have your way with the data of the home.",
+    "preview_links": {
+      
+    },
+    "image": "",
+    "favorite": "Favorites"
+  },
+  {
+      
     "title": "Chronicle.io",
     "category": "Programming",
     "content":
@@ -27,7 +39,7 @@
     "title": "CMS-Ology",
     "category": "Programming",
     "content":
-      "I Content Management System with the hopes to provide users with the capability to launch their blog or website. With this services users can create a popup shop where they can sell items that they made. Or talk about the hot topics and share with friends on your blog.",
+      "\n\nI Content Management System with the hopes to provide users with the capability to launch their blog or website. With this services users can create a popup shop where they can sell items that they made. Or talk about the hot topics and share with friends on your blog.",
     "preview_links": {
       
     },
