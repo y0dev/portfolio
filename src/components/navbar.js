@@ -1,4 +1,5 @@
 import './css/navbar.css';
+import { Link } from "react-router-dom";
 import {Component} from 'react';
 
 class NavBar extends Component {
@@ -11,19 +12,24 @@ class NavBar extends Component {
       this.handleScroll = this.handleScroll.bind(this);
       this.toggleMenu = this.toggleMenu.bind(this);
    }
+
    componentDidMount() {
       window.addEventListener('scroll', this.handleScroll);
       window.addEventListener("hashchange", this.addPixels);
-  }
+   }
   
-  componentWillUnmount() {
+   
+   componentWillUnmount() {
       window.removeEventListener('scroll', this.handleScroll);
       window.removeEventListener("hashchange", this.addPixels);
-  }
-  addPixels(event) {
+   }
+   
+   addPixels(event) {
    //   console.log(window.screen.width);
       window.scrollTo(window.scrollX, window.scrollY - 70);
-  }
+   }
+
+   // Scroll event
    handleScroll(event){
       let navbar = document.getElementById('nav-bar');
       document.documentElement.style.setProperty('--menu-color', '#000000');
@@ -51,6 +57,7 @@ class NavBar extends Component {
       })
   }
 
+  // This is to toggle menu button on all phone or tablets
   toggleMenu(event) {
    const menu = document.getElementById('menu-button');
    const side_menu = document.getElementById('side-menu'); 
@@ -88,7 +95,7 @@ class NavBar extends Component {
             <nav>
                <div className='main-menu'>
                   <div className="logo">
-                     <img src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot" />
+                     {/* <img src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot" /> */}
                      <h3>Devontae Reid</h3>
                   </div>
                   <div id='menu-button' className='hamburger-menu' onClick={this.toggleMenu}>
@@ -98,20 +105,20 @@ class NavBar extends Component {
                      <span className='menu-line'></span>
                   </div>
                   <ul>
-                     <li><a href="#intro">Home</a></li>
-                     <li><a href="#about-me">About</a></li>
-                     <li><a href="#projects">Projects</a></li>
-                     <li><a href="#contact-me">Contact</a></li>
+                     {/* <li><a href="#intro">Home</a></li> */}
+                     <li><Link to="/about-me">About Me</Link></li>
+                     <li><Link to="/projects">Projects</Link></li>
+                     <li><Link to="/articles">Articles</Link></li>
                      {/* <li><a href="#theology">Theology</a></li> */}
-                     <li><a href="https://devssite.net/">Blog</a></li>
+                     {/* <li><a href="https://devssite.net/">Blog</a></li> */}
                   </ul>
                </div>
                <div id='side-menu' className='side-menu'>
                   <ul>
                      <li><a className='side-link' onClick={this.closeMenu} href="#intro">Home</a></li>
                      <li><a className='side-link' onClick={this.closeMenu} href="#about-me">About</a></li>
-                     <li><a className='side-link' onClick={this.closeMenu} href="#projects">Projects</a></li>
-                     <li><a className='side-link' onClick={this.closeMenu} href="#contact-me">Contact</a></li>
+                     {/* <li><a className='side-link' onClick={this.closeMenu} href="#projects">Projects</a></li>
+                     <li><a className='side-link' onClick={this.closeMenu} href="#contact-me">Contact</a></li> */}
                      {/* <li><a className='side-link' onClick={this.closeMenu} href="#theology">Theology</a></li> */}
                      <li><a className='side-link' onClick={this.closeMenu} href="https://devssite.net/">Blog</a></li>
                   </ul>

@@ -1,0 +1,29 @@
+[
+    {
+        "icon": "✈️",
+        "details": {
+            "institution": "Raytheon Technologies",
+            "time": "( March 2019 - Present )",
+            "position": "Software Engineer",
+            "description": "Veniam proident in nisi qui laborum in irure velit nostrud. Anim cillum esse Lorem mollit ad mollit tempor do. Irure laborum culpa sunt occaecat est aliqua laborum magna. Non qui aliquip elit Lorem nisi anim velit qui labore aliqua nulla eu nulla velit. Sint culpa occaecat veniam officia deserunt tempor elit aute pariatur mollit nulla adipisicing ut ad."
+        }
+    },
+    {
+        "icon": "💻",
+        "details": {
+            "institution": "iOS Developer",
+            "time": "( 2014 - 2018 )",
+            "position": "Freelance Engineer",
+            "description": "Veniam proident in nisi qui laborum in irure velit nostrud. Anim cillum esse Lorem mollit ad mollit tempor do. Irure laborum culpa sunt occaecat est aliqua laborum magna. Non qui aliquip elit Lorem nisi anim velit qui labore aliqua nulla eu nulla velit. Sint culpa occaecat veniam officia deserunt tempor elit aute pariatur mollit nulla adipisicing ut ad."
+        }
+    },
+    {
+        "icon": "🎓",
+        "details": {
+            "institution": "California State University, Fullerton",
+            "time": "( 2016 - 2018 )",
+            "position": "Computer Science",
+            "description": "Veniam proident in nisi qui laborum in irure velit nostrud. Anim cillum esse Lorem mollit ad mollit tempor do. Irure laborum culpa sunt occaecat est aliqua laborum magna. Non qui aliquip elit Lorem nisi anim velit qui labore aliqua nulla eu nulla velit. Sint culpa occaecat veniam officia deserunt tempor elit aute pariatur mollit nulla adipisicing ut ad."
+        }
+    }
+]

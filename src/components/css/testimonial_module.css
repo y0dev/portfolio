@@ -1,0 +1,26 @@
+.testimonials-item-container {
+    list-style-type: none;
+    padding: 30px 0;
+    display: flex;
+}
+
+.testimonials-icon {
+    font-size: 36px !important;
+    min-width: 36px;
+    margin-right: 30px;
+    position: relative;
+    top: -10px;
+}
+
+.testimonials-author {
+    margin-top: 10px;
+    color: #e45858;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.testimonials-link {
+    text-decoration: none;
+    color: inherit;
+}

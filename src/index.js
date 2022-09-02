@@ -1,23 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+import {
+  BrowserRouter as Router,
+  useRoutes,
+} from "react-router-dom";
 import NavBar from './components/navbar';
-import reportWebVitals from './reportWebVitals';
 import Footer from './components/footer';
-import Intro from './sections/intro';
-import AboutMe from './sections/about_me';
-import Projects from './sections/projects';
+import ProjectsPage from './pages/projects';
+import HomePage from './pages/home';
+import AboutMePage from './pages/aboutme';
+import ArticlesPage from './pages/articles';
+import reportWebVitals from './reportWebVitals';
+// import Intro from './sections/intro';
+// import About_Me_Section from './sections/about_me';
+// import Projects from './sections/projects';
 import './sections/css/utilities.css';
-import ContactMe from './sections/contact_me';
+// import ContactMe from './sections/contact_me';
+
+const App = () => {
+  let routes = useRoutes([
+    { path: "/", element: <HomePage /> },
+    { path: "/about-me", element: <AboutMePage /> },
+    { path: "/articles", element: <ArticlesPage /> },
+    { path: "/projects", element: <ProjectsPage /> },
+    // ...
+  ]);
+  return routes;
+};
+
 ReactDOM.render(
   <React.StrictMode>
-    <NavBar />
-    <Intro />
-    <AboutMe />
-    <Projects />
-    <ContactMe />
+    <Router>
+      <NavBar />
+      <App />
+    </Router>
     <Footer />
+    
+    {/* <Intro /> */}
+    
+    {/* <Projects />
+    <ContactMe /> */}
     {/* <App /> */}
   </React.StrictMode>,
   document.getElementById('root')

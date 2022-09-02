@@ -1,0 +1,21 @@
+.experience-item-container {
+    list-style-type: none;
+    font-size: 18px;
+    padding: 30px 0;
+    display: flex;
+}
+
+.experience-icon {
+    font-size: 36px !important;
+    min-width: 36px;
+    margin-right: 30px;
+    position: relative;
+    top: -10px;
+}
+
+.experience-institution {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #e45858;
+}
