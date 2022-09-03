@@ -19,3 +19,15 @@
     font-size: 16px;
     color: #e45858;
 }
+
+@media (max-width: 460px) {
+    .experience-item-container {
+        padding: 20px 0;
+    }
+    .experience-institution {
+        font-size: 14px;
+    }
+    .experience-position {
+        font-size: 18px;
+    }
+}

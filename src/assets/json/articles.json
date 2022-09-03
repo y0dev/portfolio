@@ -1,0 +1,157 @@
+[
+    
+    {
+        "title": "Web Development Choice",
+        "date": "1636423946203",
+        "id":  "web-dev-choice",
+        "tags": 
+        [
+            "Technology", "ReactJS", "NodeJS"
+        ],
+        "image": 
+        {
+            "name": "web-dev.png",
+            "alt": "js-image"
+        },
+        "content":
+        [
+            {
+                "title":
+                {
+                    "tag": "h2",
+                    "text": "Beginning of NodeJS"
+                },
+
+                "paragraphs": 
+                [
+                    " :imagePlace(001)",
+                    "As I embraced the task of creating a website, I ran into some problems. Those problems were choosing the right framework. There are many out there from React, VueJS, and even embedded JavaScript.",
+                    "So the one that rose to the top of my list was React. I find React to be very powerful for something that seems so simple to use. There are many things that React offered that the others did not such as CSS animation. Working in VueJS I found it fairly difficult to work with CSS animation. I would’ve just JavaScript to handle my animations, but I don’t need all that power when it something simple as moving a div.",
+                    "My overall appreciation of React is great!"
+                ],
+
+                "images":
+                [
+                    {
+                        "id": "001",
+                        "alt": "dev-work",
+                        "caption": "Programming Away",
+                        "link": "https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg"
+                    }
+                ],
+
+                "code":
+                [
+                    {
+                        "id": "001",
+                        "language": "javascript",
+                        "content": "laboris"
+                    }
+                ],
+
+                "blockquotes":
+                [
+                    {
+                        "id": "001",
+                        "content": "laboris"
+                    }
+                ],
+
+                "links":
+                [
+                    {
+                        "id": "001",
+                        "text": "",
+                        "website": "laboris"
+                    }
+                ],
+
+                "lists":
+                [
+                    {
+                        "id": "001",
+                        "items": 
+                        [
+
+                        ],
+                        "list_type": "unordered"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Parenting with Few Rules | Doug Wilson",
+        "date": "1628742217550",
+        "id":  "parenting-with-few-rules",
+        "tags": 
+        [
+            "Parenting", "Christ", "Children"
+        ],
+        "image": 
+        {
+            "name": "family.png",
+            "alt": "parenting-img"
+        },
+        "content":
+        [
+            {
+                "title":
+                {
+                    "tag": "h2",
+                    "text": "Is it that Simple?"
+                },
+
+                "paragraphs": 
+                [
+                    " :imagePlace(001)",
+                    "As being a new father I felt like this video was very helpful for setting ground rules for my kids as they grow up.",
+                    "We shouldn’t over complicate things for our children. These rules not only established ground with you and your child, but also allows your child to critical think.",
+                    "Three Rules to Live by as a Parent: :listPlace(001)"
+                ],
+
+                "images":
+                [
+                    {
+                        "id": "001",
+                        "alt": "dev-work",
+                        "caption": "Programming Away",
+                        "link": "https://i.ytimg.com/vi/6S4LCPI9wk4/maxresdefault.jpg"
+                    }
+                ],
+
+                "blockquotes":
+                [
+                    {
+                        "id": "001",
+                        "content": "laboris"
+                    }
+                ],
+
+                "links":
+                [
+                    {
+                        "id": "001",
+                        "video": 1,
+                        "text": "",
+                        "website": "https://youtu.be/6S4LCPI9wk4"
+                    }
+                ],
+
+                "lists":
+                [
+                    {
+                        "id": "001",
+                        "items": 
+                        [
+                            "No lying",
+                            "No disobedience",
+                            "No disrespecting your mother"
+                        ],
+                        "list_type": "unordered"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -5,7 +5,7 @@ function AboutMeSection() {
       <section id='about-me'>
          <div className='content'>
             <h2>About Me</h2>
-            <div id='first'>
+            <div className='about-content' id='first'>
                <img src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot" />
                <p>
                   I am a Software Engineer currently working in embedded systems. From the start, I started off in iOS development and from there grew to enjoy

@@ -1,40 +1,67 @@
 import './css/project_module.css';
 
 function ProjectModule(props) {
-   let custom_icons =[];
-   let content;
-   let coverImage;
-   let readMore;
-   if(props.project.content) {
-      content = <p>{props.project.content}</p>;
+   let title;
+   let description;
+   let icon;
+   let image;
+   let date;
+   let links;
+   let id;
+
+    if (props.title)
+    {
+        title = <h3 className="project-title">{props.title}</h3>;
+        if (props.id)
+        {
+            id = props.id;    
+        }
    }
-   if(props.project.image) {
-      coverImage = <img className='cover-image' src={props.project.image}  alt='{props.project.title}'/>;
+   
+   if (props.description)
+    {
+      description = <p className="project-description">{props.description}</p>;
+    }
+
+   if (props.icon) {
+      icon = <img className="project-image" src={props.icon.link} alt={props.icon.alt}></img>  
    }
-   if(props.project.read) {
-      readMore = <button className="more">Read More</button>;
+   
+   if (props.image)
+   {
+      image = <img className="project-image" src={props.image.link} alt={props.image.alt}></img>
    }
-   if(props.project.preview_links) {
-      for (let i = 0; i < props.project.preview_links.length; i++) {
-         custom_icons.push(<a href={props.preview_link[i]}><img src='/assets/icons/{props.preview_link[i].png}' alt='img'/></a>);
-         
-      }
-   }
+
+    if (props.date)
+    {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const dateObj = new Date(parseInt(props.date));
+        // eslint-disable-next-line no-unused-vars
+        date = <span className="project-date">{dateObj.toLocaleDateString("en-US", options)}</span>;
+    }
+
+    if (props.links)
+    {
+      const github = props.links.github ? <a href={props.links.github} className='project-button project-github'>Github</a> : null;
+      const demo = props.links.demo ? <a href={props.links.demo} className='project-button project-demo'>Demo</a> : null; 
+      const writeup = props.links.writeup ? <a href={'/articles/' + id} className='project-button project-writeup'>Writeup</a> : null; 
+      links = [github , demo , writeup]
+    }
+
+    
+
+   
    return (
-      <div className='module-container module'>
-         <header>
-            <div className="title-type">
-               <h1>{ props.project.title }</h1>
-               <div className="type-meta">{ props.project.category }</div>
-            </div>
-            <div className="custom-icons">
-               { custom_icons }
-            </div>
-         </header>
-         { content }
-         {coverImage}
-         {readMore}
-      </div>
+       <li className='project-item-container'>
+           {icon ? icon : image}
+           <div className='project-content'>
+               {title}
+               {description}
+           </div>
+           <div className='project-links'>
+               {links}
+           </div>
+      </li>
    )
 }
 

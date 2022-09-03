@@ -1,5 +1,5 @@
 #about-me {
-   background-color: #1c1c1c;
+   /* background-color: var(--color-background); */
    position: relative;
    width: 100%;
    height: 100%;
@@ -50,10 +50,10 @@ img {
 
 
 .highlight {
-   background-color: #141414;
+   background-color: var(--color-about-highlight-bg);
    margin: 0.3em;
    padding: 0.3em 0.7em;
-   color: #8d8d8d;
+   color: var(--color-body);/*#8d8d8d*/;
    transition: color 0.5s ease-in-out;
 }
 
@@ -62,11 +62,34 @@ img {
 }
 
 .web-link {
-   color: #8d8d8d;
+   color: var(--color-body);
    transition: color 0.5s ease-in-out;
 }
 .web-link:hover {
    color: #FFFFFF;
+}
+
+@media (max-width: 460px) {
+   #about-me .content {
+      padding: 0;
+   }
+   #about-me .content #first img {
+      float: initial;
+      margin: initial;
+      height: initial;
+      width: 100%;
+      margin-bottom: 30px;
+   }
+
+   #about-me .about-heading {
+       font-size: 24px;
+   }
+   #about-me .about-content {
+      margin-top: 20px;
+   }
+   .about-container p {
+      font-size: 16px;
+  }
 }
 
 @media only screen and (max-width: 700px) {

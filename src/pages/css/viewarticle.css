@@ -1,0 +1,95 @@
+.post-header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-divider);
+}
+
+.post-header-container .post-header-details {
+    margin: 0;
+}
+
+.post-header-container #post-header-title {
+    font-weight: 600;
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.post-header-container .post-header-meta{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+.post-header-container .post-header-icon {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 999px;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.post-header-container .post-header-time {
+    font-size: 16px;
+    letter-spacing: -0.25px;
+    margin: 0 10px;
+}
+
+.post-header-container .post-header-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.post-header-container .post-header-divider {
+    display: inline-block;
+    color: var(--color-body);
+    margin: 0;
+    margin-right: 10px;
+}
+
+.post-header-container .post-header-shareButton {
+    color: var(--color-body);
+    display: inline-block;
+    font-size: 16px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 500;
+    margin: -5px;
+    padding: 5px;
+    border-radius: 5px;
+    background: transparent;
+}
+
+.post-header-container .post-header-image {
+    height: 120px;
+    max-width: 160px;
+    object-position: top;
+    object-fit: contain;
+    margin-right: 30px;
+}
+
+.post-header-tag {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #fffffe;
+    background-color: #6246ea;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    text-transform: capitalize;
+}
+
+.post-content {
+    position: relative;
+}
+
+.app-body.post-container {
+    padding-bottom: 50px;
+}

@@ -7,7 +7,7 @@ import TestimonialSection from '../sections/testimonials';
 class AboutMePage extends React.Component {
     render() {
         return (
-            <div id='about-me-container'>
+            <div className='app-body' id='about-me-container'>
                 <AboutMeSection />
                 <ExperienceSection />
                 <TestimonialSection />

@@ -8,51 +8,25 @@
     "preview_links": {
       
     },
-    "image": "",
-    "favorite": "Favorites"
-  },
-  {
-      
-    "title": "Chronicle.io",
-    "category": "Programming",
-    "content":
-      "Have you ever been study a subject or about something in the past and recently tried to figure out what website you visited while studying that topic,but can't remember the website. With this tool,you can track your search history with ease with out all the extra searching. Still in progress. This is a mockup design.",
-    "preview_links": {
-      "github": "https://github.com/y0dev/ologyDigitalFrontend"
+    "image": {
+      "link":"https://i.ibb.co/Kq8Gs7t/house.png",
+      "alt": "house-freepick"
     },
-    "image": "https://i.ibb.co/yXCV9zD/histo-link-landing-v1.png",
     "favorite": "Favorites"
-  },
-  {
-      
-    "title": "PrayerChain",
-    "category": "Programming",
-    "content":
-      "Need a way to pray for those in need or those who ask for prayer. This application will allow you to pray for those people by way of reminder.",
-    "preview_links": {
-      
-    },
-    "image": "",
-    "favorite": "Favorites"
-  },
-  {
-    "title": "CMS-Ology",
-    "category": "Programming",
-    "content":
-      "\n\nI Content Management System with the hopes to provide users with the capability to launch their blog or website. With this services users can create a popup shop where they can sell items that they made. Or talk about the hot topics and share with friends on your blog.",
-    "preview_links": {
-      
-    },
-    "image": ""
   },
   {
     "title": "Dev's Hotel Registry",
     "category": "Programming",
     "content":
       "A simple iOS project that was used to test Swift programming language at release in 2017",
-    "preview_links": {
+    "preview_links": 
+    {
       "github": "https://github.com/y0dev/DevHotel"
     },
-    "image": ""
+    "image": 
+    {
+      "link":"https://i.ibb.co/WHR1ymz/hotel.png",
+      "alt": "landing"
+    }
   }
 ]
