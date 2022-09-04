@@ -15,30 +15,10 @@ function findImage(paragraph,idx)
             "index": index
         };
         temp_para = temp_para.replace(/ :imagePlace\([0-9]+\)/, '');
-        console.log(id);
-        // console.log(temp_para);
     }
     return [ id, temp_para, idx ];
 }
 
-function findLinks(paragraph,idx)
-{
-    let temp_para = paragraph;
-    let id;
-    const index = temp_para.search(/:linkPlace\([0-9]+\)/);
-    if (index >= 0)
-    {
-        id =
-        {
-            "link": temp_para.slice(index + 11 , index + 14),
-            "index": index
-        };
-        temp_para = temp_para.replace(/ :linkPlace\([0-9]+\)/, '');
-        console.log(id);
-        // console.log(temp_para);
-    }
-    return [ id, temp_para, idx ];
-}
 
 function findList(paragraph,idx)
 {
@@ -53,8 +33,6 @@ function findList(paragraph,idx)
             "index": index
         };
         temp_para = temp_para.replace(/ :listPlace\([0-9]+\)/, '');
-        console.log(id);
-        // console.log(temp_para);
     }
     return [ id, temp_para, idx ];
 }
@@ -96,19 +74,12 @@ function PostSection(props) {
     if(props.paragraphs) {
         paragraphs = props.paragraphs.map((paragraph, p_idx) => {
             const [i_id, i_temp_para] = findImage(paragraph, p_idx);
-            const [l_id, lx_temp_para] = findLinks(i_temp_para, p_idx);
-            const [lt_id, lt_temp_para] = findList(lx_temp_para, p_idx);
+            const [lt_id, lt_temp_para] = findList(i_temp_para, p_idx);
             // console.log(i_id,l_id);
-            let image, link, list;
+            let image, list;
             if (i_id !== undefined) {
                 image = images.map((image, _) => {
                     return image.id === i_id.image ? image : null;
-                })
-            }
-
-            if (l_id !== undefined) {
-                link = links.map((link, _) => {
-                    return link.id === l_id.link ? link : null;
                 })
             }
 
@@ -119,9 +90,10 @@ function PostSection(props) {
             //const para = <p key={section + "_" + p_idx} id={section + "_" + p_idx} className="post-paragraph">{temp_para}</p>
             return <ParagraphModule
                 key={p_idx}
+                p_key={'p_' + p_idx}
                 details={lt_temp_para}
                 image={image}
-                link={link}
+                links={links}
                 list={list}
             />
         }); // end paragraphs ;

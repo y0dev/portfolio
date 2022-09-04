@@ -7,8 +7,9 @@
 
 .experience-icon {
     font-size: 36px !important;
-    min-width: 36px;
+    /* min-width: 36px; */
     margin-right: 30px;
+    margin-left: 0;
     position: relative;
     top: -10px;
 }
@@ -19,6 +20,11 @@
     font-size: 16px;
     color: #e45858;
 }
+
+.experience-details {
+    margin-left:0;
+}
+
 
 @media (max-width: 460px) {
     .experience-item-container {

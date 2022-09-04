@@ -1,11 +1,6 @@
 import './css/article_module.css';
 
-import bible_icon from '../assets/images/bible-icon.png';
-import family_icon from '../assets/images/family.png';
-import hotel_icon from '../assets/images/hotel.png';
-import house_icon from '../assets/images/house.png';
-import web_dev from '../assets/images/web-dev.png';
-const images = [bible_icon, family_icon, hotel_icon, house_icon, web_dev];
+import images from '../assets/images/images.js';
 
 function ArticleModule(props) {
     let title;
@@ -13,6 +8,7 @@ function ArticleModule(props) {
     let date;
     let tags;
     let id;
+    let note = props.note;
 
     if (props.title)
     {
@@ -48,7 +44,7 @@ function ArticleModule(props) {
 
    
    return (
-       <a href={"/articles/" + id} className='article-item-container'>
+       <a href={note === 0 ? "/articles/":"/notes/" + id} className='article-item-container'>
            {icon}
            <div className='article-content'>
                {title}

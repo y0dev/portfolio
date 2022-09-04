@@ -107,7 +107,8 @@
                     " :imagePlace(001)",
                     "As being a new father I felt like this video was very helpful for setting ground rules for my kids as they grow up.",
                     "We shouldn’t over complicate things for our children. These rules not only established ground with you and your child, but also allows your child to critical think.",
-                    "Three Rules to Live by as a Parent: :listPlace(001)"
+                    "Three Rules to Live by as a Parent: :listPlace(001)",
+                    "You can find the video on :linkPlace(001)"
                 ],
 
                 "images":
@@ -133,8 +134,8 @@
                     {
                         "id": "001",
                         "video": 1,
-                        "text": "",
-                        "website": "https://youtu.be/6S4LCPI9wk4"
+                        "text": "link",
+                        "link": "https://youtu.be/6S4LCPI9wk4"
                     }
                 ],
 

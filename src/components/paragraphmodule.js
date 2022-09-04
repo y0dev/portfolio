@@ -1,21 +1,47 @@
 import './css/paragraph_module.css';
+function hasLink(details)
+{
+    return details.search(/:linkPlace\([0-9]+\)/) >= 0;
+}
+
+function findLinks(details_prop,links)
+{
+    let temp_details = details_prop;
+    let id;
+    let a_link;
+    const index = temp_details.search(/:linkPlace\([0-9]+\)/);
+    
+    if (index >= 0)
+    {
+        id = temp_details.slice(index + 11 , index + 14)
+
+        const link = links.find((val) => val.id === id);
+        var re = new RegExp(":linkPlace\\(" + id + "\\)");
+        a_link = <a className='post-link' href={link.link}>{link.text}</a>
+        console.log(a_link);
+        temp_details = temp_details.replace(re, '');
+    }
+    return <p className="post-details" >{temp_details.slice(0,index)} {a_link} {temp_details.slice(index+1)}</p>;
+}
 
 function ParagraphModule(props) {
     let title;
     let image;
     let codeblock;
     let blockquote;
-    let link;
     let list;
     let details;
     // console.log(props);
 
-    if(props.details) {
-        details = <p className="post-details">{props.details}</p>;
+    if (props.details) {
+        if (props.links && hasLink(props.details)) {
+            details = findLinks(props.details, props.links);
+        } else {
+            details = <p className="post-details" >{props.details}</p>;
+        }
     }
 
     if (props.image) {
-        console.log(props.image);
         image = <div className='post-image-container'>
                     <a href={props.image[0].link}>
                         <img className="post-image" src={props.image[0].link} alt={props.image[0].alt}></img>
@@ -36,11 +62,9 @@ function ParagraphModule(props) {
         blockquote = <blockquote className='post-quote' cite={props.blockquote.cite}>{props.blockquote.content}</blockquote>
     }
 
-    if(props.link) {
-        link = <a className='post-link' href={props.link.url}>{props.link.content}</a>
-    }
+    
+
     if (props.list) {
-        console.log(props.list);
         let items = props.list.items.map((item,idx) => {
             return <li key={idx} className='post-list-item' >{item}</li>;
         });
@@ -63,7 +87,6 @@ function ParagraphModule(props) {
             {image}
             {codeblock}
             {blockquote}
-            {link}
             {list}
         </div>
     )

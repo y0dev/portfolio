@@ -2,7 +2,7 @@ import './css/aboutme.css';
 import React from 'react';
 import AboutMeSection from '../sections/about_me';
 import ExperienceSection from '../sections/experience';
-import TestimonialSection from '../sections/testimonials';
+// import TestimonialSection from '../sections/testimonials';
 
 class AboutMePage extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class AboutMePage extends React.Component {
             <div className='app-body' id='about-me-container'>
                 <AboutMeSection />
                 <ExperienceSection />
-                <TestimonialSection />
+                {/* <TestimonialSection /> */}
             </div>
         )
     }
