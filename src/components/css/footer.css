@@ -33,6 +33,7 @@
 
 .footer-container ul li img {
    width: 30px;
+   filter: invert(93%) sepia(2%) saturate(82%) hue-rotate(78deg) brightness(90%) contrast(88%);
 }
 
 @media only screen and (max-width: 768px) {

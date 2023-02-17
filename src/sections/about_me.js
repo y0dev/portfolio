@@ -36,6 +36,7 @@ function AboutMeSection() {
                   </span>.
                </p>
             </div>
+            <a href="/docs/devontae_resume.pdf" className='button' download>Resume</a>
          </div>
          {/* <div className='content'>
             <h2>About Me</h2>

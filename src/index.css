@@ -125,6 +125,7 @@ button {
   background: none;
 }
 
+
 input[type="text" i] {
   padding: 1px 2px;
 }
@@ -136,6 +137,24 @@ input[type="text" i] {
 .page-title {
    text-align: center;
    margin: 20px;
+}
+
+.button {
+   display: block;
+   font-size: 14px;
+   font-weight: 500;
+   text-decoration: none;
+   padding: 8px 15px;
+   border-radius: 5px;
+   color: #fffffe;
+   background-color: var(--color-view-tag-bg);
+   display: inline-block;
+   margin: 0 10px 10px 0;
+   text-transform: capitalize;
+}
+
+.button:hover {
+   background-color: var(--color-view-tag-bg-hover);
 }
 
 #about-me-root {

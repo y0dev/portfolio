@@ -15,7 +15,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) =>
   return (
     <nav className='pagination-nav'>
       <div className="pagination:number arrow">
-         <button onClick={() => goToPage(1,totalPages)}><img src='../images/arrow_left.png' alt='back-arrow'/></button>
+         <button onClick={() => goToPage(1,totalPages)}><img src='/images/arrow_left.png' alt='back-arrow'/></button>
       </div>
       <div className='pagination'>
         {pageNumbers.map(number => (
@@ -25,7 +25,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) =>
         ))}
       </div>
       <div className="pagination:number arrow">
-         <button onClick={() => goToPage(0,totalPages)}><img src='../images/arrow_right.png' alt='back-forward'/></button>
+         <button onClick={() => goToPage(0,totalPages)}><img src='/images/arrow_right.png' alt='forward-arrow'/></button>
       </div>
     </nav>
   );

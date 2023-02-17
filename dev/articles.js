@@ -8935,7 +8935,7 @@ var Pagination = function Pagination(_ref) {
       return goToPage(1, totalPages);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: "../images/arrow_left.png",
+    src: "/images/arrow_left.png",
     alt: "back-arrow"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "pagination"
@@ -8954,8 +8954,8 @@ var Pagination = function Pagination(_ref) {
       return goToPage(0, totalPages);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: "../images/arrow_right.png",
-    alt: "back-forward"
+    src: "/images/arrow_right.png",
+    alt: "forward-arrow"
   }))));
 };
 
@@ -8976,8 +8976,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _css_articles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/articles.css */ "./src/pages/css/articles.css");
-/* harmony import */ var _assets_json_articles_clean_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/json/articles_clean.json */ "./src/assets/json/articles_clean.json");
-/* harmony import */ var _assets_json_notes_clean_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/json/notes_clean.json */ "./src/assets/json/notes_clean.json");
+/* harmony import */ var _assets_json_articles_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/json/articles.json */ "./src/assets/json/articles.json");
+/* harmony import */ var _assets_json_notes_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/json/notes.json */ "./src/assets/json/notes.json");
 /* harmony import */ var _components_articlemodule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/articlemodule */ "./src/components/articlemodule.js");
 /* harmony import */ var _components_pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/pagination */ "./src/components/pagination.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -9028,19 +9028,21 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this);
     _this.state = {
-      articles: [],
-      notes: [],
-      articlesLength: 0,
-      notesLength: 0,
-      postsPerPage: 5,
-      currentNotePage: 1,
-      currentArticlePage: 1,
-      currentNotes: [],
-      currentArticles: []
-    };
-    var articles_sorted = filtered(_assets_json_articles_clean_json__WEBPACK_IMPORTED_MODULE_2__);
-    var notes_sorted = filtered(_assets_json_notes_clean_json__WEBPACK_IMPORTED_MODULE_3__);
-    _this.state.articles = articles_sorted.map(function (article, idx) {
+      posts: [],
+      mergeArray: [],
+      postsLength: 0,
+      postsPerPage: 8,
+      currentPostPage: 1,
+      currentPosts: [],
+      searchLocked: false
+    }; // Get both articles and notes and sort by date
+
+    var articles_sorted = filtered(_assets_json_articles_json__WEBPACK_IMPORTED_MODULE_2__);
+    var notes_sorted = filtered(_assets_json_notes_json__WEBPACK_IMPORTED_MODULE_3__);
+    var mergeArray = filtered(articles_sorted.concat(notes_sorted));
+    _this.state.mergeArray = mergeArray;
+    _this.state.posts = mergeArray.map(function (article, idx) {
+      var noteValue = article['file-id'] === 'note' ? 1 : 0;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_articlemodule__WEBPACK_IMPORTED_MODULE_4__["default"], {
         key: idx,
         title: article.title,
@@ -9048,36 +9050,18 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
         image: article.image,
         id: article.id,
         tags: article.tags,
-        note: 0
+        note: noteValue
       });
     }); // Get current posts
 
-    var indexOfLastArticle = _this.state.currentArticlePage * _this.state.postsPerPage;
-    var indexOfFirstArticle = indexOfLastArticle - _this.state.postsPerPage;
-    _this.state.currentArticles = _this.state.articles.slice(indexOfFirstArticle, indexOfLastArticle);
-    _this.state.notes = notes_sorted.map(function (note, idx) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_articlemodule__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        key: idx,
-        title: note.title,
-        date: note.date,
-        image: note.image,
-        id: note.id,
-        tags: note.tags,
-        note: 1
-      });
-    }); // Get current posts
-
-    var indexOfLastNote = _this.state.currentNotePage * _this.state.postsPerPage;
-    var indexOfFirstNote = indexOfLastNote - _this.state.postsPerPage;
-    _this.state.currentNotes = _this.state.notes.slice(indexOfFirstNote, indexOfLastNote);
-    _this.state.articlesLength = _this.state.articles.length;
-    _this.state.notesLength = _this.state.notes.length;
+    var indexOfLastPost = _this.state.currentPostPage * _this.state.postsPerPage;
+    var indexOfFirstPost = indexOfLastPost - _this.state.postsPerPage;
+    _this.state.currentPosts = _this.state.posts.slice(indexOfFirstPost, indexOfLastPost);
+    _this.state.postsLength = _this.state.posts.length;
     _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_this));
-    _this.articlePaginate = _this.articlePaginate.bind(_assertThisInitialized(_this));
-    _this.notesPaginate = _this.notesPaginate.bind(_assertThisInitialized(_this));
-    _this.goToPage = _this.goToPage.bind(_assertThisInitialized(_this));
-    _this.goToArticlePage = _this.goToArticlePage.bind(_assertThisInitialized(_this));
-    _this.goToNotePage = _this.goToNotePage.bind(_assertThisInitialized(_this));
+    _this.postPaginate = _this.postPaginate.bind(_assertThisInitialized(_this));
+    _this.goToVerifiedPage = _this.goToVerifiedPage.bind(_assertThisInitialized(_this));
+    _this.goToPostPage = _this.goToPostPage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -9085,101 +9069,67 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // Only show paginate if greater than postsPerPage
-      if (this.state.articles.length <= this.state.postsPerPage) {
+      if (this.state.posts.length <= this.state.postsPerPage) {
         var article_pa = document.getElementById('article-paginate'); // console.log(article_pa);
 
         article_pa.classList.add('hidden');
       }
+    } // This is used to select number for page
 
-      if (this.state.notes.length <= this.state.postsPerPage) {
-        var note_pa = document.getElementById('note-paginate'); // console.log(note_pa);
+  }, {
+    key: "postPaginate",
+    value: function postPaginate(pageNumber) {
+      var indexOfLastPost = pageNumber * this.state.postsPerPage;
+      var indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
+      this.setState({
+        currentPostPage: pageNumber,
+        currentPosts: this.state.posts.slice(indexOfFirstPost, indexOfLastPost)
+      });
+    } // Make sure that we are not going beyond the borders
 
-        note_pa.classList.add('hidden');
-      }
-    }
   }, {
-    key: "articlePaginate",
-    value: function articlePaginate(pageNumber) {
-      this.setState({
-        currentArticlePage: pageNumber
-      });
-      var indexOfLastNote = pageNumber * this.state.postsPerPage;
-      var indexOfFirstNote = indexOfLastNote - this.state.postsPerPage;
-      this.setState({
-        currentArticlePage: pageNumber,
-        currentArticles: this.state.articles.slice(indexOfFirstNote, indexOfLastNote)
-      });
-    }
-  }, {
-    key: "notesPaginate",
-    value: function notesPaginate(pageNumber) {
-      var indexOfLastNote = pageNumber * this.state.postsPerPage;
-      var indexOfFirstNote = indexOfLastNote - this.state.postsPerPage;
-      this.setState({
-        currentNotePage: pageNumber,
-        currentNotes: this.state.notes.slice(indexOfFirstNote, indexOfLastNote)
-      });
-    }
-  }, {
-    key: "goToPage",
-    value: function goToPage(dec, currentPage, totalPages) {
+    key: "goToVerifiedPage",
+    value: function goToVerifiedPage(dec, currentPage, totalPages) {
       return dec == 0 && currentPage < totalPages || dec == 1 && currentPage > 1;
-    }
+    } // This is to control arrows for going backward and forward
+
   }, {
-    key: "goToArticlePage",
-    value: function goToArticlePage(dec, totalPages) {
+    key: "goToPostPage",
+    value: function goToPostPage(dec, totalPages) {
       if (dec === 1) {
-        if (this.goToPage(dec, this.state.currentArticles, totalPages)) {
-          this.setState({
-            currentArticlePage: this.state.currentArticlePage - 1
-          });
-        }
-      } else {
-        if (this.goToPage(dec, this.state.currentArticles, totalPages)) {
-          this.setState({
-            currentArticlePage: this.state.currentArticlePage + 1
-          });
-        }
-      }
-    }
-  }, {
-    key: "goToNotePage",
-    value: function goToNotePage(dec, totalPages) {
-      if (dec === 1) {
-        if (this.goToPage(dec, this.state.currentNotePage, totalPages)) {
-          var pageNumber = this.state.currentNotePage - 1;
-          var indexOfLastNote = pageNumber * this.state.postsPerPage;
+        if (this.goToVerifiedPage(dec, this.state.currentPostPage, totalPages)) {
+          var indexOfLastNote = (this.state.currentPostPage - 1) * this.state.postsPerPage;
           var indexOfFirstNote = indexOfLastNote - this.state.postsPerPage;
           this.setState({
-            currentNotePage: pageNumber,
-            currentNotes: this.state.notes.slice(indexOfFirstNote, indexOfLastNote)
+            currentPostPage: this.state.currentPostPage - 1,
+            currentPosts: this.state.posts.slice(indexOfFirstNote, indexOfLastNote)
           });
         }
       } else {
-        if (this.goToPage(dec, this.state.currentNotePage, totalPages)) {
-          var _pageNumber = this.state.currentNotePage + 1;
-
-          var _indexOfLastNote = _pageNumber * this.state.postsPerPage;
+        if (this.goToVerifiedPage(dec, this.state.currentPostPage, totalPages)) {
+          var _indexOfLastNote = (this.state.currentPostPage + 1) * this.state.postsPerPage;
 
           var _indexOfFirstNote = _indexOfLastNote - this.state.postsPerPage;
 
           this.setState({
-            currentNotePage: _pageNumber,
-            currentNotes: this.state.notes.slice(_indexOfFirstNote, _indexOfLastNote)
-          });
+            currentPostPage: this.state.currentPostPage + 1,
+            currentPosts: this.state.posts.slice(_indexOfFirstNote, _indexOfLastNote)
+          }); // this.setState({ currentArticlePage: this.state.currentArticlePage + 1 });
         }
       }
-    }
+    } // Needs to be fixed
+
   }, {
     key: "handleSearch",
     value: function handleSearch(event) {
-      var locked = 0;
+      // Check if text field is empty
+      if (event.target.value.toLowerCase()) {
+        // Check for all posts with search term
+        console.log(event.target.value.toLowerCase());
+        var str = event.target.value; //.slice(10);
 
-      if (event.target.value.toLowerCase().includes('articles:') && locked === 0) {
-        locked = 1;
-        var str = event.target.value.slice(10);
         var matches = [];
-        articles_sorted.forEach(function (val) {
+        this.state.mergeArray.forEach(function (val) {
           val.tags.forEach(function (t_val) {
             if (t_val.toLowerCase().includes(str.toLowerCase())) {
               matches.push(val);
@@ -9187,7 +9137,7 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
           });
         }); // Remove Dups
 
-        if (matches.length <= this.state.articlesLength) {
+        if (matches.length <= this.state.postsLength) {
           this.setState({
             articles: matches.map(function (article, idx) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_articlemodule__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -9200,41 +9150,13 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
                 note: 1
               });
             }),
-            currentArticles: this.state.articles
-          });
-        }
-      } else if (event.target.value.toLowerCase().includes('notes:') && locked === 0) {
-        var _str = event.target.value.slice(7);
-
-        locked = 1;
-        var _matches = [];
-        notes_sorted.forEach(function (val) {
-          val.tags.forEach(function (t_val) {
-            if (t_val.toLowerCase().includes(_str.toLowerCase())) {
-              _matches.push(val);
-            }
-          });
-        }); // Remove dups
-
-        if (_matches.length <= this.state.notesLength) {
-          this.setState({
-            notes: _matches.map(function (article, idx) {
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_articlemodule__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                key: idx,
-                title: article.title,
-                date: article.date,
-                image: article.image,
-                id: article.id,
-                tags: article.tags,
-                note: 0
-              });
-            }),
-            currentNotes: this.state.notes
+            currentArticles: this.state.posts
           });
         }
       } else {
         this.setState({
-          notes: notes_sorted.map(function (article, idx) {
+          articles: this.state.mergeArray.map(function (article, idx) {
+            var noteValue = article['file-id'] === 'note' ? 1 : 0;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_articlemodule__WEBPACK_IMPORTED_MODULE_4__["default"], {
               key: idx,
               title: article.title,
@@ -9242,24 +9164,10 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
               image: article.image,
               id: article.id,
               tags: article.tags,
-              note: 0
+              note: noteValue
             });
           }),
-          currentNotes: this.state.notes
-        });
-        this.setState({
-          articles: articles_sorted.map(function (article, idx) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_articlemodule__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              key: idx,
-              title: article.title,
-              date: article.date,
-              image: article.image,
-              id: article.id,
-              tags: article.tags,
-              note: 0
-            });
-          }),
-          currentArticles: this.state.articles
+          currentArticles: this.state.posts
         });
       }
     }
@@ -9273,34 +9181,16 @@ var ArticlesPage = /*#__PURE__*/function (_Component) {
         className: "articles-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
         className: "articles-heading"
-      }, "Articles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-        className: "articles-search",
-        type: "text",
-        id: "articleSearchInput",
-        placeholder: "articles: tag name or notes: tag name",
-        onChange: this.handleSearch
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "Blog Posts")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "article-list"
-      }, this.state.currentArticles, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, this.state.currentPosts, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         id: "article-paginate"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_pagination__WEBPACK_IMPORTED_MODULE_5__["default"], {
         postsPerPage: this.state.postsPerPage,
-        totalPosts: this.state.articles.length,
-        paginate: this.articlePaginate,
-        goToPage: this.goToArticlePage,
-        active: this.state.currentArticlePage
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "notes-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        className: "notes-heading"
-      }, "Notes"), this.state.currentNotes, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        id: "note-paginate"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_pagination__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        postsPerPage: this.state.postsPerPage,
-        totalPosts: this.state.notes.length,
-        paginate: this.notesPaginate,
-        goToPage: this.goToNotePage,
-        active: this.state.currentNotePage
+        totalPosts: this.state.posts.length,
+        paginate: this.postPaginate,
+        goToPage: this.goToPostPage,
+        active: this.state.currentPostPage
       }))));
     }
   }]);
@@ -9436,7 +9326,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html.dark-mode {\r\n  --color-background: #333544;\r\n  --color-heading: #fff;\r\n  --color-subheading: #ddd;\r\n  --color-body: #ccc;\r\n  --color-code-bg: #333340;\r\n  --color-footer: #223;\r\n  --color-article-hover: #445;\r\n  --color-about-highlight-bg: #443944;\r\n  --color-about-highlight-hover: #333544;\r\n  --color-highlight-container-bg: #223;\r\n  --color-code-file-label: #223;\r\n  --color-code-language-label-bg: #223;\r\n  --color-code-border: #445;\r\n  --color-console-header-bg: #445;\r\n  --color-divider: #556;\r\n  --color-border-code-file-label: #ddd;\r\n  --color-viewMore-bg: #445;\r\n  --color-viewMore-text: white;\r\n  --color-viewMore-bg--hover: #223;\r\n  --color-header-shadow: #223;\r\n  --color-tooltip-icon-background: #112;\r\n  --color-tooltip-icon-border: #6246ea;\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #223;\r\n  --color-tag-text: #fff;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #000;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #445;\r\n  --color-search-border: #4a5568;\r\n  --color-view-writeup-text: var(--color-tag-text);\r\n  --color-view-writeup-bg: var(--color-tag-bg);\r\n  --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n}\r\n\r\nhtml {\r\n  --color-background: #fcfcff;\r\n  --color-heading: #2d3748;\r\n  --color-subheading: #4a5568;\r\n  --color-body: #444444;\r\n  --color-code-bg: #f9f9ff;\r\n  --color-code-border: rgba(74, 85, 104, 0.1);\r\n  --color-footer: var(--color-heading);\r\n  --color-article-hover: #eeeeee;\r\n  --color-about-highlight-bg: #b0b0bb;\r\n  --color-about-highlight-hover: #808088;\r\n  --color-highlight-container-bg: #eae6fc;\r\n  --color-code-file-label: #2d3748;\r\n  --color-code-language-label-bg: #2d3748;\r\n  --color-divider: #eeeeee;\r\n  --color-border-code-file-label: transparent;\r\n  --color-console-header-bg: #eeeeee;\r\n  --color-viewMore-bg: #eeeeee;\r\n  --color-viewMore-text: #4a5568;\r\n  --color-viewMore-bg--hover: #d5d5d5;\r\n  --color-header-shadow: #eeeeee;\r\n  --color-tooltip-icon-background: #fcfcff;\r\n  --color-tooltip-icon-border: rgba(98, 70, 234, 0.5);\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #eee;\r\n  --color-tag-text: #333;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #FFF;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #ffffff;\r\n  --color-search-border: #eeeeee;\r\n  --color-search-placeholder: #848991;\r\n  --color-view-writeup-text: #e45858;\r\n  --color-view-writeup-bg: #fdf2f2;\r\n  --color-view-writeup-bg--hover: #f9dcdc;\r\n}\r\n\r\n* {\r\n font-family: \"Lato\", sans-serif;\r\n margin: 0;\r\n padding: 0;\r\n box-sizing: border-box;\r\n max-width: 100vw;\r\n}\r\n\r\n.app-body {\r\n   margin: 0 auto;\r\n}\r\n\r\nbody {\r\n  background-color: var(--color-background);\r\n  margin: 0 auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-height: 100vh;\r\n}\r\n\r\nh1, h2, h3, h4, h5 {\r\n  color: var(--color-heading);\r\n  line-height: 1.2;\r\n}\r\n\r\na {    \r\n  color: var(--color-heading);\r\n  text-decoration: none;\r\n}\r\n\r\nh2 {\r\n  font-size: clamp(24px, 3vw, 3vw);\r\n  font-weight: 300;\r\n  margin: 0;\r\n}\r\n\r\np {\r\n  font-size: clamp(14px, 1.0vw, 1.2vw);\r\n  line-height: 2;\r\n  color: var(--color-body);\r\n  margin-bottom: 20px;\r\n  text-indent: 40px;\r\n}\r\n\r\nbutton {\r\n  padding: 0;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\ninput[type=\"text\" i] {\r\n  padding: 1px 2px;\r\n}\r\n\r\n.center-text {\r\n   text-align: center;\r\n}\r\n\r\n.page-title {\r\n   text-align: center;\r\n   margin: 20px;\r\n}\r\n\r\n#about-me-root {\r\n  margin: 0;\r\n}\r\n#articles-root {\r\n   margin: 0;\r\n}\r\n#projects-root {\r\n   margin: 0;\r\n}\r\n.app-body {\r\n  padding-top: 100px;\r\n  max-width: 1000px;\r\n  min-height: 100vh;\r\n  padding: 100px 50px;\r\n}\r\n@media (max-width: 460px) {\r\n  .app-body {\r\n    padding-bottom: 30px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n  }\r\n\r\n}\r\n\r\n\r\n@media (prefers-color-scheme: dark) {\r\n  :root {\r\n    --color-background: #333544;\r\n    --color-heading: #fff;\r\n    --color-subheading: #ddd;\r\n    --color-body: #ccc;\r\n    --color-code-bg: #333340;\r\n    --color-footer: #223;\r\n    --color-article-hover: #445;\r\n    --color-about-highlight-bg: #443944;\r\n    --color-about-highlight-hover: #333544;\r\n    --color-highlight-container-bg: #223;\r\n    --color-code-file-label: #223;\r\n    --color-code-language-label-bg: #223;\r\n    --color-code-border: #445;\r\n    --color-console-header-bg: #445;\r\n    --color-divider: #556;\r\n    --color-border-code-file-label: #ddd;\r\n    --color-viewMore-bg: #445;\r\n    --color-viewMore-text: white;\r\n    --color-viewMore-bg--hover: #223;\r\n    --color-header-shadow: #223;\r\n    --color-tooltip-icon-background: #112;\r\n    --color-tooltip-icon-border: #6246ea;\r\n    --color-tooltip-icon-text: #6246ea;\r\n    --color-tag-bg: #223;\r\n    --color-tag-text: #fff;\r\n    --color-view-tag-bg: #6246ea;\r\n    --color-view-tag-bg-hover: #3c1ae3;\r\n    --color-search-background: #445;\r\n    --color-search-border: #4a5568;\r\n    --color-view-writeup-text: var(--color-tag-text);\r\n    --color-view-writeup-bg: var(--color-tag-bg);\r\n    --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n  }\r\n}\r\n\r\n/* ========================== Navigation Bar ============================= */\r\n.navbar\r\n{\r\n   position: fixed;\r\n   z-index: 100;\r\n   background-color: var(--color-background);\r\n   height: 75px;\r\n   width: 100%;\r\n   transition-property: box-shadow, background-color;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.navbar nav {\r\n   height: 100%;\r\n}\r\n\r\n.main-menu {\r\n   width: 100%;\r\n   max-width: 950px;\r\n   margin: 0 auto;\r\n   padding: 20px;\r\n   display: flex;\r\n   align-items: center;\r\n   transition-property: height, padding;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.main-menu .logo a {\r\n   text-decoration: none;\r\n}\r\n\r\n.main-menu .menu-list {\r\n   display: flex;\r\n   list-style: none;\r\n   justify-content: space-between;\r\n   align-items: center;\r\n   margin-left: auto;\r\n}\r\n\r\n.main-menu .menu-list li a {\r\n   padding: 0 20px;\r\n   color: var(--color-heading);\r\n   text-transform: uppercase;\r\n}\r\n\r\n\r\n.menu-branding {\r\n   display: flex;\r\n   align-items: center;\r\n   margin-left: 50px;\r\n}\r\n\r\n.menu-branding img {\r\n   width: 40px;\r\n   height: 40px;\r\n   border-radius: 50%;\r\n   background-color: black;\r\n}\r\n\r\n.menu-branding h3 {\r\n   text-transform: uppercase;\r\n   font-weight: 700;\r\n   padding-left: 20px;\r\n   color: var(--color-heading);\r\n}\r\n\r\n.display-switch {\r\n   display: inline-block;    \r\n   color: var(--color-body);\r\n   background-color: transparent;\r\n   border: none;\r\n   cursor: pointer;\r\n   margin-left: 40px;\r\n   width: 24px;\r\n   font-size: 24px;\r\n}\r\n\r\n/* MEDIA */\r\n\r\n@media (max-width: 768px) {\r\n   .main-menu .menu-list li {\r\n      padding: 0;\r\n      margin-left: 0;\r\n   }\r\n}\r\n\r\n@media (max-width: 460px) {\r\n   .navbar {\r\n      height: 72px;\r\n   }\r\n   \r\n   .main-menu {\r\n      height: auto;\r\n      /* padding: 20px; */\r\n   }\r\n   .menu-branding h3 {\r\n      display: none;\r\n   }\r\n\r\n   .main-menu .menu-list {\r\n      flex: 1 1 100%;\r\n      display: flex;\r\n      justify-content: center;\r\n   }\r\n\r\n  .main-menu .menu-list li {\r\n      font-size: 16px;\r\n   }\r\n\r\n   .main-menu .menu-list li a {\r\n      padding: 0;\r\n      font-size: 14px;\r\n  }\r\n\r\n  .main-menu .menu-list li .display-switch {\r\n      display: inline-block;\r\n      margin-left: 0;\r\n      width: 24px;\r\n      font-size: 20px;\r\n   }\r\n   .menu-branding {\r\n      margin-left: 0;\r\n      margin-right: 20px;\r\n   }\r\n}\r\n\r\n", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"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","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');\r\n\r\nhtml.dark-mode {\r\n  --color-background: #333544;\r\n  --color-heading: #fff;\r\n  --color-subheading: #ddd;\r\n  --color-body: #ccc;\r\n  --color-code-bg: #333340;\r\n  --color-footer: #223;\r\n  --color-article-hover: #445;\r\n  --color-about-highlight-bg: #443944;\r\n  --color-about-highlight-hover: #333544;\r\n  --color-highlight-container-bg: #223;\r\n  --color-code-file-label: #223;\r\n  --color-code-language-label-bg: #223;\r\n  --color-code-border: #445;\r\n  --color-console-header-bg: #445;\r\n  --color-divider: #556;\r\n  --color-border-code-file-label: #ddd;\r\n  --color-viewMore-bg: #445;\r\n  --color-viewMore-text: white;\r\n  --color-viewMore-bg--hover: #223;\r\n  --color-header-shadow: #223;\r\n  --color-tooltip-icon-background: #112;\r\n  --color-tooltip-icon-border: #6246ea;\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #223;\r\n  --color-tag-text: #fff;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #000;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #445;\r\n  --color-search-border: #4a5568;\r\n  --color-view-writeup-text: var(--color-tag-text);\r\n  --color-view-writeup-bg: var(--color-tag-bg);\r\n  --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n}\r\n\r\nhtml {\r\n  --color-background: #fcfcff;\r\n  --color-heading: #2d3748;\r\n  --color-subheading: #4a5568;\r\n  --color-body: #444444;\r\n  --color-code-bg: #f9f9ff;\r\n  --color-code-border: rgba(74, 85, 104, 0.1);\r\n  --color-footer: var(--color-heading);\r\n  --color-article-hover: #eeeeee;\r\n  --color-about-highlight-bg: #b0b0bb;\r\n  --color-about-highlight-hover: #808088;\r\n  --color-highlight-container-bg: #eae6fc;\r\n  --color-code-file-label: #2d3748;\r\n  --color-code-language-label-bg: #2d3748;\r\n  --color-divider: #eeeeee;\r\n  --color-border-code-file-label: transparent;\r\n  --color-console-header-bg: #eeeeee;\r\n  --color-viewMore-bg: #eeeeee;\r\n  --color-viewMore-text: #4a5568;\r\n  --color-viewMore-bg--hover: #d5d5d5;\r\n  --color-header-shadow: #eeeeee;\r\n  --color-tooltip-icon-background: #fcfcff;\r\n  --color-tooltip-icon-border: rgba(98, 70, 234, 0.5);\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #eee;\r\n  --color-tag-text: #333;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #FFF;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #ffffff;\r\n  --color-search-border: #eeeeee;\r\n  --color-search-placeholder: #848991;\r\n  --color-view-writeup-text: #e45858;\r\n  --color-view-writeup-bg: #fdf2f2;\r\n  --color-view-writeup-bg--hover: #f9dcdc;\r\n}\r\n\r\n* {\r\n font-family: \"Lato\", sans-serif;\r\n margin: 0;\r\n padding: 0;\r\n box-sizing: border-box;\r\n max-width: 100vw;\r\n}\r\n\r\n.app-body {\r\n   margin: 0 auto;\r\n}\r\n\r\nbody {\r\n  background-color: var(--color-background);\r\n  margin: 0 auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-height: 100vh;\r\n}\r\n\r\nh1, h2, h3, h4, h5 {\r\n  color: var(--color-heading);\r\n  line-height: 1.2;\r\n}\r\n\r\na {    \r\n  color: var(--color-heading);\r\n  text-decoration: none;\r\n}\r\n\r\nh2 {\r\n  font-size: clamp(24px, 3vw, 3vw);\r\n  font-weight: 300;\r\n  margin: 0;\r\n}\r\n\r\np {\r\n  font-size: clamp(14px, 1.0vw, 1.2vw);\r\n  line-height: 2;\r\n  color: var(--color-body);\r\n  margin-bottom: 20px;\r\n  text-indent: 40px;\r\n}\r\n\r\nbutton {\r\n  padding: 0;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\ninput[type=\"text\" i] {\r\n  padding: 1px 2px;\r\n}\r\n\r\n.center-text {\r\n   text-align: center;\r\n}\r\n\r\n.page-title {\r\n   text-align: center;\r\n   margin: 20px;\r\n}\r\n\r\n#about-me-root {\r\n  margin: 0;\r\n}\r\n#articles-root {\r\n   margin: 0;\r\n}\r\n#projects-root {\r\n   margin: 0;\r\n}\r\n.app-body {\r\n  padding-top: 100px;\r\n  max-width: 1000px;\r\n  min-height: 100vh;\r\n  padding: 100px 50px;\r\n}\r\n@media (max-width: 460px) {\r\n  .app-body {\r\n    padding-bottom: 30px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n  }\r\n\r\n}\r\n\r\n\r\n@media (prefers-color-scheme: dark) {\r\n  :root {\r\n    --color-background: #333544;\r\n    --color-heading: #fff;\r\n    --color-subheading: #ddd;\r\n    --color-body: #ccc;\r\n    --color-code-bg: #333340;\r\n    --color-footer: #223;\r\n    --color-article-hover: #445;\r\n    --color-about-highlight-bg: #443944;\r\n    --color-about-highlight-hover: #333544;\r\n    --color-highlight-container-bg: #223;\r\n    --color-code-file-label: #223;\r\n    --color-code-language-label-bg: #223;\r\n    --color-code-border: #445;\r\n    --color-console-header-bg: #445;\r\n    --color-divider: #556;\r\n    --color-border-code-file-label: #ddd;\r\n    --color-viewMore-bg: #445;\r\n    --color-viewMore-text: white;\r\n    --color-viewMore-bg--hover: #223;\r\n    --color-header-shadow: #223;\r\n    --color-tooltip-icon-background: #112;\r\n    --color-tooltip-icon-border: #6246ea;\r\n    --color-tooltip-icon-text: #6246ea;\r\n    --color-tag-bg: #223;\r\n    --color-tag-text: #fff;\r\n    --color-view-tag-bg: #6246ea;\r\n    --color-view-tag-bg-hover: #3c1ae3;\r\n    --color-search-background: #445;\r\n    --color-search-border: #4a5568;\r\n    --color-view-writeup-text: var(--color-tag-text);\r\n    --color-view-writeup-bg: var(--color-tag-bg);\r\n    --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n  }\r\n}\r\n\r\n/* ========================== Navigation Bar ============================= */\r\n.navbar\r\n{\r\n   position: fixed;\r\n   z-index: 100;\r\n   background-color: var(--color-background);\r\n   height: 75px;\r\n   width: 100%;\r\n   transition-property: box-shadow, background-color;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.navbar nav {\r\n   height: 100%;\r\n}\r\n\r\n.main-menu {\r\n   width: 100%;\r\n   max-width: 950px;\r\n   margin: 0 auto;\r\n   padding: 20px;\r\n   display: flex;\r\n   align-items: center;\r\n   transition-property: height, padding;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.main-menu .logo a {\r\n   text-decoration: none;\r\n}\r\n\r\n.main-menu .menu-list {\r\n   display: flex;\r\n   list-style: none;\r\n   justify-content: space-between;\r\n   align-items: center;\r\n   margin-left: auto;\r\n}\r\n\r\n.main-menu .menu-list li a {\r\n   padding: 0 20px;\r\n   color: var(--color-heading);\r\n   text-transform: uppercase;\r\n}\r\n\r\n\r\n.menu-branding {\r\n   display: flex;\r\n   align-items: center;\r\n   margin-left: 50px;\r\n}\r\n\r\n.menu-branding img {\r\n   width: 40px;\r\n   height: 40px;\r\n   border-radius: 50%;\r\n   background-color: black;\r\n}\r\n\r\n.menu-branding h3 {\r\n   text-transform: uppercase;\r\n   font-weight: 700;\r\n   padding-left: 20px;\r\n   color: var(--color-heading);\r\n}\r\n\r\n.display-switch {\r\n   display: inline-block;    \r\n   color: var(--color-body);\r\n   background-color: transparent;\r\n   border: none;\r\n   cursor: pointer;\r\n   margin-left: 40px;\r\n   width: 24px;\r\n   font-size: 24px;\r\n}\r\n\r\n/* MEDIA */\r\n\r\n@media (max-width: 768px) {\r\n   .main-menu .menu-list li {\r\n      padding: 0;\r\n      margin-left: 0;\r\n   }\r\n}\r\n\r\n@media (max-width: 460px) {\r\n   .navbar {\r\n      height: 72px;\r\n   }\r\n   \r\n   .main-menu {\r\n      height: auto;\r\n      /* padding: 20px; */\r\n   }\r\n   .menu-branding h3 {\r\n      display: none;\r\n   }\r\n\r\n   .main-menu .menu-list {\r\n      flex: 1 1 100%;\r\n      display: flex;\r\n      justify-content: center;\r\n   }\r\n\r\n  .main-menu .menu-list li {\r\n      font-size: 16px;\r\n   }\r\n\r\n   .main-menu .menu-list li a {\r\n      padding: 0;\r\n      font-size: 14px;\r\n  }\r\n\r\n  .main-menu .menu-list li .display-switch {\r\n      display: inline-block;\r\n      margin-left: 0;\r\n      width: 24px;\r\n      font-size: 20px;\r\n   }\r\n   .menu-branding {\r\n      margin-left: 0;\r\n      margin-right: 20px;\r\n   }\r\n}\r\n\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html.dark-mode {\r\n  --color-background: #333544;\r\n  --color-heading: #fff;\r\n  --color-subheading: #ddd;\r\n  --color-body: #ccc;\r\n  --color-code-bg: #333340;\r\n  --color-footer: #223;\r\n  --color-article-hover: #445;\r\n  --color-about-highlight-bg: #443944;\r\n  --color-about-highlight-hover: #333544;\r\n  --color-highlight-container-bg: #223;\r\n  --color-code-file-label: #223;\r\n  --color-code-language-label-bg: #223;\r\n  --color-code-border: #445;\r\n  --color-console-header-bg: #445;\r\n  --color-divider: #556;\r\n  --color-border-code-file-label: #ddd;\r\n  --color-viewMore-bg: #445;\r\n  --color-viewMore-text: white;\r\n  --color-viewMore-bg--hover: #223;\r\n  --color-header-shadow: #223;\r\n  --color-tooltip-icon-background: #112;\r\n  --color-tooltip-icon-border: #6246ea;\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #223;\r\n  --color-tag-text: #fff;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #000;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #445;\r\n  --color-search-border: #4a5568;\r\n  --color-view-writeup-text: var(--color-tag-text);\r\n  --color-view-writeup-bg: var(--color-tag-bg);\r\n  --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n}\r\n\r\nhtml {\r\n  --color-background: #fcfcff;\r\n  --color-heading: #2d3748;\r\n  --color-subheading: #4a5568;\r\n  --color-body: #444444;\r\n  --color-code-bg: #f9f9ff;\r\n  --color-code-border: rgba(74, 85, 104, 0.1);\r\n  --color-footer: var(--color-heading);\r\n  --color-article-hover: #eeeeee;\r\n  --color-about-highlight-bg: #b0b0bb;\r\n  --color-about-highlight-hover: #808088;\r\n  --color-highlight-container-bg: #eae6fc;\r\n  --color-code-file-label: #2d3748;\r\n  --color-code-language-label-bg: #2d3748;\r\n  --color-divider: #eeeeee;\r\n  --color-border-code-file-label: transparent;\r\n  --color-console-header-bg: #eeeeee;\r\n  --color-viewMore-bg: #eeeeee;\r\n  --color-viewMore-text: #4a5568;\r\n  --color-viewMore-bg--hover: #d5d5d5;\r\n  --color-header-shadow: #eeeeee;\r\n  --color-tooltip-icon-background: #fcfcff;\r\n  --color-tooltip-icon-border: rgba(98, 70, 234, 0.5);\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #eee;\r\n  --color-tag-text: #333;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #FFF;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #ffffff;\r\n  --color-search-border: #eeeeee;\r\n  --color-search-placeholder: #848991;\r\n  --color-view-writeup-text: #e45858;\r\n  --color-view-writeup-bg: #fdf2f2;\r\n  --color-view-writeup-bg--hover: #f9dcdc;\r\n}\r\n\r\n* {\r\n font-family: \"Lato\", sans-serif;\r\n margin: 0;\r\n padding: 0;\r\n box-sizing: border-box;\r\n max-width: 100vw;\r\n}\r\n\r\n.app-body {\r\n   margin: 0 auto;\r\n}\r\n\r\nbody {\r\n  background-color: var(--color-background);\r\n  margin: 0 auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-height: 100vh;\r\n}\r\n\r\nh1, h2, h3, h4, h5 {\r\n  color: var(--color-heading);\r\n  line-height: 1.2;\r\n}\r\n\r\na {    \r\n  color: var(--color-heading);\r\n  text-decoration: none;\r\n}\r\n\r\nh2 {\r\n  font-size: clamp(24px, 3vw, 3vw);\r\n  font-weight: 300;\r\n  margin: 0;\r\n}\r\n\r\np {\r\n  font-size: clamp(14px, 1.0vw, 1.2vw);\r\n  line-height: 2;\r\n  color: var(--color-body);\r\n  margin-bottom: 20px;\r\n  text-indent: 40px;\r\n}\r\n\r\nbutton {\r\n  padding: 0;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\ninput[type=\"text\" i] {\r\n  padding: 1px 2px;\r\n}\r\n\r\n.center-text {\r\n   text-align: center;\r\n}\r\n\r\n.page-title {\r\n   text-align: center;\r\n   margin: 20px;\r\n}\r\n\r\n.button {\r\n   display: block;\r\n   font-size: 14px;\r\n   font-weight: 500;\r\n   text-decoration: none;\r\n   padding: 8px 15px;\r\n   border-radius: 5px;\r\n   color: #fffffe;\r\n   background-color: var(--color-view-tag-bg);\r\n   display: inline-block;\r\n   margin: 0 10px 10px 0;\r\n   text-transform: capitalize;\r\n}\r\n\r\n#about-me-root {\r\n  margin: 0;\r\n}\r\n#articles-root {\r\n   margin: 0;\r\n}\r\n#projects-root {\r\n   margin: 0;\r\n}\r\n.app-body {\r\n  padding-top: 100px;\r\n  max-width: 1000px;\r\n  min-height: 100vh;\r\n  padding: 100px 50px;\r\n}\r\n@media (max-width: 460px) {\r\n  .app-body {\r\n    padding-bottom: 30px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n  }\r\n\r\n}\r\n\r\n\r\n@media (prefers-color-scheme: dark) {\r\n  :root {\r\n    --color-background: #333544;\r\n    --color-heading: #fff;\r\n    --color-subheading: #ddd;\r\n    --color-body: #ccc;\r\n    --color-code-bg: #333340;\r\n    --color-footer: #223;\r\n    --color-article-hover: #445;\r\n    --color-about-highlight-bg: #443944;\r\n    --color-about-highlight-hover: #333544;\r\n    --color-highlight-container-bg: #223;\r\n    --color-code-file-label: #223;\r\n    --color-code-language-label-bg: #223;\r\n    --color-code-border: #445;\r\n    --color-console-header-bg: #445;\r\n    --color-divider: #556;\r\n    --color-border-code-file-label: #ddd;\r\n    --color-viewMore-bg: #445;\r\n    --color-viewMore-text: white;\r\n    --color-viewMore-bg--hover: #223;\r\n    --color-header-shadow: #223;\r\n    --color-tooltip-icon-background: #112;\r\n    --color-tooltip-icon-border: #6246ea;\r\n    --color-tooltip-icon-text: #6246ea;\r\n    --color-tag-bg: #223;\r\n    --color-tag-text: #fff;\r\n    --color-view-tag-bg: #6246ea;\r\n    --color-view-tag-bg-hover: #3c1ae3;\r\n    --color-search-background: #445;\r\n    --color-search-border: #4a5568;\r\n    --color-view-writeup-text: var(--color-tag-text);\r\n    --color-view-writeup-bg: var(--color-tag-bg);\r\n    --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n  }\r\n}\r\n\r\n/* ========================== Navigation Bar ============================= */\r\n.navbar\r\n{\r\n   position: fixed;\r\n   z-index: 100;\r\n   background-color: var(--color-background);\r\n   height: 75px;\r\n   width: 100%;\r\n   transition-property: box-shadow, background-color;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.navbar nav {\r\n   height: 100%;\r\n}\r\n\r\n.main-menu {\r\n   width: 100%;\r\n   max-width: 950px;\r\n   margin: 0 auto;\r\n   padding: 20px;\r\n   display: flex;\r\n   align-items: center;\r\n   transition-property: height, padding;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.main-menu .logo a {\r\n   text-decoration: none;\r\n}\r\n\r\n.main-menu .menu-list {\r\n   display: flex;\r\n   list-style: none;\r\n   justify-content: space-between;\r\n   align-items: center;\r\n   margin-left: auto;\r\n}\r\n\r\n.main-menu .menu-list li a {\r\n   padding: 0 20px;\r\n   color: var(--color-heading);\r\n   text-transform: uppercase;\r\n}\r\n\r\n\r\n.menu-branding {\r\n   display: flex;\r\n   align-items: center;\r\n   margin-left: 50px;\r\n}\r\n\r\n.menu-branding img {\r\n   width: 40px;\r\n   height: 40px;\r\n   border-radius: 50%;\r\n   background-color: black;\r\n}\r\n\r\n.menu-branding h3 {\r\n   text-transform: uppercase;\r\n   font-weight: 700;\r\n   padding-left: 20px;\r\n   color: var(--color-heading);\r\n}\r\n\r\n.display-switch {\r\n   display: inline-block;    \r\n   color: var(--color-body);\r\n   background-color: transparent;\r\n   border: none;\r\n   cursor: pointer;\r\n   margin-left: 40px;\r\n   width: 24px;\r\n   font-size: 24px;\r\n}\r\n\r\n/* MEDIA */\r\n\r\n@media (max-width: 768px) {\r\n   .main-menu .menu-list li {\r\n      padding: 0;\r\n      margin-left: 0;\r\n   }\r\n}\r\n\r\n@media (max-width: 460px) {\r\n   .navbar {\r\n      height: 72px;\r\n   }\r\n   \r\n   .main-menu {\r\n      height: auto;\r\n      /* padding: 20px; */\r\n   }\r\n   .menu-branding h3 {\r\n      display: none;\r\n   }\r\n\r\n   .main-menu .menu-list {\r\n      flex: 1 1 100%;\r\n      display: flex;\r\n      justify-content: center;\r\n   }\r\n\r\n  .main-menu .menu-list li {\r\n      font-size: 16px;\r\n   }\r\n\r\n   .main-menu .menu-list li a {\r\n      padding: 0;\r\n      font-size: 14px;\r\n  }\r\n\r\n  .main-menu .menu-list li .display-switch {\r\n      display: inline-block;\r\n      margin-left: 0;\r\n      width: 24px;\r\n      font-size: 20px;\r\n   }\r\n   .menu-branding {\r\n      margin-left: 0;\r\n      margin-right: 20px;\r\n   }\r\n}\r\n\r\n", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"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","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');\r\n\r\nhtml.dark-mode {\r\n  --color-background: #333544;\r\n  --color-heading: #fff;\r\n  --color-subheading: #ddd;\r\n  --color-body: #ccc;\r\n  --color-code-bg: #333340;\r\n  --color-footer: #223;\r\n  --color-article-hover: #445;\r\n  --color-about-highlight-bg: #443944;\r\n  --color-about-highlight-hover: #333544;\r\n  --color-highlight-container-bg: #223;\r\n  --color-code-file-label: #223;\r\n  --color-code-language-label-bg: #223;\r\n  --color-code-border: #445;\r\n  --color-console-header-bg: #445;\r\n  --color-divider: #556;\r\n  --color-border-code-file-label: #ddd;\r\n  --color-viewMore-bg: #445;\r\n  --color-viewMore-text: white;\r\n  --color-viewMore-bg--hover: #223;\r\n  --color-header-shadow: #223;\r\n  --color-tooltip-icon-background: #112;\r\n  --color-tooltip-icon-border: #6246ea;\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #223;\r\n  --color-tag-text: #fff;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #000;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #445;\r\n  --color-search-border: #4a5568;\r\n  --color-view-writeup-text: var(--color-tag-text);\r\n  --color-view-writeup-bg: var(--color-tag-bg);\r\n  --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n}\r\n\r\nhtml {\r\n  --color-background: #fcfcff;\r\n  --color-heading: #2d3748;\r\n  --color-subheading: #4a5568;\r\n  --color-body: #444444;\r\n  --color-code-bg: #f9f9ff;\r\n  --color-code-border: rgba(74, 85, 104, 0.1);\r\n  --color-footer: var(--color-heading);\r\n  --color-article-hover: #eeeeee;\r\n  --color-about-highlight-bg: #b0b0bb;\r\n  --color-about-highlight-hover: #808088;\r\n  --color-highlight-container-bg: #eae6fc;\r\n  --color-code-file-label: #2d3748;\r\n  --color-code-language-label-bg: #2d3748;\r\n  --color-divider: #eeeeee;\r\n  --color-border-code-file-label: transparent;\r\n  --color-console-header-bg: #eeeeee;\r\n  --color-viewMore-bg: #eeeeee;\r\n  --color-viewMore-text: #4a5568;\r\n  --color-viewMore-bg--hover: #d5d5d5;\r\n  --color-header-shadow: #eeeeee;\r\n  --color-tooltip-icon-background: #fcfcff;\r\n  --color-tooltip-icon-border: rgba(98, 70, 234, 0.5);\r\n  --color-tooltip-icon-text: #6246ea;\r\n  --color-tag-bg: #eee;\r\n  --color-tag-text: #333;\r\n  --color-tag-bg-active: #6246ea;\r\n  --color-tag-text-active: #FFF;\r\n  --color-view-tag-bg: #6246ea;\r\n  --color-view-tag-bg-hover: #3c1ae3;\r\n  --color-search-background: #ffffff;\r\n  --color-search-border: #eeeeee;\r\n  --color-search-placeholder: #848991;\r\n  --color-view-writeup-text: #e45858;\r\n  --color-view-writeup-bg: #fdf2f2;\r\n  --color-view-writeup-bg--hover: #f9dcdc;\r\n}\r\n\r\n* {\r\n font-family: \"Lato\", sans-serif;\r\n margin: 0;\r\n padding: 0;\r\n box-sizing: border-box;\r\n max-width: 100vw;\r\n}\r\n\r\n.app-body {\r\n   margin: 0 auto;\r\n}\r\n\r\nbody {\r\n  background-color: var(--color-background);\r\n  margin: 0 auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-height: 100vh;\r\n}\r\n\r\nh1, h2, h3, h4, h5 {\r\n  color: var(--color-heading);\r\n  line-height: 1.2;\r\n}\r\n\r\na {    \r\n  color: var(--color-heading);\r\n  text-decoration: none;\r\n}\r\n\r\nh2 {\r\n  font-size: clamp(24px, 3vw, 3vw);\r\n  font-weight: 300;\r\n  margin: 0;\r\n}\r\n\r\np {\r\n  font-size: clamp(14px, 1.0vw, 1.2vw);\r\n  line-height: 2;\r\n  color: var(--color-body);\r\n  margin-bottom: 20px;\r\n  text-indent: 40px;\r\n}\r\n\r\nbutton {\r\n  padding: 0;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\ninput[type=\"text\" i] {\r\n  padding: 1px 2px;\r\n}\r\n\r\n.center-text {\r\n   text-align: center;\r\n}\r\n\r\n.page-title {\r\n   text-align: center;\r\n   margin: 20px;\r\n}\r\n\r\n.button {\r\n   display: block;\r\n   font-size: 14px;\r\n   font-weight: 500;\r\n   text-decoration: none;\r\n   padding: 8px 15px;\r\n   border-radius: 5px;\r\n   color: #fffffe;\r\n   background-color: var(--color-view-tag-bg);\r\n   display: inline-block;\r\n   margin: 0 10px 10px 0;\r\n   text-transform: capitalize;\r\n}\r\n\r\n#about-me-root {\r\n  margin: 0;\r\n}\r\n#articles-root {\r\n   margin: 0;\r\n}\r\n#projects-root {\r\n   margin: 0;\r\n}\r\n.app-body {\r\n  padding-top: 100px;\r\n  max-width: 1000px;\r\n  min-height: 100vh;\r\n  padding: 100px 50px;\r\n}\r\n@media (max-width: 460px) {\r\n  .app-body {\r\n    padding-bottom: 30px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n  }\r\n\r\n}\r\n\r\n\r\n@media (prefers-color-scheme: dark) {\r\n  :root {\r\n    --color-background: #333544;\r\n    --color-heading: #fff;\r\n    --color-subheading: #ddd;\r\n    --color-body: #ccc;\r\n    --color-code-bg: #333340;\r\n    --color-footer: #223;\r\n    --color-article-hover: #445;\r\n    --color-about-highlight-bg: #443944;\r\n    --color-about-highlight-hover: #333544;\r\n    --color-highlight-container-bg: #223;\r\n    --color-code-file-label: #223;\r\n    --color-code-language-label-bg: #223;\r\n    --color-code-border: #445;\r\n    --color-console-header-bg: #445;\r\n    --color-divider: #556;\r\n    --color-border-code-file-label: #ddd;\r\n    --color-viewMore-bg: #445;\r\n    --color-viewMore-text: white;\r\n    --color-viewMore-bg--hover: #223;\r\n    --color-header-shadow: #223;\r\n    --color-tooltip-icon-background: #112;\r\n    --color-tooltip-icon-border: #6246ea;\r\n    --color-tooltip-icon-text: #6246ea;\r\n    --color-tag-bg: #223;\r\n    --color-tag-text: #fff;\r\n    --color-view-tag-bg: #6246ea;\r\n    --color-view-tag-bg-hover: #3c1ae3;\r\n    --color-search-background: #445;\r\n    --color-search-border: #4a5568;\r\n    --color-view-writeup-text: var(--color-tag-text);\r\n    --color-view-writeup-bg: var(--color-tag-bg);\r\n    --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);\r\n  }\r\n}\r\n\r\n/* ========================== Navigation Bar ============================= */\r\n.navbar\r\n{\r\n   position: fixed;\r\n   z-index: 100;\r\n   background-color: var(--color-background);\r\n   height: 75px;\r\n   width: 100%;\r\n   transition-property: box-shadow, background-color;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.navbar nav {\r\n   height: 100%;\r\n}\r\n\r\n.main-menu {\r\n   width: 100%;\r\n   max-width: 950px;\r\n   margin: 0 auto;\r\n   padding: 20px;\r\n   display: flex;\r\n   align-items: center;\r\n   transition-property: height, padding;\r\n   transition-duration: 400ms;\r\n}\r\n\r\n.main-menu .logo a {\r\n   text-decoration: none;\r\n}\r\n\r\n.main-menu .menu-list {\r\n   display: flex;\r\n   list-style: none;\r\n   justify-content: space-between;\r\n   align-items: center;\r\n   margin-left: auto;\r\n}\r\n\r\n.main-menu .menu-list li a {\r\n   padding: 0 20px;\r\n   color: var(--color-heading);\r\n   text-transform: uppercase;\r\n}\r\n\r\n\r\n.menu-branding {\r\n   display: flex;\r\n   align-items: center;\r\n   margin-left: 50px;\r\n}\r\n\r\n.menu-branding img {\r\n   width: 40px;\r\n   height: 40px;\r\n   border-radius: 50%;\r\n   background-color: black;\r\n}\r\n\r\n.menu-branding h3 {\r\n   text-transform: uppercase;\r\n   font-weight: 700;\r\n   padding-left: 20px;\r\n   color: var(--color-heading);\r\n}\r\n\r\n.display-switch {\r\n   display: inline-block;    \r\n   color: var(--color-body);\r\n   background-color: transparent;\r\n   border: none;\r\n   cursor: pointer;\r\n   margin-left: 40px;\r\n   width: 24px;\r\n   font-size: 24px;\r\n}\r\n\r\n/* MEDIA */\r\n\r\n@media (max-width: 768px) {\r\n   .main-menu .menu-list li {\r\n      padding: 0;\r\n      margin-left: 0;\r\n   }\r\n}\r\n\r\n@media (max-width: 460px) {\r\n   .navbar {\r\n      height: 72px;\r\n   }\r\n   \r\n   .main-menu {\r\n      height: auto;\r\n      /* padding: 20px; */\r\n   }\r\n   .menu-branding h3 {\r\n      display: none;\r\n   }\r\n\r\n   .main-menu .menu-list {\r\n      flex: 1 1 100%;\r\n      display: flex;\r\n      justify-content: center;\r\n   }\r\n\r\n  .main-menu .menu-list li {\r\n      font-size: 16px;\r\n   }\r\n\r\n   .main-menu .menu-list li a {\r\n      padding: 0;\r\n      font-size: 14px;\r\n  }\r\n\r\n  .main-menu .menu-list li .display-switch {\r\n      display: inline-block;\r\n      margin-left: 0;\r\n      width: 24px;\r\n      font-size: 20px;\r\n   }\r\n   .menu-branding {\r\n      margin-left: 0;\r\n      margin-right: 20px;\r\n   }\r\n}\r\n\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10225,7 +10115,7 @@ module.exports = "data:image/png;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1Ymxp
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = "data:image/png;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiNmVkMWI4NzMyNDAyNWY3NmJjNzY3MjNmMzNmMjc1OTkucG5nIjs=";
+module.exports = "data:image/png;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiMDgxOWIyMDIzZTI3MWI3N2UxOGJjOGRlZWRmOTA0ZmMucG5nIjs=";
 
 /***/ }),
 
@@ -10289,23 +10179,23 @@ module.exports = "data:image/png;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1Ymxp
 
 /***/ }),
 
-/***/ "./src/assets/json/articles_clean.json":
-/*!*********************************************!*\
-  !*** ./src/assets/json/articles_clean.json ***!
-  \*********************************************/
+/***/ "./src/assets/json/articles.json":
+/*!***************************************!*\
+  !*** ./src/assets/json/articles.json ***!
+  \***************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('[{"date":"1636423946203","id":"web-dev-choice","image":{"name":"images/web-dev.png","alt":"js-image"},"tags":["Technology","ReactJS","NodeJS"],"title":"Web Development Choice"},{"date":"1628742217550","id":"parenting-with-few-rules","image":{"name":"images/family.png","alt":"parenting-img"},"tags":["Parenting","Christ","Children"],"title":"Parenting with Few Rules | Doug Wilson"},{"date":"1665111900994","id":"navy-seals-breathing","image":{"name":"images/heart_strength.png","alt":"health-img"},"tags":["Health","Fitness"],"title":"Navy Seals & Breathing"},{"date":"1667624400000","id":"docker-getting-started","image":{"name":"images/docker.png","alt":"docker-image"},"tags":["Technology","Docker"],"title":"Getting Started with Docker"},{"date":"1675365300000","id":"jenkins-getting-started","image":{"name":"images/jenkins.png","alt":"jenkins-image"},"tags":["Technology","Jenkins","CI/CD"],"title":"Basics of Jenkins"},{"date":"1675836000000","id":"system-design","image":{"name":"images/web-dev.png","alt":"web-dev-img"},"tags":["System Design","Technology","MAANG"],"title":"Help with System Design Interviews"}]');
+module.exports = JSON.parse('[{"file-id":"article","date":"1636423946203","id":"web-dev-choice","image":{"name":"images/web-dev.png","alt":"js-image"},"tags":["Technology","ReactJS","NodeJS"],"title":"Web Development Choice"},{"file-id":"article","date":"1628742217550","id":"parenting-with-few-rules","image":{"name":"images/family.png","alt":"parenting-img"},"tags":["Parenting","Christ","Children"],"title":"Parenting with Few Rules | Doug Wilson"},{"file-id":"article","date":"1665111900994","id":"navy-seals-breathing","image":{"name":"images/heart_strength.png","alt":"health-img"},"tags":["Health","Fitness"],"title":"Navy Seals & Breathing"},{"file-id":"article","date":"1667624400000","id":"docker-getting-started","image":{"name":"images/docker.png","alt":"docker-image"},"tags":["Technology","Docker"],"title":"Getting Started with Docker"},{"file-id":"article","date":"1675365300000","id":"jenkins-getting-started","image":{"name":"images/jenkins.png","alt":"jenkins-image"},"tags":["Technology","Jenkins","CI/CD"],"title":"Basics of Jenkins"},{"file-id":"article","date":"1675836000000","id":"system-design","image":{"name":"images/web-dev.png","alt":"web-dev-img"},"tags":["System Design","Technology","MAANG"],"title":"Help with System Design Interviews"}]');
 
 /***/ }),
 
-/***/ "./src/assets/json/notes_clean.json":
-/*!******************************************!*\
-  !*** ./src/assets/json/notes_clean.json ***!
-  \******************************************/
+/***/ "./src/assets/json/notes.json":
+/*!************************************!*\
+  !*** ./src/assets/json/notes.json ***!
+  \************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('[{"date":1644825601000,"id":"theology-103-week-5","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin","Angels","Demons"],"title":"Theology 103"},{"date":1644220801000,"id":"theology-103-week-4","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin","Angels","Demons"],"title":"Theology 103"},{"date":1643616001000,"id":"theology-103-week-3","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin"],"title":"Theology 103"},{"date":1643011201000,"id":"theology-103-week-2","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin"],"title":"Theology 103"},{"date":1639369440000,"id":"theology-102-week-6","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","God"],"title":"Theology 102"},{"date":1638636277590,"id":"theology-102-week-5","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","God"],"title":"Theology 102"},{"date":1637969188145,"id":"theology-102-week-4","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Trinity","God"],"title":"Theology 102"},{"date":1637398837075,"id":"theology-102-week-3","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Trinity","God"],"title":"Theology 102"}]');
+module.exports = JSON.parse('[{"file-id":"note","date":1644825601000,"id":"theology-103-week-5","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin","Angels","Demons"],"title":"Theology 103"},{"file-id":"note","date":1644220801000,"id":"theology-103-week-4","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin","Angels","Demons"],"title":"Theology 103"},{"file-id":"note","date":1643616001000,"id":"theology-103-week-3","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin"],"title":"Theology 103"},{"file-id":"note","date":1643011201000,"id":"theology-103-week-2","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","Sin"],"title":"Theology 103"},{"file-id":"note","date":1639369440000,"id":"theology-102-week-6","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","God"],"title":"Theology 102"},{"file-id":"note","date":1638636277590,"id":"theology-102-week-5","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Christ","God"],"title":"Theology 102"},{"file-id":"note","date":1637969188145,"id":"theology-102-week-4","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Trinity","God"],"title":"Theology 102"},{"file-id":"note","date":1637398837075,"id":"theology-102-week-3","image":{"name":"images/bible-icon.png","alt":"bible-icon"},"tags":["Theology","Trinity","God"],"title":"Theology 102"}]');
 
 /***/ })
 

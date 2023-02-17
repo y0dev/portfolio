@@ -13,16 +13,6 @@ class AboutMePage extends React.Component {
                 
                 <AboutMeSection />
                 <ExperienceSection />
-                {/* <CodeSnip 
-                    title='sample.js'
-                    language='javascript'
-                    code={['const something = { } ;','something = { title: "HELLO" }']}/>
-
-                <CodeSnip 
-                    title='sample2.js'
-                    language='javascript'
-                    code={['const another = { } ;','let sum = 0;']}/> */}
-                {/* <TestimonialSection /> */}
             </div>
         )
     }
