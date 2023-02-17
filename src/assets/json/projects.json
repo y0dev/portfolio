@@ -9,7 +9,7 @@
       
     },
     "image": {
-      "link":"https://i.ibb.co/Kq8Gs7t/house.png",
+      "link":"/images/house.png",
       "alt": "house-freepick"
     },
     "favorite": "Favorites"
@@ -25,7 +25,7 @@
     },
     "image": 
     {
-      "link":"https://i.ibb.co/WHR1ymz/hotel.png",
+      "link":"/images/hotel.png",
       "alt": "landing"
     }
   }

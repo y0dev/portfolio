@@ -4,7 +4,14 @@ function Footer() {
    return (
       <div className='footer'>
          <div className="footer-container">
-            Sola Scriptura (Scripture Alone), Solus Christus (Christ Alone), Sola fide (Faith Alone), Sola Gratia (Grace Alone), and Soli Deo Gloria (Glory to God Alone)
+            <p>Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )</p>
+            <div className='socials'>
+               <ul>
+                  <li><a href='https://www.linkedin.com/in/devontaereid/'><img src='/images/websites/linkedin.png'></img></a></li>
+                  <li><a href='https://twitter.com/_yodev_'><img src='/images/websites/twitter.png'></img></a></li>
+                  <li><a href='https://github.com/y0dev'><img src='/images/websites/github.png'></img></a></li>
+               </ul>
+            </div>
             <p className="footer-small">
                Icons provided by 
                <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik</a>

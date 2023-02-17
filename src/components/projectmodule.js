@@ -24,12 +24,12 @@ function ProjectModule(props) {
     }
 
    if (props.icon) {
-      icon = <img className="project-image" src={props.icon.link} alt={props.icon.alt}></img>  
+      icon = <img className="project-image" src={`${props.icon.link}`} alt={props.icon.alt}></img>  
    }
    
    if (props.image)
    {
-      image = <img className="project-image" src={props.image.link} alt={props.image.alt}></img>
+      image = <img className="project-image" src={`${props.image.link}`} alt={props.image.alt}></img>
    }
 
     if (props.date)

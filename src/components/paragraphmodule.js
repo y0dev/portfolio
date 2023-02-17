@@ -42,11 +42,13 @@ function ParagraphModule(props) {
     }
 
     if (props.image) {
+        let image_obj = props.image.filter((img) => img !== null);//props.details.contains(img.id))
+        // console.log(image_obj);
         image = <div className='post-image-container'>
-                    <a href={props.image[0].link}>
-                        <img className="post-image" src={props.image[0].link} alt={props.image[0].alt}></img>
+                    <a href={image_obj[0].link}>
+                        <img className="post-image" src={image_obj[0].link} alt={image_obj[0].alt}></img>
                     </a>
-                     <figcaption className="post-image-caption">{props.image[0].caption}</figcaption>
+                     <figcaption className="post-image-caption">{image_obj[0].caption}</figcaption>
                  </div>;
     }
     

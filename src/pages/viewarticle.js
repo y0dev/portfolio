@@ -1,13 +1,15 @@
 import './css/viewarticle.css';
 import React from 'react';
-import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import fontawesome from '@fortawesome/fontawesome';
+import { faShareAlt } from '@fortawesome/fontawesome-free-solid'
+// import { useParams } from "react-router-dom";
 import _articles from '../assets/json/articles.json';
 import _notes from '../assets/json/notes.json';
 import PostSection from '../sections/post_subsection';
-import {Helmet} from "react-helmet";
 
-import images from '../assets/images/images.js';
-
+// Add Icons from Font Awesome
+fontawesome.library.add(faShareAlt);
 
 function getPostTags(post) {
     return post.tags.map((tag, idx) => (
@@ -19,8 +21,7 @@ function getImage(post) {
     if ( post.image )
     {
         const arr = post.image.name.split(".");
-        const image = images.find(img => img.includes(arr[0]));
-        return <img className="post-header-image" src={image} alt={post.image.alt}></img>
+        return <img className="post-header-image" src={post.image.name} alt={post.image.alt}></img>
     }
 }
 
@@ -60,39 +61,25 @@ function copyURL(event)
 }
 
 function ViewArticlePage() {
-    let { id } = useParams();
-    let post = _articles.find(article => article.id === id);
+
+    const _id = window.location.href.split('?').reverse()[0]
+    // let { id } = useParams();
+    // console.log(id);
+    console.log(document.URL);
+    let post = _articles.find(article => article.id === _id);
     if (post === undefined)
     {
-        post = _notes.find(note => note.id === id);
+        post = _notes.find(note => note.id === _id);
     }
-    const image = getImage(post);
+    const image_obj = getImage(post);
     const tags = getPostTags(post);
     const sections = getSections(post);
     const date = getDate(post);
     
-    // console.log(post);
+
     return (
         <div>
-            <Helmet>
-                <meta charSet="utf-8" />
-                <title>{post.title}</title>
-                <link rel="canonical" href={document.URL} />
-                {/* <meta name="description" content="Backend & Frontend Developer, Engineer, & Theologian"/> */}
-                <meta name="author" content="Devontae Reid"/>
-                <meta property="og:type" content="website"/>
-                <meta property="og:title" content={post.title}/>
-                <meta property="og:url" content={document.URL}/>
-                {/* <meta property="og:description" content="Backend & Frontend Developer, Engineer, & Theologian"/> */}
-                <meta property="og:site_name" content="Devontae Reid"/>
-                <meta property="og:image" content={image} />
-                <meta property="twitter:title" content={post.title}/>
-                {/* <meta property="twitter:description" content="Backend & Frontend Developer, Engineer, & Theologian"/> */}
-                <meta property="twitter:image" content={image}/>
-                <meta property="twitter:card" content="'summary_large_image"/>
-                <meta property="twitter:site" content="'@_yodev_"/>
-            </Helmet>
-            <article className='app-body post-container'>
+            <article className='app-body' id='post-container'>
             <div className='post-header-container'>
                 <div className='post-header-details'>
                     <h1 id='post-header-title'>{post.title}</h1>
@@ -102,7 +89,7 @@ function ViewArticlePage() {
                         <span className="post-header-divider"> | </span>
                         <button className="post-header-shareButton" id="shareButton" onClick={copyURL}>
                             <span className="post-header-shareButton-icon">
-                                <i className="fas fa-share-alt"></i>
+                                <FontAwesomeIcon icon="share-alt" /> 
                             </span>
                             Share
                         </button>
@@ -112,7 +99,7 @@ function ViewArticlePage() {
                         {tags}                       
                     </div>
                 </div>  
-                {image}
+                {image_obj}
             </div>
             <div className='post-content'>
                 {sections}

@@ -2,3 +2,12 @@
     font-size: 26px;
     margin-top: 50px;
 }
+
+.post-section-container .post-link {
+    color: var(--color-view-tag-bg);
+}
+
+.post-section-container .post-link:hover {
+    color: var(--color-view-tag-bg-hover);
+
+}

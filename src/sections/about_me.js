@@ -1,4 +1,5 @@
 import './css/about_me.css';
+import headshot from '../assets/images/headshot.jpeg'
 
 function AboutMeSection() {
    return (
@@ -6,7 +7,7 @@ function AboutMeSection() {
          <div className='content'>
             <h2>About Me</h2>
             <div className='about-content' id='first'>
-               <img src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot" />
+               <img src='/images/headshot.jpeg' alt="headshot" />
                <p>
                   I am a Software Engineer currently working in embedded systems. From the start, I started off in iOS development and from there grew to enjoy
                   web development both Front-End and Back-End. Who would have known User Interface would be a love/hate relationship. There's a struggle of coming 
@@ -27,11 +28,11 @@ function AboutMeSection() {
                   growing I believe I'm north of 100 books in my collection. Here's a list of
                   my study resources 
                   <span className='highlight'>
-                     <a className='web-link' href="https://www.desiringgod.org/">Desiring God</a></span>  ,
+                     <a className='web-link' href="https://www.desiringgod.org/">Desiring God</a></span>,
                   <span className='highlight'>
-                     <a className='web-link' href="https://www.gty.org/">Grace To You</a> </span> , and 
+                     <a className='web-link' href="https://www.gty.org/">Grace To You</a> </span>, and 
                   <span className='highlight'>
-                     <a className='web-link' href="https://www.truthforlife.org/"> Truth for Life</a>
+                     <a className='web-link' href="https://www.truthforlife.org/">Truth for Life</a>
                   </span>.
                </p>
             </div>

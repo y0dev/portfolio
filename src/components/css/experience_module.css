@@ -25,13 +25,22 @@
     margin-left:0;
 }
 
+ul.experience-description {
+    color: var(--color-body);
+    font-size: clamp(14px, 1.0vw, 1.2vw);
+    line-height: 30px;
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style-type: circle;
+}
+
 
 @media (max-width: 460px) {
     .experience-item-container {
         padding: 20px 0;
     }
     .experience-institution {
-        font-size: 14px;
+        font-size: 13px;
     }
     .experience-position {
         font-size: 18px;

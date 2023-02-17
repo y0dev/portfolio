@@ -1,5 +1,5 @@
 import './css/navbar.css';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Component } from 'react';
 import logo from '../assets/images/logos/logo192.png';
 
@@ -47,30 +47,16 @@ class NavBar extends Component {
 
    // Scroll event
    handleScroll(event){
-      // let navbar = document.getElementById('nav-bar');
-      // document.documentElement.style.setProperty('--menu-color', '#000000');
-      // document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 0)');
-      // // console.log(navbar)
-      // navbar.style.position = 'fixed';
-      // navbar.style.top = 20;
-      // navbar.style.left = 0;
-      // // console.log(this.window.scrollY);
-      // if(window.scrollY === 0) {
-      //    document.documentElement.style.setProperty('--menu-background-color', '#FFFFFF');
-      //    navbar.style.position = 'relative';
-      // } else if (window.scrollY >= 1 && window.scrollY < 500){
-      //    document.documentElement.style.setProperty('--menu-color', '#FFFFFF');
-      // } else if (window.scrollY >= 500 && window.scrollY < 550) {
-      //    document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 0.43)');
-      // } else if (window.scrollY >= 550 && window.scrollY < 600) {
-      //    document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 0.863)');
-      // } else if (window.scrollY >= 600) {
-      //    document.documentElement.style.setProperty('--menu-background-color', '#FFFFFF');
-      // }
-      // this.setState({
-      //    menu_color: document.documentElement.style.getPropertyValue('--menu-color'),
-      //    menu_bg_color: document.documentElement.style.getPropertyValue('--menu-background-color')
-      // })
+      const navbar = document.getElementById('nav-bar');
+      if (window.scrollY > 50) 
+      {
+         navbar.classList.add('header-content--mini');
+         navbar.children[0].classList.add('header-container--mini');
+      } else 
+      {
+         navbar.classList.remove('header-content--mini');
+         navbar.children[0].classList.remove('header-container--mini');
+      }
   }
 
   // This is to toggle menu button on all phone or tablets
@@ -137,14 +123,14 @@ class NavBar extends Component {
          <div id='nav-bar' onScroll={this.handleScroll} className="navbar">
             <nav>
                <div className='main-menu'>
-                  <Link to="/" className="menu-branding">
-                     <img src={logo} alt="branding-logo" />
+                  <a href="/" className="menu-branding">
+                     <img src="/images/logo.png" alt="branding-logo" />
                      <h3>Devontae Reid</h3>
-                  </Link>
+                  </a>
                   <ul className='menu-list'>
-                     <li><Link to="/about-me">About Me</Link></li>
-                     <li><Link to="/projects">Projects</Link></li>
-                     <li><Link to="/articles">Articles</Link></li>
+                     <li><a href="/projects">Projects</a></li>
+                     <li><a href="/articles">Articles</a></li>
+                     <li><a href="/gospel">Gospel</a></li>
                      <li><button className='display-switch' onClick={this.changeDisplay}>☀️</button></li>
                      {/* <li><a href="https://devssite.net/">Blog</a></li> */}
                   </ul>

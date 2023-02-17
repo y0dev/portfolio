@@ -1,4 +1,4 @@
-.articles-container {
+#articles-container {
     width: 100%;
     max-width: 950px;
     margin: 0 auto;
@@ -45,6 +45,10 @@
     margin-bottom: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (max-width: 768px){
     
     .articles-header {
@@ -68,4 +72,11 @@
         margin-bottom: 20px;
     }
     
+}
+
+@media (max-width: 768px){
+    #articles-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }

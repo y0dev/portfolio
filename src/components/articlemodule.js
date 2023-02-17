@@ -2,6 +2,7 @@ import './css/article_module.css';
 
 import images from '../assets/images/images.js';
 
+
 function ArticleModule(props) {
     let title;
     let icon;
@@ -9,6 +10,7 @@ function ArticleModule(props) {
     let tags;
     let id;
     let note = props.note;
+    let link = note === 0 ? "/articles/" : "/notes/";
 
     if (props.title)
     {
@@ -21,9 +23,10 @@ function ArticleModule(props) {
 
     if ( props.image )
     {
-        const arr = props.image.name.split(".");
-        const image = images.find(img => img.includes(arr[0]));
-        icon = <img className="article-image" src={image} alt={props.image.name}></img>
+        // const arr = props.image.name.split(".");
+        // const image = images.find(img => img.includes(arr[0]));
+
+        icon = <img className="article-image" src={`/${props.image.name}`} alt={props.image.alt}></img>
     }
 
     if (props.date)
@@ -44,7 +47,7 @@ function ArticleModule(props) {
 
    
    return (
-       <a href={note === 0 ? "/articles/":"/notes/" + id} className='article-item-container'>
+       <a href={link + id} className='article-item-container'>
            {icon}
            <div className='article-content'>
                {title}

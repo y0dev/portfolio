@@ -6,3 +6,9 @@
     border-top: 0 !important;
     padding-top: 0;
 }
+
+@media (max-width: 1000px) {
+    #experience {
+        padding: 0 20px;
+    }
+}

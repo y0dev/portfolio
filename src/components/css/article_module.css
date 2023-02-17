@@ -6,6 +6,11 @@
     min-height: 70px;
 }
 
+.article-item-container:hover {
+    background-color: rgba(231, 231, 231, 0.089);
+    border-radius: 5px; 
+}
+
 .article-item-container .article-image {
     width: 35px;
     margin-left: 20px;

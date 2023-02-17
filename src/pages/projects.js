@@ -1,6 +1,8 @@
 import React from 'react';
 import _projects from '../assets/json/projects.json';
 import ProjectModule from '../components/projectmodule';
+import './css/projects.css';
+
 
 class ProjectsPage extends React.Component {
     render() {
@@ -12,6 +14,7 @@ class ProjectsPage extends React.Component {
                 icon={project.image}
                 links={project.preview_links} />
         });
+
         return (
             <div className='app-body' id='project-container'>
                 <h2 className="projects-heading">Projects</h2>

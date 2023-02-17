@@ -15,7 +15,7 @@
    /* display: flex;
    flex-direction: row; */
 #about-me .content #first {
-   padding: 40px;
+   padding: 40px 0;
 }
 
 #about-me .content #first img {
@@ -70,9 +70,13 @@ img {
 }
 
 @media (max-width: 460px) {
+   #about-me {
+      padding-bottom: 50px;
+   }
    #about-me .content {
       padding: 0;
    }
+
    #about-me .content #first img {
       float: initial;
       margin: initial;
@@ -84,12 +88,15 @@ img {
    #about-me .about-heading {
        font-size: 24px;
    }
+   #about-me .content #first {
+      padding: 10px;
+   }
    #about-me .about-content {
       margin-top: 20px;
    }
    .about-container p {
       font-size: 16px;
-  }
+   }
 }
 
 @media only screen and (max-width: 700px) {
@@ -100,4 +107,14 @@ img {
    .icons {
       flex-wrap: wrap;
    }
+}
+
+@media (max-width: 1000px) {
+   #about-me .content {
+      padding: 0;
+   }
+
+   /* #about-me .content #first {
+      padding: 40px 0;
+  } */
 }
