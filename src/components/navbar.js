@@ -1,6 +1,5 @@
-import './css/navbar.css';
 // import { Link } from "react-router-dom";
-import { Component } from 'react';
+import React, { Component } from 'react';
 import logo from '../assets/images/logos/logo192.png';
 
 class NavBar extends Component {
@@ -8,7 +7,8 @@ class NavBar extends Component {
       super();
       this.state = {
          menu_color: '',
-         menu_bg_color: ''
+         menu_bg_color: '',
+         showMobileMenu: false,
       };
       this.handleScroll = this.handleScroll.bind(this);
       this.toggleMenu = this.toggleMenu.bind(this);
@@ -25,7 +25,7 @@ class NavBar extends Component {
          // If last known theme was dark toggle the theme to dark
          if (display === 'true' && !htmlTag.classList.contains('dark')) {
             htmlTag.classList.add('dark');
-            displayButtons[0].innerText = '☀️'; 
+            if (displayButtons[0]) displayButtons[0].innerText = '☀️'; 
          }
       }
       window.addEventListener('scroll', this.handleScroll);
@@ -56,26 +56,8 @@ class NavBar extends Component {
    }
 
   // This is to toggle menu button on all phone or tablets
-  toggleMenu(event) {
-   const menu = document.getElementById('menu-button');
-   const side_menu = document.getElementById('side-menu'); 
-   //   console.log(event.target) 
-     if(event.target.id === 'menu-button' 
-        || event.target.className === 'menu-line') {
-      menu.classList.toggle('active');
-      side_menu.classList.toggle('show');
-     }
-
-     const menu_color = document.documentElement.style.getPropertyValue('--menu-color');
-     const menu_bg_color = document.documentElement.style.getPropertyValue('--menu-background-color');
-   //   console.log(menu_color,menu_bg_color);
-     if(menu.classList.contains('active') && (menu_color === '#FFFFFF' && menu_bg_color === 'rgba(255, 255, 255, 0)')) {
-         document.documentElement.style.setProperty('--menu-color', '#000000');
-         document.documentElement.style.setProperty('--menu-background-color', 'rgba(255, 255, 255, 1)');
-     } else if (!menu.classList.contains('active')) {
-         document.documentElement.style.setProperty('--menu-color', this.state.menu_color);
-         document.documentElement.style.setProperty('--menu-background-color', this.state.menu_bg_color);
-     }
+  toggleMenu() {
+   this.setState((prevState) => ({ showMobileMenu: !prevState.showMobileMenu }));
   }
    changeDisplay(event) { 
       // Create a media condition that targets viewports prefers dark color scheme
@@ -90,11 +72,11 @@ class NavBar extends Component {
 
       if (htmlTag.classList.contains('dark')) {
          htmlTag.classList.remove('dark');
-         displayButtons[0].innerText = '🌙';
+         if (displayButtons[0]) displayButtons[0].innerText = '🌙';
          localStorage.setItem('dark-mode', "false");
       } else {
          htmlTag.classList.add('dark');
-         displayButtons[0].innerText = '☀️';
+         if (displayButtons[0]) displayButtons[0].innerText = '☀️';
          localStorage.setItem('dark-mode', "true");
       }
    }
@@ -109,6 +91,7 @@ class NavBar extends Component {
    }
 
   render() {
+      const { showMobileMenu } = this.state;
       return (
          <div id='nav-bar' onScroll={this.handleScroll} className="fixed z-50 w-full h-[75px] bg-white dark:bg-gray-800 transition-all duration-400">
             <nav className="h-full">
@@ -117,11 +100,31 @@ class NavBar extends Component {
                      <img src="/images/logo.png" alt="branding-logo" className="w-10 h-10" />
                      <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Devontae Reid</h3>
                   </a>
-                  <ul className='flex items-center gap-6'>
+                  {/* Hamburger menu button for mobile */}
+                  <button
+                     className="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none"
+                     onClick={this.toggleMenu}
+                     aria-label="Toggle menu"
+                  >
+                     <span className={`block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1 transition-all ${showMobileMenu ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+                     <span className={`block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1 transition-all ${showMobileMenu ? 'opacity-0' : ''}`}></span>
+                     <span className={`block w-6 h-0.5 bg-gray-800 dark:bg-white transition-all ${showMobileMenu ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+                  </button>
+                  {/* Desktop menu */}
+                  <ul className="hidden md:flex items-center gap-6">
                      <li><a href="/projects" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Projects</a></li>
                      <li><a href="/articles" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Articles</a></li>
                      <li><a href="/gospel" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Gospel</a></li>
                      <li><button className='display-switch p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700' onClick={this.changeDisplay}>☀️</button></li>
+                  </ul>
+               </div>
+               {/* Mobile menu dropdown */}
+               <div className={`md:hidden w-full bg-white dark:bg-gray-800 transition-all duration-300 ${showMobileMenu ? 'block' : 'hidden'}`}>
+                  <ul className="flex flex-col items-center gap-4 py-4">
+                     <li><a href="/projects" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" onClick={this.toggleMenu}>Projects</a></li>
+                     <li><a href="/articles" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" onClick={this.toggleMenu}>Articles</a></li>
+                     <li><a href="/gospel" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" onClick={this.toggleMenu}>Gospel</a></li>
+                     <li><button className="display-switch p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={this.changeDisplay}>☀️</button></li>
                   </ul>
                </div>
             </nav>
