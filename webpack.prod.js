@@ -1,44 +1,48 @@
 const path = require('path');
 const common = require('./webpack.common');
 const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 module.exports = merge(common, {
 	mode: 'production',
 	output: {
-		path: path.resolve(__dirname,'dist'),
-		filename: '[name].[contenthash].js',
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].[contenthash].bundle.js',
+		publicPath: '/',
 		clean: true,
-		// assetModuleFilename: '[name][ext]'
 	},
 	module: {
-		rules: 
-		[
-			// ====== Images Rule =======
+		rules: [
+			{
+				test: /\.css$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					'postcss-loader'
+				]
+			},
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/,
 				type: 'asset/resource',
-				// use: {
-				// 	loader: 'url-loader',
-				// 	options: {
-				// 		name: '[hash]-[name].[ext]',
-				// 		outputPath: 'images',
-				// 		limit: 8192,
-				// 		mimetype: "image/png",
-				// 		encoding: true,
-				// 	},
-				// }
 			}
 		]
 	},
+	optimization: {
+		minimizer: [
+			new CssMinimizerPlugin(),
+			new TerserPlugin(),
+		],
+		minimize: true,
+	},
 	plugins: [
+		new MiniCssExtractPlugin({
+			filename: '[name].[contenthash].css',
+		}),
 		new WebpackAssetsManifest({
-			output: path.resolve(__dirname,'dist/asset-manifest.json'),
-			// customize(entry,orig,manifest,asset) {
-			// 	return {
-			// 		key: `${entry.key.replace}`
-			// 	}
-			// },
+			output: path.resolve(__dirname, 'dist/asset-manifest.json'),
 			transform(assets, manifest) {
 				return {
 					files: assets
@@ -46,4 +50,4 @@ module.exports = merge(common, {
 			}
 		}),
 	]
-})
+});

@@ -33,20 +33,18 @@ module.exports = {
 			// },
 			//===== Styling Rule ======
 			{
-				test: /\.css/,
-				use: 
-				[
+				test: /\.css$/,
+				use: [
 					'style-loader',
-					'css-loader'
+					'css-loader',
+					'postcss-loader'
 				]
 			},
 			// ===== Node Rule =======
 			{
 				test: /\.(ts|tsx|js|jsx)$/,
-				use: 
-				[
-					'babel-loader'
-				]
+				exclude: /node_modules/,
+				use: ['babel-loader']
 			},
 			// ===== JSON Rule =====
 			{ test: /\.json$/, type: 'json' },

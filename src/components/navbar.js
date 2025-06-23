@@ -18,15 +18,13 @@ class NavBar extends Component {
    componentDidMount() {
       const display = localStorage.getItem('dark-mode');
       
-      if (display !== null)
-      {
+      if (display !== null) {
          const htmlTag = document.getElementsByTagName('html')[0];
          const displayButtons = document.getElementsByClassName('display-switch');
 
          // If last known theme was dark toggle the theme to dark
-         if ( display === 'true' && !htmlTag.classList.contains('dark-mode') )
-         {
-            htmlTag.classList.toggle('dark-mode');
+         if (display === 'true' && !htmlTag.classList.contains('dark')) {
+            htmlTag.classList.add('dark');
             displayButtons[0].innerText = '☀️'; 
          }
       }
@@ -48,16 +46,14 @@ class NavBar extends Component {
    // Scroll event
    handleScroll(event){
       const navbar = document.getElementById('nav-bar');
-      if (window.scrollY > 50) 
-      {
-         navbar.classList.add('header-content--mini');
-         navbar.children[0].classList.add('header-container--mini');
-      } else 
-      {
-         navbar.classList.remove('header-content--mini');
-         navbar.children[0].classList.remove('header-container--mini');
+      if (window.scrollY > 50) {
+         navbar.classList.add('shadow-md');
+         navbar.classList.add('h-[60px]');
+      } else {
+         navbar.classList.remove('shadow-md');
+         navbar.classList.remove('h-[60px]');
       }
-  }
+   }
 
   // This is to toggle menu button on all phone or tablets
   toggleMenu(event) {
@@ -82,30 +78,24 @@ class NavBar extends Component {
      }
   }
    changeDisplay(event) { 
-
       // Create a media condition that targets viewports prefers dark color scheme
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
       // Check if the media query is true
       if (mediaQuery.matches) {
-         // Then trigger an alert
          return;
       }
 
       const htmlTag = document.getElementsByTagName('html')[0];
       const displayButtons = document.getElementsByClassName('display-switch');
 
-      htmlTag.classList.toggle('dark-mode');
-      
-      // Store state of theme into local storage
-      if ( htmlTag.classList.contains('dark-mode') )
-      {
+      if (htmlTag.classList.contains('dark')) {
+         htmlTag.classList.remove('dark');
+         displayButtons[0].innerText = '🌙';
+         localStorage.setItem('dark-mode', "false");
+      } else {
+         htmlTag.classList.add('dark');
          displayButtons[0].innerText = '☀️';
          localStorage.setItem('dark-mode', "true");
-      }
-      else
-      {
-         displayButtons[0].innerText = '🌙';  
-         localStorage.setItem('dark-mode', "false"); 
       }
    }
 
@@ -120,19 +110,18 @@ class NavBar extends Component {
 
   render() {
       return (
-         <div id='nav-bar' onScroll={this.handleScroll} className="navbar">
-            <nav>
-               <div className='main-menu'>
-                  <a href="/" className="menu-branding">
-                     <img src="/images/logo.png" alt="branding-logo" />
-                     <h3>Devontae Reid</h3>
+         <div id='nav-bar' onScroll={this.handleScroll} className="fixed z-50 w-full h-[75px] bg-white dark:bg-gray-800 transition-all duration-400">
+            <nav className="h-full">
+               <div className='max-w-[950px] mx-auto px-5 py-4 flex items-center justify-between'>
+                  <a href="/" className="flex items-center gap-3">
+                     <img src="/images/logo.png" alt="branding-logo" className="w-10 h-10" />
+                     <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Devontae Reid</h3>
                   </a>
-                  <ul className='menu-list'>
-                     <li><a href="/projects">Projects</a></li>
-                     <li><a href="/articles">Articles</a></li>
-                     <li><a href="/gospel">Gospel</a></li>
-                     <li><button className='display-switch' onClick={this.changeDisplay}>☀️</button></li>
-                     {/* <li><a href="https://devssite.net/">Blog</a></li> */}
+                  <ul className='flex items-center gap-6'>
+                     <li><a href="/projects" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Projects</a></li>
+                     <li><a href="/articles" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Articles</a></li>
+                     <li><a href="/gospel" className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Gospel</a></li>
+                     <li><button className='display-switch p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700' onClick={this.changeDisplay}>☀️</button></li>
                   </ul>
                </div>
             </nav>
