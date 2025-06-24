@@ -4,135 +4,22 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-
-// Register ScrollTrigger plugin
+import resources from "@/data/resources.json"
+import Footer from "@/components/Footer";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const books = [
-  {
-    id: 1,
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    category: "Programming",
-    description: "A handbook of agile software craftsmanship",
-    cover: "📚",
-    rating: 5,
-    status: "Read"
-  },
-  {
-    id: 2,
-    title: "Design Patterns",
-    author: "Gang of Four",
-    category: "Programming",
-    description: "Elements of reusable object-oriented software",
-    cover: "🎨",
-    rating: 5,
-    status: "Reading"
-  },
-  {
-    id: 3,
-    title: "The Pragmatic Programmer",
-    author: "Andrew Hunt & David Thomas",
-    category: "Programming",
-    description: "Your journey to mastery",
-    cover: "⚡",
-    rating: 5,
-    status: "Read"
-  },
-  {
-    id: 4,
-    title: "Refactoring",
-    author: "Martin Fowler",
-    category: "Programming",
-    description: "Improving the design of existing code",
-    cover: "🔧",
-    rating: 4,
-    status: "To Read"
-  },
-  {
-    id: 5,
-    title: "JavaScript: The Good Parts",
-    author: "Douglas Crockford",
-    category: "Programming",
-    description: "The beautiful, elegant, and expressive language",
-    cover: "🟨",
-    rating: 4,
-    status: "Read"
-  },
-  {
-    id: 6,
-    title: "React: Up & Running",
-    author: "Stoyan Stefanov",
-    category: "Programming",
-    description: "Building web applications",
-    cover: "⚛️",
-    rating: 4,
-    status: "Read"
-  }
-];
-
-const tools = [
-  {
-    name: "VS Code",
-    category: "Editor",
-    description: "My primary code editor with custom extensions",
-    icon: "💻"
-  },
-  {
-    name: "Git",
-    category: "Version Control",
-    description: "Essential for version control and collaboration",
-    icon: "📝"
-  },
-  {
-    name: "Docker",
-    category: "Containerization",
-    description: "For containerized development and deployment",
-    icon: "🐳"
-  },
-  {
-    name: "Postman",
-    category: "API Testing",
-    description: "API development and testing tool",
-    icon: "📮"
-  }
-];
-
-const resources = [
-  {
-    name: "MDN Web Docs",
-    category: "Documentation",
-    description: "Comprehensive web development documentation",
-    url: "https://developer.mozilla.org/",
-    icon: "🌐"
-  },
-  {
-    name: "Stack Overflow",
-    category: "Community",
-    description: "Q&A platform for developers",
-    url: "https://stackoverflow.com/",
-    icon: "❓"
-  },
-  {
-    name: "GitHub",
-    category: "Platform",
-    description: "Code hosting and collaboration platform",
-    url: "https://github.com/",
-    icon: "🐙"
-  }
-];
 
 export default function ResourcesPage() {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Page animations
-    gsap.fromTo(".resource-section",
-      { 
-        y: 50, 
-        opacity: 0
+    gsap.fromTo(
+      ".resource-section",
+      {
+        y: 50,
+        opacity: 0,
       },
       {
         y: 0,
@@ -144,16 +31,16 @@ export default function ResourcesPage() {
           trigger: pageRef.current,
           start: "top 80%",
           end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
 
-    // Book card animations
-    gsap.fromTo(".book-card",
-      { 
-        scale: 0.9, 
-        opacity: 0
+    gsap.fromTo(
+      ".book-card",
+      {
+        scale: 0.9,
+        opacity: 0,
       },
       {
         scale: 1,
@@ -165,14 +52,13 @@ export default function ResourcesPage() {
           trigger: ".bookshelf-section",
           start: "top 80%",
           end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
 
-    // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -189,19 +75,6 @@ export default function ResourcesPage() {
     }
   };
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`text-sm ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
-      >
-        ★
-      </span>
-    ));
-  };
-
   return (
     <div ref={pageRef} className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
@@ -211,63 +84,70 @@ export default function ResourcesPage() {
             Resources
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            A curated collection of books, tools, and resources that have shaped my journey as a developer
+            A curated collection of books, tools, and developer resources that
+            have shaped my journey.
           </p>
         </div>
       </section>
 
-      {/* Bookshelf Section */}
-      <section className="bookshelf-section resource-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+      {/* Books Section Preview */}
+      <section className="resource-section bookshelf-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              📚 Bookshelf
+              📚 Books
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Books that have influenced my thinking and helped me grow as a developer
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+              A few of my favorite books.{" "}
+              <Link
+                href="/resources/books"
+                className="text-blue-600 dark:text-blue-400 underline"
+              >
+                See all books →
+              </Link>
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {books.map((book) => (
-              <div
-                key={book.id}
-                className="book-card bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-600 overflow-hidden"
-              >
-                <div className="p-6">
-                  {/* Book Cover */}
-                  <div className="text-center mb-4">
-                    <div className="text-4xl mb-2">{book.cover}</div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                      {book.title}
-                    </h3>
-                    <p className="text-blue-600 dark:text-blue-400 font-medium">
-                      by {book.author}
-                    </p>
+            {resources.books
+              .filter((book) => book.featured)
+              .map((book) => (
+                <a
+                  key={book.id}
+                  href={`https://www.amazon.com/s?k=${encodeURIComponent(
+                    book.title
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="book-card bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-600 overflow-hidden p-6 flex flex-col"
+                >
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-4">{book.cover}</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                        {book.title}
+                      </h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">
+                        by {book.author}
+                      </p>
+                    </div>
                   </div>
-
-                  {/* Category & Status */}
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {book.category}
-                    </span>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(book.status)}`}>
-                      {book.status}
-                    </span>
-                  </div>
-
-                  {/* Rating */}
-                  <div className="flex justify-center mb-4">
-                    {renderStars(book.rating)}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-1">
                     {book.description}
                   </p>
-                </div>
-              </div>
-            ))}
+                  <div className="flex items-center justify-between mt-auto">
+                    <span
+                      className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                        book.status
+                      )}`}
+                    >
+                      {book.status}
+                    </span>
+                    <span className="text-yellow-400 text-sm ml-2">
+                      {"★".repeat(book.rating) + "☆".repeat(5 - book.rating)}
+                    </span>
+                  </div>
+                </a>
+              ))}
           </div>
         </div>
       </section>
@@ -285,7 +165,7 @@ export default function ResourcesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tools.map((tool, index) => (
+            {resources.tools.map((tool, index) => (
               <div
                 key={index}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700"
@@ -308,20 +188,128 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Online Resources Section */}
+      {/* Developer Resources Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              🌐 Online Resources
+              🌐 Developer Resources
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Websites and platforms that I frequently visit for learning and development
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+              Websites and platforms I frequently visit for learning and development
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {resources.map((resource, index) => (
+            {resources.dev_resources.map((resource, index) => (
+              <a
+                key={index}
+                href={resource.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+              >
+                <div className="text-center">
+                  <div className="text-3xl mb-3">{resource.icon}</div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                    {resource.name}
+                  </h3>
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
+                    {resource.category}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {resource.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Podcast Section */}
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              🎙️ Podcasts
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+              Podcasts I recommend for developers and lifelong learners
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {resources.podcasts.map((podcast, index) => (
+              <a
+                key={index}
+                href={podcast.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+              >
+                <div className="text-center">
+                  <div className="text-3xl mb-3">{podcast.icon}</div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                    {podcast.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {podcast.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* YouTube Channels Section */}
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              📺 YouTube Channels
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+              YouTube channels I recommend for learning and inspiration
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {resources.youtube_channels.map((channel, index) => (
+              <a
+                key={index}
+                href={channel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+              >
+                <div className="text-center">
+                  <div className="text-3xl mb-3">{channel.icon}</div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                    {channel.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {channel.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Theology Resources Section */}
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              ⛪ Theology Resources
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+              Biblical teaching, sermons, evangelism, and apologetics resources
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {resources.theology_resources.map((resource, index) => (
               <a
                 key={index}
                 href={resource.url}
@@ -361,13 +349,25 @@ export default function ResourcesPage() {
             href="mailto:devontae.reid@gmail.com"
             className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 transform hover:scale-105"
           >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
             </svg>
             Share Resources
           </a>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
-} 
+}

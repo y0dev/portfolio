@@ -32,6 +32,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
+        <script type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js"></script>
       </body>
     </html>
   );

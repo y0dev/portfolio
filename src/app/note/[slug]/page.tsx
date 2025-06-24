@@ -4,9 +4,9 @@ import {formatDate} from "@/utils"
 import Link from "next/link";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -17,8 +17,9 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function NotePage({ params }: PageProps) {
-  const note = articles.find(a => a.id === params.slug && a.type === "note");
+export default async function NotePage({ params }: PageProps) {
+  const { slug } = await params;
+  const note = articles.find(a => a.id === slug && a.type === "note");
 
   if (!note) {
     notFound();

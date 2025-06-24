@@ -3,6 +3,7 @@
 import { useState, useEffect, SetStateAction } from 'react';
 import Link from 'next/link';
 import { articles } from '@/data/articles';
+import { parseDate } from '@/utils';
 
 const categories = [
   "All",
@@ -49,15 +50,17 @@ export default function Articles() {
 
   const featuredArticles = filtered
     .filter(a => a.type === 'article')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date))
     .slice(0, 2);
+
   const allArticles = filtered
-    .filter((a) => a.type === 'article')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .filter(a => a.type === 'article')
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date))
     .slice(2);
+
   const notes = filtered
-    .filter((a) => a.type === 'note')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .filter(a => a.type === 'note')
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
   const totalArticlesPages = Math.ceil(allArticles.length / itemsPerPage);
   const totalNotesPages = Math.ceil(notes.length / itemsPerPage);
