@@ -3,6 +3,7 @@ import { articles } from "@/data/articles";
 import {formatDate, parseDate} from "@/utils"
 import Link from "next/link";
 import type { Metadata } from "next";
+import type { Article } from "@/types";
 
 interface PageProps {
   params: Promise<{
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${note.title} | Devontae Reid`,
-    description: note.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Personal note and reflection.",
+    description: note.description || "Personal note and reflection.",
     metadataBase: new URL('https://www.devontaereid.com'),
     keywords: [...note.tags, "note", "reflection", "devontae reid", "personal"],
     authors: [{ name: "Devontae Reid" }],
@@ -55,14 +56,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     openGraph: {
       title: note.title,
-      description: note.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Personal note and reflection.",
+      description: note.description || "Personal note and reflection.",
       url: `https://www.devontaereid.com/note/${slug}`,
       siteName: "Devontae Reid",
       images: [
         {
-          url: "https://www.devontaereid.com/images/logo.png",
-          width: 1200,
-          height: 630,
+          url: "/logo512.png",
+          width: 512,
+          height: 512,
           alt: note.title,
           type: "image/png",
         },
@@ -77,8 +78,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: note.title,
-      description: note.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Personal note and reflection.",
-      images: ["https://www.devontaereid.com/images/logo.png"],
+      description: note.description || "Personal note and reflection.",
+      images: ["/logo512.png"],
       site: "@_yodev_",
       creator: "@_yodev_",
     },
@@ -140,91 +141,10 @@ export default async function NotePage({ params }: PageProps) {
         <article className="prose prose-lg dark:prose-invert max-w-none">
           {note.content.map((section, sectionIndex) => (
             <section key={sectionIndex} className="mb-12">
-              {/* Paragraphs */}
-              {section.paragraphs.map((paragraph, index) => (
-                <p key={index} className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-
-              {/* Images */}
-              {section.images?.map((image) => (
-                <figure key={image.id} className="my-8">
-                  <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 text-center">
-                    <div className="text-4xl mb-4">🖼️</div>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Image: {image.title}
-                    </p>
-                    {image.caption && (
-                      <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                        {image.caption}
-                      </p>
-                    )}
-                  </div>
-                </figure>
-              ))}
-
-              {/* Code Blocks */}
-              {section.code?.map((codeBlock) => (
-                <div key={codeBlock.id} className="my-8">
-                  <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-gray-400 text-sm font-mono">
-                        {codeBlock.language}
-                      </span>
-                      <button className="text-gray-400 hover:text-white text-sm">
-                        Copy
-                      </button>
-                    </div>
-                    <pre className="text-gray-100 overflow-x-auto">
-                      <code>{codeBlock.content}</code>
-                    </pre>
-                  </div>
-                </div>
-              ))}
-
-              {/* Blockquotes */}
-              {section.blockquotes?.map((blockquote) => (
-                <blockquote
-                  key={blockquote.id}
-                  className="border-l-4 border-green-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300 bg-green-50 dark:bg-green-900/20 py-4 rounded-r-lg"
-                >
-                  &quot;{blockquote.content}&quot;
-                </blockquote>
-              ))}
-
-              {/* Links */}
-              {section.links?.map((link) => (
-                <div key={link.id} className="my-6">
-                  <a
-                    href={link.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-                  >
-                    {link.text} →
-                  </a>
-                </div>
-              ))}
-
-              {/* Lists */}
-              {section.lists?.map((list) => (
-                <div key={list.id} className="my-6">
-                  {list.list_type === "ordered" ? (
-                    <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      {list.items.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ol>
-                  ) : (
-                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      {list.items.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
+              {section.title && (
+                <h2 className="text-2xl font-bold mb-6">{section.title}</h2>
+              )}
+              <div dangerouslySetInnerHTML={{ __html: section.htmlContent }} />
             </section>
           ))}
         </article>

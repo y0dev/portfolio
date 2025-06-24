@@ -1,218 +1,83 @@
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
+import { marked } from "marked";
 
-interface OldArticle {
+interface ArticleMetadata {
   id: string;
   title: string;
   description?: string;
   date: string | number;
   tags: string[];
-  image?: {
-    name: string;
-    alt: string;
-  };
-  time?: {
-    hours: string;
-    mins: string;
-    secs: string;
-  };
-  type?: "article" | "note";
-  content: Array<{
-    title?: string | { tag?: string; text: string };
-    paragraphs: string[];
-    images?: Array<{
-      id?: string;
-      alt?: string;
-      caption?: string;
-      link?: string;
-      image?: string;
-      title?: string;
-    }>;
-    code?: Array<{
-      id?: string;
-      language?: string;
-      content?: string;
-    }>;
-    blockquotes?: Array<{
-      id?: string;
-      content?: string;
-    }>;
-    links?: Array<{
-      id?: string;
-      text?: string;
-      website?: string;
-      link?: string;
-      video?: boolean;
-    }>;
-    lists?: Array<{
-      id?: string;
-      items?: string[];
-      list_type?: "ordered" | "unordered";
-    }>;
-  }>;
-}
-
-interface SectionTitle {
-  tag?: string;
-  text: string;
-}
-
-interface TransformedArticle {
-  id: string;
-  title: string;
-  description?: string;
-  date: string | number;
-  tags: string[];
-  image?: {
-    name: string;
-    alt: string;
-  };
-  time?: {
-    hours: string;
-    mins: string;
-    secs: string;
-  };
   type: "article" | "note";
-  content: Array<{
-    title?: SectionTitle;
-    paragraphs: string[];
-    images?: Array<{
-      id?: string;
-      alt?: string;
-      caption?: string;
-      link?: string;
-      image?: string;
-      title?: string;
-    }>;
-    code?: Array<{
-      id?: string;
-      language?: string;
-      content?: string;
-    }>;
-    blockquotes?: Array<{
-      id?: string;
-      content?: string;
-    }>;
-    links?: Array<{
-      id?: string;
-      text?: string;
-      website?: string;
-      link?: string;
-      video?: boolean;
-    }>;
-    lists?: Array<{
-      id?: string;
-      items?: string[];
-      list_type?: "ordered" | "unordered";
-    }>;
-  }>;
 }
 
-function transformTitle(
-  title: string | { tag?: string; text: string } | undefined
-): SectionTitle | undefined {
-  if (!title) return undefined;
+interface ContentSection {
+  title?: string;
+  htmlContent: string;
+}
 
-  if (typeof title === "string") {
-    return { text: title };
-  } else if (typeof title === "object") {
-    return { tag: title.tag, text: title.text };
+interface TransformedArticle extends ArticleMetadata {
+  content: ContentSection[];
+}
+
+function parseMarkdown(markdownContent: string): ContentSection[] {
+  const { content } = matter(markdownContent);
+  const sections = content.split('---').map(s => s.trim()).filter(Boolean);
+  
+  return sections.map(section => {
+    const lines = section.split('\\n');
+    const titleLine = lines.find(line => line.toLowerCase().startsWith('title:'));
+    const title = titleLine ? titleLine.replace(/title:/i, '').trim() : undefined;
+    
+    const markdown = lines.filter(line => !line.toLowerCase().startsWith('title:')).join('\\n');
+    const htmlContent = marked(markdown) as string;
+    
+    return {
+      title,
+      htmlContent,
+    };
+  });
+}
+
+function processArticle(dir: string): TransformedArticle | null {
+  const metadataPath = path.join(dir, 'metadata.json');
+  const markdownPath = path.join(dir, 'index.md');
+
+  if (!fs.existsSync(metadataPath) || !fs.existsSync(markdownPath)) {
+    return null;
   }
-  return undefined;
-}
 
-function transformArticle(old: OldArticle): TransformedArticle {
-  return {
-    id: old.id,
-    title: old.title,
-    description: old.description,
-    date: old.date,
-    tags: old.tags,
-    image: old.image,
-    time: old.time,
-    type: old.type ?? "note",
-    content: old.content.map((section) => ({
-      title: transformTitle(section.title),
-      paragraphs: section.paragraphs || [],
-      images: section.images,
-      code: section.code,
-      blockquotes: section.blockquotes,
-      links: section.links,
-      lists: section.lists,
-    })),
-  };
+  const metadata: ArticleMetadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"));
+  const markdownFileContent = fs.readFileSync(markdownPath, "utf-8");
+  const content = parseMarkdown(markdownFileContent);
+
+  return { ...metadata, content };
 }
 
 function main() {
-  const inputPath = path.resolve(__dirname, '..', 'markdown-parser-project', 'json', 'notes.json');
-  const outputPath = path.resolve(__dirname, "notes.ts");
+  const articlesDir = path.resolve(__dirname, '..', 'content', 'articles');
+  const outputPath = path.resolve(__dirname, '..', 'src', 'data', 'articles.ts');
 
-  const oldData = JSON.parse(fs.readFileSync(inputPath, "utf-8")) as OldArticle[];
-  const newArticles = oldData.map(transformArticle);
+  if (!fs.existsSync(articlesDir)) {
+    console.log("No 'content/articles' directory found. Skipping transformation.");
+    return;
+  }
 
-  const header = `/* eslint-disable */\n\nexport interface Blockquote {
-  id: string;
-  content: string;
-}
+  const articleDirs = fs.readdirSync(articlesDir)
+    .map(name => path.join(articlesDir, name))
+    .filter(source => fs.lstatSync(source).isDirectory());
 
-export interface LinkItem {
-  id: string;
-  text: string;
-  website?: string;
-  link?: string;
-  video?: boolean;
-}
+  const articles = articleDirs.map(processArticle).filter((article): article is TransformedArticle => article !== null);
+  
+  const tsContent = `/* eslint-disable */
+import type { Article } from '@/types';
 
-export interface List {
-  id: string;
-  items: string[];
-  list_type: "ordered" | "unordered";
-}
+export const articles: Article[] = ${JSON.stringify(articles, null, 2)};
+`;
 
-export interface SectionTitle {
-  tag?: string;
-  text: string;
-}
-
-export interface ContentSection {
-  title?: SectionTitle;
-  paragraphs: string[];
-  images?: Image[];
-  code?: CodeBlock[];
-  blockquotes?: Blockquote[];
-  links?: LinkItem[];
-  lists?: List[];
-}
-
-export interface TimeMeta {
-  hours: string;
-  mins: string;
-  secs: string;
-}
-
-export interface Article {
-  id: string;
-  title: string;
-  description?: string;
-  date: string | number;
-  tags: string[];
-  image?: {
-    name: string;
-    alt: string;
-  };
-  time?: TimeMeta;
-  content: ContentSection[];
-  type: "article" | "note";
-}\n\n`;
-
-  const output = `${header}export const articles: Article[] = ${JSON.stringify(
-    newArticles,
-    null,
-    2
-  )};\n`;
-
-  fs.writeFileSync(outputPath, output, "utf-8");
-  console.log(`✅ Converted articles written to ${outputPath}`);
+  fs.writeFileSync(outputPath, tsContent);
+  console.log('✅ Successfully transformed articles!');
 }
 
 main();
