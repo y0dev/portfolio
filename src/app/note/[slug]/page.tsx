@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
-import {formatDate} from "@/utils"
+import {formatDate, parseDate} from "@/utils"
 import Link from "next/link";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{
@@ -15,6 +16,80 @@ export async function generateStaticParams() {
     .map((article) => ({
       slug: article.id,
     }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const note = articles.find(a => a.id === slug && a.type === "note");
+
+  if (!note) {
+    return {
+      title: "Note Not Found",
+      description: "The requested note could not be found.",
+    };
+  }
+
+  return {
+    title: `${note.title} | Devontae Reid`,
+    description: note.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Personal note and reflection.",
+    metadataBase: new URL('https://www.devontaereid.com'),
+    keywords: [...note.tags, "note", "reflection", "devontae reid", "personal"],
+    authors: [{ name: "Devontae Reid" }],
+    creator: "Devontae Reid",
+    publisher: "Devontae Reid",
+    category: "Personal",
+    classification: "Note",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: `https://www.devontaereid.com/note/${slug}`,
+    },
+    openGraph: {
+      title: note.title,
+      description: note.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Personal note and reflection.",
+      url: `https://www.devontaereid.com/note/${slug}`,
+      siteName: "Devontae Reid",
+      images: [
+        {
+          url: "https://www.devontaereid.com/images/logo.png",
+          width: 1200,
+          height: 630,
+          alt: note.title,
+          type: "image/png",
+        },
+      ],
+      locale: "en_US",
+      type: "article",
+      publishedTime: new Date(parseDate(note.date)).toISOString(),
+      modifiedTime: new Date(parseDate(note.date)).toISOString(),
+      authors: ["Devontae Reid"],
+      tags: note.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: note.title,
+      description: note.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Personal note and reflection.",
+      images: ["https://www.devontaereid.com/images/logo.png"],
+      site: "@_yodev_",
+      creator: "@_yodev_",
+    },
+    other: {
+      "article:author": "Devontae Reid",
+      "article:section": "Personal",
+      "article:tag": note.tags.join(", "),
+      "article:published_time": new Date(parseDate(note.date)).toISOString(),
+      "article:modified_time": new Date(parseDate(note.date)).toISOString(),
+    },
+  };
 }
 
 export default async function NotePage({ params }: PageProps) {

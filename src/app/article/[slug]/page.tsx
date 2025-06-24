@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
 import Link from "next/link";
-import { formatDate } from "@/utils";
+import { formatDate, parseDate } from "@/utils";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{
@@ -15,6 +16,80 @@ export async function generateStaticParams() {
     .map((article) => ({
       slug: article.id,
     }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const article = articles.find(a => a.id === slug && a.type === "article");
+
+  if (!article) {
+    return {
+      title: "Article Not Found",
+      description: "The requested article could not be found.",
+    };
+  }
+
+  return {
+    title: `${article.title} | Devontae Reid`,
+    description: article.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Blog post about technology and development insights.",
+    metadataBase: new URL('https://www.devontaereid.com'),
+    keywords: [...article.tags, "blog", "article", "devontae reid", "technology", "development"],
+    authors: [{ name: "Devontae Reid" }],
+    creator: "Devontae Reid",
+    publisher: "Devontae Reid",
+    category: "Technology",
+    classification: "Blog",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: `https://www.devontaereid.com/article/${slug}`,
+    },
+    openGraph: {
+      title: article.title,
+      description: article.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Blog post about technology and development insights.",
+      url: `https://www.devontaereid.com/article/${slug}`,
+      siteName: "Devontae Reid",
+      images: [
+        {
+          url: "https://www.devontaereid.com/images/logo.png",
+          width: 1200,
+          height: 630,
+          alt: article.title,
+          type: "image/png",
+        },
+      ],
+      locale: "en_US",
+      type: "article",
+      publishedTime: new Date(parseDate(article.date)).toISOString(),
+      modifiedTime: new Date(parseDate(article.date)).toISOString(),
+      authors: ["Devontae Reid"],
+      tags: article.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Blog post about technology and development insights.",
+      images: ["https://www.devontaereid.com/images/logo.png"],
+      site: "@_yodev_",
+      creator: "@_yodev_",
+    },
+    other: {
+      "article:author": "Devontae Reid",
+      "article:section": "Technology",
+      "article:tag": article.tags.join(", "),
+      "article:published_time": new Date(parseDate(article.date)).toISOString(),
+      "article:modified_time": new Date(parseDate(article.date)).toISOString(),
+    },
+  };
 }
 
 export default async function ArticlePage({ params }: PageProps) {

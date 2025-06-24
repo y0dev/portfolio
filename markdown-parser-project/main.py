@@ -116,12 +116,12 @@ def process_markdown_file(file_path: str):
     # Update JSON data and handle FTP operations
     article_js_path = os.path.join('output',ftp_art_path)
     download_file_from_ftp(ftp_host, ftp_user, ftp_pass,ftp_art_path,article_js_path)
-    update_js_json_data(article_js_path, new_entry, entry_type=doc_info["type"].lower())
+    # update_js_json_data(article_js_path, new_entry, entry_type=doc_info["type"].lower())
 
-    # Upload generated content to FTP server
-    remote_folder_path = os.path.join(ftp_base_path, doc_info["type"].lower() + 's', os.path.basename(html_dir))
-    upload_folder_to_ftp(ftp_host, ftp_user, ftp_pass, html_dir, remote_folder_path)
-    upload_file_to_ftp(ftp_host, ftp_user, ftp_pass, article_js_path)
+    # # Upload generated content to FTP server
+    # remote_folder_path = os.path.join(ftp_base_path, doc_info["type"].lower() + 's', os.path.basename(html_dir))
+    # upload_folder_to_ftp(ftp_host, ftp_user, ftp_pass, html_dir, remote_folder_path)
+    # upload_file_to_ftp(ftp_host, ftp_user, ftp_pass, article_js_path)
 
 def main():
     """

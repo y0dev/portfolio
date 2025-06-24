@@ -209,8 +209,77 @@ export default function Home() {
                 In my free time, I enjoy building interesting projects and experimenting with new technologies. Lately, I&apos;ve been working on various Node.js APIs that integrate with browser extensions.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                When I&apos;m not programming, you&apos;ll find me reading my Bible or spending time with family. The Bible has given me so much wisdom in life and has taught me deeply about the grace of God. My personal library has grown to over 100 books. Some of my favorite study resources include <a href="https://www.desiringgod.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Desiring God</a>, <a href="https://www.gty.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Grace To You</a>, and <a href="https://www.truthforlife.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Truth For Life</a>.
+                When I&apos;m not programming, you&apos;ll find me reading my Bible or spending time with family. The Bible has given me so much wisdom in life and has taught me deeply about the grace of God. My personal library has grown to over 100 books. Some of my favorite study resources include:
               </p>
+              
+              {/* Enhanced Study Resources Links */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <a 
+                  href="https://www.desiringgod.org" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group flex items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-800/30 dark:hover:to-indigo-800/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex-shrink-0 w-10 h-10 bg-blue-600 dark:bg-blue-500 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                      Desiring God
+                    </h4>
+                    <p className="text-sm text-blue-700 dark:text-blue-300">John Piper&apos;s ministry</p>
+                  </div>
+                  <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 ml-auto group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+
+                <a 
+                  href="https://www.gty.org" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group flex items-center p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:from-green-100 hover:to-emerald-100 dark:hover:from-green-800/30 dark:hover:to-emerald-800/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex-shrink-0 w-10 h-10 bg-green-600 dark:bg-green-500 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-green-900 dark:text-green-100 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">
+                      Grace To You
+                    </h4>
+                    <p className="text-sm text-green-700 dark:text-green-300">John MacArthur&apos;s teaching</p>
+                  </div>
+                  <svg className="w-4 h-4 text-green-600 dark:text-green-400 ml-auto group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+
+                <a 
+                  href="https://www.truthforlife.org" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group flex items-center p-4 bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-lg border border-purple-200 dark:border-purple-800 hover:from-purple-100 hover:to-violet-100 dark:hover:from-purple-800/30 dark:hover:to-violet-800/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex-shrink-0 w-10 h-10 bg-purple-600 dark:bg-purple-500 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-purple-900 dark:text-purple-100 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                      Truth For Life
+                    </h4>
+                    <p className="text-sm text-purple-700 dark:text-purple-300">Alistair Begg&apos;s ministry</p>
+                  </div>
+                  <svg className="w-4 h-4 text-purple-600 dark:text-purple-400 ml-auto group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
 
               <div className="flex flex-wrap gap-4">
                 <span className="skill-tag bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200">
