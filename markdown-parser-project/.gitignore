@@ -1,0 +1,56 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.dmg
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.egg-info/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Pug files
+*.pug
+
+# Markdown files
+*.md
+
+# VS Code
+.vscode/
+
+# IDEs and Editors
+.idea/
+*.swp
+*~
+*.sublime-workspace
+*.sublime-project
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build directories
+build/
+dist/
+*.egg
+*.tar.gz
+
+# Python environment
+.env/
+*.env
+
+# Misc
+*.bak
+
+input_md
+output
+json

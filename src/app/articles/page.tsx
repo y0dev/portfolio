@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { articles, metadata } from '@/data/articles';
+import { articles } from '@/data/articles';
+
 
 const categories = [
   'All',
