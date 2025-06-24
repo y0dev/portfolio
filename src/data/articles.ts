@@ -46,6 +46,12 @@ export interface Article {
   type: "article" | "note";
 }
 
+export const metadata = {
+  title: 'Articles & Notes | Devontae Reid',
+  description: 'Thoughts, tutorials, and insights on web development and technology',
+};
+
+
 export const articles: Article[] = [
   {
     title: "Building Scalable React Applications with TypeScript",

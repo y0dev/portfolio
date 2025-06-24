@@ -1,0 +1,30 @@
+{
+  "experience": [
+    {
+      "company": "Tech Company A",
+      "title": "Frontend Developer",
+      "start": "Jan 2022",
+      "end": "Present",
+      "location": "Remote",
+      "description": [
+        "Built scalable UI components with React and TailwindCSS.",
+        "Improved site performance by 35% through code splitting and lazy loading.",
+        "Led migration from legacy CSS to utility-first architecture."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "University of X",
+      "degree": "B.S. in Computer Science",
+      "start": "2018",
+      "end": "2022",
+      "location": "Texas",
+      "description": [
+        "Graduated magna cum laude, GPA: 3.8/4.0.",
+        "Relevant coursework: Algorithms, Web Development, Databases.",
+        "President of Developer Student Club (2020–2022)."
+      ]
+    }
+  ]
+}

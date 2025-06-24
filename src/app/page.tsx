@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TimelineSection from "@/components/TimelineSection";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -118,7 +119,20 @@ export default function Home() {
       }
     );
 
+    gsap.from(".timeline-item", {
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: ".timeline-item",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
     // Card hover animations
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gsap.utils.toArray(".featured-card").forEach((card: any) => {
       card.addEventListener("mouseenter", () => {
         gsap.to(card, {
@@ -150,7 +164,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="hero-title text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Hi, I'm <span className="text-blue-600 dark:text-blue-400">Devontae Reid</span>
+              Hi, I&apos;m <span className="text-blue-600 dark:text-blue-400">Devontae Reid</span>
             </h1>
             <p className="hero-subtitle text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
               Full-stack developer and creative technologist passionate about building 
@@ -183,12 +197,12 @@ export default function Home() {
                 About Me
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                I'm a passionate developer with expertise in modern web technologies. 
+                I&apos;m a passionate developer with expertise in modern web technologies. 
                 I love creating elegant solutions to complex problems and sharing my 
                 knowledge through writing and open source contributions.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                When I'm not coding, you can find me exploring new technologies, 
+                When I&apos;m not coding, you can find me exploring new technologies, 
                 contributing to open source projects, or writing about my experiences 
                 in software development.
               </p>
@@ -279,7 +293,7 @@ export default function Home() {
               <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
                 <div className="text-white text-center">
                   <div className="text-4xl mb-2">💬</div>
-                  <p className="font-medium">Let's Connect</p>
+                  <p className="font-medium">Let&apos;s Connect</p>
                 </div>
               </div>
               <div className="p-6">
@@ -287,7 +301,7 @@ export default function Home() {
                   Get In Touch
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Interested in working together? Let's discuss your project.
+                  Interested in working together? Let&apos;s discuss your project.
                 </p>
                 <a
                   href="mailto:hello@devontaereid.com"
@@ -300,6 +314,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Timeline Section */}
+      <TimelineSection/>
+
     </div>
   );
 }
