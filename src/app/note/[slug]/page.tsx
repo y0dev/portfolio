@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
+import {formatDate} from "@/utils"
 import Link from "next/link";
 
 interface PageProps {
@@ -56,9 +57,7 @@ export default function NotePage({ params }: PageProps) {
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             {note.title}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            {note.date}
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">{formatDate(note.date)}</p>
         </header>
 
         {/* Note Content */}
@@ -73,7 +72,7 @@ export default function NotePage({ params }: PageProps) {
               ))}
 
               {/* Images */}
-              {section.images.map((image) => (
+              {section.images?.map((image) => (
                 <figure key={image.id} className="my-8">
                   <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 text-center">
                     <div className="text-4xl mb-4">🖼️</div>
@@ -90,7 +89,7 @@ export default function NotePage({ params }: PageProps) {
               ))}
 
               {/* Code Blocks */}
-              {section.code.map((codeBlock) => (
+              {section.code?.map((codeBlock) => (
                 <div key={codeBlock.id} className="my-8">
                   <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-3">
@@ -109,17 +108,17 @@ export default function NotePage({ params }: PageProps) {
               ))}
 
               {/* Blockquotes */}
-              {section.blockquotes.map((blockquote) => (
+              {section.blockquotes?.map((blockquote) => (
                 <blockquote
                   key={blockquote.id}
                   className="border-l-4 border-green-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300 bg-green-50 dark:bg-green-900/20 py-4 rounded-r-lg"
                 >
-                  "{blockquote.content}"
+                  &quot;{blockquote.content}&quot;
                 </blockquote>
               ))}
 
               {/* Links */}
-              {section.links.map((link) => (
+              {section.links?.map((link) => (
                 <div key={link.id} className="my-6">
                   <a
                     href={link.website}
@@ -133,7 +132,7 @@ export default function NotePage({ params }: PageProps) {
               ))}
 
               {/* Lists */}
-              {section.lists.map((list) => (
+              {section.lists?.map((list) => (
                 <div key={list.id} className="my-6">
                   {list.list_type === "ordered" ? (
                     <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">

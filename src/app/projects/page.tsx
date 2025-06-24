@@ -1,72 +1,5 @@
-import Link from "next/link";
 
-export const metadata = {
-  title: "Projects | Devontae Reid",
-  description: "A collection of my projects and technical work",
-};
-
-const projects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce platform built with Next.js, TypeScript, and Stripe integration. Features include user authentication, product management, and secure payment processing.",
-    technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS", "Prisma"],
-    image: "🛒",
-    link: "#",
-    github: "#",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    image: "📋",
-    link: "#",
-    github: "#",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Weather Dashboard",
-    description: "A beautiful weather dashboard that displays current weather conditions and forecasts using multiple weather APIs and interactive charts.",
-    technologies: ["React", "Chart.js", "OpenWeather API", "CSS Grid"],
-    image: "🌤️",
-    link: "#",
-    github: "#",
-    featured: false,
-  },
-  {
-    id: 4,
-    title: "Portfolio Website",
-    description: "A modern, responsive portfolio website built with Next.js and Tailwind CSS, featuring dark mode and smooth animations.",
-    technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
-    image: "🎨",
-    link: "#",
-    github: "#",
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "Chat Application",
-    description: "Real-time chat application with user authentication, message history, and file sharing capabilities.",
-    technologies: ["React", "Firebase", "Material-UI", "WebRTC"],
-    image: "💬",
-    link: "#",
-    github: "#",
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "Recipe Finder",
-    description: "A recipe discovery app that helps users find recipes based on available ingredients and dietary preferences.",
-    technologies: ["Vue.js", "Spoonacular API", "Vuex", "Vuetify"],
-    image: "🍳",
-    link: "#",
-    github: "#",
-    featured: false,
-  },
-];
+import projects from '@/data/projects.json';
 
 export default function Projects() {
   const featuredProjects = projects.filter(project => project.featured);
@@ -81,7 +14,7 @@ export default function Projects() {
             My Projects
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            A collection of projects I've built, from full-stack applications to 
+            A collection of projects I&apos;ve built, from full-stack applications to 
             creative experiments. Each project represents a learning opportunity 
             and a chance to solve real-world problems.
           </p>
@@ -122,18 +55,23 @@ export default function Projects() {
                     ))}
                   </div>
                   <div className="flex gap-4">
-                    <a
-                      href={project.link}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium transition-colors"
-                    >
-                      View Live
-                    </a>
-                    <a
-                      href={project.github}
-                      className="border border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 px-4 py-2 rounded font-medium transition-colors"
-                    >
-                      View Code
-                    </a>
+                    {project.link && project.link !== "" && (
+                      <a
+                        href={project.link}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium transition-colors"
+                      >
+                        View Live
+                      </a>
+                    )}
+
+                    {project.github && project.github !== "" && (
+                      <a
+                        href={project.github}
+                        className="border border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 px-4 py-2 rounded font-medium transition-colors"
+                      >
+                        View Code
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -181,18 +119,22 @@ export default function Projects() {
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <a
-                      href={project.link}
-                      className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
-                    >
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.github}
-                      className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium"
-                    >
-                      Code
-                    </a>
+                    {project.link && project.link !== "" && (
+                      <a
+                        href={project.link}
+                        className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                      >
+                        Live Demo
+                      </a>
+                    )}
+                    {project.github && project.github !== "" && (
+                      <a
+                        href={project.github}
+                        className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium"
+                      >
+                        Code
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -207,10 +149,10 @@ export default function Projects() {
               Interested in working together?
             </h3>
             <p className="text-blue-100 mb-6">
-              I'm always open to discussing new opportunities and exciting projects.
+              I&apos;m always open to discussing new opportunities and exciting projects.
             </p>
             <a
-              href="mailto:hello@devontaereid.com"
+              href="mailto:devontae.reid@gmail.com"
               className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Get In Touch

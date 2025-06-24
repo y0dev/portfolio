@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
 import Link from "next/link";
+import { formatDate } from "@/utils";
 
 interface PageProps {
   params: {
@@ -28,15 +29,12 @@ export default function ArticlePage({ params }: PageProps) {
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb */}
         <nav className="mb-8">
-          <Link 
-            href="/articles" 
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
+          <Link href="/articles" className="text-blue-600 dark:text-blue-400 hover:underline">
             ← Back to Articles
           </Link>
         </nav>
 
-        {/* Article Header */}
+        {/* Header */}
         <header className="mb-12">
           <div className="flex flex-wrap gap-2 mb-4">
             {article.tags.map((tag) => (
@@ -51,105 +49,119 @@ export default function ArticlePage({ params }: PageProps) {
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             {article.title}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            {article.date}
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">{formatDate(article.date)}</p>
         </header>
 
-        {/* Article Content */}
+        {/* Content */}
         <article className="prose prose-lg dark:prose-invert max-w-none">
-          {article.content.map((section, sectionIndex) => (
-            <section key={sectionIndex} className="mb-12">
-              {/* Paragraphs */}
-              {section.paragraphs.map((paragraph, index) => (
-                <p key={index} className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+          {article.content.map((section, sectionIndex) => {
+            const images = section.images || [];
+            const codeBlocks = section.code || [];
+            const blockquotes = section.blockquotes || [];
+            const links = section.links || [];
+            const lists = section.lists || [];
 
-              {/* Images */}
-              {section.images.map((image) => (
-                <figure key={image.id} className="my-8">
-                  <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 text-center">
-                    <div className="text-4xl mb-4">🖼️</div>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Image: {image.title}
+            return (
+              <section key={sectionIndex} className="mb-12">
+                {/* Section title */}
+                {section.title?.text && (
+                  <h2 className="text-2xl font-bold mb-6">{section.title.text}</h2>
+                )}
+
+                {/* Paragraphs with placeholders */}
+                {section.paragraphs?.map((paragraph: string, index: number) => {
+                  // Placeholders
+                  if (paragraph.startsWith(":imagePlace(")) {
+                    const id = paragraph.match(/:imagePlace\((.*?)\)/)?.[1];
+                    const image = images.find((img) => img.id === id);
+                    if (!image) return null;
+                    return (
+                      <figure key={`image-${id}`} className="my-8">
+                        <img
+                          src={image.image || image.link}
+                          alt={image.alt || image.title || "image"}
+                          className="rounded-lg shadow-md"
+                        />
+                        {image.caption && (
+                          <figcaption className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">
+                            {image.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    );
+                  }
+
+                  if (paragraph.startsWith(":listPlace(")) {
+                    const id = paragraph.match(/:listPlace\((.*?)\)/)?.[1];
+                    const list = lists.find((l) => l.id === id);
+                    if (!list) return null;
+                    return list.list_type === "ordered" ? (
+                      <ol key={`list-${id}`} className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300 my-4">
+                        {list.items.map((item, i) => <li key={i}>{item}</li>)}
+                      </ol>
+                    ) : (
+                      <ul key={`list-${id}`} className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 my-4">
+                        {list.items.map((item, i) => <li key={i}>{item}</li>)}
+                      </ul>
+                    );
+                  }
+
+                  if (paragraph.startsWith(":linkPlace(")) {
+                    const id = paragraph.match(/:linkPlace\((.*?)\)/)?.[1];
+                    const link = links.find((l) => l.id === id);
+                    if (!link) return null;
+                    return (
+                      <div key={`link-${id}`} className="my-4">
+                        <a
+                          href={link.link || link.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                        >
+                          {link.text} →
+                        </a>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <p key={index} className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                      {paragraph}
                     </p>
-                    {image.caption && (
-                      <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                        {image.caption}
-                      </p>
-                    )}
-                  </div>
-                </figure>
-              ))}
+                  );
+                })}
 
-              {/* Code Blocks */}
-              {section.code.map((codeBlock) => (
-                <div key={codeBlock.id} className="my-8">
-                  <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-gray-400 text-sm font-mono">
-                        {codeBlock.language}
-                      </span>
-                      <button className="text-gray-400 hover:text-white text-sm">
-                        Copy
-                      </button>
+                {/* Code Blocks */}
+                {codeBlocks.map((codeBlock) => (
+                  <div key={codeBlock.id} className="my-8">
+                    <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-gray-400 text-sm font-mono">
+                          {codeBlock.language}
+                        </span>
+                      </div>
+                      <pre className="text-gray-100 overflow-x-auto">
+                        <code>{codeBlock.content}</code>
+                      </pre>
                     </div>
-                    <pre className="text-gray-100 overflow-x-auto">
-                      <code>{codeBlock.content}</code>
-                    </pre>
                   </div>
-                </div>
-              ))}
+                ))}
 
-              {/* Blockquotes */}
-              {section.blockquotes.map((blockquote) => (
-                <blockquote
-                  key={blockquote.id}
-                  className="border-l-4 border-blue-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300"
-                >
-                  "{blockquote.content}"
-                </blockquote>
-              ))}
-
-              {/* Links */}
-              {section.links.map((link) => (
-                <div key={link.id} className="my-6">
-                  <a
-                    href={link.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                {/* Blockquotes */}
+                {blockquotes.map((blockquote) => (
+                  <blockquote
+                    key={blockquote.id}
+                    className="border-l-4 border-blue-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300"
                   >
-                    {link.text} →
-                  </a>
-                </div>
-              ))}
-
-              {/* Lists */}
-              {section.lists.map((list) => (
-                <div key={list.id} className="my-6">
-                  {list.list_type === "ordered" ? (
-                    <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      {list.items.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ol>
-                  ) : (
-                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      {list.items.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </section>
-          ))}
+                    &quot;{blockquote.content}&quot;
+                  </blockquote>
+                ))}
+              </section>
+            );
+          })}
         </article>
 
-        {/* Article Footer */}
+        {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-wrap gap-4">
             <span className="text-gray-600 dark:text-gray-400">Tags:</span>
@@ -167,4 +179,4 @@ export default function ArticlePage({ params }: PageProps) {
       </div>
     </div>
   );
-} 
+}

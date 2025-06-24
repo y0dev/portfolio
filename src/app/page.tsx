@@ -304,7 +304,7 @@ export default function Home() {
                   Interested in working together? Let&apos;s discuss your project.
                 </p>
                 <a
-                  href="mailto:hello@devontaereid.com"
+                  href="mailto:devontae.reid@gmail.com"
                   className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
                 >
                   Send Email →

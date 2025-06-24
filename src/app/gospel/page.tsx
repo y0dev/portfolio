@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 export const metadata = {
   title: "The Gospel | Devontae Reid",
@@ -15,7 +14,7 @@ export default function Gospel() {
             The Gospel
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            The good news of Jesus Christ - God's plan of salvation for humanity
+            The good news of Jesus Christ - God&apos;s plan of salvation for humanity
           </p>
         </header>
 
@@ -28,13 +27,13 @@ export default function Gospel() {
             </h2>
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                The word "gospel" means "good news." The gospel is the good news that God has provided 
+                The word &quot;gospel&quot; means &quot;good news.&quot; The gospel is the good news that God has provided 
                 a way for sinful humanity to be reconciled to Him through the life, death, and resurrection 
                 of Jesus Christ.
               </p>
               <blockquote className="border-l-4 border-blue-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/20 py-4 rounded-r-lg">
-                "For God so loved the world, that he gave his only Son, that whoever believes in him 
-                should not perish but have eternal life." - John 3:16
+                &quot;For God so loved the world, that he gave his only Son, that whoever believes in him 
+                should not perish but have eternal life.&quot; - John 3:16
               </blockquote>
             </div>
           </section>
@@ -51,15 +50,15 @@ export default function Gospel() {
                     We Are All Sinners
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    The Bible teaches that all people have sinned and fall short of God's perfect standard 
+                    The Bible teaches that all people have sinned and fall short of God&apos;s perfect standard 
                     (Romans 3:23). Sin is not just doing bad things, but living in rebellion against God 
                     and His ways.
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                    <li>We have broken God's law</li>
+                    <li>We have broken God&apos;s law</li>
                     <li>We are spiritually dead in our sins</li>
                     <li>We are separated from God</li>
-                    <li>We deserve God's judgment</li>
+                    <li>We deserve God&apos;s judgment</li>
                   </ul>
                 </div>
                 <div>
@@ -71,8 +70,8 @@ export default function Gospel() {
                     eternal separation from God in hell.
                   </p>
                   <blockquote className="border-l-4 border-red-500 pl-4 italic text-gray-700 dark:text-gray-300">
-                    "For the wages of sin is death, but the free gift of God is eternal life in Christ 
-                    Jesus our Lord." - Romans 6:23
+                    &quot;For the wages of sin is death, but the free gift of God is eternal life in Christ 
+                    Jesus our Lord.&quot; - Romans 6:23
                   </blockquote>
                 </div>
               </div>
@@ -103,7 +102,7 @@ export default function Gospel() {
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
                     Jesus willingly died on the cross, taking the punishment we deserve for our sins. 
-                    His death satisfied God's justice and made forgiveness possible.
+                    His death satisfied God&apos;s justice and made forgiveness possible.
                   </p>
                 </div>
                 <div className="text-center">
@@ -189,8 +188,8 @@ export default function Gospel() {
                     <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                       <li>God helps you grow in holiness</li>
                       <li>You find purpose and meaning</li>
-                      <li>You experience God's peace</li>
-                      <li>You become part of God's family</li>
+                      <li>You experience God&apos;s peace</li>
+                      <li>You become part of God&apos;s family</li>
                       <li>You have hope for the future</li>
                     </ul>
                   </div>
@@ -206,21 +205,21 @@ export default function Gospel() {
                 Will You Trust in Jesus Today?
               </h2>
               <p className="text-xl mb-8 text-blue-100">
-                If you want to receive God's gift of salvation, you can pray something like this:
+                If you want to receive God&apos;s gift of salvation, you can pray something like this:
               </p>
               <div className="bg-white/10 rounded-lg p-6 mb-8 text-left max-w-2xl mx-auto">
                 <p className="text-lg italic">
-                  "Dear God, I know I am a sinner and need your forgiveness. I believe that Jesus 
+                  &quot;Dear God, I know I am a sinner and need your forgiveness. I believe that Jesus 
                   died on the cross for my sins and rose from the dead. I want to turn from my sins 
                   and trust in Jesus as my Savior and Lord. Please forgive me and give me eternal life. 
-                  Thank you for your love and grace. In Jesus' name, Amen."
+                  Thank you for your love and grace. In Jesus&apos; name, Amen.&quot;
                 </p>
               </div>
               <p className="text-lg mb-8">
-                If you prayed this prayer or have questions about the gospel, we'd love to hear from you!
+                If you prayed this prayer or have questions about the gospel, we&apos;d love to hear from you!
               </p>
               <a
-                href="mailto:hello@devontaereid.com"
+                href="mailto:devontae.reid@gmail.com"
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors"
               >
                 Get In Touch

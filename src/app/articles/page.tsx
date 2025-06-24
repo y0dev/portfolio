@@ -1,24 +1,36 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import Link from 'next/link';
 import { articles } from '@/data/articles';
 
-
 const categories = [
-  'All',
-  'Web Development',
-  'React',
-  'Performance',
-  'CSS',
-  'Technology',
-  'Accessibility',
-  'Testing',
-  'DevOps',
-  'Theology',
-  'Christ',
-  'Eschatology',
+  "All",
+  "Theology",
+  "Covenant",
+  "Thankful",
+  "Health",
+  "Tech",
+  "Technology",
+  "Embedded",
+  "Quantum",
+  "Algo",
+  "Algorithm",
+  "System Design",
+  "Security",
+  "Cloud",
+  "AI",
+  "RISC-V",
+  "Linux",
+  "Docker",
+  "Kubernetes",
+  "Networking",
+  "Database",
+  "System Programming",
+  "Web Development",
+  "Cryptography",
 ];
+
 
 export default function Articles() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -35,9 +47,17 @@ export default function Articles() {
     selectedCategory === 'All' ? true : article.tags?.includes(selectedCategory)
   );
 
-  const featuredArticles = filtered.filter((a) => a.type === 'article').slice(0, 2);
-  const allArticles = filtered.filter((a) => a.type === 'article').slice(2);
-  const notes = filtered.filter((a) => a.type === 'note');
+  const featuredArticles = filtered
+    .filter(a => a.type === 'article')
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 2);
+  const allArticles = filtered
+    .filter((a) => a.type === 'article')
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(2);
+  const notes = filtered
+    .filter((a) => a.type === 'note')
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const totalArticlesPages = Math.ceil(allArticles.length / itemsPerPage);
   const totalNotesPages = Math.ceil(notes.length / itemsPerPage);
@@ -52,7 +72,20 @@ export default function Articles() {
     currentNotePage * itemsPerPage
   );
 
-  const renderPagination = (totalPages: number, currentPage: number, setPage: (n: number) => void, color = 'blue') => (
+  function withPrefix(description?: string, type?: "note" | "article") {
+    if (!description) return null;
+
+    const prefix =
+      type === "note"
+        ? "This note is"
+        : type === "article"
+        ? "This article is"
+        : "This note/article is";
+
+    return `${prefix} ${description}...`;
+  }
+
+  const renderPagination = (totalPages: number, currentPage: number, setPage: { (value: SetStateAction<number>): void; (value: SetStateAction<number>): void; (arg0: number): void; }, color = 'blue') => (
     <div className="mt-8 flex justify-center space-x-2">
       {Array.from({ length: totalPages }, (_, i) => (
         <button
@@ -73,7 +106,6 @@ export default function Articles() {
   return (
     <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Articles & Notes
@@ -83,7 +115,7 @@ export default function Articles() {
           </p>
         </div>
 
-        {/* Category Filter */}
+        {/* Categories */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((category) => (
             <button
@@ -119,37 +151,18 @@ export default function Articles() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-4 mb-3">
-                      <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-sm font-medium">
-                        Article
-                      </span>
-                      <span className="text-gray-500 dark:text-gray-400 text-sm">{article.date}</span>
-                    </div>
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                       {article.title}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {article.content[0]?.paragraphs[0]?.substring(0, 150)}...
+                      {withPrefix(article.description, "article")}...
                     </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {article.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-500 dark:text-gray-400 text-sm">{article.date}</span>
-                      <Link
-                        href={`/article/${article.id}`}
-                        className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-                      >
-                        Read More →
-                      </Link>
-                    </div>
+                    <Link
+                      href={`/article/${article.id}`}
+                      className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                    >
+                      Read More →
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -173,40 +186,16 @@ export default function Articles() {
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs font-medium">
-                      Article
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400 text-xs">{article.date}</span>
-                  </div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{article.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm">
-                    {article.content[0]?.paragraphs[0]?.substring(0, 100)}...
+                    {withPrefix(article.description,"article")}...
                   </p>
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {article.tags.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {article.tags.length > 2 && (
-                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium">
-                        +{article.tags.length - 2} more
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-500 dark:text-gray-400 text-xs">{article.date}</span>
-                    <Link
-                      href={`/article/${article.id}`}
-                      className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
-                    >
-                      Read →
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/article/${article.id}`}
+                    className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                  >
+                    Read →
+                  </Link>
                 </div>
               </article>
             ))}
@@ -230,40 +219,16 @@ export default function Articles() {
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs font-medium">
-                      Note
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400 text-xs">{note.date}</span>
-                  </div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{note.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm">
-                    {note.content[0]?.paragraphs[0]?.substring(0, 100)}...
+                    {withPrefix(note.description, "note")}...
                   </p>
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {note.tags.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {note.tags.length > 2 && (
-                      <span className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium">
-                        +{note.tags.length - 2} more
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-500 dark:text-gray-400 text-xs">{note.date}</span>
-                    <Link
-                      href={`/note/${note.id}`}
-                      className="text-green-600 dark:text-green-400 hover:underline text-sm font-medium"
-                    >
-                      Read →
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/note/${note.id}`}
+                    className="text-green-600 dark:text-green-400 hover:underline text-sm font-medium"
+                  >
+                    Read →
+                  </Link>
                 </div>
               </article>
             ))}
