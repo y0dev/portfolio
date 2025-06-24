@@ -60,8 +60,8 @@ export const favoritePlayers: PlayerProps[] = [
       rings: 1,
       achievements: {
         "NBA MVP": 1,
-        "All-NBA First Team": 1,
         "NBA Championships": 1,
+        "All-NBA First Team": 1,
         "NBA All-Star": 1
       }
     },
