@@ -10,3 +10,22 @@ export interface Article {
     htmlContent: string;
   }[];
 } 
+
+export interface PlayerTeamAchievements {
+  trophies?: number;
+  rings?: number;
+  achievements: object;
+}
+
+export interface TeamProps {
+  name: string;
+  logo: string;
+  link: string;
+  achievements: PlayerTeamAchievements;
+}
+
+export interface PlayerProps {
+  name: string;
+  image: string;
+  achievements: PlayerTeamAchievements;
+}

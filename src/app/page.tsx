@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import GospelTeaser from "@/components/GospelTeaser";
 import TimelineSection from "@/components/TimelineSection";
 import TestimoniesSection from "@/components/TestimoniesSection";
 import Footer from "@/components/Footer";
+import FavoritesSection from "@/components/FavoritesSection";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -402,6 +404,12 @@ export default function Home() {
 
       {/* Timeline Section */}
       <TimelineSection />
+
+      {/* Gospel Teaser Section */}
+      <GospelTeaser />
+
+      {/* Favorite Sports Section */}
+      <FavoritesSection/>
 
       {/* Footer */}
       <Footer />
