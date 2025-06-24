@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TimelineSection from "@/components/TimelineSection";
+import TestimoniesSection from "@/components/TestimoniesSection";
+import Footer from "@/components/Footer";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -16,6 +18,7 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const featuredRef = useRef<HTMLDivElement>(null);
+  const testimonialRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Hero section animations
@@ -160,7 +163,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section ref={heroRef} className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="hero-title text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
@@ -189,7 +192,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section ref={aboutRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <section ref={aboutRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="about-content">
@@ -197,15 +200,18 @@ export default function Home() {
                 About Me
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                I&apos;m a passionate developer with expertise in modern web technologies. 
-                I love creating elegant solutions to complex problems and sharing my 
-                knowledge through writing and open source contributions.
+                I am a Software Engineer currently working in embedded systems. I started in iOS development and eventually grew to enjoy web development—both front-end and back-end. Who would have known that user interfaces would be a love/hate relationship? There&apos;s a constant battle between finding inspiration and enjoying the final product.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                When I&apos;m not coding, you can find me exploring new technologies, 
-                contributing to open source projects, or writing about my experiences 
-                in software development.
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                While trying to discover inspiration for web design, I often spend my time building RESTful APIs. I&apos;m proficient in HTML, CSS, JavaScript, C/C++, and Python, and I work primarily in ReactJS and VueJS.
               </p>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                In my free time, I enjoy building interesting projects and experimenting with new technologies. Lately, I&apos;ve been working on various Node.js APIs that integrate with browser extensions.
+              </p>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                When I&apos;m not programming, you&apos;ll find me reading my Bible or spending time with family. The Bible has given me so much wisdom in life and has taught me deeply about the grace of God. My personal library has grown to over 100 books. Some of my favorite study resources include <a href="https://www.desiringgod.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Desiring God</a>, <a href="https://www.gty.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Grace To You</a>, and <a href="https://www.truthforlife.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Truth For Life</a>.
+              </p>
+
               <div className="flex flex-wrap gap-4">
                 <span className="skill-tag bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200">
                   React
@@ -221,6 +227,7 @@ export default function Home() {
                 </span>
               </div>
             </div>
+
             <div className="about-image relative">
               <div className="w-full h-96 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl">
                 <div className="text-white text-center">
@@ -234,7 +241,7 @@ export default function Home() {
       </section>
 
       {/* Featured Section */}
-      <section ref={featuredRef} className="py-20 px-4 sm:px-6 lg:px-8">
+      <section ref={featuredRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
             Featured Work
@@ -315,9 +322,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <TimelineSection/>
+      {/* Testimonies Section */}
+      {/* <TestimoniesSection /> */}
 
+      {/* Timeline Section */}
+      <TimelineSection />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
