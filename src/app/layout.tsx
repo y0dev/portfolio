@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -38,16 +39,16 @@ export const metadata: Metadata = {
     canonical: 'https://www.devontaereid.com',
   },
   openGraph: {
-    title: "Devontae Reid | Full-Stack Developer & Creative Technologist",
+    title: "Devontae Reid | Embedded Engineer & Full-Stack Developer",
     description: "Full-stack developer and creative technologist passionate about building innovative web applications and sharing insights on technology and faith.",
     url: "https://www.devontaereid.com",
     siteName: "Devontae Reid",
     images: [
       {
-        url: "https://www.devontaereid.com/images/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Devontae Reid - Full-Stack Developer",
+        url: "/logo512.png",
+        width: 512,
+        height: 512,
+        alt: "Devontae Reid - Embedded Engineer & Full-Stack Developer",
         type: "image/png",
       },
     ],
@@ -56,15 +57,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devontae Reid | Full-Stack Developer & Creative Technologist",
+    title: "Devontae Reid | Embedded Engineer & Full-Stack Developer",
     description: "Full-stack developer and creative technologist passionate about building innovative web applications and sharing insights on technology and faith.",
-    images: ["https://www.devontaereid.com/images/logo.png"],
+    images: ["/logo512.png"],
     site: "@_yodev_",
     creator: "@_yodev_",
   },
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   viewport: "width=device-width, initial-scale=1.0",
 };

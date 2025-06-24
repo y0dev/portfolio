@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Footer from "@/components/Footer";
+import resources from "@/data/resources.json"
 
 export const metadata = {
   title: "Bookshelf | Devontae Reid",
@@ -7,176 +7,23 @@ export const metadata = {
 };
 
 interface Book {
-  id: string;
+  id: number;
   title: string;
   author: string;
   description: string;
   category: string;
   rating: number;
+  status: string;
   image: string;
   link: string;
   featured?: boolean;
 }
 
-const books: Book[] = [
-  // Technology Books
-  {
-    id: "clean-code",
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    description: "A handbook of agile software craftsmanship that teaches you how to write clean, maintainable code.",
-    category: "Technology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-    featured: true,
-  },
-  {
-    id: "design-patterns",
-    title: "Design Patterns",
-    author: "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
-    description: "Elements of Reusable Object-Oriented Software - the definitive guide to design patterns.",
-    category: "Technology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "refactoring",
-    title: "Refactoring",
-    author: "Martin Fowler",
-    description: "Improving the Design of Existing Code - essential reading for any developer who wants to write better code.",
-    category: "Technology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "pragmatic-programmer",
-    title: "The Pragmatic Programmer",
-    author: "Andrew Hunt, David Thomas",
-    description: "Your journey to mastery - from journeyman to master in the art of software development.",
-    category: "Technology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-    featured: true,
-  },
-  {
-    id: "effective-typescript",
-    title: "Effective TypeScript",
-    author: "Dan Vanderkam",
-    description: "62 specific ways to improve your TypeScript code and become a more effective developer.",
-    category: "Technology",
-    rating: 4,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-
-  // Theology Books
-  {
-    id: "systematic-theology",
-    title: "Systematic Theology",
-    author: "Wayne Grudem",
-    description: "An introduction to biblical doctrine that covers all the major areas of Christian theology.",
-    category: "Theology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-    featured: true,
-  },
-  {
-    id: "knowing-god",
-    title: "Knowing God",
-    author: "J.I. Packer",
-    description: "A classic work that helps readers understand and know God more deeply through biblical teaching.",
-    category: "Theology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "desiring-god",
-    title: "Desiring God",
-    author: "John Piper",
-    description: "Meditations of a Christian Hedonist - exploring the relationship between joy and God's glory.",
-    category: "Theology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "mere-christianity",
-    title: "Mere Christianity",
-    author: "C.S. Lewis",
-    description: "A classic defense of the Christian faith that explains the core beliefs shared by all Christians.",
-    category: "Theology",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "gospel-according-to-jesus",
-    title: "The Gospel According to Jesus",
-    author: "John MacArthur",
-    description: "What does Jesus mean when he says, 'Follow me'? A study of true salvation and discipleship.",
-    category: "Theology",
-    rating: 4,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-
-  // Personal Development
-  {
-    id: "atomic-habits",
-    title: "Atomic Habits",
-    author: "James Clear",
-    description: "An easy and proven way to build good habits and break bad ones.",
-    category: "Personal Development",
-    rating: 5,
-    image: "📚",
-    link: "https://amzn.to/3example",
-    featured: true,
-  },
-  {
-    id: "deep-work",
-    title: "Deep Work",
-    author: "Cal Newport",
-    description: "Rules for focused success in a distracted world.",
-    category: "Personal Development",
-    rating: 4,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "essentialism",
-    title: "Essentialism",
-    author: "Greg McKeown",
-    description: "The disciplined pursuit of less - how to focus on what matters most.",
-    category: "Personal Development",
-    rating: 4,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-  {
-    id: "mindset",
-    title: "Mindset",
-    author: "Carol S. Dweck",
-    description: "The new psychology of success - how we can learn to fulfill our potential.",
-    category: "Personal Development",
-    rating: 4,
-    image: "📚",
-    link: "https://amzn.to/3example",
-  },
-];
 
 const categories = ["All", "Technology", "Theology", "Personal Development"];
 
 export default function Bookshelf() {
-  const featuredBooks = books.filter(book => book.featured);
-  const technologyBooks = books.filter(book => book.category === "Technology");
-  const theologyBooks = books.filter(book => book.category === "Theology");
-  const personalDevelopmentBooks = books.filter(book => book.category === "Personal Development");
+  const books: Book[] = resources.books;
 
   const renderStars = (rating: number) => {
     return "★".repeat(rating) + "☆".repeat(5 - rating);

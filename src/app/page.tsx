@@ -166,26 +166,32 @@ export default function Home() {
       <section ref={heroRef} className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="hero-title text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Hi, I&apos;m <span className="text-blue-600 dark:text-blue-400">Devontae Reid</span>
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
+              <span className="block">Devontae Reid</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-400 dark:to-purple-500 mt-2">
+                Software Engineer
+              </span>
             </h1>
-            <p className="hero-subtitle text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-              Full-stack developer and creative technologist passionate about building 
-              innovative solutions that make a difference.
+            <p className="max-w-xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-8">
+              Full-stack developer with a passion for building innovative applications and exploring new technologies.
             </p>
-            <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
+            <div className="flex justify-center gap-4">
+              <a
                 href="/projects"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
                 View My Work
-              </Link>
-              <Link
-                href="/articles"
-                className="border border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              </a>
+              <a
+                href="/assets/Devontae+Reid+Resume.pdf"
+                download
+                className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
-                Read My Articles
-              </Link>
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Resume
+              </a>
             </div>
           </div>
         </div>

@@ -9,10 +9,25 @@
       "cover": "📚",
       "rating": 5,
       "status": "Read",
-      "featured": true
+      "featured": true,
+      "link": "https://amzn.to/3qXYZclean",
+      "image": ""
     },
     {
       "id": 2,
+      "title": "Biblical Doctrine",
+      "author": "John MacArthur & Richard Mayhue",
+      "category": "Theology",
+      "description": "A comprehensive resource on systematic theology from a reformed, biblical perspective.",
+      "cover": "📖",
+      "rating": 5,
+      "status": "Read",
+      "featured": true,
+      "link": "https://www.amazon.com/Biblical-Doctrine-Systematic-Summary-Bible/dp/1433545918",
+      "image": ""
+    },
+    {
+      "id": 3,
       "title": "Design Patterns",
       "author": "Gang of Four",
       "category": "Programming",
@@ -20,10 +35,12 @@
       "cover": "🎨",
       "rating": 5,
       "status": "Reading",
-      "featured": false
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
     },
     {
-      "id": 3,
+      "id": 4,
       "title": "The Pragmatic Programmer",
       "author": "Andrew Hunt & David Thomas",
       "category": "Programming",
@@ -31,10 +48,12 @@
       "cover": "⚡",
       "rating": 5,
       "status": "Read",
-      "featured": false
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "Refactoring",
       "author": "Martin Fowler",
       "category": "Programming",
@@ -42,10 +61,12 @@
       "cover": "🔧",
       "rating": 4,
       "status": "To Read",
-      "featured": false
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "JavaScript: The Good Parts",
       "author": "Douglas Crockford",
       "category": "Programming",
@@ -53,10 +74,12 @@
       "cover": "🟨",
       "rating": 4,
       "status": "Read",
-      "featured": false
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "React: Up & Running",
       "author": "Stoyan Stefanov",
       "category": "Programming",
@@ -64,7 +87,9 @@
       "cover": "⚛️",
       "rating": 4,
       "status": "Read",
-      "featured": false
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
     }
   ],
   "tools": [

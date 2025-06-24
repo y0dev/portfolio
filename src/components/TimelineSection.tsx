@@ -12,28 +12,6 @@ export default function TimelineSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Timeline animations
-    gsap.fromTo(".timeline-item",
-      { 
-        x: -50, 
-        opacity: 0,
-        scale: 0.95
-      },
-      {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
 
     // Timeline dots animation
     gsap.fromTo(".timeline-dot",
@@ -90,7 +68,7 @@ export default function TimelineSection() {
             Professional Experience
           </h3>
           
-          {Object.entries(groupedExperience).map(([company, experiences], companyIndex) => (
+          {Object.entries(groupedExperience).map(([company, experiences]) => (
             <div key={company} className="mb-16">
               {/* Company Header */}
               <div className="text-center mb-8">
