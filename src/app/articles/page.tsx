@@ -131,14 +131,15 @@ export default function ArticlesPage() {
             >
               {/* Article Image */}
               {article.image && (
-                <div className="relative w-full h-48 bg-gray-200 dark:bg-gray-700">
+                <div className="relative w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
                   <Image
                     src={`/assets/${article.image.name}`}
                     alt={article.image.alt}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               )}
               
