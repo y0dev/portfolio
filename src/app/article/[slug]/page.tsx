@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
 import Link from "next/link";
+import Image from "next/image";
 import { formatDate, parseDate } from "@/utils";
+import ContentRenderer from "@/components/ContentRenderer";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -112,16 +114,32 @@ export default async function ArticlePage({ params }: PageProps) {
 
         {/* Header */}
         <header className="mb-12">
-          <div className="flex flex-wrap gap-2 mb-4">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="flex items-center gap-4 mb-4">
+            {/* Article Image */}
+            {article.image && (
+              <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
+                <Image
+                  src={`/assets/${article.image.name}`}
+                  alt={article.image.alt}
+                  fill
+                  className="object-cover"
+                  sizes="48px"
+                />
+              </div>
+            )}
+            
+            <div className="flex flex-wrap gap-2">
+              {article.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
+          
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             {article.title}
           </h1>
@@ -129,16 +147,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </header>
 
         {/* Content */}
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          {article.content.map((section, sectionIndex) => (
-            <section key={sectionIndex} className="mb-12">
-              {section.title && (
-                <h2 className="text-2xl font-bold mb-6">{section.title}</h2>
-              )}
-              <div dangerouslySetInnerHTML={{ __html: section.htmlContent }} />
-            </section>
-          ))}
-        </article>
+        <ContentRenderer content={article.content} />
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">

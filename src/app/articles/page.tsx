@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { articles } from "@/data/articles";
 import { formatDate } from "@/utils";
 import type { Article } from "@/types";
@@ -126,8 +127,21 @@ export default function ArticlesPage() {
             <Link
               key={article.id}
               href={`/${article.type}/${article.id}`}
-              className="group block bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700"
+              className="group block bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 overflow-hidden"
             >
+              {/* Article Image */}
+              {article.image && (
+                <div className="relative w-full h-48 bg-gray-200 dark:bg-gray-700">
+                  <Image
+                    src={`/assets/${article.image.name}`}
+                    alt={article.image.alt}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              )}
+              
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <span

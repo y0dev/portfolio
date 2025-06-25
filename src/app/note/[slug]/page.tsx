@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
 import {formatDate, parseDate} from "@/utils"
 import Link from "next/link";
+import Image from "next/image";
+import ContentRenderer from "@/components/ContentRenderer";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -115,10 +117,24 @@ export default async function NotePage({ params }: PageProps) {
 
         {/* Note Header */}
         <header className="mb-12">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-4 mb-4">
             <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">
               Note
             </span>
+            
+            {/* Note Image */}
+            {note.image && (
+              <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
+                <Image
+                  src={`/assets/${note.image.name}`}
+                  alt={note.image.alt}
+                  fill
+                  className="object-cover"
+                  sizes="48px"
+                />
+              </div>
+            )}
+            
             <div className="flex flex-wrap gap-2">
               {note.tags.map((tag) => (
                 <span
@@ -130,6 +146,7 @@ export default async function NotePage({ params }: PageProps) {
               ))}
             </div>
           </div>
+          
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             {note.title}
           </h1>
@@ -137,16 +154,7 @@ export default async function NotePage({ params }: PageProps) {
         </header>
 
         {/* Note Content */}
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          {note.content.map((section, sectionIndex) => (
-            <section key={sectionIndex} className="mb-12">
-              {section.title && (
-                <h2 className="text-2xl font-bold mb-6">{section.title}</h2>
-              )}
-              <div dangerouslySetInnerHTML={{ __html: section.htmlContent }} />
-            </section>
-          ))}
-        </article>
+        <ContentRenderer content={note.content} />
 
         {/* Note Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">

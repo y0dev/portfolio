@@ -5,6 +5,10 @@ export interface Article {
   date: string | number;
   tags: string[];
   type: "article" | "note";
+  image: {
+      alt: string,
+      name: string
+  },
   content: {
     title?: string;
     htmlContent: string;

@@ -6,12 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "transform-articles": "ts-node scripts/transform-articles.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "gsap": "^3.13.0",
+    "jsdom": "^26.1.0",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/jsdom": "^21.1.7",
     "@types/marked": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^19",
