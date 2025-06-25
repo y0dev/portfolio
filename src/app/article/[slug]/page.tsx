@@ -3,7 +3,6 @@ import { articles } from "@/data/articles";
 import Link from "next/link";
 import { formatDate, parseDate } from "@/utils";
 import type { Metadata } from "next";
-import type { Article } from "@/types";
 
 interface PageProps {
   params: Promise<{

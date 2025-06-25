@@ -122,7 +122,7 @@ export default function TestimoniesSection() {
             What People Say
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Testimonials from colleagues and clients I've had the pleasure of working with
+            Testimonials from colleagues and clients I&apos;ve had the pleasure of working with
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export default function TestimoniesSection() {
 
               {/* Content */}
               <blockquote className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                "{testimonial.content}"
+                &quot;{testimonial.content}&quot;
               </blockquote>
 
               {/* Author */}

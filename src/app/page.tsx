@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GospelTeaser from "@/components/GospelTeaser";
 import TimelineSection from "@/components/TimelineSection";
-import TestimoniesSection from "@/components/TestimoniesSection";
+// import TestimoniesSection from "@/components/TestimoniesSection";
 import Footer from "@/components/Footer";
 import FavoritesSection from "@/components/FavoritesSection";
 
@@ -20,7 +20,7 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const featuredRef = useRef<HTMLDivElement>(null);
-  const testimonialRef = useRef<HTMLDivElement>(null);
+  // const testimonialRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Hero section animations
