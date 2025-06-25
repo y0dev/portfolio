@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
 import Link from "next/link";
+import Image from "next/image";
 import { formatDate, parseDate } from "@/utils";
+import ContentRenderer from "@/components/ContentRenderer";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${article.title} | Devontae Reid`,
-    description: article.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Blog post about technology and development insights.",
+    description: article.description || "Blog post about technology and development insights.",
     metadataBase: new URL('https://www.devontaereid.com'),
     keywords: [...article.tags, "blog", "article", "devontae reid", "technology", "development"],
     authors: [{ name: "Devontae Reid" }],
@@ -55,14 +57,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     openGraph: {
       title: article.title,
-      description: article.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Blog post about technology and development insights.",
+      description: article.description || "Blog post about technology and development insights.",
       url: `https://www.devontaereid.com/article/${slug}`,
       siteName: "Devontae Reid",
       images: [
         {
-          url: "https://www.devontaereid.com/images/logo.png",
-          width: 1200,
-          height: 630,
+          url: "/logo512.png",
+          width: 512,
+          height: 512,
           alt: article.title,
           type: "image/png",
         },
@@ -77,8 +79,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.content[0]?.paragraphs?.[0]?.substring(0, 160) || "Blog post about technology and development insights.",
-      images: ["https://www.devontaereid.com/images/logo.png"],
+      description: article.description || "Blog post about technology and development insights.",
+      images: ["/logo512.png"],
       site: "@_yodev_",
       creator: "@_yodev_",
     },
@@ -112,16 +114,32 @@ export default async function ArticlePage({ params }: PageProps) {
 
         {/* Header */}
         <header className="mb-12">
-          <div className="flex flex-wrap gap-2 mb-4">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="flex items-center gap-4 mb-4">
+            {/* Article Image */}
+            {article.image && (
+              <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
+                <Image
+                  src={`/assets/${article.image.name}`}
+                  alt={article.image.alt}
+                  fill
+                  className="object-cover"
+                  sizes="48px"
+                />
+              </div>
+            )}
+            
+            <div className="flex flex-wrap gap-2">
+              {article.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
+          
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             {article.title}
           </h1>
@@ -129,113 +147,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </header>
 
         {/* Content */}
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          {article.content.map((section, sectionIndex) => {
-            const images = section.images || [];
-            const codeBlocks = section.code || [];
-            const blockquotes = section.blockquotes || [];
-            const links = section.links || [];
-            const lists = section.lists || [];
-
-            return (
-              <section key={sectionIndex} className="mb-12">
-                {/* Section title */}
-                {section.title?.text && (
-                  <h2 className="text-2xl font-bold mb-6">{section.title.text}</h2>
-                )}
-
-                {/* Paragraphs with placeholders */}
-                {section.paragraphs?.map((paragraph: string, index: number) => {
-                  // Placeholders
-                  if (paragraph.startsWith(":imagePlace(")) {
-                    const id = paragraph.match(/:imagePlace\((.*?)\)/)?.[1];
-                    const image = images.find((img) => img.id === id);
-                    if (!image) return null;
-                    return (
-                      <figure key={`image-${id}`} className="my-8">
-                        <img
-                          src={image.image || image.link}
-                          alt={image.alt || image.title || "image"}
-                          className="rounded-lg shadow-md"
-                        />
-                        {image.caption && (
-                          <figcaption className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">
-                            {image.caption}
-                          </figcaption>
-                        )}
-                      </figure>
-                    );
-                  }
-
-                  if (paragraph.startsWith(":listPlace(")) {
-                    const id = paragraph.match(/:listPlace\((.*?)\)/)?.[1];
-                    const list = lists.find((l) => l.id === id);
-                    if (!list) return null;
-                    return list.list_type === "ordered" ? (
-                      <ol key={`list-${id}`} className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300 my-4">
-                        {list.items.map((item, i) => <li key={i}>{item}</li>)}
-                      </ol>
-                    ) : (
-                      <ul key={`list-${id}`} className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 my-4">
-                        {list.items.map((item, i) => <li key={i}>{item}</li>)}
-                      </ul>
-                    );
-                  }
-
-                  if (paragraph.startsWith(":linkPlace(")) {
-                    const id = paragraph.match(/:linkPlace\((.*?)\)/)?.[1];
-                    const link = links.find((l) => l.id === id);
-                    if (!link) return null;
-                    return (
-                      <div key={`link-${id}`} className="my-4">
-                        <a
-                          href={link.link || link.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-                        >
-                          {link.text} →
-                        </a>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <p key={index} className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                      {paragraph}
-                    </p>
-                  );
-                })}
-
-                {/* Code Blocks */}
-                {codeBlocks.map((codeBlock) => (
-                  <div key={codeBlock.id} className="my-8">
-                    <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-gray-400 text-sm font-mono">
-                          {codeBlock.language}
-                        </span>
-                      </div>
-                      <pre className="text-gray-100 overflow-x-auto">
-                        <code>{codeBlock.content}</code>
-                      </pre>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Blockquotes */}
-                {blockquotes.map((blockquote) => (
-                  <blockquote
-                    key={blockquote.id}
-                    className="border-l-4 border-blue-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300"
-                  >
-                    &quot;{blockquote.content}&quot;
-                  </blockquote>
-                ))}
-              </section>
-            );
-          })}
-        </article>
+        <ContentRenderer content={article.content} />
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">

@@ -1,1812 +1,375 @@
-export interface Image {
-  id: string;
-  alt?: string;
-  link?: string;   // external or fallback
-  image?: string;  // internal / static asset
-  title?: string;
-  caption?: string;
-}
-
-export interface CodeBlock {
-  title?: string;
-  id: string;
-  language: string;
-  content: string[];
-}
-
-export interface Blockquote {
-  id: string;
-  content: string;
-}
-
-export interface LinkItem {
-  id: string;
-  text: string;
-  website?: string;  // original format
-  link?: string;     // alternate key used in notes
-  video?: boolean;   // optional flag if it’s a video
-}
-
-export interface List {
-  id: string;
-  items: string[];
-  list_type: "ordered" | "unordered";
-}
-
-export interface SectionTitle {
-  tag?: string; // e.g., h2
-  text: string;
-}
-
-export interface ContentSection {
-  title?: SectionTitle;            // optional title object
-  paragraphs: string[];            // can contain placeholders
-  images?: Image[];                // optional image list
-  code?: CodeBlock[];              // optional code blocks
-  blockquotes?: Blockquote[];      // optional quotes
-  links?: LinkItem[];              // optional external links
-  lists?: List[];                  // optional bullet/numbered lists
-}
-
-export interface TimeMeta {
-  hours: string;
-  mins: string;
-  secs: string;
-}
-
-export interface Article {
-  id: string;
-  title: string;
-  description?: string;            // optional short summary
-  date: string | number;           // support both "Jan 15, 2024" and timestamp
-  tags: string[];
-  image?: {
-    name: string;
-    alt: string;
-  };
-  time?: TimeMeta;                 // for notes/audio/podcast entries
-  content: ContentSection[];
-  type: "article" | "note";
-}
-
-
-export const metadata = {
-  title: 'Articles & Notes | Devontae Reid',
-  description: 'Thoughts, tutorials, and insights on web development and technology',
-};
-
-
+/* eslint-disable */
+import type { Article } from '@/types';
 
 export const articles: Article[] = [
   {
-    "id": "web-dev-choice",
-    "title": "Web Development Choice",
-    "description": "my time looking for a framework to create my portfolio website along with blog site",
-    "date": "1636423946203",
-    "tags": [
-      "Technology",
-      "ReactJS",
-      "NodeJS"
-    ],
-    "image": {
-      "name": "images/web-dev.png",
-      "alt": "js-image"
-    },
-    "time": {
-      "secs": "29",
-      "mins": "00",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Beginning of NodeJS"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "As I embraced the task of creating a website, I ran into some problems. Those problems were choosing the right framework. There are many out there from React, VueJS, and even embedded JavaScript.",
-          "So the one that rose to the top of my list was React. I find React to be very powerful for something that seems so simple to use. There are many things that React offered that the others did not such as CSS animation. Working in VueJS I found it fairly difficult to work with CSS animation. I would've just JavaScript to handle my animations, but I don't need all that power when it something simple as moving a div.",
-          "My overall appreciation of React is :special-text(key='bold',great)special-text-end!"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "dev-work",
-            "caption": "Programming Away",
-            "link": "https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg"
-          }
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "javascript",
-            "content": ["laboris"]
-          }
-        ],
-        "blockquotes": [
-          {
-            "id": "001",
-            "content": "laboris"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [],
-            "list_type": "unordered"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "parenting-with-few-rules",
-    "title": "Parenting with Few Rules | Doug Wilson",
-    "description": "parenting as a Christian with few rules from Doug Wilson podcast",
-    "date": "1628742217550",
-    "tags": [
-      "Parenting",
-      "Christ",
-      "Children"
-    ],
-    "image": {
-      "name": "images/family.png",
-      "alt": "parenting-img"
-    },
-    "time": {
-      "secs": "47",
-      "mins": "00",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Is it That Simple?"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "As being a new father I felt like this video was very helpful for setting ground rules for my kids as they grow up. You may think that if you have too many rules or your too lenient, but there is a way that one is ought to parent. If we want to be parents that live obedient to Christ as we raise our children while at the same time not being a helicopter parent.",
-          "A video came up on my timeline from Pastor Doug Wilson of Christ Church in Moscow, Idaho. He speaks on being a parent who doesn't have so many rules and the reason why. He speaks on why as parents we shouldn't over complicate things for our children while at the same time teaching our children to think on their own when it comes to subject matters on what is right vs wrong. These rules not only established ground with you and your child, but also allows your child to critical think.",
-          "Three Rules to Live by as a Parent: :listPlace(001)",
-          "You can find the video on Youtube at the following :linkPlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "doug-wilson-parenting",
-            "caption": "Fewer Rules in Parenting? | Doug Wilson",
-            "link": "https://i.ytimg.com/vi/6S4LCPI9wk4/maxresdefault.jpg"
-          }
-        ],
-        "blockquotes": [
-          {
-            "id": "001",
-            "content": "laboris"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "video": true,
-            "text": "Fewer Rules in Parenting? | Doug Wilson",
-            "link": "https://youtu.be/6S4LCPI9wk4"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "No lying",
-              "No disobedience",
-              "No disrespecting your mother"
-            ],
-            "list_type": "unordered"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "navy-seals-breathing",
-    "title": "Navy Seals & Breathing",
-    "description": "Learn how to breathe correctly while doing intense exercises to maximize performance and prevent injury. Tips to help you get the most out of your workouts.",
-    "date": "1665111900994",
-    "tags": [
-      "Health",
-      "Fitness"
-    ],
-    "image": {
-      "name": "images/heart_strength.png",
-      "alt": "health-img"
-    },
-    "time": {
-      "secs": "37",
-      "mins": "01",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Intro"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "Ever wonder why Navy SEALs are some of the world's most elite warriors? It's as simple as \"breathing\" literally. According to the Lung Association of Canada, we take on average 22,000 breaths a day. Wow, we take 22,000 breaths a day and don't give thanks for even a quarter of it.",
-          "Thanks God for His mercy to allow us to take these breaths! Psalm 136",
-          " :imagePlace(002)",
-          "We can do a lot to help ourselves by practicing better breathing patterns. There are many different breathing patterns that can result in more energy and a clearer head. The well known breathing pattern is known as \"Box Breathing\". In this pattern you would exhale and inhale for the same duration around a box so to speak. :listPlace(001)",
-          "Box breathing helps you deal effectively with stress and anxiety. It also brings balance to your body and mind along with regulating your natural heart rhythm."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "navy-seals",
-            "caption": "Navy Seals Training",
-            "link": "https://i0.wp.com/cms.sofrep.com/wp-content/uploads/2018/01/navy-seal-photo-065.jpg"
-          },
-          {
-            "id": "002",
-            "alt": "box-breathing-gif",
-            "caption": "Box Breathing",
-            "link": "https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif"
-          }
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "",
-            "content": ["laboris"]
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Inhale along the left for 4 seconds",
-              "Exhale along the top for 4 seconds",
-              "Inside the along the right for 4 seconds",
-              "Exhale along the bottom for 4 seconds"
-            ],
-            "list_type": "ordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Training"
-        },
-        "paragraphs": [
-          "Navy Seals train in such a way to help them control their breathing not only to stay calm, but to also conserve energy. It starts with breathing and proper breathing. Proper breathing begins with breathing through the nose and out the mouth. We heard this before early in our sports career. Little that we know, that is very beneficial to our health. The benefits are: :listPlace(001)",
-          "Here is a workout or things to do while working out that I believe will help with teaching yourself proper breathing and self control. 100s of pushups, burpees and squats. While at the bottom of a squat just breathe deep inhales, so that you will fill your lungs and slow exhales. The reasoning behind this is because shallow breaths leads to: :listPlace(002)",
-          "While running, fill your lungs by breathing in through your nose only after each run or after each set. Sharp inhales through the nose and soft exhales through the mouth or nose."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "image1",
-            "caption": "Breathing Counter",
-            "link": "https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Reduces exposure to foreign substances",
-              "Increases oxygen uptake and circulation",
-              "Aids our immune system",
-              "Slows down breathing",
-              "Improves lung volume",
-              "Humidifies inhaled air"
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Increased blood pressure",
-              "Increased stress response",
-              "Reduced oxygen intake",
-              "Impaired thinking",
-              "Slower recovery"
-            ],
-            "list_type": "unordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Finally"
-        },
-        "paragraphs": [
-          "Start small! :listPlace(001)",
-          "Link to the Twitter 🧵 : :linkPlace(001)"
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "Navy SEALs are the world's most elite warriors",
-            "link": "https://twitter.com/tobi_emonts/status/1577998885125033985?s=20&t=aJC2U0dfO1wUkyJpjw1lzQ"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Break up your big goals into small chunks, one breath at a time",
-              "Breath control is stress control"
-            ],
-            "list_type": "ordered"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "docker-getting-started",
-    "title": "Getting Started with Docker",
-    "description": "Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers.",
-    "date": "1667624400000",
-    "tags": [
-      "Technology",
-      "Docker"
-    ],
-    "image": {
-      "name": "images/docker.png",
-      "alt": "docker-image"
-    },
-    "time": {
-      "secs": "44",
-      "mins": "00",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Initial Steps to Running Docker"
-        },
-        "paragraphs": [
-          ":imagePlace(001)",
-          "The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.",
-          "If you have installed docker on your pc or mac. The steps to run a docker container are as follows: :listPlace(001)",
-          "Creating a dockerfile and building and running it. Here's an example of a basic dockerfile :codePlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "docker",
-            "caption": "Docker @ Resource from Docker Website",
-            "link": "https://www.ondat.io/hubfs/Docker.png"
-          }
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "docker",
-            "title": "docker_file",
-            "content": [
-              ":comment # Parent Image: Software and version",
-              ":code-specific FROM :code-specific-end python:3",
-              ":code-specific WORKDIR :code-specific-end :path-start /Users/user_directory/docker/textblob :path-end",
-              ":code-specific COPY :code-specific-end requirements.txt :path-start ./ :path-end",
-              ":code-specific RUN :code-specific-end pip install --no-cache-dir -r requirements.txt",
-              ":comment # First dot is relative file path where dockerfile resides",
-              ":comment # Second dot is the root directory",
-              ":code-specific COPY :code-specific-end . .",
-              ":code-specific CMD :code-specific-end :bracket-open [ :string-open \"python :string-close\", :string-open \"./main.py :string-close\" :bracket-close ]"
-            ]
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "Docker Help",
-            "link": ""
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Create a docker",
-              "Build docker image \" docker build -t :user-defined-code image:end . \"",
-              "Run the docker container \" docker run --name :user-defined-code container_name image:end \"",
-              "Stop container \"docker stop :user-defined-code container_name:end \"",
-              "List running containers \"docker ps -a \""
-            ],
-            "list_type": "ordered"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "jenkins-getting-started",
-    "title": "Basics of Jenkins",
-    "description": "Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily.",
-    "date": "1675365300000",
-    "tags": [
-      "Technology",
-      "Jenkins",
-      "CI/CD"
-    ],
-    "image": {
-      "name": "images/jenkins.png",
-      "alt": "jenkins-image"
-    },
-    "time": {
-      "secs": "06",
-      "mins": "01",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Creating a Jenkinsfile"
-        },
-        "paragraphs": [
-          ":imagePlace(001)",
-          "When creating a Jenkinsfile the necessary fields must are: pipeline, agent, stages. \"pipeline\" is always needed and is at the top-level. From here we have the \"agent\" which describes where to execute (default would be set to any). Then we have stages which describes where the works happens, and within \"stages\" you define \"stage\" that will have parameters such as: (\"init\"), (\"build\"), (\"test\"), and (\"deploy\").",
-          "Another field that may be added and this is added after \"stages\". This is \"post\" and what this does is execute some logic after all stages have executed. The conditions that are within the \"post\" section are: always, success, failure. Always will always execute whether the script failed or not. Examples of this are sending emails out to the team after a build."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "jenkins",
-            "caption": "Jenkins Image from Jenkins Website",
-            "link": "https://www.jenkins.io/images/logo-title-opengraph.png"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Adding Environmental Variables"
-        },
-        "paragraphs": [
-          "In order to add environmental variables to your file, before \"stages\" you need to add \"environment\" into your pipeline.",
-          ":codePlace(001)"
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "groovy",
-            "title": "jenkins_file_env",
-            "content": [
-              "pipeline {",
-              "\tagent any",
-              "\tenvironment {",
-              "\t\tEXAMPLE_VAR = 'Something'",
-              "\t}",
-              "\t...",
-              "}"
-            ]
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Adding Build Tools for Project"
-        },
-        "paragraphs": [
-          ":codePlace(001)"
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "groovy",
-            "title": "jenkins_file_tools",
-            "content": [
-              "pipeline {",
-              "\tagent any",
-              "\ttools  {",
-              "\t\tnodejs 'NodeJS'",
-              "\t}",
-              "\t...",
-              "}"
-            ]
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Building Jenkinsfile"
-        },
-        "paragraphs": [
-          "After this you would then go to Jenkins localhost webpage and create a new job. Depending on the version of Jenkins you have downloaded this menu may be different. What you should see is a text field and beneath a list of types of projects you can create. The projects are Freestyle project, Pipeline, Multi-configuration project, Folder, GitHub Organization, and Multibranch Pipeline. For my example I am using Multibranch Pipeline.",
-          "Within the General Tab, scroll down to Branch Sources and add the link to the Git project repository and add the correct credentials. You can determine what branches you want to build by selecting the next drop-down. Click build and you should now be presented with a new page that displays the pipeline output/log."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Final Results"
-        },
-        "paragraphs": [
-          ":codePlace(001)"
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "groovy",
-            "title": "jenkins_file_final",
-            "content": [
-              "def gv",
-              "pipeline {",
-              "\tagent any",
-              "\tparameters {",
-              "\t\tchoice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')",
-              "\t\tbooleanParam(name: 'executeTests', defaultValue: true, description: '')",
-              "\t}",
-              "\tstages {",
-              "\t\tstage (\"init\") {",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv = load \"script.groovy\"",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t\tstage (\"build\") {",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv.buildApp()",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t\tstage (\"test\") {",
-              "\t\t\twhen {",
-              "\t\t\t\texpression {",
-              "\t\t\t\t\tparams.executeTests",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv.testApp()",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t\tstage (\"deploy\") {",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv.deployApp()",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t}",
-              "}"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "system-design",
-    "title": "Help with System Design Interviews",
-    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
-    "date": "1675836000000",
-    "tags": [
-      "System Design",
-      "Technology",
-      "MAANG"
-    ],
-    "image": {
-      "name": "images/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "time": {
-      "secs": "12",
-      "mins": "07",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Preparation for the Interview"
-        },
-        "paragraphs": [
-          ":imagePlace(001)",
-          "Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.",
-          "Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are :linkPlace(001), :linkPlace(002), :linkPlace(003), :linkPlace(004), :linkPlace(005), :linkPlace(006), :linkPlace(007), :linkPlace(008), :linkPlace(009), :linkPlace(010), :linkPlace(011), :linkPlace(012), and :linkPlace(013).",
-          "Some thoughts that should happen when designing a system should be “Why does this system works?”. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "system-design",
-            "caption": "Load Balancing from G4G",
-            "link": "https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "Engineering at Meta",
-            "link": "https://engineering.fb.com/"
-          },
-          {
-            "id": "002",
-            "text": "Meta Research",
-            "link": "https://research.fb.com/"
-          },
-          {
-            "id": "003",
-            "text": "AWS Architecture Blog",
-            "link": "https://aws.amazon.com/blogs/architecture/"
-          },
-          {
-            "id": "004",
-            "text": "Amazon Science Blog",
-            "link": "https://www.amazon.science/blog"
-          },
-          {
-            "id": "005",
-            "text": "Netflix TechBlog",
-            "link": "https://netflixtechblog.com/"
-          },
-          {
-            "id": "006",
-            "text": "Google Research",
-            "link": "https://research.google/"
-          },
-          {
-            "id": "007",
-            "text": "Engineering at Quora",
-            "link": "https://quoraengineering.quora.com/"
-          },
-          {
-            "id": "008",
-            "text": "Uber Engineering Blog",
-            "link": "https://eng.uber.com/"
-          },
-          {
-            "id": "009",
-            "text": "Databricks Blog",
-            "link": "https://databricks.com/blog/category/engineering"
-          },
-          {
-            "id": "010",
-            "text": "Pinterest Engineering",
-            "link": "https://medium.com/@Pinterest_Engineering"
-          },
-          {
-            "id": "011",
-            "text": "BlackRock Engineering",
-            "link": "https://medium.com/blackrock-engineering"
-          },
-          {
-            "id": "012",
-            "text": "Lyft Engineering",
-            "link": "https://eng.lyft.com/"
-          },
-          {
-            "id": "013",
-            "text": "Salesforce Engineering",
-            "link": "https://engineering.salesforce.com/"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Stay on track"
-        },
-        "paragraphs": [
-          "At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.",
-          "Key things to remember when thinking of deliverables expected from the developed design :listPlace(001)"
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.",
-              "Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on."
-            ],
-            "list_type": "ordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "The Interview"
-        },
-        "paragraphs": [
-          "When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.",
-          "The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: :listPlace(001)"
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "What is the size of the data right now? (Guessing this is the size of data type)",
-              "At what rate is the data expected to grow over time?",
-              "How will the data be consumed by other subsystems or end users?",
-              "Is the data read-heavy or write-heavy?",
-              "Do we need strict consistency of data, or will eventual consistency work?",
-              "What is the durability target of the data?",
-              "What privacy and regulatory requirements do we require for storing or transmitting user data?"
-            ],
-            "list_type": "unordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Abstraction"
-        },
-        "paragraphs": [
-          "Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Remote Procedure Calls"
-        },
-        "paragraphs": [
-          "Remote Procedure Calls (RPC) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Consistency"
-        },
-        "paragraphs": [
-          "Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.",
-          "There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Availability"
-        },
-        "paragraphs": [
-          "Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Reliability"
-        },
-        "paragraphs": [
-          "Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Scalability"
-        },
-        "paragraphs": [
-          "Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: :listPlace(001)",
-          "There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. :listPlace(002)"
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Request workload: This is the number of requests served by the system.",
-              "Data/storage workload: This is the amount of data stored by the system."
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Vertical Scaling = more space in a single system",
-              "Horizontal Scaling = more nodes that need to be in sync with one another"
-            ],
-            "list_type": "unordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Maintainability"
-        },
-        "paragraphs": [
-          "Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Fault Tolerance"
-        },
-        "paragraphs": [
-          "Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures—a reality that is outlined in the CAP theorem.",
-          "Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Back-Of-The-Envelope"
-        },
-        "paragraphs": [
-          "This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.",
-          "For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.",
-          ":imagePlace(001)",
-          ":imagePlace(002)",
-          ":imagePlace(003)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "system-design-db-rates",
-            "caption": "Database Rates",
-            "link": "/images/system-design/database_rates.png"
-          },
-          {
-            "id": "002",
-            "alt": "system-design-latency-rates",
-            "caption": "Latency Rates",
-            "link": "/images/system-design/latency_values.png"
-          },
-          {
-            "id": "003",
-            "alt": "system-design-server-specs",
-            "caption": "Server Specs",
-            "link": "/images/system-design/server_specs.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "thankfulness",
-    "title": "Command for Thankfulness",
-    "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
-    "date": "1678428000000",
-    "tags": [
-      "Christ",
-      "Salvation",
-      "Love",
-      "Thankful"
-    ],
-    "image": {
-      "name": "images/thankful.png",
-      "alt": "thankful-icon"
-    },
-    "time": {
-      "secs": "20",
-      "mins": "01",
-      "hours": "00"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Command for Thankfulness"
-        },
-        "paragraphs": [
-          "We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren’t. Prime example of this in scripture is Israel’s ungrateful heart throughout their time in the wilderness (Num. 14:1-4;20:3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2:24-25).",
-          "The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1:8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They’re not the only ones that think this way.",
-          "As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they’ve been wrong by someone and that person deserves it. As I was reminded by a brother, “We deserve much worse than what this person just said about us even though it may not be true.” God did not need to save Israel from Egypt nor did he need to save us from our sins.",
-          "So, to close as the Apostle Paul commands, “Be Thankful”. We ought to always be thankful in all circumstances because we deserve much more than we are receiving."
-        ],
-        "images": [],
-        "links": [],
-        "lists": []
-      }
-    ]
-  },
-  {
-    "id": "debugging-in-node",
-    "title": "Debugging in NodeJS",
-    "description": "How to properly debug in NodeJS",
-    "date": "1680066000000",
+    "id": "quantum-random-number-generator-pt.2",
+    "title": "Quantum Random Number Generator Pt.2",
+    "description": "This is the second part of notes on random number generation.",
+    "date": "May 09, 2025",
     "tags": [
       "Technology",
       "Engineer"
     ],
+    "type": "note",
     "image": {
-      "name": "images/web-dev.png",
-      "alt": "web-dev-img"
+      "alt": "web-dev-img",
+      "name": "images/web-dev.png"
     },
-    "time": {
-      "secs": "57",
-      "mins": "0",
-      "hours": "0"
-    },
-    "type": "article",
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Debugging in Node Using Chrome Devtools"
-        },
-        "paragraphs": [
-          "As I’m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you’re a web developer. It is done by adding simply :special-text(key=italic,--)special-text-end :special-text(key=italic,inspect )special-text-end flag. What happens is that when using :special-text(key=italic,--)special-text-end :special-text(key=italic,inspect )special-text-end flag Node opens a port to accept WebSocket connections. Now you will be presented with the following::imagePlace(001)",
-          "Once successful, now open up Google Chrome and type the following URL :special-text(key=italic,chrome)special-text-end :special-text(key=italic,://)special-text-end :special-text(key=italic,inspect)special-text-end :special-text(key=italic,/#)special-text-end :special-text(key=italic,devices)special-text-end . This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure… which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.",
-          "One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "",
-            "caption": "node --inspect snippet",
-            "link": "/images/articles/node-inspect.png"
-          }
-        ],
-        "code": [],
-        "links": [],
-        "lists": []
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date 05/09/2025</em>*</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Reviewed On MM/DD/YYYY</em>*</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Academic Papers Used</em>*: M. Stipˇ cevi´ c and B. Medved Rogina research paper</li>\n</ul>"
       },
       {
-        "title": {
-          "tag": "h2",
-          "text": "Setting up Stack Trace"
-        },
-        "paragraphs": [
-          "The basics behind displaying stack trace is simple in node. All one would have to do is."
-        ],
-        "images": [],
-        "code": [],
-        "links": [],
-        "lists": []
+        "title": "Topic: QRNG Part 2",
+        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">According to this paper, \"The best way to realize scientiﬁcally provable random number generator is to rely on intrinsic randomness of certain simple quantum systems.\" The most common way of for generating a random number in Quantum Physics is based on a photon passing through a beam splitter.</p>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">How a beam splitter works is that a light source emits photons and ensuingly passes through a beam splitter where the photon can take two possible paths. If it ends up in the detector D1 it would be \"1\" if it ends up in detector D2 then the value is \"0\".</p>"
+      }
+    ]
+  },
+  {
+    "id": "docker_net_app_notes",
+    "title": "Setting Up Web Application on NAS",
+    "description": "Here’s the complete recall note now with Networking Tips for Docker containers, including linking containers and accessing them from other devices on your network.",
+    "date": "May 8, 2025",
+    "tags": [
+      "Template",
+      "Info",
+      "Beginner"
+    ],
+    "type": "note",
+    "image": {
+      "alt": "image-title",
+      "name": "images/image.png"
+    },
+    "content": [
+      {
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date:</em>* 05/08/2025</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
       },
       {
-        "title": {
-          "tag": "h2",
-          "text": "Soli Deo Gloria"
-        },
-        "paragraphs": [],
-        "images": [],
-        "code": [],
-        "links": [],
-        "lists": []
-      }
-    ]
-  },
-  {
-    "id": "depth-first-search",
-    "title": "Depth First Search",
-    "description": "Article on the depth first search definition and its usage for a tree and a graph.",
-    "date": "1691730000000",
-    "tags": [
-      "Data Structures",
-      "Algorithms",
-      "Tech Interview"
-    ],
-    "image": {
-      "name": "images/algorithm.png",
-      "alt": "algo-img"
-    },
-    "time": {
-      "secs": "14",
-      "mins": "2",
-      "hours": "0"
-    },
-    "type": "article",
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Introduction"
-        },
-        "paragraphs": [
-          "In this article, I will define the :special-text(key=bold,Depth )special-text-end :special-text(key=bold,First )special-text-end :special-text(key=bold,Search )special-text-end :special-text(key=bold,()special-text-end :special-text(key=bold,DFS)special-text-end :special-text(key=bold,) )special-text-end algorithm. I will be explaining the definition and the uses of the search on a tree and a graph."
-        ],
-        "images": [],
-        "code": [],
-        "links": [],
-        "lists": []
+        "title": "**Steps to Deploy:**",
+        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">1️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Login to the NAS</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Use SSH to access the NAS:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">ssh username@nas_ip\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">2️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Build the Docker Container</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Navigate to the app's directory on the NAS:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">cd /path/to/your/app\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Build the Docker image:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker build -t myapp-image .\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">3️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Start the Docker Container</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Run the container and expose the necessary ports:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run -d --name myapp-container -p 8080:8080 myapp-image\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">4️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Expose the Port in the Docker Network</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Verify that the port <strong class=\"font-bold text-gray-900 dark:text-white\">8080</strong> is mapped and accessible inside the NAS:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker port myapp-container\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Check connectivity from NAS to the Docker container:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">curl http://localhost:8080\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">5️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Configure the Web Server Application on the NAS</strong>\n In Web Portal Settings, select configure new settings</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Open the Web Server App interface on your NAS.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Add a Reverse Proxy or Port Forwarding entry:</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Source Port: 8080</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Destination IP: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">localhost</code> or the Docker container IP</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Destination Port: 8080</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Ensure the web server points correctly to the Docker container.</p>\n</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
       },
       {
-        "title": {
-          "tag": "h3",
-          "text": "Definition"
-        },
-        "paragraphs": [
-          "DFS is a tree and graph traversal algorithm used to explore node(s) in a tree or graph data structure. Depending on the data structure a node will have different meaning in regards to the relationship with other nodes. For example, a node in a tree is a single element in a tree that will either be connected to another node via parent-child relationship. While a node in graph will be connected to other nodes via neighbor relationship. ",
-          "DFS on a tree has three traversal methods: pre-order, in-order, and post-order. These tree traversals generally go from left to right. In the pre-order traversal, we would start from the current node, then traverse the left subtree, and finally traverse the right subtree. In-order traversal, we would start from the root node and traverse the left subtree, then the current node, and finally traverse the right subtree. The last traversal method post-order traversal, we would start from the root node and traverse the left subtree, then the right subtree, and finally visit the current node. Below is an example of in-order traversal these steps are basis for how each traversal method operates::listPlace(001)",
-          "We now get into using these same traversals with a graph data structure. The main difference in using these traversal methods with graphs are that you have to mark each visited node. The reason for the marking of nodes because graph contains cycles and we don’t want to get stuck in an infinite loop."
-        ],
-        "images": [],
-        "code": [],
-        "links": [],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Traverse the left subtree",
-              "Visit the current node",
-              "Traverse the right subtree"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "title": "Quick Commands Reference",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Login to NAS: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">ssh username@nas_ip</code></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Build Docker Image: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker build -t myapp-image .</code></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Run Docker Container: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run -d --name myapp-container -p 8080:8080 myapp-image</code></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Check Docker Ports: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker port myapp-container</code></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Test Port Access: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">curl http://localhost:8080</code></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
       },
       {
-        "title": {
-          "tag": "h3",
-          "text": "Uses"
-        },
-        "paragraphs": [
-          "\tWhen determining when to use the following algorithm we chose by first understanding if the problem is a tree/graph problem or not. This can be difficult at first because all tree/graph problem don’t just same “I’m a tree” or “I’m a graph”. Determining whether a problem is a tree/graph is done by understanding what the problem is asking just like any other algorithm. Generally identifying DFS problem you will notice whether the question is asking for the following::listPlace(001)",
-          "The strategy to determining which traversal methods to use depends on the algorithm that is being design. When thinking about picking pre-order method, you may be thinking of exploring the root prior to the leaves. While using post-order method, you may be thinking of exploring the leaves before the root. In-order is best used, when you know that the tree has a sequence in the nodes."
-        ],
-        "images": [],
-        "code": [],
-        "links": [],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Max Depth of Tree, *anything* tree",
-              "Combination Search :listPlace(002)"
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "“Generate all possible”",
-              "“Number of ways”"
-            ],
-            "list_type": "unordered"
-          }
-        ]
+        "title": "Checklist Before Deployment",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong> </strong> Dockerfile configured properly</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong> </strong> Port mapped correctly in Docker</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong> </strong> NAS Web Server App proxy configured</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong> </strong> Test connection from NAS web server to container</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
       },
       {
-        "title": {
-          "tag": "h3",
-          "text": "Implementation"
-        },
-        "paragraphs": [
-          "\tTo implement DFS algorithm is simple for both a tree and a graph. It is implemented just as it is defined. See the example below written in Python::codePlace(001)",
-          "\tThe difference in the implementation for a tree and a graph is including a visited set as a state. In the implementation of DFS in a graph you will add a visited set to store all the vertices/nodes that were already visited. Since a graph uses a visited set, you no longer need to used the goal state that a tree would used to find a left node. The python example below shows the basic implementation to start from: :codePlace(002)"
-        ],
-        "images": [],
-        "code": [
-          {
-            "id": "001",
-            "title": "DFS Implementation for Tree Traversal",
-            "language": "python",
-            "content": [
-              "def dfs(root):",
-              "\tif not root:",
-              "\t\treturn",
-              "\t# Traverse the left subtree",
-              "\tdfs(root.left)",
-              "\t# Visit current node",
-              "\tprint(root)",
-              "\t# Traverse the right subtree",
-              "\tdfs(root.right)",
-              "\treturn"
-            ]
-          },
-          {
-            "id": "002",
-            "title": "DFS Implementation for Graph Traversal",
-            "language": "python",
-            "content": [
-              "def dfs(root, visited):",
-              "\t# Visit all neighbors",
-              "\tfor neighbor in get_neighbors(root):",
-              "\t\t# Check if neighbor has been visited before",
-              "\t\tif neighbor in visited:",
-              "\t\t\tcontinue",
-              "",
-              "\t\t# Add neighbor to visited set",
-              "\t\tvisited.add(neighbor)",
-              "",
-              "\t\t# Add neighbor to stack",
-              "\t\tdfs(neighbor, visited)"
-            ]
-          }
-        ],
-        "links": [],
-        "lists": []
-      }
-    ]
-  },
-    {
-    "id": "theology-103-week-5",
-    "title": "Theology 103",
-    "description": "week 5 of Theology 103 course",
-    "date": "1644825601000",
-    "tags": [
-      "Theology",
-      "Christ",
-      "Sin",
-      "Angels",
-      "Demons"
-    ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "36",
-      "mins": "01",
-      "hours": "00"
-    },
-    "type": "note",
-    "content": [
+        "title": "🚩 Troubleshooting Tips",
+        "htmlContent": "<table class=\"table table-striped table-hover\">\n<thead>\n<tr>\n<th>Problem</th>\n<th>Possible Cause</th>\n<th>Solution</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Cannot access the app from the NAS</td>\n<td>Port mapping issue or firewall restriction</td>\n<td>Check Docker port mapping: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker port myapp-container</code> and NAS firewall settings.</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">curl http://localhost:8080</code> fails</td>\n<td>Container not running or wrong port</td>\n<td>Run <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker ps</code> to check the container status. Make sure it exposes 8080.</td>\n</tr>\n<tr>\n<td>Web server not reaching the container</td>\n<td>Incorrect IP or reverse proxy settings</td>\n<td>Use Docker IP with <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' myapp-container</code>.</td>\n</tr>\n<tr>\n<td>Docker container exits unexpectedly</td>\n<td>Crash inside the app or bad Dockerfile</td>\n<td>Run <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker logs myapp-container</code> to view error messages.</td>\n</tr>\n<tr>\n<td>Port already in use</td>\n<td>Conflict with another service</td>\n<td>Find the process with <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">sudo lsof -i :8080</code> and kill if necessary.</td>\n</tr>\n<tr>\n<td>Changes not visible after redeploy</td>\n<td>Old image still running</td>\n<td>Stop and remove old container: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker rm -f myapp-container</code>, then restart.</td>\n</tr>\n<tr>\n<td>Network bridge issues</td>\n<td>Docker network misconfiguration</td>\n<td>Restart Docker networking: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">sudo systemctl restart docker</code>.</td>\n</tr>\n</tbody></table>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
       {
-        "title": {
-          "tag": "h2",
-          "text": "Week 5: Humans and Sin, Angels and Demons"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "These are the following learning that I was grateful to learn about this week: :listPlace(001)",
-          "I still have questions on the following: :listPlace(002)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Satan can serve God's purposes in the realm of church discipline when repentance remains absent",
-              "Believers are to gird up the loins with truth which show they have a heart for battle because of their commitment to Christ",
-              "God has provided the breastplate of righteousness to protect the believer's mind and emotions",
-              "Though Satan and one-third of the angel disqualified themselves from servest to the LORD, they weren't completely banned from heaven",
-              "Satan will only bruise Christ heel (cause Him to suffer), while Christ will bruise Satan's head (destroy him with a fatal blow)",
-              "When someone is demonize, the demon exercise living and dominant control over that person",
-              "The sealing ministry of the Holy Spirit protects Christians against demon invasion, and its unbiblical and impossible for a true believer to have a demon invasion",
-              "Demonization refers to the only unbelievers in whom a demon resides",
-              "Believers can be tormented, oppressed, and harassed externally, even to to severe degree like Saul",
-              "A demon is far more powerful than a human so we must trust the appeal to God in prayer to deal with situation of demonization",
-              "The angel of the LORD has been identified as a special created angel, some say Michael the archangel, but no created angel has ever show traits of deity",
-              "Also the angel of the LORD is a self-manifestation of Yahweh himself",
-              "The angel of the LORD showed traits of deity (Ex, 3:2-5; Judg. 13:17-18; Ex. 23:21;33:14; Isa. 63:9)",
-              "The identification of the angel of the LORD matches the NT explanation of the preincarnate Christ",
-              "The words uttered by Christ asserts that He was the angel of the LORD mentioned in the OT because it asserts that more than one person can be God",
-              "The attributes of the OT angel of the LORD compare perfectly with those of Christ"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "How can demons be pictured in today's age, such as in a homeless person who is talking to themselves, or can it be your average person?",
-              "If one is demon possessed what do we do as Christians?",
-              "Will the Antichrist be some type of leader like the king of Babylon in Isaiah 14?",
-              "What portion in man's sinful action is Satan or demon deception; or just the man's own sinfulness? (The Devil made me do it theology)"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "title": "🔄 Common Docker Commands",
+        "htmlContent": "<table class=\"table table-striped table-hover\">\n<thead>\n<tr>\n<th>Command</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker ps</code></td>\n<td>List all running containers</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker ps -a</code></td>\n<td>List all containers (running and stopped)</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker images</code></td>\n<td>List all Docker images</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker logs <container-name></code></td>\n<td>View logs for a specific container</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker stop <container-name></code></td>\n<td>Stop a running container</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker start <container-name></code></td>\n<td>Start a stopped container</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker restart <container-name></code></td>\n<td>Restart a running container</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker rm <container-name></code></td>\n<td>Remove a stopped container</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker rmi <image-name></code></td>\n<td>Remove a Docker image</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker exec -it <container-name> bash</code></td>\n<td>Access the container's shell for debugging</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker inspect <container-name></code></td>\n<td>View detailed information about a container</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker network ls</code></td>\n<td>List all Docker networks</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker network inspect <network-name></code></td>\n<td>Inspect a Docker network</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker system prune</code></td>\n<td>Remove all stopped containers, unused networks, and dangling images</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker volume ls</code></td>\n<td>List all Docker volumes</td>\n</tr>\n<tr>\n<td><code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker volume prune</code></td>\n<td>Remove unused Docker volumes</td>\n</tr>\n</tbody></table>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "🌐 Networking Tips for Docker Containers",
+        "htmlContent": ""
+      },
+      {
+        "title": "1️⃣ Accessing Container from Another Device on the Network",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">If you want to access the container from another device, use the NAS IP address and the exposed port:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">http://nas_ip:8080\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Ensure your NAS firewall allows the port (e.g., 8080).</p>\n</li>\n</ul>"
+      },
+      {
+        "title": "2️⃣ Linking Containers Together (Legacy Method)",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">To link containers during <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run</code>:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run --name container1 --link container2:alias_name -d myapp-image\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Inside <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">container1</code>, you can access <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">container2</code> by the hostname <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">alias_name</code>.</p>\n</li>\n</ul>"
+      },
+      {
+        "title": "3️⃣ Docker Networks (Preferred Method)",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Create a Docker network:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker network create myapp-network\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Run containers on the same network:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run --network myapp-network --name backend -d backend-image\ndocker run --network myapp-network --name frontend -d frontend-image\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Containers can communicate using container names:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">curl http://backend:8080\n</code></pre>\n</li>\n</ul>"
+      },
+      {
+        "title": "4️⃣ Bridge vs Host Network Modes",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Bridge Mode (default): Isolated networking, port mappings required.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Host Mode: Directly uses the host's network stack. Run with:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run --network host -d myapp-image\n</code></pre>\n</li>\n</ul>"
       }
     ]
   },
   {
-    "id": "theology-103-week-4",
-    "title": "Theology 103",
-    "description": "week 4 of Theology 103 course",
-    "date": "1644220801000",
+    "id": "risc-v_linker_script_notes",
+    "title": "RISC-V Linker Script Notes",
+    "description": "Basic information on the linker script for Microchip Polarfire RISC-V linker script.",
+    "date": "May 7, 2025",
     "tags": [
-      "Theology",
-      "Christ",
-      "Sin",
-      "Angels",
-      "Demons"
+      "Technology",
+      "Embedded",
+      "Engineer"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "38",
-      "mins": "01",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "binary-code-img",
+      "name": "images/binary-code.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Week 4: Humans and Sin, Angels and Demons"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "These are the following learning that I was grateful to learn about this week: :listPlace(001)",
-          "I still have questions on the following: :listPlace(002)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Angels(both holy and evil) were created at the start of creation and the demons fell somewhere after the seven day creation and prior to the fall. They existed with a set number and 1/3 of them falling",
-              "The term “heaven” in scripture describes three different elevation levels above earth.",
-              "“Third heaven” normally known as paradise where God resides",
-              "“Second heaven” where the sun, moon, and stars reside",
-              "“First heaven” earth's atmosphere",
-              "Angels are ministering spirits this is presented in Heb. 1:14",
-              "“God of this world” is Satan and he has superior power, but not deity. This title comes by virtue not his position nor his nature. The reason behind the title is Satan's work in the garden that cause the fall, and he is behind all false religions",
-              "Satan's messages and activities are all built on deception and lies (1 Ki. 22:21-23)",
-              "God used Satan to deceive Israel's King Ahab to go into battle which led to Ahab's death",
-              "Satan and other demonic minions were most intensely engaged during Christ's earthly ministry",
-              "Satan operates as the unrivaled master of disguise who also mimics and imitates the holy things of God, but gives his cheap version, which lures people to himself",
-              "Satan wages an invisible spiritual war using deceitful and clever tactics",
-              "Satan's target is the human mind more importantly the Christian's mind as he plays mind games with them",
-              "Satan attempt to distort or deny the truth God's Word by sensualism, sensationalism, universalism, rationalism, existentialism, illusionism, ecumenism, humanism",
-              "The question that Satan asked Eve in the garden was not a research question, but rather a ridicule",
-              "Ex: You've got to be kidding, Eve. God didn't really say you can't eat from any tree in the garden, did he?",
-              "In the moment when Eve was deceived God's Word was no longer authoritative in her life now that she had an alternative"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "How can demons be pictured in today's age, such as in a homeless person who is talking to themselves, or can it be your average person?",
-              "If one is demon possessed what do we do as Christians?",
-              "Will the Antichrist be some type of leader like the king of Babylon in Isaiah 14?",
-              "What portion in man’s sinful action is Satan or demon deception; or just the man’s own sinfulness? (The Devil made me do it theology)"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "title": "Memory Configuration Overview",
+        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This memory map defines various memory regions and their attributes. Each region's <strong class=\"font-bold text-gray-900 dark:text-white\">origin</strong> address and <strong class=\"font-bold text-gray-900 dark:text-white\">length</strong> are specified. The map includes <strong class=\"font-bold text-gray-900 dark:text-white\">data memory</strong>, <strong class=\"font-bold text-gray-900 dark:text-white\">instruction memory</strong>, <strong class=\"font-bold text-gray-900 dark:text-white\">cacheable</strong> and <strong class=\"font-bold text-gray-900 dark:text-white\">non-cacheable</strong> sections, and regions specifically used for bootloading, initialization, and system startup.</p>"
+      },
+      {
+        "title": "Memory Sections Breakdown",
+        "htmlContent": "<ol class=\"list-decimal mb-4 space-y-2 pl-6\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">envm (rx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x20220100</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 128k - 0x100</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">This section holds the reset vector, starting from page 1 of the envm region. It is read-only (rx) for security and stability.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">dtim (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x01000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 7k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">DTIM (Data Tightly Coupled Memory), used for rapid memory access by the processor, is read-write-execute (rwx).</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">e51_itim (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x01800000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 28k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Instruction memory for the E51 processor. It's read-write-execute (rwx) for instructions and data.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">u54_x_itim (rwx) (for U54 cores 1 to 4)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x01808000 (U54_1)</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 28k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">The other U54 cores (2, 3, 4) have similar memory maps for their instruction regions.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Each U54 core has a dedicated 28k memory region to execute its own instructions.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">l2lim (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x08000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 256k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">L2 Cache Limit region, used for low-latency, fast data access for the CPU cores.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">scratchpad (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x0A000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 256k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">General-purpose scratchpad memory for storing temporary data during operations.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">switch_code_dtim (rx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x01001c00</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 1k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Used during the switching of the envm clock for executing necessary code when transitioning.</li>\n</ul>\n</li>\n</ol>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "DDR Memory Sections",
+        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">These sections define memory regions for accessing <strong class=\"font-bold text-gray-900 dark:text-white\">DDR RAM</strong>, with varying cache configurations and sizes:</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">ddr_cached_32bit (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x80000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 768M</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">32-bit cached DDR memory for general-purpose use.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">ddr_non_cached_32bit (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0xC0000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 256M</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">32-bit non-cached DDR memory, slower but often used for peripherals or large buffer storage.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">ddr_wcb_32bit (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0xD0000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 256M</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">WCB (Write-Combining Buffer) used to optimize write operations.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">ddr_cached_38bit (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x1000000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 1024M</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">38-bit cached DDR memory, a larger address space for high-performance applications.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">ddr_non_cached_38bit (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x1400000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 0k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Reserved space, not currently in use.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">ddr_wcb_38bit (rwx)</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Origin: 0x1800000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Length: 0k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Reserved space for 38-bit WCB operations.</li>\n</ul>\n</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "Special Memory Regions",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">UNITITALISED_MEM</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Size: 16B</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">A small amount of uninitialized memory, used to store information retrieved from the bootloader on start-up.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">HEAP_SIZE</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Size: 0k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Needs to be calculated based on the application requirements for dynamic memory allocation.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">STACK_SIZE_U54_APPLICATION</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Size: 8k</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Stack size allocated for the U54 application (single hart).</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">SECTION_START_ADDRESS</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Address: 0x80000000</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">This is the reset address for the system, typically where the processor starts execution after power-up or reset.</li>\n</ul>\n</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "Memory Layout Notes",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">The memory sections are carefully mapped with specific regions for various tasks, such as booting (envm), execution (U54 cores), and data manipulation (DTIM, scratchpad, DDR).</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Cacheable and non-cacheable memory regions allow optimizing performance for certain types of data, such as frequently accessed variables or large, slow buffers.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Memory sizes are specific and should be adjusted based on the application’s needs, particularly the heap and stack sizes.</li>\n</ul>"
       }
     ]
   },
   {
-    "id": "theology-103-week-3",
-    "title": "Theology 103",
-    "description": "week 3 of Theology 103 course",
-    "date": "1643616001000",
+    "id": "quantum-random-number-generator",
+    "title": "Quantum Random Number Generator",
+    "description": "Notes on the topic of Quantum RNG",
+    "date": "April 30, 2025",
     "tags": [
-      "Theology",
-      "Christ",
-      "Sin"
+      "Technology",
+      "Quantum"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "00",
-      "mins": "02",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "physics-img",
+      "name": "images/physics-icon.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Week 3: Humans and Sin, Angels and Demons"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "Since the enlightenment, humans have thought of themselves as inherently \"good\".",
-          "These are the following learning that I was grateful to learn about this week: :listPlace(001)",
-          "I still have questions on the following: :listPlace(002)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Society presents sin as stemming from the personal environment they grew up in. So if you grew up in a rough environment you are likely to be a greater sinner than someone in a good environment.",
-              "From a biblical understanding sin is man usurping God's authority and acting as they are autonomist",
-              "Both Satan and Adam were unsatisfied with their perfect condition, and the rebelled and desired to be like God",
-              "There are three types of death: spiritual death(every unbeliever), physical death(everyone will face unless they are raptured), eternal death(final result for the unbeliever)",
-              "Original sin not only includes the first sin that Adam commit, but also it include the state of people who descended from Adam",
-              "Transmission of Adam sin seems to be best fit with the representative view. Representative headship asserts that the action of a representative results is seen as the action also for those united to him.",
-              "The action of our federal head lead to not only a sinful nature, but also our condemnation, so in the same the action by our new federal head Christ we receive life. (Rom. 5; 1 Cor. 15)",
-              "Total depravity does not conclude that man is not able to do good rather it teaches that the corruption of sin pollutes the person. Both body and spirit are corrupted by sin",
-              "Man is not relatively neutral in which they are able to accept or reject God. Man is a hater of God who can not understand the things of God",
-              "The \"sin that leads to death\" is a sin that lead to drastic chastisement",
-              "Mortal and Venial sins are antithetical to the bible because it supposes that there are some sins that will not lead to condemnation which in turn leads to a faulty salvation",
-              "The Roman Catholic idea of meritorious penance which is used for removal of mortal sin is an error and takes a blow at Christ atoning sacrifice for sin",
-              "Personal sin does not break the bond between them and Christ, but they do have a negative impact on communion with Christ",
-              "God created the world perfect, the reason the world is the way it is, is because man has to face the consequences for their sin",
-              "The truth gives eternal perspective to our temporal sufferings in a fallen world"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Is this denial from this British monk the reason why so many believe in free will?",
-              "In understanding the a-mil or post-mil position on the end times, how can it be that the man of lawlessness isn't literally or has already come and deceived?",
-              "Why was the woman promised the coming seed that would reverse the curse?",
-              "Why did God not destroy all man again as he did in the flood even though man remained sinful as we see even Noah was sinful?"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date 04/30/2025</em>*</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\"><em class=\"italic text-gray-800 dark:text-gray-100\">Reviewed On MM/DD/YYYY</em>*</p>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Quantum Random Number Generator(QRNG) uses quantum physics in-order to generate a random number. Reason for these notes is because software is unable to generate true random number. It can only generate pseudo random numbers. What this basically means is that we can alway figure out how that randomness occurred.</p>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">In QRNG, it uses the quantum properties of the electrons to truly generate a random number.</p>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Key Concepts & Takeaways</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Xener Diode: Is a diode that allows current to not only flow in the normal forward direction, but also the reverse direction when voltage exceed a certain value.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Depletion Zone: Region around the p-n junction of a diode.</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Notes</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Inside of these Xener diodes are two materials p-n. These are materials are filled with atoms. The n-material are positively charge and the p-material is negatively charged.</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">The charge is not strong when it is not be biased by a current.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Around the atoms on either material there is Valence electrons which are interacted with the electrons that are following from one material to another. When this happens a Valence electron can be knocked loose or stuck in the depletion zone.</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">When this happens the causes the flow of electrons not to be constant which leads to some randomness. The reason why is the interaction of the electrons are purely random.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Another case is quantum tunnel in which electrons pass through the depletion zone in when it shouldn't be able to cross because it doesn't have enough energy.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Classical Physics: When a ball attempts to roll up a hill with not enough energy it will stop and roll back.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Quantum Physics: When a electron with wave-like properties. Though it may not have enough energy to cross the barrier in my example a hill. There would still be a non-zero probability that it will appear on the other side of the hill.</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">As if it tunneled through the barrier(hill).</li>\n</ul>\n</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Mnemonics / Memory Aids</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">🎲 True vs Pseudo Randomness</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🔁 \"Pseudo = Predictable; Quantum = Chaos Unleashed.\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Pseudo-random numbers are generated by algorithms → can be recreated.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Quantum randomness comes from nature’s unpredictability at the electron level.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">⚡ Zener Diode Behavior</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🔀 \"Zener = Zen Flow Both Ways (if over-biased)\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Think of Zener as calm but flexible — it lets current flow backward when voltage exceeds a breakdown threshold.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Useful for creating instabilities in electron behavior = randomness source.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Depletion Zone</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🚧 \"Depletion = Dead Zone Between Doped Densities\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">This is the no-man’s land between p-type (positive) and n-type (negative) material.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Not many free carriers → critical for tunneling and randomness.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">⚛️ Valence Electrons and Tunneling</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🌌 \"Quantum = Chance, Not Certainty\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🎳 \"Ball on a hill = Classical\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🌀 \"Wave through a wall = Quantum\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Electrons behave like waves in quantum mechanics.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Even if they “shouldn’t” have enough energy, they can tunnel through a barrier.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Think of tunneling like cheating classical physics using probability.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Randomness from Zener Events</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">⚡ \"Zener Glitches = Quantum Twitches\"</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">As electrons jump around randomly due to quantum effects, voltage or current output fluctuates — perfect for entropy.</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">🔄 Electron Interactions = Randomness Source</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">🔃 \"Knock, Stick, or Tunnel — Every Interaction is a Roll of the Dice\"</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Whether an electron:</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Gets knocked loose</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Gets stuck</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Tunnels through</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">The result is inherently unpredictable → perfect for QRNGs.</p>\n</li>\n</ul>"
       }
     ]
   },
   {
-    "id": "theology-103-week-2",
-    "title": "Theology 103",
-    "description": "week 2 of Theology 103 course",
-    "date": "1643011201000",
+    "id": "embedded_terms_p1",
+    "title": "Embedded Systems Terms and Acronyms",
+    "description": "Notes of terms that are commonly used in embedded engineering",
+    "date": "April 28, 2025",
     "tags": [
-      "Theology",
-      "Christ",
-      "Sin"
+      "Technology",
+      "Embedded",
+      "Engineer"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "53",
-      "mins": "01",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "binary-code-img",
+      "name": "images/binary-code.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Week 3: Humans and Sin, Angels and Demons"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "Since the enlightenment, humans have thought of themselves as inherently \"good\".",
-          "These are the following learning that I was grateful to learn about this week in my study on humans and sin: :listPlace(001)",
-          "I still have questions on the following: :listPlace(002)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": ""
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Anthropology helps me with understanding who I am as a person. This answers the question of why we all are here.",
-              "Anthropology also helps with dealing with the time such as what Charles Spurgen dealt with evolution starting with Charles Darwin. This is where I am happy to learn about sudden creationism",
-              "I noticed while going through Genesis 1 were the terms created, made, and formed. This was eye opening because I sometimes can gloss over these terms while reading and miss God's magnificent glory in creation",
-              "Imago Dei is a unique difference that we humans possess that all other creatures and animals don't possess. We are his representation not in the divine sense, but in the sense of the Trinitrian nature how we live in relationship with others",
-              "Our conscience can get overridden by lies and errors which in turn misinforms the conscience",
-              "Scripture seems to support dichotomy and trichotomy where sometimes soul and spirit are interchangeable and other times they are not so interchangeable, but mean different things",
-              "Creationism argument when it comes to the origin of the soul fails to understand that Adam creation is a unique creation, so using him for the argument that both the soul and body were created at the same time is wrong.",
-              "Deut. 22:5 supports that God expects that said person to live according to the gender He granted them at birth",
-              "After the creatures were created God seemed to still create Adam a helper, so we see that the creatures and animals weren't suitable for him",
-              "Homosexual unions cannot be rightly seen as marriages because it goes against God meaning for marriage: :listPlace(003)",
-              "Ex. 21:22-25 presents a strong case for life starting in the womb because of the severity of the punishment if the child in the mother is harmed.",
-              "The soul/spirit lives in an intermediate state between death and bodily resurrection"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Can one human constitution affect another human constitution?",
-              "Similar to man initial command and go and fill the earth which they disobey which led to Gen. 11 in which they gathered in one place; is our command to go and make disciples of all nations can we be disobedient if we stick to trying to make disciples and our household and extended families?",
-              "When talking about the role of government, is it wrong to disobey when they constitute something as being wrong such as the latest Canadian bill even though they are in place to punish people who do wrong?"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "003",
-            "items": [
-              "He create man and seen that man needed a companion and this companion must fulfill His command to procreate"
-            ],
-            "list_type": "unordered"
-          }
-        ]
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date 04/28/2025</em>*</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\"><em class=\"italic text-gray-800 dark:text-gray-100\">Reviewed On MM/DD/YYYY</em>*</p>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Embedded systems development often uses many acronyms for buses, memory operations, communication protocols, and peripherals. Understanding these terms is critical for <strong class=\"font-bold text-gray-900 dark:text-white\">reading datasheets, designing firmware, and debugging systems</strong>.</p>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Key Concepts & Takeaways</h2>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">List of <strong class=\"font-bold text-gray-900 dark:text-white\">essential terms and acronyms</strong>:</p>\n<table class=\"table table-striped table-hover\">\n<thead>\n<tr>\n<th align=\"left\">Acronym</th>\n<th align=\"left\">Meaning</th>\n<th align=\"left\">Quick Explanation</th>\n</tr>\n</thead>\n<tbody><tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">ADC</strong></td>\n<td align=\"left\">Analog to Digital Converter</td>\n<td align=\"left\">Converts analog signals (e.g., sensor output) into digital values.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">AHB</strong></td>\n<td align=\"left\">Advanced High-performance Bus</td>\n<td align=\"left\">High-performance pipelined bus for fast memory/peripheral access.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">AMBA</strong></td>\n<td align=\"left\">Advanced Microcontroller Bus Architecture</td>\n<td align=\"left\">ARM standard for communication between CPU, memory, and peripherals.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">APB</strong></td>\n<td align=\"left\">Advanced Peripheral Bus</td>\n<td align=\"left\">Low-speed, low-power bus for simple peripherals (e.g., UART, Timer).</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">AXI</strong></td>\n<td align=\"left\">Advanced eXtensible Interface</td>\n<td align=\"left\">A high-performance bus protocol used inside SoCs (e.g., ARM-based designs).</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">AXI4</strong></td>\n<td align=\"left\">Advanced eXtensible Interface 4</td>\n<td align=\"left\">Latest AXI bus version; supports burst transactions and outstanding accesses.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">AXI4-Lite</strong></td>\n<td align=\"left\">AXI4 Lite Protocol</td>\n<td align=\"left\">Simplified version of AXI4 for simple register access.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">CSR</strong></td>\n<td align=\"left\">Control and Status Register</td>\n<td align=\"left\">Registers used to configure and monitor hardware modules.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">DAC</strong></td>\n<td align=\"left\">Digital to Analog Converter</td>\n<td align=\"left\">Converts digital values into analog output (e.g., for audio).</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">DMA</strong></td>\n<td align=\"left\">Direct Memory Access</td>\n<td align=\"left\">Hardware module that moves data between memory and peripherals without CPU intervention.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">DRAM</strong></td>\n<td align=\"left\">Dynamic Random-Access Memory</td>\n<td align=\"left\">Volatile memory with higher density but slower access than SRAM.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">ECC</strong></td>\n<td align=\"left\">Error Correction Code</td>\n<td align=\"left\">Technique for detecting and correcting bit-level errors in memory or data.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">FIFO</strong></td>\n<td align=\"left\">First In, First Out</td>\n<td align=\"left\">Buffer type where first data written is first data read out.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">FPGA</strong></td>\n<td align=\"left\">Field-Programmable Gate Array</td>\n<td align=\"left\">Reconfigurable hardware used alongside CPUs in embedded systems.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">GPIO</strong></td>\n<td align=\"left\">General-Purpose Input/Output</td>\n<td align=\"left\">Simple programmable pins for reading or driving logical signals.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">HLS</strong></td>\n<td align=\"left\">High-Level Synthesis</td>\n<td align=\"left\">Converts C/C++ code into FPGA logic automatically.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">I2C</strong></td>\n<td align=\"left\">Inter-Integrated Circuit</td>\n<td align=\"left\">Two-wire serial bus (SDA, SCL) for low-speed communications between ICs.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">ISR</strong></td>\n<td align=\"left\">Interrupt Service Routine</td>\n<td align=\"left\">Special function executed when an interrupt occurs.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">JTAG</strong></td>\n<td align=\"left\">Joint Test Action Group</td>\n<td align=\"left\">Interface for debugging and programming hardware at low level.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">MCU</strong></td>\n<td align=\"left\">Microcontroller Unit</td>\n<td align=\"left\">Small computer on a single chip, often used in embedded systems.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">MMU</strong></td>\n<td align=\"left\">Memory Management Unit</td>\n<td align=\"left\">Hardware that handles virtual memory and address translation.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">MPU</strong></td>\n<td align=\"left\">Memory Protection Unit</td>\n<td align=\"left\">Simplified MMU; controls access permissions without full virtual memory.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">NVM</strong></td>\n<td align=\"left\">Non-Volatile Memory</td>\n<td align=\"left\">Memory that retains data without power (e.g., Flash, EEPROM).</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">PLL</strong></td>\n<td align=\"left\">Phase-Locked Loop</td>\n<td align=\"left\">Circuit used to generate stable high-frequency clocks.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">PPI</strong></td>\n<td align=\"left\">Private Peripheral Interrupts</td>\n<td align=\"left\">Per-core interrupt sources used in multicore ARM processors.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">PS/PL</strong></td>\n<td align=\"left\">Processing System / Programmable Logic</td>\n<td align=\"left\">Terms used in Zynq SoCs: ARM cores (PS) + FPGA fabric (PL).</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">PWM</strong></td>\n<td align=\"left\">Pulse Width Modulation</td>\n<td align=\"left\">Modulates duty cycle of a digital signal for control (e.g., motors, LEDs).</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">QSPI</strong></td>\n<td align=\"left\">Quad Serial Peripheral Interface</td>\n<td align=\"left\">A high-bandwidth SPI protocol using 4 data lines, often used for flash memory.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">RTOS</strong></td>\n<td align=\"left\">Real-Time Operating System</td>\n<td align=\"left\">OS designed for deterministic task scheduling and handling deadlines.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">SoC</strong></td>\n<td align=\"left\">System on Chip</td>\n<td align=\"left\">Integrated circuit containing CPU, memory, and peripherals.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">SPI</strong></td>\n<td align=\"left\">Serial Peripheral Interface</td>\n<td align=\"left\">Synchronous serial communication with master/slave, using SCLK, MOSI, MISO, SS lines.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">SRAM</strong></td>\n<td align=\"left\">Static Random-Access Memory</td>\n<td align=\"left\">Fast, volatile memory typically used for caches.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">TCM</strong></td>\n<td align=\"left\">Tightly Coupled Memory</td>\n<td align=\"left\">Fast memory attached directly to the CPU, bypassing caches.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">TMR</strong></td>\n<td align=\"left\">Triple Modular Redundancy</td>\n<td align=\"left\">Fault-tolerant method duplicating critical circuits and using majority voting.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">TrustZone</strong></td>\n<td align=\"left\">ARM Security Extension</td>\n<td align=\"left\">Creates secure and non-secure hardware partitions for protected execution.</td>\n</tr>\n<tr>\n<td align=\"left\"><strong class=\"font-bold text-gray-900 dark:text-white\">UART</strong></td>\n<td align=\"left\">Universal Asynchronous Receiver/Transmitter</td>\n<td align=\"left\">Serial communication interface (TX/RX, no clock).</td>\n</tr>\n</tbody></table>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Mnemonics / Memory Aids</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">\"SPI = Spin (clock), UART = Unclocked (no clock)\"</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">\"DMA = Don't Move Anything (CPU), it’s automatic\"</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">\"AXI = Highway of data inside the chip\"</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">\"AXI for speed, APB for simple feeds.\"</strong> (AXI is high-speed, APB is low-speed)</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">\"TrustZone = Two Worlds, One Chip.\"</strong> (Secure & Non-Secure)</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">\"MMU = Virtualize; MPU = Protect.\"</strong></li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Connections to Other Topics</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">DMA, AXI, and FIFO</strong> are often combined in high-speed embedded designs (e.g., video processing).</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">RTOS and ISR</strong> management is crucial for real-time behavior in mission-critical systems.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">UART, SPI, and I2C</strong> are everywhere in MCU peripheral communication.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">AXI4, APB, AHB, and AMBA are often found <strong class=\"font-bold text-gray-900 dark:text-white\">inside SoCs like Zynq, i.MX, STM32MP1</strong>.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">TrustZone, MMU, MPU</strong> are critical in <strong class=\"font-bold text-gray-900 dark:text-white\">IoT security, automotive, and medical devices</strong>.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">TCM</strong> is critical in <strong class=\"font-bold text-gray-900 dark:text-white\">real-time systems</strong> where cache misses are unacceptable.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">FPGA + HLS</strong> strategies are important in <strong class=\"font-bold text-gray-900 dark:text-white\">custom hardware acceleration</strong> (AI/ML edge).</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Example Applications</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Using <strong class=\"font-bold text-gray-900 dark:text-white\">DMA</strong> to transfer ADC results to memory without CPU load.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Setting up <strong class=\"font-bold text-gray-900 dark:text-white\">SPI</strong> to read from an external flash chip.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Configuring <strong class=\"font-bold text-gray-900 dark:text-white\">GPIOs</strong> to control an LED or button input.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Configuring <strong class=\"font-bold text-gray-900 dark:text-white\">TrustZone</strong> to separate secure bootloader and non-secure application code.</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Using AXI4-Lite to map a custom hardware peripheral into ARM memory space (PL side).</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Implementing ECC in a critical memory region for a satellite system.</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Next Review Date</h2>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">📅 05/15/2025</p>"
       }
     ]
   },
   {
-    "id": "theology-102-week-6",
-    "title": "Theology 102",
-    "description": "week 6 of Theology 102 course",
-    "date": "1639369440000",
+    "id": "launch_money_hound",
+    "title": "Launch Money Hound Using Docker",
+    "description": "This is a note for me to recall how to launch my mound hound application for budget.",
+    "date": "April 27, 2025",
     "tags": [
-      "Theology",
-      "Christ",
-      "God"
+      "Template",
+      "Info",
+      "Beginner"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "45",
-      "mins": "01",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "image-title",
+      "name": "images/image.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "CHRISTOLOGY PT.2"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "These are the following learning that I was grateful to learn about this week: :listPlace(001)",
-          "I still have questions on the following: :listPlace(002)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Doxologies of the NT ascribe the same glory and honor to Christ as was the commonality to ascribe to God in the OT (1 Chr. 29:10-11;1 Pet. 4:11;2 Pet. 3:18)",
-              "Jesus instructs His disciples to pray to Him(Jh. 14:14;15:16;16:23-24) and we look at those passage we see that He describes Himself as our mediator between God and man",
-              "Christ in emptying Himself in Phil. 2 did not empty Himself of His deity, but rather emptying by addition, not subtraction, by becoming man",
-              "The Son of God fully possessed His divine nature, attributes, and prerogatives, he did not fully express them. They were veiled to be revealed by Him when he wanted",
-              "Christ surrender the glories from which He came, from being worshipped by saints and angels to mocked by men",
-              "Both Jesus's divine nature and human nature possesses their own will. (Jh. 17:24) His divine will; (Mat. 26:39) His human will",
-              "His limited knowledge such as in passage like Mark 13 is a result of His voluntary surrender of the independent use of His divine attributes",
-              "Jesus was baptized in order to fulfill the Father's will. He in turned identified Himself with sinners to ultimately bear their sins",
-              "Jesus veiling the truth in parables acted as both judgement and mercy for the hearers. Judgement because it kept them in darkness and mercy because He grant them to see the light of God",
-              "God prepared mankind for the atoning substitutionary sacrifice;of Christ by providing the instructions about sacrifice",
-              "The display of Jesus's glory is most often associated with His second advent, not His resurrection",
-              "Glory in the minds of the prophets and apostles were mostly associated with Christ's resurrection",
-              "The believers resurrection they share in the same glory",
-              "Every believer is ultimately accountable to him (1 Cor. 3:10-15) which motivates us to please God",
-              "At the fullness of time, God will gather together believers in the millennial kingdom",
-              "The real glory of eternity is when believers will reside in the presence of the Lord"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Is this denial from this British monk the reason why so many believe in free will?",
-              "In understanding the a-mil or post-mil position on the end times, how can it be that the man of lawlessness isn't literally or has already come and deceived?",
-              "Why was the woman promised the coming seed that would reverse the curse?",
-              "Why did God not destroy all man again as he did in the flood even though man remained sinful as we see even Noah was sinful?"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "title": "Topic: Launching Docker",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">MM/DD/YYYY</strong>  </li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Source:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">Book, Lecture, Meeting, etc.</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "Key Points",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Summarize main ideas concisely</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Use bullet points for clarity</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Highlight important concepts, definitions, or formulas</strong></li>\n</ul>"
+      },
+      {
+        "title": "Examples & Details",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include real-world applications or personal examples</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write down supporting facts or case studies</strong></li>\n</ul>"
+      },
+      {
+        "title": "Questions & Clarifications",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List any questions or doubts for further research</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Mark things you need to revisit</strong></li>\n</ul>"
+      },
+      {
+        "title": "Action Items / Next Steps",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">To-do list for applying what you learned</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Follow-up readings, exercises, or discussions</strong></li>\n</ul>"
+      },
+      {
+        "title": "Summary",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write a short recap in your own words</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include any mnemonics or memory aids</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This format ensures that your notes are clear, actionable, and easy to review. Let me know if you want a different structure!</p>"
       }
     ]
   },
   {
-    "id": "theology-102-week-5",
-    "title": "Theology 102",
-    "description": "week 5 of Theology 102 course",
-    "date": "1638636277590",
+    "id": "engineering_template",
+    "title": "Engineering Notes Template",
+    "description": "Template for taking engineering notes",
+    "date": "April 25, 2025",
     "tags": [
-      "Theology",
-      "Christ",
-      "God"
+      "Technology",
+      "Embedded",
+      "Engineer"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "27",
-      "mins": "01",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "binary-code-img",
+      "name": "images/binary-code.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "CHRISTOLOGY PT.2"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "These are the following learning that I was grateful to learn about this week: :listPlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Christ is eternally begotten from the Father, this is not speaking that Christ had a beginning because that goes against John 1:2-3",
-              "Begotten in an eternal sense is speaking of the relationship of the First and Second person of the Trinity",
-              "The Holy Spirit is not begotten, but rather procession",
-              "When talking about order in the Trinity we are not speaking of glory, majesty, or essence, but rather with relationship",
-              "The word Trinity is not found in found in Scripture but it is based on the biblical verbiage presented",
-              "The doctrine of the Trinity was formally articulated by the Councils of Nicea(AD 325) and Constantinople(AD 381), but weren't invented here",
-              "The term arised to combat heresies that were arising from Gnosticism and Monarchianism",
-              "Christ (Second person of the Trinity) was sent from the Father as a result of God's love for mankind (John 3:16)",
-              "Christ has always existed as the Son of God but became a child only at the moment of His miraculous conception",
-              "\"Son of God\" title was understood categorically by everyone as a title of deity",
-              "Theophany meaning appearance of God usually is referred to the old testament and are seen in passage like Gen. 16: 7-3 and has to be seen through the author rather than the character",
-              "As we read John 1:18 we see that \"no one has seen God...,he has made him known\" made known in greek ( ex geomai )",
-              "Jesus (the Son of God) made the Father known to mankind",
-              "We see Christ intervening in history when mankind rebelled along with establishing the Kingdom of God on earth",
-              "The point of the word \"God-breathed\" points to the origin of Scripture which is the divine breath of the Holy Spirit",
-              "The Son of God appears as the one speaking to the people both in the OT and NT",
-              "Christ is the theophany giving revelation by means of His personal presence",
-              "The Spirit plays a key role in the prophets' recording of the revelation they seen",
-              "He who is the Word of God speaks all thing into existence and pronounces judgement"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">MM/DD/YYYY</strong>  </li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Author:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">Your Name</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "Objective",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Clearly state the purpose of this work</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Define the problem you’re solving</strong></li>\n</ul>"
+      },
+      {
+        "title": "Specifications & Requirements",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List key design constraints, inputs, and outputs</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include relevant standards, tolerances, and dependencies</strong></li>\n</ul>"
+      },
+      {
+        "title": "Design & Implementation Notes",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Sketch or diagram if applicable</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List design choices and rationale</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Document hardware/software versions</strong></li>\n</ul>"
+      },
+      {
+        "title": "Calculations & Formulas",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write down equations used</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Show step-by-step problem-solving if needed</strong></li>\n</ul>"
+      },
+      {
+        "title": "Test Procedures & Results",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Test Setup:</strong> <strong class=\"font-bold text-gray-900 dark:text-white\">Equipment, environment, configurations</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Observations:</strong> <strong class=\"font-bold text-gray-900 dark:text-white\">Measurements, anomalies, expected vs. actual results</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Screenshots/Logs:</strong> <strong class=\"font-bold text-gray-900 dark:text-white\">Include logs or output snippets</strong></li>\n</ul>"
+      },
+      {
+        "title": "Troubleshooting & Debugging",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Issues Encountered:</strong> <strong class=\"font-bold text-gray-900 dark:text-white\">Description of problems</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Root Cause Analysis:</strong> <strong class=\"font-bold text-gray-900 dark:text-white\">What was wrong?</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Fixes & Workarounds:</strong> <strong class=\"font-bold text-gray-900 dark:text-white\">Steps taken to resolve issues</strong></li>\n</ul>"
+      },
+      {
+        "title": "Next Steps / Action Items",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List pending tasks, improvements, or follow-up actions</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Assign responsibility if applicable</strong></li>\n</ul>"
+      },
+      {
+        "title": "References & Resources",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Links to datasheets, documentation, research papers</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Mentions of past work, lessons learned</strong></li>\n</ul>"
       }
     ]
   },
   {
-    "id": "theology-102-week-4",
-    "title": "Theology 102",
-    "description": "week 4 of Theology 102 course",
-    "date": "1637969188145",
+    "id": "sample",
+    "title": "Sample Note or Blog",
+    "description": "Here's a simple description",
+    "date": "April 25, 2025",
     "tags": [
-      "Theology",
-      "Trinity",
-      "God"
+      "Technology",
+      "Embedded",
+      "Engineer"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "20",
-      "mins": "01",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "binary-code-img",
+      "name": "images/binary-code.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "The Trinity"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "These are the following learning that I was grateful to learn about this week: :listPlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "The trinity is a doctrine stating that God is absolutely and eternally one essence subsisting in three distinct and ordered persons without any division or replication",
-              "The trinity is defined using negative statements which is known as apophatic theology",
-              "Division and replication both results in three gods which the Trinity is not stating in their definition :listPlace(002)",
-              "Modes of subsistence reveals the personal properties that distinguish each member of the Trinity :listPlace(003)",
-              "These relationships establish a definite order within the Trinity, so with respect to relationship ONLY not essence or glory. (1. Father, 2. Son, 3. Holy Spirit)",
-              "Psalm 45:6-7 refers to the Messiah as \"God\" and is enthroned, having been anointed by \"God\"",
-              "New Testament writer identify that Jesus is the Lord that the psalmist is speaking of in Psalm 110:1 :listPlace(004)",
-              "The word one in the Hebrew \"ekhad\" affirms God's unity while also allowing for plurality. Gen 2:24 is a example \"one\" flesh even though there is two people",
-              "OT presents the angel of Yahweh as Yahweh and also distinct from Yahweh :listPlace(005)",
-              "Scripture presents a emphasis on the number three such as the seraphim in (Isa. 6:3)",
-              "(Isa. 48:12-16) This passage from the Old Testament presents at least two distinct entities",
-              "The early church saw the threefold blessing as an indication as three persons of the Trinity",
-              "During the great commission Jesus told His disciples to baptize in the \"name\" which is singular :listPlace(006)"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "This will lead into many heresies hence the reasons of the cults of old and today",
-              "Each person of the trinity possess equally the full and divine essence of God"
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "003",
-            "items": [
-              "Father, Son, and Holy Spirit"
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "004",
-            "items": [
-              "The Son is both elohim and adonai",
-              "The Shema in Deuteronomy 6:7 allows for a plurality in God"
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "005",
-            "items": [
-              "(Ex. 23:20-23) Yahweh sent the angel of Yahweh",
-              "Wisdom may be depicted as a distinct entity, but NT writers speak of Christ as \"the wisdom of God\""
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "006",
-            "items": [
-              "cf. Mat. 28:19"
-            ],
-            "list_type": "unordered"
-          }
-        ]
+        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Lorem ipsum dolor sit amet, consectetur <strong class=\"font-bold text-gray-900 dark:text-white\">adipiscing</strong> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <em class=\"italic text-gray-800 dark:text-gray-100\">aliquip</em> ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Rom. 1:17 and another to (John 3:16)</p>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">List Section</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Item 1</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Item 2<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Sub-item A</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Sub-item B</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Item 3</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Links Section</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Example Link</em>*(<a href=\"https://example.com\" class=\"text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200\">https://example.com</a>)</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Image Section</h2>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">!<strong class=\"font-bold text-gray-900 dark:text-white\">Alt Text 1</strong>(<a href=\"https://example.com/image1.png\" class=\"text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200\">https://example.com/image1.png</a>)\n!<strong class=\"font-bold text-gray-900 dark:text-white\">Alt Text 2</strong>(<a href=\"https://example.com/image2.jpg\" class=\"text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200\">https://example.com/image2.jpg</a>)</p>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Blockquote Section</h2>\n<blockquote class=\"border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This is a blockquote.</p>\n</blockquote>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Code Block Section</h2>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-python\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">def hello_world():\n    print(\"Hello, World!\")\n</code></pre>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Table Section</h2>\n<table class=\"table table-striped table-hover\">\n<thead>\n<tr>\n<th>Header 1</th>\n<th>Header 2</th>\n<th>Header 3</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Cell 1</td>\n<td>Cell 2</td>\n<td>Cell 3</td>\n</tr>\n<tr>\n<td>Cell 4</td>\n<td>Cell 5</td>\n<td>Cell 6</td>\n</tr>\n<tr>\n<td>Cell 7</td>\n<td>Cell 8</td>\n<td>Cell 9</td>\n</tr>\n</tbody></table>"
       }
     ]
   },
   {
-    "id": "theology-102-week-3",
-    "title": "Theology 102",
-    "description": "week 3 of Theology 102 course",
-    "date": "1637398837075",
+    "id": "recall_notes_template",
+    "title": "Recall Notes Template",
+    "description": "Template for taking engineering notes",
+    "date": "April 17, 2025",
     "tags": [
-      "Theology",
-      "Trinity",
-      "God"
+      "Technology",
+      "Embedded",
+      "Engineer"
     ],
-    "image": {
-      "name": "images/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "time": {
-      "secs": "30",
-      "mins": "01",
-      "hours": "00"
-    },
     "type": "note",
+    "image": {
+      "alt": "binary-code-img",
+      "name": "images/binary-code.png"
+    },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Attributes of God"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "Here's what I learned this week studying the attributes/perfections of God: :listPlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "biblical-doctrine",
-            "caption": "MacArthur/Mayhue Biblical Doctrine",
-            "link": "https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "God is not dependent on no one or nothing. This is a common thought that we as human love to think that we can give something to God or God is somehow wouldn't be God if we don't choose Him for our salvation",
-              "God's immutability, this is something that I would've used to an Arminian brother or sister in understanding that since God doesn't change and He has decreed His elect from the being. I thought this would've been a good argument, but reading this section understanding that open theist and their disbelief in God's immutability.",
-              "Immutability does not mean that God is static, nor that He doesn't act distinctly in time or possess true affections",
-              "Anthropopathic language is God's figurative expression of how He explains His change in actions towards a person",
-              "His infinitude with regard to time is eternity, and His infinitude with regard to space is omnipresence",
-              "God can experience time, but he is not controlled, confined, or condition by time",
-              "God upholds the created order by being in every point of space",
-              "God does know what would have happened if circumstances would have been different, but they aren't possible because they are not apart of God's plan",
-              "God's knowledge is perfect He is never learning, so He does not have to look into the future to see how would accept His salvation",
-              "God's knowledge has two aspects: Natural knowledge and free knowledge: :listPlace(002)",
-              "His natural knowledge is how He reveals himself to creation",
-              "We as creation can know God through His free knowledge because He decrees of how He would reveal Himself to creation",
-              "God's foreknowledge is not dependent on foresight of what humans would do",
-              "Scripture reveals God's power (Eph. 3:20)",
-              "God's power is that he has a theoretical absolute power to do more than what He actually does but not inconsistent with His essence",
-              "Doctrine of divine perfection is the doctrine of divine blessedness"
-            ],
-            "list_type": "ordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Natural Knowledge: is His self-conscious knowledge of Himself",
-              "Free Knowledge: all things that become known in time by His sovereign will, all things that do not become known in time, and how He is manifested and not manifested by all things outside of Him"
-            ],
-            "list_type": "unordered"
-          }
-        ]
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">MM/DD/YYYY</strong>  </li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Reviewed On:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">Dates when you revisited these notes</strong></li>\n</ul>"
+      },
+      {
+        "title": "Summary (Quick Recall)",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">A 2-3 sentence summary in your own words</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Use bold or highlight key points</strong></li>\n</ul>"
+      },
+      {
+        "title": "Key Concepts & Takeaways",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List important ideas, definitions, or formulas</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Use bullet points or numbering for clarity</strong></li>\n</ul>"
+      },
+      {
+        "title": "Mnemonics / Memory Aids",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Acronyms, visualization techniques, or analogies</strong></li>\n</ul>"
+      },
+      {
+        "title": "Connections to Other Topics",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">How does this relate to past knowledge or projects?</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Reference other notes if applicable</strong></li>\n</ul>"
+      },
+      {
+        "title": "Example Applications",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Real-world examples or personal experiences</strong></li>\n</ul>"
+      },
+      {
+        "title": "Action Items for Mastery",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Practice problems, hands-on exercises, or discussions</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Questions to explore further</strong></li>\n</ul>"
+      },
+      {
+        "title": "Next Review Date",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Set a date to revisit and reinforce learning</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This format helps with <strong class=\"font-bold text-gray-900 dark:text-white\">spaced repetition</strong>, ensuring the information stays fresh in your mind. You can set reminders to review notes at increasing intervals (e.g., 1 week, 1 month, 3 months).</p>"
+      }
+    ]
+  },
+  {
+    "id": "basic_template",
+    "title": "Basic Notes Template",
+    "description": "Template for taking basic notes",
+    "date": "April 1, 2025",
+    "tags": [
+      "Template",
+      "Info",
+      "Beginner"
+    ],
+    "type": "note",
+    "image": {
+      "alt": "image-title",
+      "name": "images/image.png"
+    },
+    "content": [
+      {
+        "title": "Topic: [Main Subject]",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">MM/DD/YYYY</strong>  </li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Source:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">Book, Lecture, Meeting, etc.</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+      },
+      {
+        "title": "Key Points",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Summarize main ideas concisely</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Use bullet points for clarity</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Highlight important concepts, definitions, or formulas</strong></li>\n</ul>"
+      },
+      {
+        "title": "Examples & Details",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include real-world applications or personal examples</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write down supporting facts or case studies</strong></li>\n</ul>"
+      },
+      {
+        "title": "Questions & Clarifications",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List any questions or doubts for further research</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Mark things you need to revisit</strong></li>\n</ul>"
+      },
+      {
+        "title": "Action Items / Next Steps",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">To-do list for applying what you learned</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Follow-up readings, exercises, or discussions</strong></li>\n</ul>"
+      },
+      {
+        "title": "Summary",
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write a short recap in your own words</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include any mnemonics or memory aids</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This format ensures that your notes are clear, actionable, and easy to review. Let me know if you want a different structure!</p>"
       }
     ]
   }
