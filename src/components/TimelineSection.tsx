@@ -12,30 +12,82 @@ export default function TimelineSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-
-    // Timeline dots animation
-    gsap.fromTo(".timeline-dot",
-      { 
-        scale: 0,
-        opacity: 0
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.3,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+    const ctx = gsap.context(() => {
+      // Timeline dots animation with better consistency
+      gsap.fromTo(".timeline-dot",
+        { 
+          scale: 0,
+          opacity: 0,
+          y: 20
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 85%",
+            end: "bottom 15%",
+            toggleActions: "play none none reverse",
+            markers: false
+          }
         }
-      }
-    );
+      );
+
+      // Content cards animation
+      gsap.fromTo(".timeline-item",
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+            markers: false
+          }
+        }
+      );
+
+      // Company headers animation
+      gsap.fromTo(".company-header",
+        {
+          opacity: 0,
+          y: -20
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 85%",
+            end: "bottom 15%",
+            toggleActions: "play none none reverse",
+            markers: false
+          }
+        }
+      );
+
+    }, timelineRef);
 
     // Cleanup function
     return () => {
+      ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
@@ -71,7 +123,7 @@ export default function TimelineSection() {
           {Object.entries(groupedExperience).map(([company, experiences]) => (
             <div key={company} className="mb-16">
               {/* Company Header */}
-              <div className="text-center mb-8">
+              <div className="company-header text-center mb-8">
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {company}
                 </h4>
