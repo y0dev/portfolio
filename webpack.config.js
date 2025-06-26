@@ -55,7 +55,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			title: 'Devontae Reid',
 			filename: 'about-me.html',
-			template: './src/templates/about-me-template.html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
 			'meta': {
 				'og:title': 'Devontae Reid',
 				'twitter:title': 'Devontae Reid',
@@ -76,7 +77,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			title: 'Projects | Devontae Reid',
 			filename: 'projects.html',
-			template: './src/templates/projects-template.html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
 			'meta': {
 				'og:title': 'Projects | Devontae Reid',
 				'twitter:title': 'Projects | Devontae Reid',
@@ -97,7 +99,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			title: 'Articles & Notes | Devontae Reid',
 			filename: 'articles.html',
-			template: './src/templates/articles-template.html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
 			'meta': {
 				'og:title': 'Articles & Notes | Devontae Reid',
 				'twitter:title': 'Articles & Notes | Devontae Reid',
@@ -110,6 +113,50 @@ module.exports = {
 				'twitter:site': '@_yodev_',
 
 				'og:url': 'https://www.devontaereid.com/articles',
+				'og:type': 'website'
+				// 'theme-color': '#4285f4'
+				// Will generate: <meta name="theme-color" content="#4285f4">
+			}
+		}),
+		new HtmlWebpackPlugin({
+			title: 'Resources | Devontae Reid',
+			filename: 'resources.html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
+			'meta': {
+				'og:title': 'Resources | Devontae Reid',
+				'twitter:title': 'Resources | Devontae Reid',
+
+				'description': 'A curated collection of books, tools, and developer resources',
+				'og:description': 'A curated collection of books, tools, and developer resources',
+				'twitter:description': 'A curated collection of books, tools, and developer resources',
+
+				'twitter:card': 'summary_large_image',
+				'twitter:site': '@_yodev_',
+
+				'og:url': 'https://www.devontaereid.com/resources',
+				'og:type': 'website'
+				// 'theme-color': '#4285f4'
+				// Will generate: <meta name="theme-color" content="#4285f4">
+			}
+		}),
+		new HtmlWebpackPlugin({
+			title: 'Books | Devontae Reid',
+			filename: 'resources/books.html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
+			'meta': {
+				'og:title': 'Books | Devontae Reid',
+				'twitter:title': 'Books | Devontae Reid',
+
+				'description': 'A collection of books that have influenced my thinking, from programming to theology',
+				'og:description': 'A collection of books that have influenced my thinking, from programming to theology',
+				'twitter:description': 'A collection of books that have influenced my thinking, from programming to theology',
+
+				'twitter:card': 'summary_large_image',
+				'twitter:site': '@_yodev_',
+
+				'og:url': 'https://www.devontaereid.com/resources/books',
 				'og:type': 'website'
 				// 'theme-color': '#4285f4'
 				// Will generate: <meta name="theme-color" content="#4285f4">

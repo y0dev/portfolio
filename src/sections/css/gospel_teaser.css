@@ -1,0 +1,689 @@
+/* Gospel Teaser Section */
+.gospel-teaser-section {
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.gospel-teaser-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    pointer-events: none;
+}
+
+.gospel-teaser-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.gospel-teaser-container {
+    max-width: 64rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Header */
+.gospel-teaser-header {
+    margin-bottom: 2rem;
+}
+
+.gospel-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.gospel-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #2563eb;
+}
+
+.gospel-teaser-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin-bottom: 1rem;
+}
+
+.gospel-teaser-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-subheading);
+    margin-bottom: 1.5rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Content */
+.gospel-teaser-content {
+    background-color: var(--color-background);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.gospel-teaser-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.gospel-teaser-main {
+    flex: 1;
+}
+
+.gospel-teaser-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin-bottom: 1rem;
+}
+
+.gospel-teaser-text {
+    color: var(--color-body);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.gospel-teaser-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Highlights */
+.gospel-teaser-highlights {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.gospel-highlights-title {
+    font-weight: 700;
+    color: var(--color-heading);
+    margin-bottom: 0.75rem;
+}
+
+.gospel-highlights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-body);
+}
+
+.gospel-highlight-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.highlight-bullet {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #3b82f6;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* Actions */
+.gospel-teaser-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.gospel-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.gospel-btn:hover {
+    transform: translateY(-1px);
+}
+
+.gospel-btn-primary {
+    background-color: #2563eb;
+    color: white;
+}
+
+.gospel-btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.gospel-btn-secondary {
+    border: 1px solid var(--color-divider);
+    color: var(--color-body);
+}
+
+.gospel-btn-secondary:hover {
+    background-color: var(--color-article-hover);
+}
+
+.btn-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+    .gospel-teaser-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .gospel-teaser-content {
+        padding: 2rem;
+    }
+    
+    .gospel-teaser-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .gospel-teaser-actions {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gospel-teaser-section {
+        padding: 4rem 2rem;
+    }
+}
+
+/* Dark Mode Adjustments */
+html.dark-mode .gospel-teaser-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+}
+
+html.dark-mode .gospel-teaser-section::before {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+}
+
+html.dark-mode .gospel-icon-wrapper {
+    background-color: rgba(59, 130, 246, 0.3);
+}
+
+html.dark-mode .gospel-icon {
+    color: #60a5fa;
+}
+
+html.dark-mode .gospel-teaser-highlights {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+}
+
+html.dark-mode .gospel-btn-secondary {
+    border-color: var(--color-divider);
+    color: var(--color-body);
+}
+
+html.dark-mode .gospel-btn-secondary:hover {
+    background-color: var(--color-article-hover);
+}
+
+/* Custom animations for the gospel teaser */
+.gospel-teaser-content {
+    transition: all 0.3s ease;
+}
+
+.gospel-teaser-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Button hover effects */
+.gospel-btn {
+    transition: all 0.2s ease;
+}
+
+.gospel-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gospel-teaser-section {
+        padding: 2rem 1rem;
+    }
+    
+    .gospel-teaser-content {
+        padding: 1.5rem;
+    }
+    
+    .gospel-teaser-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Modern Gospel Teaser Section Styles */
+.gospel-teaser-modern {
+  position: relative;
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Background decorations */
+.gospel-bg-decor {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.gospel-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3rem);
+}
+
+.bg-circle-1 {
+  top: 2.5rem;
+  left: 2.5rem;
+  width: 10rem;
+  height: 10rem;
+  background: #60a5fa;
+}
+
+.bg-circle-2 {
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: 15rem;
+  height: 15rem;
+  background: #a78bfa;
+}
+
+.bg-circle-3 {
+  top: 50%;
+  left: 33%;
+  width: 8rem;
+  height: 8rem;
+  background: #818cf8;
+  transform: translateY(-50%);
+}
+
+.bg-circle-4 {
+  bottom: 33%;
+  right: 25%;
+  width: 12rem;
+  height: 12rem;
+  background: #93c5fd;
+}
+
+/* Animated background elements */
+.gospel-bg-anim {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gospel-ping {
+  position: absolute;
+  border-radius: 50%;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.ping-1 {
+  top: 5rem;
+  left: 5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #3b82f6;
+}
+
+.ping-2 {
+  top: 10rem;
+  right: 8rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #8b5cf6;
+  animation-delay: 1s;
+}
+
+.ping-3 {
+  bottom: 8rem;
+  left: 25%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #6366f1;
+  animation-delay: 2s;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Container and content */
+.gospel-container {
+  position: relative;
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gospel-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Title styles */
+.gospel-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gospel-title-sub {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+/* Cards section */
+.gospel-cards {
+  margin-bottom: 2.5rem;
+}
+
+.gospel-text {
+  margin-bottom: 1.5rem;
+}
+
+.gospel-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.5s ease;
+  transform: translateY(0);
+}
+
+.gospel-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.25rem);
+}
+
+.gospel-card-1 {
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.gospel-card-2 {
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.gospel-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.gospel-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.gospel-card-desc {
+  font-size: 1.125rem;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.floating-emoji {
+  font-size: 1.875rem;
+  animation: float-emoji 3s ease-in-out infinite;
+}
+
+@keyframes float-emoji {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.5rem); }
+}
+
+/* Highlight section */
+.gospel-highlight {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border-left: 4px solid #3b82f6;
+  margin-bottom: 2rem;
+}
+
+.gospel-highlight-text {
+  font-size: 1.125rem;
+  color: #374151;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Button styles */
+.gospel-button {
+  margin-bottom: 2rem;
+}
+
+.gospel-discover-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  text-decoration: none;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.gospel-discover-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.25rem);
+  border-color: #60a5fa;
+}
+
+.btn-text {
+  margin-right: 0.75rem;
+}
+
+.btn-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.gospel-discover-btn:hover .btn-icon {
+  transform: translateX(0.25rem);
+}
+
+/* Status section */
+.gospel-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #6b7280;
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-dot-delay {
+  animation-delay: 1s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-text {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Decorative borders */
+.gospel-border-circle {
+  position: absolute;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+}
+
+.border-circle-1 {
+  top: 2.5rem;
+  left: 2.5rem;
+  width: 5rem;
+  height: 5rem;
+}
+
+.border-circle-2 {
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.border-circle-3 {
+  top: 50%;
+  left: 1.25rem;
+  width: 3rem;
+  height: 3rem;
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-50%);
+}
+
+.border-circle-4 {
+  bottom: 33%;
+  right: 1.25rem;
+  width: 2rem;
+  height: 2rem;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Dark mode support */
+html.dark-mode .gospel-teaser-modern {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+}
+
+html.dark-mode .gospel-title-sub {
+  color: #d1d5db;
+}
+
+html.dark-mode .gospel-card {
+  background: rgba(31, 41, 55, 0.8);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+html.dark-mode .gospel-card-title {
+  color: #f9fafb;
+}
+
+html.dark-mode .gospel-card-desc {
+  color: #d1d5db;
+}
+
+html.dark-mode .gospel-highlight {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+}
+
+html.dark-mode .gospel-highlight-text {
+  color: #d1d5db;
+}
+
+html.dark-mode .gospel-status {
+  color: #9ca3af;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .gospel-content {
+    padding: 0 1rem;
+  }
+  
+  .gospel-card {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .gospel-teaser-modern {
+    padding: 3rem 0.5rem;
+  }
+  
+  .gospel-title {
+    font-size: 2rem;
+  }
+  
+  .gospel-title-sub {
+    font-size: 1.25rem;
+  }
+  
+  .gospel-card {
+    padding: 1rem;
+  }
+  
+  .gospel-card-title {
+    font-size: 1.125rem;
+  }
+  
+  .gospel-card-desc {
+    font-size: 1rem;
+  }
+  
+  .gospel-discover-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+} 

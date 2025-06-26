@@ -1,31 +1,75 @@
 'use strict';
 
-// import React from 'react';
+// Entry point for rendering different pages with React
+
+// React 18+ way to render components
 import { createRoot } from 'react-dom/client';
+
+// Global styles for the application
 import './index.css';
-// import {
-//   BrowserRouter as Router,
-//   useRoutes
-// } from "react-router-dom";
-// import NavBar from './components/navbar';
-// import Footer from './components/footer';
-import ProjectsPage from './pages/projects';
-// // import HomePage from './pages/home';
-import AboutMePage from './pages/aboutme';
-import ArticlesPage from './pages/articles';
-// import ViewArticlePage from './pages/viewarticle';
-// import reportWebVitals from './reportWebVitals';
+// Additional utility CSS (Tailwind, custom classes, etc.)
 import './sections/css/utilities.css';
 
+// Layout component that wraps all pages with a common structure (e.g., header, footer)
+import Layout from './components/Layout';
 
-const aboutMeCont = document.getElementById('about-me-root');
-const aboutMeRoot = createRoot(aboutMeCont);
-aboutMeRoot.render(<AboutMePage />);
+// Individual pages to be rendered
+import ProjectsPage from './pages/projects';
+import AboutMePage from './pages/aboutme';
+import ArticlesPage from './pages/articles';
+import ResourcesPage from './pages/resources';
+import BooksPage from './pages/books';
+import GospelPage from './pages/gospel';
 
-const projectCont = document.getElementById('projects-root');
-const projectRoot = createRoot(projectCont);
-projectRoot.render(<ProjectsPage />);
+// ----------------------------------------------
+// Render each page conditionally based on the URL path
+// This allows using the same JS bundle across multiple static HTML files (like a multi-page app)
+// ----------------------------------------------
 
-const articleCont = document.getElementById('articles-root');
-const articleRoot = createRoot(articleCont);
-articleRoot.render(<ArticlesPage />);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    const root = createRoot(rootElement);
+    
+    // Get the current pathname to determine which page to render
+    const pathname = window.location.pathname;
+    
+    // Render the appropriate page based on the URL
+    if (pathname.includes('/gospel')) {
+        root.render(
+            <Layout>
+                <GospelPage />
+            </Layout>
+        );
+    } else if (pathname.includes('/projects')) {
+        root.render(
+            <Layout>
+                <ProjectsPage />
+            </Layout>
+        );
+    } else if (pathname.includes('/articles')) {
+        root.render(
+            <Layout>
+                <ArticlesPage />
+            </Layout>
+        );
+    } else if (pathname.includes('/resources/books')) {
+        root.render(
+            <Layout>
+                <BooksPage />
+            </Layout>
+        );
+    } else if (pathname.includes('/resources')) {
+        root.render(
+            <Layout>
+                <ResourcesPage />
+            </Layout>
+        );
+    } else {
+        // Default to About Me page (home page)
+        root.render(
+            <Layout>
+                <AboutMePage />
+            </Layout>
+        );
+    }
+}

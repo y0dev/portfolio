@@ -1,0 +1,459 @@
+/* Resources Page Styles */
+.resources-page {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  padding-top: 80px; /* Account for fixed navbar */
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(59, 130, 246, 0.1));
+  text-align: center;
+}
+
+.hero-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-subheading);
+  max-width: 48rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Resource Sections */
+.resource-section {
+  padding: 5rem 1rem;
+}
+
+.resource-section:nth-child(even) {
+  background-color: var(--color-background);
+}
+
+.resource-section:nth-child(odd) {
+  background-color: var(--color-highlight-container-bg);
+}
+
+.resource-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Section Headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  font-size: 1.125rem;
+  color: var(--color-subheading);
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.section-link {
+  color: #3b82f6;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.section-link:hover {
+  color: #2563eb;
+}
+
+/* Resource Grid */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Resource Cards */
+.resource-card {
+  background-color: var(--color-background);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-divider);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.resource-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.resource-link {
+  display: block;
+}
+
+.resource-content {
+  text-align: center;
+}
+
+.resource-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.resource-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-heading);
+  margin-bottom: 0.5rem;
+}
+
+.resource-category {
+  font-size: 0.875rem;
+  color: #3b82f6;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.resource-description {
+  font-size: 0.875rem;
+  color: var(--color-body);
+  line-height: 1.5;
+}
+
+/* Books Section */
+.bookshelf-section {
+  background-color: var(--color-background);
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.book-card {
+  background-color: var(--color-background);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-divider);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.book-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.book-cover {
+  font-size: 3rem;
+  margin-right: 1rem;
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  margin-bottom: 0.25rem;
+}
+
+.book-author {
+  color: #3b82f6;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.book-description {
+  color: var(--color-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.book-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-read {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #047857;
+}
+
+.status-reading {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
+}
+
+.status-to-read {
+  background-color: rgba(107, 114, 128, 0.1);
+  color: #374151;
+}
+
+.book-rating {
+  color: #f59e0b;
+  font-size: 0.875rem;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
+  text-align: center;
+}
+
+.cta-container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  margin-bottom: 1rem;
+}
+
+.cta-description {
+  font-size: 1.125rem;
+  color: var(--color-subheading);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.cta-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-description {
+    font-size: 1rem;
+  }
+  
+  .resource-section {
+    padding: 3rem 1rem;
+  }
+  
+  .resource-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .books-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+  }
+  
+  .cta-description {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .resource-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .resource-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+@media (min-width: 1025px) {
+  .resource-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
+/* Dark Mode Adjustments */
+html.dark-mode .resource-section:nth-child(even) {
+  background-color: var(--color-background);
+}
+
+html.dark-mode .resource-section:nth-child(odd) {
+  background-color: var(--color-highlight-container-bg);
+}
+
+html.dark-mode .resource-card,
+html.dark-mode .book-card {
+  background-color: var(--color-background);
+  border-color: var(--color-divider);
+}
+
+html.dark-mode .status-read {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+html.dark-mode .status-reading {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+html.dark-mode .status-to-read {
+  background-color: rgba(107, 114, 128, 0.2);
+  color: #9ca3af;
+}
+
+/* Animation for cards */
+.resource-card,
+.book-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation for grid items */
+.resource-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.resource-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.resource-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.resource-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.resource-grid > *:nth-child(5) { animation-delay: 0.5s; }
+.resource-grid > *:nth-child(6) { animation-delay: 0.6s; }
+
+.books-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.books-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.books-grid > *:nth-child(3) { animation-delay: 0.3s; }
+
+/* Focus states for accessibility */
+.resource-card:focus,
+.book-card:focus,
+.cta-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Hover effects */
+.resource-card:hover,
+.book-card:hover {
+  transform: translateY(-4px);
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+/* Loading state */
+.resources-page.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Print styles */
+@media print {
+  .resource-card,
+  .book-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .cta-section {
+    display: none;
+  }
+} 

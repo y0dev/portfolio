@@ -1,32 +1,52 @@
 [
   {
-      
-    "title": "Home Deal Finder",
-    "category": "Programming",
-    "content":
-      "Looking for homes and organizing them in an excel document hasn't become more easier with this browser extension. This tool allows you to visit Zillow, Redfin, and Trulia, and gather the information (Address, Selling Price, Rooms and Square Footage) to place into an excel sheet and have your way with the data of the home.",
-    "preview_links": {
-      
-    },
-    "image": {
-      "link":"/images/house.png",
-      "alt": "house-freepick"
-    },
-    "favorite": "Favorites"
+    "id": 1,
+    "title": "BitByBit",
+    "description": "A full-stack platform for learning embedded systems and low-level programming through structured lessons, quizzes, and code walkthroughs.",
+    "technologies": ["Next.js", "TypeScript", "MongoDB", "Express", "Tailwind CSS"],
+    "image": "📘",
+    "link": "https://bitbybit.dev",
+    "github": "https://github.com/y0dev/bitbybit",
+    "featured": true
   },
   {
+    "id": 2,
+    "title": "ESP Home Automation",
+    "description": "This ESPHome application manages a smart garage door opener with features like auto-closing, virtual locking, and real-time logging to a NAS server. It monitors door state through sensors, controls a relay for door operation, and logs events like door openings, closings, and errors. It also integrates with Home Assistant for remote management and supports secure Wi-Fi, OTA updates, and web-based monitoring.",
+    "technologies": [
+      "ESPHome",
+      "YAML",
+      "Home Assistant",
+      "MQTT",
+      "Wi-Fi",
+      "OTA Updates",
+      "Embedded Sensors",
+      "Relay Control",
+      "Web Interface"
+    ],
+    "image": "🏠",
+    "link": "",
+    "github": "",
+    "featured": false
+  },
+  {
+    "id": 3,
+    "title": "Home Deal Finder",
+    "description": "Looking for homes and organizing them in an excel document hasn't become more easier with this browser extension. This tool allows you to visit Zillow, Redfin, and Trulia, and gather the information (Address, Selling Price, Rooms and Square Footage) to place into an excel sheet and have your way with the data of the home.",
+    "technologies": ["JavaScript", "Browser Extensions", "DOM Parsing"],
+    "image": "🏠",
+    "link": "",
+    "github": "",
+    "featured": false
+  },
+  {
+    "id": 4,
     "title": "Dev's Hotel Registry",
-    "category": "Programming",
-    "content":
-      "A simple iOS project that was used to test Swift programming language at release in 2017",
-    "preview_links": 
-    {
-      "github": "https://github.com/y0dev/DevHotel"
-    },
-    "image": 
-    {
-      "link":"/images/hotel.png",
-      "alt": "landing"
-    }
+    "description": "A simple iOS project that was used to test Swift programming language at release in 2017.",
+    "technologies": ["Swift", "Xcode", "iOS"],
+    "image": "🏨",
+    "link": "",
+    "github": "https://github.com/y0dev/DevHotel",
+    "featured": false
   }
 ]

@@ -1,8 +1,5 @@
 import React from 'react';
 import './css/pagination.css';
-import backArrow from '../assets/images/arrow_left.png'
-import nextArrow from '../assets/images/arrow_right.png'
-
 
 const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) => {
   const pageNumbers = [];
@@ -11,21 +8,71 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) =>
    pageNumbers.push(i);
   }
 
+  // Show limited page numbers for better UX
+  const getVisiblePages = () => {
+    const delta = 2;
+    const range = [];
+    const rangeWithDots = [];
+
+    for (let i = Math.max(2, active - delta); i <= Math.min(totalPages - 1, active + delta); i++) {
+      range.push(i);
+    }
+
+    if (active - delta > 2) {
+      rangeWithDots.push(1, '...');
+    } else {
+      rangeWithDots.push(1);
+    }
+
+    rangeWithDots.push(...range);
+
+    if (active + delta < totalPages - 1) {
+      rangeWithDots.push('...', totalPages);
+    } else {
+      rangeWithDots.push(totalPages);
+    }
+
+    return rangeWithDots;
+  };
 
   return (
     <nav className='pagination-nav'>
-      <div className="pagination:number arrow">
-         <button onClick={() => goToPage(1,totalPages)}><img src='/images/arrow_left.png' alt='back-arrow'/></button>
-      </div>
-      <div className='pagination'>
-        {pageNumbers.map(number => (
-         <button key={number} className={`pagination:number ${(number == active) ? 'active':''}`} onClick={() => paginate(number)}>
-            {number}
-         </button>
-        ))}
-      </div>
-      <div className="pagination:number arrow">
-         <button onClick={() => goToPage(0,totalPages)}><img src='/images/arrow_right.png' alt='forward-arrow'/></button>
+      <div className="pagination-container">
+        <button 
+          className="pagination-arrow prev" 
+          onClick={() => goToPage(1, totalPages)}
+          disabled={active === 1}
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <div className='pagination-numbers'>
+          {getVisiblePages().map((number, index) => (
+            number === '...' ? (
+              <span key={`dots-${index}`} className="pagination-dots">...</span>
+            ) : (
+              <button 
+                key={number} 
+                className={`pagination-number ${number === active ? 'active' : ''}`} 
+                onClick={() => paginate(number)}
+              >
+                {number}
+              </button>
+            )
+          ))}
+        </div>
+        
+        <button 
+          className="pagination-arrow next" 
+          onClick={() => goToPage(0, totalPages)}
+          disabled={active === totalPages}
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </nav>
   );

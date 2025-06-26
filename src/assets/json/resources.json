@@ -1,0 +1,326 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "category": "Programming",
+      "description": "A handbook of agile software craftsmanship",
+      "cover": "📚",
+      "rating": 5,
+      "status": "To Read",
+      "featured": true,
+      "link": "https://amzn.to/3qXYZclean",
+      "image": ""
+    },
+    {
+      "id": 2,
+      "title": "Biblical Doctrine",
+      "author": "John MacArthur & Richard Mayhue",
+      "category": "Theology",
+      "description": "A comprehensive resource on systematic theology from a reformed, biblical perspective.",
+      "cover": "📖",
+      "rating": 5,
+      "status": "Read",
+      "featured": true,
+      "link": "https://www.amazon.com/Biblical-Doctrine-Systematic-Summary-Bible/dp/1433545918",
+      "image": ""
+    },
+    {
+      "id": 3,
+      "title": "Design Patterns",
+      "author": "Gang of Four",
+      "category": "Programming",
+      "description": "Elements of reusable object-oriented software",
+      "cover": "🎨",
+      "rating": 5,
+      "status": "To Read",
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
+    },
+    {
+      "id": 4,
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt & David Thomas",
+      "category": "Programming",
+      "description": "Your journey to mastery",
+      "cover": "⚡",
+      "rating": 5,
+      "status": "To Read",
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
+    },
+    {
+      "id": 5,
+      "title": "Refactoring",
+      "author": "Martin Fowler",
+      "category": "Programming",
+      "description": "Improving the design of existing code",
+      "cover": "🔧",
+      "rating": 4,
+      "status": "To Read",
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
+    },
+    {
+      "id": 6,
+      "title": "JavaScript: The Good Parts",
+      "author": "Douglas Crockford",
+      "category": "Programming",
+      "description": "The beautiful, elegant, and expressive language",
+      "cover": "🟨",
+      "rating": 4,
+      "status": "To Read",
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
+    },
+    {
+      "id": 7,
+      "title": "React: Up & Running",
+      "author": "Stoyan Stefanov",
+      "category": "Programming",
+      "description": "Building web applications",
+      "cover": "⚛️",
+      "rating": 4,
+      "status": "To Read",
+      "featured": false,
+      "link": "https://amzn.to/3qXYZdoctrine",
+      "image": ""
+    },
+    {
+      "id": 8,
+      "title": "Parenting by God's Promises",
+      "author": "Joel R. Beeke",
+      "category": "Theology",
+      "description": "Biblical principles for parenting grounded in God's covenant promises.",
+      "cover": "👨‍👩‍👧‍👦",
+      "rating": 5,
+      "status": "Read",
+      "featured": false,
+      "link": "https://www.amazon.com/dp/1601781426",
+      "image": ""
+    },
+    {
+      "id": 9,
+      "title": "Family Shepherds",
+      "author": "Voddie Baucham Jr.",
+      "category": "Theology",
+      "description": "Calling and equipping men to lead their homes in Christ.",
+      "cover": "👨‍👧‍👦",
+      "rating": 5,
+      "status": "Read",
+      "featured": false,
+      "link": "https://www.amazon.com/dp/1433523693",
+      "image": ""
+    }
+  ],
+  "tools": [
+    {
+      "name": "VS Code",
+      "category": "Editor",
+      "description": "My primary code editor with custom extensions",
+      "icon": "💻"
+    },
+    {
+      "name": "Git",
+      "category": "Version Control",
+      "description": "Essential for version control and collaboration",
+      "icon": "📝"
+    },
+    {
+      "name": "Docker",
+      "category": "Containerization",
+      "description": "For containerized development and deployment",
+      "icon": "🐳"
+    },
+    {
+      "name": "Postman",
+      "category": "API Testing",
+      "description": "API development and testing tool",
+      "icon": "📮"
+    },
+    {
+      "name": "Xilinx Tools",
+      "category": "FPGA/Embedded",
+      "description": "Development tools for Xilinx platforms including Vivado and Vitis",
+      "icon": "⚙️"
+    }
+  ],
+  "dev_resources": [
+    {
+      "name": "MDN Web Docs",
+      "category": "Documentation",
+      "description": "Comprehensive web development documentation",
+      "url": "https://developer.mozilla.org/",
+      "icon": "🌐"
+    },
+    {
+      "name": "Stack Overflow",
+      "category": "Community",
+      "description": "Q&A platform for developers",
+      "url": "https://stackoverflow.com/",
+      "icon": "❓"
+    },
+    {
+      "name": "GitHub",
+      "category": "Platform",
+      "description": "Code hosting and collaboration platform",
+      "url": "https://github.com/",
+      "icon": "🐙"
+    }
+  ],
+  "podcasts": [
+    {
+      "name": "Syntax.fm",
+      "description": "A Tasty Treats Podcast for Web Developers.",
+      "url": "https://syntax.fm/",
+      "icon": "🎙️"
+    },
+    {
+      "name": "The Changelog",
+      "description": "Conversations with the hackers, leaders, and innovators of the software world.",
+      "url": "https://changelog.com/podcast",
+      "icon": "🎧"
+    },
+    {
+      "name": "Software Engineering Daily",
+      "description": "Daily interviews about technical software topics.",
+      "url": "https://softwareengineeringdaily.com/",
+      "icon": "📻"
+    },
+    {
+      "name": "JS Party",
+      "description": "A community celebration of JavaScript and the web.",
+      "url": "https://jsparty.fm/",
+      "icon": "🎉"
+    },
+    {
+      "name": "React Podcast",
+      "description": "Conversations about React with your favorite developers.",
+      "url": "https://reactpodcast.simplecast.fm/",
+      "icon": "⚛️"
+    }
+  ],
+  "youtube_channels": [
+    {
+      "name": "Fireship",
+      "description": "High-intensity web development tutorials.",
+      "url": "https://www.youtube.com/c/Fireship",
+      "icon": "🔥"
+    },
+    {
+      "name": "The Net Ninja",
+      "description": "Modern web development tutorials and courses.",
+      "url": "https://www.youtube.com/c/TheNetNinja",
+      "icon": "🥷"
+    },
+    {
+      "name": "Academind",
+      "description": "Web development and programming tutorials.",
+      "url": "https://www.youtube.com/c/Academind",
+      "icon": "🎓"
+    },
+    {
+      "name": "Traversy Media",
+      "description": "Web development and programming tutorials.",
+      "url": "https://www.youtube.com/c/TraversyMedia",
+      "icon": "📺"
+    },
+    {
+      "name": "Dev Ed",
+      "description": "Web development tutorials and coding challenges.",
+      "url": "https://www.youtube.com/c/DevEd",
+      "icon": "🎨"
+    }
+  ],
+  "theology_resources": [
+    {
+      "name": "Grace To You",
+      "category": "Sermons",
+      "description": "Biblical preaching and teaching from John MacArthur.",
+      "url": "https://www.gty.org/",
+      "icon": "📖"
+    },
+    {
+      "name": "Truth For Life",
+      "category": "Sermons",
+      "description": "Biblical teaching from Alistair Begg.",
+      "url": "https://www.truthforlife.org/",
+      "icon": "🎙️"
+    },
+    {
+      "name": "Desiring God",
+      "category": "Sermons",
+      "description": "Biblical resources from John Piper.",
+      "url": "https://www.desiringgod.org/",
+      "icon": "💝"
+    },
+    {
+      "name": "Ligonier Ministries",
+      "category": "Theology",
+      "description": "Biblical teaching and theological resources.",
+      "url": "https://www.ligonier.org/",
+      "icon": "⛪"
+    },
+    {
+      "name": "Got Questions",
+      "category": "Apologetics",
+      "description": "Biblical answers to theological questions.",
+      "url": "https://www.gotquestions.org/",
+      "icon": "❓"
+    },
+    {
+      "name": "Answers in Genesis",
+      "category": "Apologetics",
+      "description": "Biblical creation and apologetics resources.",
+      "url": "https://answersingenesis.org/",
+      "icon": "🌍"
+    },
+    {
+      "name": "Living Waters",
+      "category": "Evangelism",
+      "description": "Evangelism training and resources.",
+      "url": "https://www.livingwaters.com/",
+      "icon": "💧"
+    },
+    {
+      "name": "Way of the Master",
+      "category": "Evangelism",
+      "description": "Biblical evangelism training and resources.",
+      "url": "https://www.wayofthemaster.com/",
+      "icon": "🛤️"
+    },
+    {
+      "name": "Reasonable Faith",
+      "category": "Apologetics",
+      "description": "Christian apologetics from William Lane Craig.",
+      "url": "https://www.reasonablefaith.org/",
+      "icon": "🧠"
+    },
+    {
+      "name": "Stand to Reason",
+      "category": "Apologetics",
+      "description": "Christian apologetics and worldview training.",
+      "url": "https://www.str.org/",
+      "icon": "🛡️"
+    },
+    {
+      "name": "Apologia",
+      "category": "Apologetics",
+      "description": "Christ-centered apologetics and cultural engagement.",
+      "url": "https://apologiastudios.com/",
+      "icon": "📢"
+    },
+    {
+      "name": "Monergism",
+      "category": "Theology",
+      "description": "A rich collection of reformed theology articles and sermons.",
+      "url": "https://www.monergism.com/",
+      "icon": "📚"
+    }
+  ]
+}

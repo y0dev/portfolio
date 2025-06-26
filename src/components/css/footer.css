@@ -1,44 +1,227 @@
+/* Footer Styles */
 .footer {
-   background-color: var(--color-footer);
-   color: white;
-   margin-top: auto;
+  background-color: #111827;
+  color: white;
+  margin-top: auto;
+}
+
+html.dark-mode .footer {
+  background-color: #000;
 }
 
 .footer-container {
-   width: 100%;
-   max-width: 950px;
-   margin: 0 auto;
-   padding: 30px;
-   text-align: center;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
 }
 
-.footer-container .footer-small {
-   font-size: 10px;
-   color: #ffffff;
-   margin-top: 10px;
+/* Footer Grid */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
-.footer-container ul {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   list-style: none;
+/* Brand Section */
+.footer-brand {
+  grid-column: 1 / -1;
 }
 
-.footer-container ul li {
-   width: 30px;
-   height: 30px;
-   margin: 5px;
+.brand-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.footer-container ul li img {
-   width: 30px;
-   filter: invert(93%) sepia(2%) saturate(82%) hue-rotate(78deg) brightness(90%) contrast(88%);
+.brand-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
 }
 
-@media only screen and (max-width: 768px) {
-   .footer-container {
-      padding: 30px 15px;
+.brand-initials {
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.brand-description {
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+  max-width: 28rem;
+  line-height: 1.6;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  color: #9ca3af;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link:hover {
+  color: white;
+}
+
+.social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Footer Sections */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+/* Footer Links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-link {
+  color: #d1d5db;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #d1d5db;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.contact-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid #374151;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.copyright {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legal-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.legal-link:hover {
+  color: white;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .footer-container {
+    padding: 3rem 1.5rem;
   }
-   
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-brand {
+    grid-column: 1;
+  }
+  
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-container {
+    padding: 3rem 2rem;
+  }
+}
+
+/* Dark Mode Adjustments */
+html.dark-mode .footer {
+  background-color: #000;
+}
+
+html.dark-mode .footer-bottom {
+  border-top-color: #374151;
+}
+
+/* Hover Effects */
+.social-link,
+.footer-link,
+.legal-link {
+  transition: color 0.2s ease;
+}
+
+.social-link:hover,
+.footer-link:hover,
+.legal-link:hover {
+  color: white;
 }
