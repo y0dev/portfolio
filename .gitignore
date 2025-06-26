@@ -22,6 +22,7 @@
 /build
 /dev
 /dist
+output
 
 # misc
 .DS_Store
