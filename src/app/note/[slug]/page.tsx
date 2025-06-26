@@ -7,21 +7,12 @@ import ContentRenderer from "@/components/ContentRenderer";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
-interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
-
 export async function generateStaticParams() {
   return articles
-    .filter(article => article.type === "note")
-    .map((article) => ({
-      slug: article.id,
-    }));
+    .map(article => ({ slug: article.id }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const note = articles.find(a => a.id === slug && a.type === "note");
 
@@ -95,7 +86,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function NotePage({ params }: PageProps) {
+export default async function NotePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const note = articles.find(a => a.id === slug && a.type === "note");
 

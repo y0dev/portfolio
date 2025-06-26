@@ -316,52 +316,7 @@ function cleanupRemainingMarkdown(html: string): string {
     .replace(/`(.*?)`/g, '<code>$1</code>');
 }
 
-function parseMarkdown(markdownContent: string): ContentSection[] {
-  const { content } = matter(markdownContent);
-  const sections = content.split('---').map(s => s.trim()).filter(Boolean);
-  
-  return sections.map(section => {
-    const lines = section.split('\n');
-    const titleLine = lines.find(line => line.toLowerCase().startsWith('title:'));
-    const title = titleLine ? titleLine.replace(/title:/i, '').trim() : undefined;
-    
-    const markdown = lines.filter(line => !line.toLowerCase().startsWith('title:')).join('\n');
-    
-    // Pre-process the markdown to ensure proper parsing
-    const processedMarkdown = preprocessMarkdown(markdown);
-    let htmlContent = marked(processedMarkdown) as string;
-    
-    // Clean up the HTML content first
-    htmlContent = cleanHtmlContent(htmlContent);
-    
-    // Apply all enhancement functions
-    htmlContent = enhanceCodeBlocks(htmlContent);
-    htmlContent = enhanceTables(htmlContent);
-    htmlContent = enhanceImages(htmlContent);
-    htmlContent = enhanceUnorderedLists(htmlContent);
-    htmlContent = enhanceOrderedLists(htmlContent);
-    htmlContent = enhanceListItems(htmlContent);
-    htmlContent = enhanceHeadings(htmlContent);
-    htmlContent = enhanceParagraphs(htmlContent);
-    htmlContent = enhanceStrongText(htmlContent);
-    htmlContent = enhanceEmphasizedText(htmlContent);
-    htmlContent = enhanceBlockquotes(htmlContent);
-    htmlContent = enhanceLinks(htmlContent);
-    htmlContent = enhanceInlineCode(htmlContent);
-    htmlContent = enhanceHorizontalRules(htmlContent);
-    htmlContent = enhancePreformattedText(htmlContent);
-    
-    // Clean up any remaining markdown syntax
-    htmlContent = cleanupRemainingMarkdown(htmlContent);
-    
-    return {
-      title,
-      htmlContent,
-    };
-  });
-}
-
-function parseNoteMarkdown(markdownContent: string): { metadata: Partial<ArticleMetadata>, content: ContentSection[] } {
+function parseMarkdown(markdownContent: string): { metadata: Partial<ArticleMetadata>, content: ContentSection[] } {
   const lines = markdownContent.replace(/\r\n/g, '\n').split('\n');
   const metadata: Partial<ArticleMetadata> = {};
   let contentStartIndex = 0;
@@ -456,52 +411,6 @@ function parseNoteMarkdown(markdownContent: string): { metadata: Partial<Article
   return { metadata, content };
 }
 
-function processArticle(dir: string): TransformedArticle | null {
-  const metadataPath = path.join(dir, 'metadata.json');
-  const markdownPath = path.join(dir, 'index.md');
-
-  if (!fs.existsSync(markdownPath)) {
-    return null;
-  }
-
-  const markdownFileContent = fs.readFileSync(markdownPath, "utf-8");
-  
-  // Check if this is a note format (has Blog/Note Info section)
-  if (markdownFileContent.includes('## Blog/Note Info')) {
-    const { metadata, content } = parseNoteMarkdown(markdownFileContent);
-    
-    // Generate ID from directory name
-    const id = path.basename(dir);
-    
-    // Ensure required fields
-    if (!metadata.title || !metadata.date || !metadata.type) {
-      console.warn(`Warning: Missing required metadata for ${id}`);
-      return null;
-    }
-    
-    return {
-      id,
-      title: metadata.title,
-      description: metadata.description,
-      date: metadata.date,
-      tags: metadata.tags || [],
-      type: metadata.type,
-      image: metadata.image,
-      content
-    };
-  } else {
-    // Original article format with separate metadata.json
-    if (!fs.existsSync(metadataPath)) {
-      return null;
-    }
-    
-    const metadata: ArticleMetadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"));
-    const content = parseMarkdown(markdownFileContent);
-    
-    return { ...metadata, content };
-  }
-}
-
 function processNotesFromMarkdownParser(): TransformedArticle[] {
   const notesDir = path.resolve(__dirname, '..', 'markdown-parser-project', 'input_md');
   const articles: TransformedArticle[] = [];
@@ -520,10 +429,11 @@ function processNotesFromMarkdownParser(): TransformedArticle[] {
       const markdownContent = fs.readFileSync(filePath, "utf-8");
       // console.log(`File path: ${filePath}`)
       if (markdownContent.includes('## Blog/Note Info')) {
-        const { metadata, content } = parseNoteMarkdown(markdownContent);
+        const { metadata, content } = parseMarkdown(markdownContent);
         
         // Generate ID from filename (without extension)
         const id = path.basename(filePath, '.md');
+        // console.log(`File path: ${filePath} \t\tID: ${id}`)
         
         // Ensure required fields
         if (!metadata.title || !metadata.date || !metadata.type) {
@@ -532,7 +442,7 @@ function processNotesFromMarkdownParser(): TransformedArticle[] {
         }
         
         articles.push({
-          id,
+          id: id.replace('.','-'),
           title: metadata.title,
           description: metadata.description,
           date: metadata.date,
@@ -551,22 +461,9 @@ function processNotesFromMarkdownParser(): TransformedArticle[] {
 }
 
 function main() {
-  const articlesDir = path.resolve(__dirname, '..', 'content', 'articles');
   const outputPath = path.resolve(__dirname, '..', 'src', 'data', 'articles.ts');
 
-  let allArticles: TransformedArticle[] = [];
-  
-  // Process articles from content/articles directory
-  if (fs.existsSync(articlesDir)) {
-    const articleDirs = fs.readdirSync(articlesDir)
-      .map(name => path.join(articlesDir, name))
-      .filter(source => fs.lstatSync(source).isDirectory());
-
-    const articles = articleDirs.map(processArticle).filter((article): article is TransformedArticle => article !== null);
-    allArticles.push(...articles);
-  } else {
-    console.log("No 'content/articles' directory found. Skipping articles processing.");
-  }
+  const allArticles: TransformedArticle[] = [];
   
   // Process notes from markdown-parser-project
   const notes = processNotesFromMarkdownParser();

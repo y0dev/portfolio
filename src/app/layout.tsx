@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-sync-scripts */
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
@@ -67,7 +67,11 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  viewport: "width=device-width, initial-scale=1.0",
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -80,7 +84,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/x-icon" href="/images/logo.png" />
         <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
         {/* Basic Meta Tags */}
         <meta name="author" content="Devontae Reid" />
