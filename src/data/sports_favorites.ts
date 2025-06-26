@@ -3,7 +3,7 @@ import { TeamProps, PlayerProps } from "@/types";
 export const favoriteTeams: TeamProps[] = [
   {
     name: "Philadelphia Eagles",
-    logo: "/teams/eagles.png",
+    logo: "/images/sports/eagles.png",
     link: "https://www.philadelphiaeagles.com/",
     achievements: {
       trophies: 1,
@@ -16,7 +16,7 @@ export const favoriteTeams: TeamProps[] = [
   },
   {
     name: "LA Dodgers",
-    logo: "/teams/dodgers.png",
+    logo: "/images/sports/dodgers.png",
     link: "https://www.mlb.com/dodgers",
     achievements: {
       trophies: 7,
