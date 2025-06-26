@@ -21,18 +21,29 @@ class ArticlesPage extends Component {
             currentPosts: [],
             searchTerm: '',
             selectedCategory: 'all',
-            categories: ['all', 'web development', 'programming', 'technology', 'tutorial', 'thoughts'],
+            categories: ['all', 'programming', 'technology', 'tutorial', 'theology', 'health'],
             filteredPosts: []
         }
         
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
+        this.postPaginate = this.postPaginate.bind(this);
+        this.goToVerifiedPage = this.goToVerifiedPage.bind(this);
+        this.goToPostPage = this.goToPostPage.bind(this);
+        this.clearFilters = this.clearFilters.bind(this);
+    }
+
+    componentDidMount() {
         // Get both articles and notes and sort by date
         const articles_sorted = filtered(_articles);
         const notes_sorted = filtered(_notes);
         const mergeArray = filtered(articles_sorted.concat(notes_sorted));
-        this.state.mergeArray = mergeArray;
-        this.state.filteredPosts = mergeArray;
-
-        this.state.posts = mergeArray.map((article, idx) => {
+        
+        console.log('Articles loaded:', _articles.length);
+        console.log('Notes loaded:', _notes.length);
+        console.log('Total items:', mergeArray.length);
+        
+        const posts = mergeArray.map((article, idx) => {
             let noteValue = article['file-id'] === 'note' ? 1 : 0;
             return <ArticleModule key={idx}
                 title={article.title}
@@ -43,23 +54,25 @@ class ArticlesPage extends Component {
                 note={noteValue}/>
         });
 
+        console.log('Posts created:', posts.length);
+
         // Get current posts
         let indexOfLastPost = this.state.currentPostPage * this.state.postsPerPage;
         let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
-        this.state.currentPosts = this.state.posts.slice(indexOfFirstPost, indexOfLastPost);
+        const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-        this.state.postsLength = this.state.posts.length;
-        this.handleSearch = this.handleSearch.bind(this);
-        this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
-        this.postPaginate = this.postPaginate.bind(this);
-        this.goToVerifiedPage = this.goToVerifiedPage.bind(this);
-        this.goToPostPage = this.goToPostPage.bind(this);
-        this.clearFilters = this.clearFilters.bind(this);
-    }
+        console.log('Current posts:', currentPosts.length);
 
-    componentDidMount() {
+        this.setState({
+            mergeArray: mergeArray,
+            filteredPosts: mergeArray,
+            posts: posts,
+            currentPosts: currentPosts,
+            postsLength: posts.length
+        });
+
         // Only show paginate if greater than postsPerPage
-        if (this.state.posts.length <= this.state.postsPerPage) {
+        if (posts.length <= this.state.postsPerPage) {
             const article_pa = document.getElementById('article-paginate');
             if (article_pa) {
                 article_pa.classList.add('hidden');
@@ -183,6 +196,10 @@ class ArticlesPage extends Component {
 
     render() {
         const hasActiveFilters = this.state.searchTerm || this.state.selectedCategory !== 'all';
+        
+        console.log('Render - currentPosts length:', this.state.currentPosts.length);
+        console.log('Render - posts length:', this.state.posts.length);
+        console.log('Render - mergeArray length:', this.state.mergeArray.length);
         
         return (
             <div className='app-body' id='articles-container'>

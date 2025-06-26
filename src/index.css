@@ -35,6 +35,18 @@ html.dark-mode {
   --color-view-writeup-text: var(--color-tag-text);
   --color-view-writeup-bg: var(--color-tag-bg);
   --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);
+  
+  /* Article Module Dark Mode CSS Variables */
+  --color-bg-secondary: #1f2937;
+  --color-bg-tertiary: #374151;
+  --color-border: #4b5563;
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-primary-dark: #60a5fa;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-accent: #451a03;
+  --color-accent-text: #fbbf24;
 }
 
 html {
@@ -73,6 +85,18 @@ html {
   --color-view-writeup-text: #e45858;
   --color-view-writeup-bg: #fdf2f2;
   --color-view-writeup-bg--hover: #f9dcdc;
+  
+  /* Article Module CSS Variables */
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-primary-dark: #2563eb;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-accent: #fef3c7;
+  --color-accent-text: #92400e;
 }
 
 * {
@@ -84,7 +108,16 @@ html {
 }
 
 .app-body {
-   margin: 0 auto;
+  padding-top: 120px;
+  max-width: 1000px;
+  min-height: 100vh;
+  padding: 120px 50px 50px 50px;
+}
+
+@media (max-width: 460px) {
+  .app-body {
+    padding: 100px 10px 30px 10px;
+  }
 }
 
 body {
@@ -126,7 +159,7 @@ button {
 }
 
 input[type="text" i] {
-  padding: 1px 2px;
+  padding: 1rem 4rem;
 }
 
 .center-text {
@@ -154,21 +187,6 @@ input[type="text" i] {
 
 .button:hover {
    background-color: var(--color-view-tag-bg-hover);
-}
-
-
-.app-body {
-  padding-top: 100px;
-  max-width: 1000px;
-  min-height: 100vh;
-  padding: 100px 50px;
-}
-@media (max-width: 460px) {
-  .app-body {
-    padding-bottom: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
