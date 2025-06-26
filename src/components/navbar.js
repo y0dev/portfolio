@@ -72,6 +72,11 @@ function NavBar() {
       { href: '/resources', label: 'Resources' },
    ];
 
+   // Helper for desktop nav highlighting
+   function isActiveNav(itemHref) {
+      return pathname === itemHref || pathname.startsWith(itemHref + '/');
+   }
+
    return (
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
          <div className="main-menu">
@@ -88,7 +93,7 @@ function NavBar() {
                   <li key={item.href} className="nav-item">
                      <a 
                         href={item.href}
-                        className={`nav-link ${pathname === item.href ? 'active' : ''}`}
+                        className={`nav-link ${isActiveNav(item.href) ? 'active' : ''}`}
                      >
                         {item.label}
                      </a>

@@ -9,7 +9,7 @@ function ArticleModule(props) {
     let tags;
     let id;
     let note = props.note;
-    let link = note === 0 ? "/articles/" : "/notes/";
+    let link = note === 0 ? "/article/" : "/note/";
 
     if (props.title) {
         title = <h3 className="article-title">{props.title}</h3>;

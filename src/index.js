@@ -36,7 +36,7 @@ if (rootElement) {
 
     console.log('Pathname:', pathname);
     // Check for individual article/note routes first
-    if (pathname.match(/^\/articles\/[^\/]+$/) || pathname.match(/^\/notes\/[^\/]+$/)) {
+    if (pathname.match(/^\/article\/[^\/]+$/) || pathname.match(/^\/note\/[^\/]+$/)) {
         console.log('Viewing article/note:', pathname);
         root.render(
             <Layout>

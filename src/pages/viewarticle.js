@@ -88,7 +88,7 @@ function copyURL() {
 }
 
 function ViewArticlePage() {
-    // Extract ID from URL pathname (e.g., /articles/my-article-id -> my-article-id)
+    // Extract ID from URL pathname (e.g., /article/my-article-id -> my-article-id)
     const pathname = window.location.pathname;
     const _id = pathname.split('/').pop();
     

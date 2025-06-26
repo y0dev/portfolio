@@ -9,7 +9,7 @@ module.exports = merge(common, {
 		path: path.resolve(__dirname,'dist'),
 		filename: '[name].[contenthash].js',
 		clean: true,
-		// assetModuleFilename: '[name][ext]'
+		assetModuleFilename: 'images/[name][ext]'
 	},
 	module: {
 		rules: 
@@ -18,16 +18,6 @@ module.exports = merge(common, {
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/,
 				type: 'asset/resource',
-				// use: {
-				// 	loader: 'url-loader',
-				// 	options: {
-				// 		name: '[hash]-[name].[ext]',
-				// 		outputPath: 'images',
-				// 		limit: 8192,
-				// 		mimetype: "image/png",
-				// 		encoding: true,
-				// 	},
-				// }
 			}
 		]
 	},
