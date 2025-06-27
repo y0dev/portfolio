@@ -19,7 +19,6 @@ const ARTICLES_ENDPOINT = `${API_BASE_URL}/articles`;
 
 /**
  * Initialize the page when DOM is loaded
- */
 document.addEventListener('DOMContentLoaded', function() {
     console.log('ViewArticle page initializing...');
     
@@ -33,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Try to load from API first, fallback to static data
     loadArticleData(articleId);
 });
+ */
 
 /**
  * Load article data from API or fallback to static JSON
- */
 async function loadArticleData(articleId) {
     try {
         // Try API first
@@ -66,10 +65,10 @@ async function loadArticleData(articleId) {
     // Fallback to static data
     loadFallbackData(articleId);
 }
+ */
 
 /**
  * Load fallback data from static JSON files
- */
 async function loadFallbackData(articleId) {
     try {
         // Load articles and notes from static files
@@ -91,6 +90,7 @@ async function loadFallbackData(articleId) {
         showErrorPage();
     }
 }
+ */
 
 /**
  * Render the article page
