@@ -33,8 +33,6 @@ if (rootElement) {
     
     // Get the current pathname to determine which page to render
     const pathname = window.location.pathname;
-
-    console.log('Pathname:', pathname);
     // Check for individual article/note routes first
     if (pathname.match(/^\/article\/[^\/]+$/) || pathname.match(/^\/note\/[^\/]+$/)) {
         console.log('Viewing article/note:', pathname);

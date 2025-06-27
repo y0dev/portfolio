@@ -428,35 +428,58 @@
                         <label for="bookDescription">Description</label>
                         <textarea id="bookDescription" name="description" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="bookCategory">Category</label>
-                        <select id="bookCategory" name="category" required>
-                            <option value="">Select Category</option>
-                            <option value="technology">Technology</option>
-                            <option value="programming">Programming</option>
-                            <option value="tutorial">Tutorial</option>
-                            <option value="theology">Theology</option>
-                            <option value="health">Health</option>
-                        </select>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="bookCategory">Category</label>
+                            <select id="bookCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Programming">Programming</option>
+                                <option value="Theology">Theology</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Business">Business</option>
+                                <option value="Health">Health</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookRating">Rating (1-5)</label>
+                            <select id="bookRating" name="rating" required>
+                                <option value="">Select Rating</option>
+                                <option value="1">1 Star</option>   
+                                <option value="2">2 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="5">5 Stars</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="bookStatus">Status</label>
+                            <select id="bookStatus" name="status" required>
+                                <option value="To Read">To Read</option>
+                                <option value="Reading">Reading</option>
+                                <option value="Read">Read</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookCover">Cover Emoji</label>
+                            <input type="text" id="bookCover" name="cover" placeholder="📚" value="📚">
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="bookLink">Link</label>
+                            <input type="url" id="bookLink" name="link" placeholder="https://amazon.com/book">
+                        </div>
+                        <div class="form-group">
+                            <label for="bookImage">Image URL</label>
+                            <input type="url" id="bookImage" name="image" placeholder="https://example.com/image.jpg">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="bookRating">Rating (1-5)</label>
-                        <select id="bookRating" name="rating" required>
-                            <option value="">Select Rating</option>
-                            <option value="1">1 Star</option>   
-                            <option value="2">2 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="5">5 Stars</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="bookCoverImage">Cover Image URL</label>
-                        <input type="url" id="bookCoverImage" name="cover_image" placeholder="https://example.com/image.jpg">
-                    </div>
-                    <div class="form-group">
-                        <label for="bookAmazonURL">Amazon URL</label>
-                        <input type="url" id="bookAmazonURL" name="amazon_url" placeholder="https://www.amazon.com/dp/B08N5L5RG2">
+                        <label>
+                            <input type="checkbox" id="bookFeatured" name="featured"> Featured Book
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
@@ -466,8 +489,8 @@
             <div id="books-response" class="response-area"></div>   
         </div>
 
-         <!-- Resources Section -->
-         <div class="test-section">
+        <!-- Resources Section -->
+        <div class="test-section">
             <h2>Resources API</h2>
             <div class="button-group">
                 <button class="btn btn-primary" onclick="getResources()">Get Resources</button>
@@ -512,6 +535,227 @@
                 </div>  
             </div>
             <div id="resources-response" class="response-area"></div>
+        </div>
+
+        <!-- Tools Section -->
+        <div class="test-section">
+            <h2>Tools API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getTools()">Get Tools</button>
+                <button class="btn btn-success" onclick="showCreateToolForm()">Create Tool</button>
+                <button class="btn btn-warning" onclick="showUpdateToolForm()">Update Tool</button>
+                <button class="btn btn-danger" onclick="showDeleteToolForm()">Delete Tool</button>
+            </div>
+            
+            <div id="tools-form" style="display: none;">
+                <form id="toolForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="toolName">Name</label>
+                            <input type="text" id="toolName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolCategory">Category</label>
+                            <select id="toolCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Editor">Editor</option>
+                                <option value="Version Control">Version Control</option>
+                                <option value="Containerization">Containerization</option>
+                                <option value="API Testing">API Testing</option>
+                                <option value="FPGA/Embedded">FPGA/Embedded</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="toolDescription">Description</label>
+                        <textarea id="toolDescription" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="toolIcon">Icon Emoji</label>
+                        <input type="text" id="toolIcon" name="icon" placeholder="🛠️" value="🛠️">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="tools-response" class="response-area"></div>
+        </div>
+
+        <!-- Dev Resources Section -->
+        <div class="test-section">
+            <h2>Dev Resources API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getDevResources()">Get Dev Resources</button>
+                <button class="btn btn-success" onclick="showCreateDevResourceForm()">Create Dev Resource</button>
+                <button class="btn btn-warning" onclick="showUpdateDevResourceForm()">Update Dev Resource</button>
+                <button class="btn btn-danger" onclick="showDeleteDevResourceForm()">Delete Dev Resource</button>
+            </div>
+            
+            <div id="dev-resources-form" style="display: none;">
+                <form id="devResourceForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="devResourceName">Name</label>
+                            <input type="text" id="devResourceName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="devResourceCategory">Category</label>
+                            <select id="devResourceCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Documentation">Documentation</option>
+                                <option value="Community">Community</option>
+                                <option value="Platform">Platform</option>
+                                <option value="Tutorial">Tutorial</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="devResourceDescription">Description</label>
+                        <textarea id="devResourceDescription" name="description" required></textarea>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="devResourceUrl">URL</label>
+                            <input type="url" id="devResourceUrl" name="url" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="devResourceIcon">Icon Emoji</label>
+                            <input type="text" id="devResourceIcon" name="icon" placeholder="🔗" value="🔗">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="dev-resources-response" class="response-area"></div>
+        </div>
+
+        <!-- Podcasts Section -->
+        <div class="test-section">
+            <h2>Podcasts API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getPodcasts()">Get Podcasts</button>
+                <button class="btn btn-success" onclick="showCreatePodcastForm()">Create Podcast</button>
+                <button class="btn btn-warning" onclick="showUpdatePodcastForm()">Update Podcast</button>
+                <button class="btn btn-danger" onclick="showDeletePodcastForm()">Delete Podcast</button>
+            </div>
+            
+            <div id="podcasts-form" style="display: none;">
+                <form id="podcastForm">
+                    <div class="form-group">
+                        <label for="podcastName">Name</label>
+                        <input type="text" id="podcastName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="podcastDescription">Description</label>
+                        <textarea id="podcastDescription" name="description" required></textarea>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="podcastUrl">URL</label>
+                            <input type="url" id="podcastUrl" name="url" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="podcastIcon">Icon Emoji</label>
+                            <input type="text" id="podcastIcon" name="icon" placeholder="🎧" value="🎧">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="podcasts-response" class="response-area"></div>
+        </div>
+
+        <!-- YouTube Channels Section -->
+        <div class="test-section">
+            <h2>YouTube Channels API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getYouTubeChannels()">Get YouTube Channels</button>
+                <button class="btn btn-success" onclick="showCreateYouTubeChannelForm()">Create YouTube Channel</button>
+                <button class="btn btn-warning" onclick="showUpdateYouTubeChannelForm()">Update YouTube Channel</button>
+                <button class="btn btn-danger" onclick="showDeleteYouTubeChannelForm()">Delete YouTube Channel</button>
+            </div>
+            
+            <div id="youtube-channels-form" style="display: none;">
+                <form id="youtubeChannelForm">
+                    <div class="form-group">
+                        <label for="youtubeChannelName">Name</label>
+                        <input type="text" id="youtubeChannelName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="youtubeChannelDescription">Description</label>
+                        <textarea id="youtubeChannelDescription" name="description" required></textarea>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="youtubeChannelUrl">URL</label>
+                            <input type="url" id="youtubeChannelUrl" name="url" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="youtubeChannelIcon">Icon Emoji</label>
+                            <input type="text" id="youtubeChannelIcon" name="icon" placeholder="📺" value="📺">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="youtube-channels-response" class="response-area"></div>
+        </div>
+
+        <!-- Theology Resources Section -->
+        <div class="test-section">
+            <h2>Theology Resources API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getTheologyResources()">Get Theology Resources</button>
+                <button class="btn btn-success" onclick="showCreateTheologyResourceForm()">Create Theology Resource</button>
+                <button class="btn btn-warning" onclick="showUpdateTheologyResourceForm()">Update Theology Resource</button>
+                <button class="btn btn-danger" onclick="showDeleteTheologyResourceForm()">Delete Theology Resource</button>
+            </div>
+            
+            <div id="theology-resources-form" style="display: none;">
+                <form id="theologyResourceForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="theologyResourceName">Name</label>
+                            <input type="text" id="theologyResourceName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="theologyResourceCategory">Category</label>
+                            <select id="theologyResourceCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Sermons">Sermons</option>
+                                <option value="Theology">Theology</option>
+                                <option value="Apologetics">Apologetics</option>
+                                <option value="Evangelism">Evangelism</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="theologyResourceDescription">Description</label>
+                        <textarea id="theologyResourceDescription" name="description" required></textarea>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="theologyResourceUrl">URL</label>
+                            <input type="url" id="theologyResourceUrl" name="url" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="theologyResourceIcon">Icon Emoji</label>
+                            <input type="text" id="theologyResourceIcon" name="icon" placeholder="✝️" value="✝️">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="theology-resources-response" class="response-area"></div>
         </div>
 
         <!-- Loading Indicator -->
@@ -955,7 +1199,7 @@
         async function getBooks() {
             showLoading();
             try {
-                const data = await apiFetch(API_BASE_URL + 'books');
+                const data = await apiFetch(API_BASE_URL + 'resources/books');
                 showResponse('books-response', data);
             } catch (error) {   
                 showResponse('books-response', { error: error.message });
@@ -994,12 +1238,15 @@
                 description: formData.get('description'),
                 category: formData.get('category'),
                 rating: parseInt(formData.get('rating')),
-                cover_image: formData.get('cover_image') || null,
-                amazon_url: formData.get('amazon_url') || null
+                status: formData.get('status'),
+                cover: formData.get('cover'),
+                link: formData.get('link') || null,
+                image: formData.get('image') || null,
+                featured: formData.get('featured') === 'on'
             };
 
             try {
-                const result = await apiFetch(API_BASE_URL + 'books', {
+                const result = await apiFetch(API_BASE_URL + 'resources/books', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
@@ -1030,12 +1277,15 @@
                 description: formData.get('description'),
                 category: formData.get('category'),
                 rating: parseInt(formData.get('rating')),
-                cover_image: formData.get('cover_image') || null,
-                amazon_url: formData.get('amazon_url') || null
+                status: formData.get('status'),
+                cover: formData.get('cover'),
+                link: formData.get('link') || null,
+                image: formData.get('image') || null,
+                featured: formData.get('featured') === 'on'
             };      
 
             try {
-                const result = await apiFetch(API_BASE_URL + 'books/' + id, {
+                const result = await apiFetch(API_BASE_URL + 'resources/books/' + id, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)  
@@ -1051,6 +1301,20 @@
                 hideLoading();
             }
         }   
+
+        async function deleteBook(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/books/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('books-response', data);
+            } catch (error) {
+                showResponse('books-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
 
         // Resources API functions
         async function getResources() {
@@ -1163,6 +1427,554 @@
             }
         }
 
+        // Tools API functions
+        async function getTools() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/tools');
+                showResponse('tools-response', data);
+            } catch (error) {
+                showResponse('tools-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateToolForm() {
+            hideForms();
+            document.getElementById('tools-form').style.display = 'block';
+            document.getElementById('toolForm').onsubmit = createTool;
+        }
+
+        function showUpdateToolForm() {
+            hideForms();
+            document.getElementById('tools-form').style.display = 'block';
+            document.getElementById('toolForm').onsubmit = updateTool;
+        }
+
+        function showDeleteToolForm() {
+            const id = prompt('Enter tool ID to delete:');
+            if (id) {
+                deleteTool(id);
+            }
+        }
+
+        async function createTool(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/tools', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('tools-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('tools-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateTool(event) {
+            event.preventDefault();
+            const id = prompt('Enter tool ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/tools/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('tools-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('tools-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteTool(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/tools/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('tools-response', data);
+            } catch (error) {
+                showResponse('tools-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Dev Resources API functions
+        async function getDevResources() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/dev_resources');
+                showResponse('dev-resources-response', data);
+            } catch (error) {
+                showResponse('dev-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateDevResourceForm() {
+            hideForms();
+            document.getElementById('dev-resources-form').style.display = 'block';
+            document.getElementById('devResourceForm').onsubmit = createDevResource;
+        }
+
+        function showUpdateDevResourceForm() {
+            hideForms();
+            document.getElementById('dev-resources-form').style.display = 'block';
+            document.getElementById('devResourceForm').onsubmit = updateDevResource;
+        }
+
+        function showDeleteDevResourceForm() {
+            const id = prompt('Enter dev resource ID to delete:');
+            if (id) {
+                deleteDevResource(id);
+            }
+        }
+
+        async function createDevResource(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/dev_resources', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('dev-resources-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('dev-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateDevResource(event) {
+            event.preventDefault();
+            const id = prompt('Enter dev resource ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/dev_resources/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('dev-resources-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('dev-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteDevResource(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/dev_resources/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('dev-resources-response', data);
+            } catch (error) {
+                showResponse('dev-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Podcasts API functions
+        async function getPodcasts() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/podcasts');
+                showResponse('podcasts-response', data);
+            } catch (error) {
+                showResponse('podcasts-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreatePodcastForm() {
+            hideForms();
+            document.getElementById('podcasts-form').style.display = 'block';
+            document.getElementById('podcastForm').onsubmit = createPodcast;
+        }
+
+        function showUpdatePodcastForm() {
+            hideForms();
+            document.getElementById('podcasts-form').style.display = 'block';
+            document.getElementById('podcastForm').onsubmit = updatePodcast;
+        }
+
+        function showDeletePodcastForm() {
+            const id = prompt('Enter podcast ID to delete:');
+            if (id) {
+                deletePodcast(id);
+            }
+        }
+
+        async function createPodcast(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/podcasts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('podcasts-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('podcasts-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updatePodcast(event) {
+            event.preventDefault();
+            const id = prompt('Enter podcast ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/podcasts/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('podcasts-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('podcasts-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deletePodcast(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/podcasts/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('podcasts-response', data);
+            } catch (error) {
+                showResponse('podcasts-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // YouTube Channels API functions
+        async function getYouTubeChannels() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/youtube_channels');
+                showResponse('youtube-channels-response', data);
+            } catch (error) {
+                showResponse('youtube-channels-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateYouTubeChannelForm() {
+            hideForms();
+            document.getElementById('youtube-channels-form').style.display = 'block';
+            document.getElementById('youtubeChannelForm').onsubmit = createYouTubeChannel;
+        }
+
+        function showUpdateYouTubeChannelForm() {
+            hideForms();
+            document.getElementById('youtube-channels-form').style.display = 'block';
+            document.getElementById('youtubeChannelForm').onsubmit = updateYouTubeChannel;
+        }
+
+        function showDeleteYouTubeChannelForm() {
+            const id = prompt('Enter YouTube channel ID to delete:');
+            if (id) {
+                deleteYouTubeChannel(id);
+            }
+        }
+
+        async function createYouTubeChannel(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/youtube_channels', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('youtube-channels-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('youtube-channels-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateYouTubeChannel(event) {
+            event.preventDefault();
+            const id = prompt('Enter YouTube channel ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/youtube_channels/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('youtube-channels-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('youtube-channels-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteYouTubeChannel(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/youtube_channels/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('youtube-channels-response', data);
+            } catch (error) {
+                showResponse('youtube-channels-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Theology Resources API functions
+        async function getTheologyResources() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/theology_resources');
+                showResponse('theology-resources-response', data);
+            } catch (error) {
+                showResponse('theology-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateTheologyResourceForm() {
+            hideForms();
+            document.getElementById('theology-resources-form').style.display = 'block';
+            document.getElementById('theologyResourceForm').onsubmit = createTheologyResource;
+        }
+
+        function showUpdateTheologyResourceForm() {
+            hideForms();
+            document.getElementById('theology-resources-form').style.display = 'block';
+            document.getElementById('theologyResourceForm').onsubmit = updateTheologyResource;
+        }
+
+        function showDeleteTheologyResourceForm() {
+            const id = prompt('Enter theology resource ID to delete:');
+            if (id) {
+                deleteTheologyResource(id);
+            }
+        }
+
+        async function createTheologyResource(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/theology_resources', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('theology-resources-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('theology-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateTheologyResource(event) {
+            event.preventDefault();
+            const id = prompt('Enter theology resource ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                description: formData.get('description'),
+                url: formData.get('url'),
+                icon: formData.get('icon')
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/theology_resources/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('theology-resources-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('theology-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteTheologyResource(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/theology_resources/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('theology-resources-response', data);
+            } catch (error) {
+                showResponse('theology-resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
     </script>
 </body>
 </html> 

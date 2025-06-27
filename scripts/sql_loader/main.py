@@ -181,21 +181,16 @@ class DatabaseManager:
             CREATE TABLE IF NOT EXISTS books (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 title VARCHAR(255) NOT NULL,
-                author VARCHAR(255) NOT NULL,
-                description TEXT,
-                cover_image JSON,
+                author VARCHAR(255),
                 category VARCHAR(100),
-                rating DECIMAL(2,1) CHECK (rating >= 0 AND rating <= 5),
-                amazon_link VARCHAR(500),
-                isbn VARCHAR(20),
-                pages INT,
-                published_year INT,
-                date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                INDEX idx_category (category),
-                INDEX idx_rating (rating),
-                INDEX idx_date_added (date_added)
+                description TEXT,
+                cover VARCHAR(10),
+                rating INT CHECK (rating BETWEEN 1 AND 5),
+                status ENUM('To Read', 'Reading', 'Read') DEFAULT 'To Read',
+                featured BOOLEAN DEFAULT FALSE,
+                link TEXT,
+                image TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
             """
             self.cursor.execute(create_table_query)
@@ -206,33 +201,111 @@ class DatabaseManager:
             print(f"❌ Error creating books table: {err}")
             return False
     
-    def create_resources_table(self):
-        """Create resources table"""
+    def create_tools_table(self):
+        """Create tools table"""
         try:
             create_table_query = """
-            CREATE TABLE IF NOT EXISTS resources (
+            CREATE TABLE IF NOT EXISTS tools (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,
-                description TEXT,
-                link VARCHAR(500) NOT NULL,
+                name VARCHAR(100) NOT NULL,
                 category VARCHAR(100),
-                type ENUM('tool', 'website', 'podcast', 'video', 'documentation', 'book', 'course', 'other') DEFAULT 'other',
-                tags JSON,
-                featured BOOLEAN DEFAULT FALSE,
-                date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                INDEX idx_category (category),
-                INDEX idx_type (type),
-                INDEX idx_date_added (date_added)
+                description TEXT,
+                icon VARCHAR(10),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
             """
             self.cursor.execute(create_table_query)
-            print("✅ Resources table created successfully.")
+            print("✅ Tools table created successfully.")
             return True
             
         except mysql.connector.Error as err:
-            print(f"❌ Error creating resources table: {err}")
+            print(f"❌ Error creating tools table: {err}")
+            return False
+    
+    def create_dev_resources_table(self):
+        """Create dev_resources table"""
+        try:
+            create_table_query = """
+            CREATE TABLE IF NOT EXISTS dev_resources (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(150) NOT NULL,
+                category VARCHAR(100),
+                description TEXT,
+                url TEXT,
+                icon VARCHAR(10),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            """
+            self.cursor.execute(create_table_query)
+            print("✅ Dev Resources table created successfully.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"❌ Error creating dev_resources table: {err}")
+            return False
+    
+    def create_podcasts_table(self):
+        """Create podcasts table"""
+        try:
+            create_table_query = """
+            CREATE TABLE IF NOT EXISTS podcasts (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(150) NOT NULL,
+                description TEXT,
+                url TEXT,
+                icon VARCHAR(10),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            """
+            self.cursor.execute(create_table_query)
+            print("✅ Podcasts table created successfully.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"❌ Error creating podcasts table: {err}")
+            return False
+    
+    def create_youtube_channels_table(self):
+        """Create youtube_channels table"""
+        try:
+            create_table_query = """
+            CREATE TABLE IF NOT EXISTS youtube_channels (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(150) NOT NULL,
+                description TEXT,
+                url TEXT,
+                icon VARCHAR(10),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            """
+            self.cursor.execute(create_table_query)
+            print("✅ YouTube Channels table created successfully.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"❌ Error creating youtube_channels table: {err}")
+            return False
+    
+    def create_theology_resources_table(self):
+        """Create theology_resources table"""
+        try:
+            create_table_query = """
+            CREATE TABLE IF NOT EXISTS theology_resources (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(150) NOT NULL,
+                category VARCHAR(100),
+                description TEXT,
+                url TEXT,
+                icon VARCHAR(10),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            """
+            self.cursor.execute(create_table_query)
+            print("✅ Theology Resources table created successfully.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"❌ Error creating theology_resources table: {err}")
             return False
     
     def create_users_table(self):
@@ -286,14 +359,27 @@ class DatabaseManager:
                                    5, '{"url": "/images/john-smith.jpg", "alt": "John Smith"}', True)
             
             # Sample books
-            self.insert_book('Clean Code', 'Robert C. Martin', 'A handbook of agile software craftsmanship',
-                            '{"url": "/images/clean-code.jpg", "alt": "Clean Code Book Cover"}',
-                            'programming', 4.5, 'https://amazon.com/clean-code', '9780132350884', 464, 2008)
+            self.insert_book('Clean Code', 'Robert C. Martin', 'programming', 'A handbook of agile software craftsmanship',
+                            '📚', 5, 'Read', True, 'https://amazon.com/clean-code', '/images/clean-code.jpg')
             
-            # Sample resources
-            self.insert_resource('MDN Web Docs', 'Comprehensive documentation for web technologies',
-                                'https://developer.mozilla.org', 'documentation', 'website',
-                                '["web", "documentation", "reference"]', True)
+            # Sample tools
+            self.insert_tool('VS Code', 'development', 'Popular code editor with extensive plugin ecosystem', '💻')
+            
+            # Sample dev resources
+            self.insert_dev_resource('MDN Web Docs', 'documentation', 'Comprehensive documentation for web technologies',
+                                    'https://developer.mozilla.org', '📖')
+            
+            # Sample podcasts
+            self.insert_podcast('Syntax', 'A Tasty Treats Podcast for Web Developers',
+                               'https://syntax.fm', '🎧')
+            
+            # Sample YouTube channels
+            self.insert_youtube_channel('Traversy Media', 'Web development tutorials and courses',
+                                       'https://youtube.com/traversymedia', '📺')
+            
+            # Sample theology resources
+            self.insert_theology_resource('Ligonier Ministries', 'apologetics', 'Reformed theology resources and teaching',
+                                         'https://ligonier.org', '✝️')
             
             print("✅ Sample data inserted successfully.")
             return True
@@ -358,14 +444,14 @@ class DatabaseManager:
         except Exception as e:
             print(f"❌ Error inserting testimonial from '{name}': {e}")
     
-    def insert_book(self, title, author, description, cover_image, category, rating, amazon_link, isbn, pages, published_year):
+    def insert_book(self, title, author, category, description, cover, rating, status, featured, link, image):
         """Insert book with error handling"""
         try:
             query = """
-            INSERT INTO books (title, author, description, cover_image, category, rating, amazon_link, isbn, pages, published_year)
+            INSERT INTO books (title, author, category, description, cover, rating, status, featured, link, image)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
-            data = (title, author, description, cover_image, category, rating, amazon_link, isbn, pages, published_year)
+            data = (title, author, category, description, cover, rating, status, featured, link, image)
             self.cursor.execute(query, data)
             self.connection.commit()
             print(f"✅ Book '{title}' inserted.")
@@ -373,20 +459,80 @@ class DatabaseManager:
         except Exception as e:
             print(f"❌ Error inserting book '{title}': {e}")
     
-    def insert_resource(self, title, description, link, category, type_resource, tags, featured):
-        """Insert resource with error handling"""
+    def insert_tool(self, name, category, description, icon):
+        """Insert tool with error handling"""
         try:
             query = """
-            INSERT INTO resources (title, description, link, category, type, tags, featured)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO tools (name, category, description, icon)
+            VALUES (%s, %s, %s, %s)
             """
-            data = (title, description, link, category, type_resource, tags, featured)
+            data = (name, category, description, icon)
             self.cursor.execute(query, data)
             self.connection.commit()
-            print(f"✅ Resource '{title}' inserted.")
+            print(f"✅ Tool '{name}' inserted.")
             
         except Exception as e:
-            print(f"❌ Error inserting resource '{title}': {e}")
+            print(f"❌ Error inserting tool '{name}': {e}")
+    
+    def insert_dev_resource(self, name, category, description, url, icon):
+        """Insert dev resource with error handling"""
+        try:
+            query = """
+            INSERT INTO dev_resources (name, category, description, url, icon)
+            VALUES (%s, %s, %s, %s, %s)
+            """
+            data = (name, category, description, url, icon)
+            self.cursor.execute(query, data)
+            self.connection.commit()
+            print(f"✅ Dev Resource '{name}' inserted.")
+            
+        except Exception as e:
+            print(f"❌ Error inserting dev resource '{name}': {e}")
+    
+    def insert_podcast(self, name, description, url, icon):
+        """Insert podcast with error handling"""
+        try:
+            query = """
+            INSERT INTO podcasts (name, description, url, icon)
+            VALUES (%s, %s, %s, %s)
+            """
+            data = (name, description, url, icon)
+            self.cursor.execute(query, data)
+            self.connection.commit()
+            print(f"✅ Podcast '{name}' inserted.")
+            
+        except Exception as e:
+            print(f"❌ Error inserting podcast '{name}': {e}")
+    
+    def insert_youtube_channel(self, name, description, url, icon):
+        """Insert YouTube channel with error handling"""
+        try:
+            query = """
+            INSERT INTO youtube_channels (name, description, url, icon)
+            VALUES (%s, %s, %s, %s)
+            """
+            data = (name, description, url, icon)
+            self.cursor.execute(query, data)
+            self.connection.commit()
+            print(f"✅ YouTube Channel '{name}' inserted.")
+            
+        except Exception as e:
+            print(f"❌ Error inserting YouTube channel '{name}': {e}")
+    
+    def insert_theology_resource(self, name, category, description, url, icon):
+        """Insert theology resource with error handling"""
+        try:
+            query = """
+            INSERT INTO theology_resources (name, category, description, url, icon)
+            VALUES (%s, %s, %s, %s, %s)
+            """
+            data = (name, category, description, url, icon)
+            self.cursor.execute(query, data)
+            self.connection.commit()
+            print(f"✅ Theology Resource '{name}' inserted.")
+            
+        except Exception as e:
+            print(f"❌ Error inserting theology resource '{name}': {e}")
     
     def insert_user(self, username, email, password_hash, full_name, role):
         """Insert user with error handling"""
@@ -413,7 +559,7 @@ class DatabaseManager:
         print("\n🚀 Creating database tables...")
         
         tables_created = 0
-        total_tables = 5
+        total_tables = 8
         
         if self.create_articles_table():
             tables_created += 1
@@ -423,7 +569,15 @@ class DatabaseManager:
             tables_created += 1
         if self.create_books_table():
             tables_created += 1
-        if self.create_resources_table():
+        if self.create_tools_table():
+            tables_created += 1
+        if self.create_dev_resources_table():
+            tables_created += 1
+        if self.create_podcasts_table():
+            tables_created += 1
+        if self.create_youtube_channels_table():
+            tables_created += 1
+        if self.create_theology_resources_table():
             tables_created += 1
         
         print(f"\n📊 Database setup complete: {tables_created}/{total_tables} tables created successfully.")
@@ -487,6 +641,10 @@ if __name__ == "__main__":
 # DROP TABLE articles;
 # DROP TABLE books;
 # DROP TABLE projects;
-# DROP TABLE resources;
+# DROP TABLE tools;
+# DROP TABLE dev_resources;
+# DROP TABLE podcasts;
+# DROP TABLE youtube_channels;
+# DROP TABLE theology_resources;
 # DROP TABLE testimonials;
 # DROP TABLE users;

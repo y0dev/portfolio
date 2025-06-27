@@ -71,7 +71,7 @@ class ArticlesPage extends Component {
                 title={article.title}
                 date={article.date}
                 image={article.image}
-                id={article.id}
+                slug={article.slug}
                 tags={article.tags}
                 note={noteValue}/>
         });
@@ -108,8 +108,6 @@ class ArticlesPage extends Component {
         try {
             this.setState({ loading: true, error: null });
             
-            console.log('Fetching articles from:', ARTICLES_ENDPOINT);
-            
             const response = await fetch(ARTICLES_ENDPOINT, {
                 method: 'GET',
                 headers: {
@@ -119,9 +117,6 @@ class ArticlesPage extends Component {
                 mode: 'cors', // Explicitly set CORS mode
             });
 
-            console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers);
-
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error('Response error text:', errorText);
@@ -129,13 +124,10 @@ class ArticlesPage extends Component {
             }
 
             const data = await response.json();
-            console.log('Response data:', data);
             
             if (data.success && data.data) {
                 const articles = data.data;
                 const articles_sorted = filtered(articles);
-                
-                console.log('Articles loaded from API:', articles.length);
                 
                 const posts = articles_sorted.map((article, idx) => {
                     // Check if it's a note based on 'type' field or 'file-id' field
@@ -148,19 +140,15 @@ class ArticlesPage extends Component {
                         title={article.title}
                         date={article.date}
                         image={article.image}
-                        id={article.id}
+                        slug={article.slug}
                         tags={article.tags}
                         note={noteValue}/>
                 });
-
-                console.log('Posts created:', posts.length);
 
                 // Get current posts
                 let indexOfLastPost = this.state.currentPostPage * this.state.postsPerPage;
                 let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
                 const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-                console.log('Current posts:', currentPosts.length);
 
                 this.setState({
                     mergeArray: articles_sorted,
@@ -279,7 +267,7 @@ class ArticlesPage extends Component {
                 title={article.title}
                 date={article.date}
                 image={article.image}
-                id={article.id}
+                slug={article.slug}
                 tags={article.tags}
                 note={noteValue}/>
         });
@@ -307,7 +295,7 @@ class ArticlesPage extends Component {
                     title={article.title}
                     date={article.date}
                     image={article.image}
-                    id={article.id}
+                    slug={article.slug}
                     tags={article.tags}
                     note={noteValue}/>
             }),
@@ -323,7 +311,7 @@ class ArticlesPage extends Component {
                     title={article.title}
                     date={article.date}
                     image={article.image}
-                    id={article.id}
+                    slug={article.slug}
                     tags={article.tags}
                     note={noteValue}/>
             }).slice(0, this.state.postsPerPage)
@@ -332,10 +320,6 @@ class ArticlesPage extends Component {
 
     render() {
         const hasActiveFilters = this.state.searchTerm || this.state.selectedCategory !== 'all';
-        
-        console.log('Render - currentPosts length:', this.state.currentPosts.length);
-        console.log('Render - posts length:', this.state.posts.length);
-        console.log('Render - mergeArray length:', this.state.mergeArray.length);
         
         // Loading state
         if (this.state.loading) {

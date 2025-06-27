@@ -7,14 +7,14 @@ function ArticleModule(props) {
     let icon;
     let date;
     let tags;
-    let id;
+    let slug;
     let note = props.note;
     let link = note === 0 ? "/article/" : "/note/";
 
     if (props.title) {
         title = <h3 className="article-title">{props.title}</h3>;
-        if (props.id) {
-            id = props.id;    
+        if (props.slug) {
+            slug = props.slug;    
         }
     }
 
@@ -35,7 +35,7 @@ function ArticleModule(props) {
     }
 
     return (
-        <a href={link + id} className='article-card'>
+        <a href={link + slug} className='article-card'>
             <div className='article-card-header'>
                 {icon && (
                     <div className='article-image-container'>

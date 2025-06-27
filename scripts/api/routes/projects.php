@@ -6,7 +6,7 @@
  * @version 1.0
  */
 
-require_once '../config.php';
+require_once '../../config/config.php';
 
 // Set CORS headers
 setCorsHeaders();

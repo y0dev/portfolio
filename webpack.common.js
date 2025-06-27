@@ -291,6 +291,78 @@ module.exports = {
 				'keywords': 'articles, blog, software development, programming, technology, web development, coding, tutorials, thoughts',
 				'canonical': 'https://www.devontaereid.com/articles'
 			}
-		})
+		}),
+		new HtmlWebpackPlugin({
+			title: 'Article - Devontae Reid | Blog',
+			favicon: './src/assets/images/logos/logo192.png',
+			filename: 'article/[slug].html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
+			'meta': {
+				'viewport': 'width=device-width, initial-scale=1.0',
+				'author': 'Devontae Reid',
+				'robots': 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+				'theme-color': '#3b82f6',
+
+				// Open Graph
+				'og:title': 'Article - Devontae Reid | Blog',
+				'og:description': 'Articles and notes on software development, programming, technology, and thoughts on building better software.',
+				'og:image': 'https://i.ibb.co/HY4dx9s/headshot.jpg',
+				'og:image:width': '1200',
+				'og:image:height': '630',
+				'og:url': 'https://www.devontaereid.com/article/[slug]',
+				'og:type': 'website',
+				'og:site_name': 'Devontae Reid Portfolio',
+
+				// Twitter Card
+				'twitter:card': 'summary_large_image',
+				'twitter:site': '@_yodev_',
+				'twitter:creator': '@_yodev_',
+				'twitter:title': 'Article - Devontae Reid | Blog',
+				'twitter:description': 'Articles and notes on software development, programming, technology, and thoughts on building better software.',
+				'twitter:image': 'https://i.ibb.co/HY4dx9s/headshot.jpg',
+
+				// Additional SEO
+				'description': 'Article on software development, programming, technology, and thoughts on building better software.',
+				'keywords': 'article, blog, software development, programming, technology, web development, coding, tutorials, thoughts',
+				'canonical': 'https://www.devontaereid.com/article/[slug]'
+			}
+		}),
+		new HtmlWebpackPlugin({
+			title: 'Note - Devontae Reid | Blog',
+			favicon: './src/assets/images/logos/logo192.png',
+			filename: 'note/[slug].html',
+			template: './src/templates/index.html',
+			chunks: ['main'],
+			'meta': {
+				'viewport': 'width=device-width, initial-scale=1.0',
+				'author': 'Devontae Reid',
+				'robots': 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+				'theme-color': '#3b82f6',
+
+				// Open Graph
+				'og:title': 'Note - Devontae Reid | Blog',
+				'og:description': 'Notes on software development, programming, technology, and thoughts on building better software.',
+				'og:image': 'https://i.ibb.co/HY4dx9s/headshot.jpg',
+				'og:image:width': '1200',
+				'og:image:height': '630',
+				'og:url': 'https://www.devontaereid.com/note/[slug]',
+				'og:type': 'website',
+				'og:site_name': 'Devontae Reid Portfolio',
+
+				// Twitter Card
+				'twitter:card': 'summary_large_image',
+				'twitter:site': '@_yodev_',
+				'twitter:creator': '@_yodev_',
+				'twitter:title': 'Note - Devontae Reid | Blog',
+				'twitter:description': 'Notes on software development, programming, technology, and thoughts on building better software.',
+				'twitter:image': 'https://i.ibb.co/HY4dx9s/headshot.jpg',
+
+				// Additional SEO
+				'description': 'Note on software development, programming, technology, and thoughts on building better software.',
+				'keywords': 'note, blog, software development, programming, technology, web development, coding, tutorials, thoughts',
+				'canonical': 'https://www.devontaereid.com/note/[slug]'
+			}	
+		})	
 	]
 }
