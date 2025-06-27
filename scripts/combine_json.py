@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import sys
 from typing import List, Dict, Any
 
 
@@ -19,7 +20,7 @@ def replace_placeholders(
         img_id = match.group(1)
         img = next((img for img in images if img["id"] == img_id), None)
         if img:
-            return f'<img src="{img["link"]}" alt="{img["alt"]}" title="{img.get("caption", "")}">'
+            return f'<div class="post-image-container"><a href="{img["link"]}"><img class="post-image" src="{img["link"]}" alt="{img["alt"]}" title="{img.get("caption", "")}"></a><figcaption class="post-image-caption">{img.get("caption", "")}</figcaption></div>'
         return match.group(0)
 
     # Replace linkPlace
@@ -27,7 +28,7 @@ def replace_placeholders(
         link_id = match.group(1)
         link = next((l for l in links if l["id"] == link_id), None)
         if link:
-            return f'<a href="{link["link"]}">{link["text"]}</a>'
+            return f'<a class="post-link" href="{link["link"]}">{link["text"]}</a>'
         return match.group(0)
 
     # Replace listPlace
@@ -35,9 +36,11 @@ def replace_placeholders(
         list_id = match.group(1)
         list_block = next((l for l in lists if l["id"] == list_id), None)
         if list_block:
-            tag = 'ol' if list_block['list_type'] == 'ordered' else 'ul'
-            items = ''.join(f"<li>{item}</li>" for item in list_block['items'])
-            return f"<{tag}>{items}</{tag}>"
+            # Check for both 'list_type' and 'listType' field names
+            list_type = list_block.get('list_type') or list_block.get('listType', 'unordered')
+            tag = 'ol' if list_type == 'ordered' else 'ul'
+            items = ''.join(f'<li class="post-list-item">{item}</li>' for item in list_block['items'])
+            return f"<{tag} class=\"post-list\">{items}</{tag}>"
         return match.group(0)
     
     # Replace :codePlace(ID)
@@ -45,7 +48,8 @@ def replace_placeholders(
         code_id = match.group(1)
         code_entry = next((c for c in codes if c["id"] == code_id), None)
         if code_entry:
-            return f'<pre><code>{code_entry["content"]}</code></pre>'
+            language = code_entry.get('language', 'text')
+            return f'<pre class="language-{language}"><code class="language-{language}">{code_entry["content"]}</code></pre>'
         return match.group(0)
 
     # Replace :special-text(...)special-text-end
@@ -94,7 +98,7 @@ def process_article(json_data: Dict[str, Any]) -> Dict[str, Any]:
         lists = section.get("lists", [])
         codes = section.get("code", []) if "code" in section else section.get("codes", [])
 
-        html_paragraphs = [f"<p>{replace_placeholders(p, images, links, lists, codes)}</p>" for p in paragraphs]
+        html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes)}</p>' for p in paragraphs]
         htmlContent = "\n".join(html_paragraphs)
 
         transformed["content"].append({
@@ -118,11 +122,56 @@ def combine_articles(directory):
                 print(f"❌ Error reading {filename}: {e}")
     return combined
 
-if __name__ == "__main__":
-    input_dir = "/Volumes/Documents/blog_articles/json_outputs"  # directory with input JSON files
-    output_path = ARTICLES_PATH
+def get_input_directory():
+    """Get the input directory from environment variable, command line argument, or use default"""
+    # Check command line arguments first
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+    
+    # Check environment variable
+    env_path = os.getenv('BLOG_ARTICLES_DIR')
+    if env_path:
+        return env_path
+    
+    # Default fallback paths for different operating systems
+    if os.name == 'nt':  # Windows
+        default_paths = [
+            os.path.join('F:\\', 'Documents', 'blog_articles', 'json_outputs')
+        ]
+    else:  # Linux/Mac
+        default_paths = [
+            os.path.join('/Volumes', 'Documents', 'blog_articles', 'json_outputs')
+        ]
+    
+    # Try to find an existing directory
+    for path in default_paths:
+        if os.path.exists(path) and os.path.isdir(path):
+            return path
+    
+    # If none exist, return the first default path and let the user create it
+    return default_paths[0]
 
+if __name__ == "__main__":
+    input_dir = get_input_directory()
+    output_path = ARTICLES_PATH
+    print(f"📁 Input directory: {input_dir}")
+    # Check if input directory exists
+    if not os.path.exists(input_dir):
+        print(f"❌ Input directory does not exist: {input_dir}")
+        print("\nTo fix this, either:")
+        print(f"1. Create the directory: {input_dir}")
+        print("2. Set the BLOG_ARTICLES_DIR environment variable")
+        print("3. Pass the directory path as a command line argument")
+        print("\nExample usage:")
+        print("  python scripts/combine_json.py /path/to/your/json/files")
+        print("  BLOG_ARTICLES_DIR=/path/to/your/json/files python scripts/combine_json.py")
+        sys.exit(1)
+
+    print(f"📁 Reading articles from: {input_dir}")
     all_articles = combine_articles(input_dir)
+
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     with open(output_path, "w", encoding="utf-8") as out_file:
         json.dump(all_articles, out_file, indent=2)
