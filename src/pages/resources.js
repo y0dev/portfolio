@@ -3,7 +3,6 @@ import './css/resources.css';
 
 // API Configuration
 const API_BASE_URL = 'https://devontaereid.com/scripts/api';
-const RESOURCES_ENDPOINT = `${API_BASE_URL}/resources`;
 
 class ResourcesPage extends Component {
     constructor() {
@@ -23,14 +22,61 @@ class ResourcesPage extends Component {
     }
 
     async componentDidMount() {
-        await this.fetchResources();
+        await this.fetchAllResources();
     }
 
-    async fetchResources() {
+    async fetchAllResources() {
         try {
             this.setState({ loading: true, error: null });
             
-            const response = await fetch(RESOURCES_ENDPOINT, {
+            // Fetch all resource types in parallel
+            const resourceTypes = [
+                'books',
+                'tools', 
+                'dev_resources',
+                'podcasts',
+                'youtube_channels',
+                'theology_resources'
+            ];
+
+            const fetchPromises = resourceTypes.map(type => 
+                this.fetchResourceType(type)
+            );
+
+            const results = await Promise.allSettled(fetchPromises);
+            
+            // Process results
+            const newResources = { ...this.state.resources };
+            let hasErrors = false;
+
+            results.forEach((result, index) => {
+                const resourceType = resourceTypes[index];
+                if (result.status === 'fulfilled' && result.value) {
+                    newResources[resourceType] = result.value;
+                } else {
+                    console.error(`Failed to fetch ${resourceType}:`, result.reason);
+                    hasErrors = true;
+                }
+            });
+
+            this.setState({
+                resources: newResources,
+                loading: false,
+                error: hasErrors ? 'Some resources failed to load. Please refresh the page.' : null
+            });
+
+        } catch (error) {
+            console.error('Error fetching resources:', error);
+            this.setState({ 
+                error: 'Failed to load resources. Please try again later.',
+                loading: false 
+            });
+        }
+    }
+
+    async fetchResourceType(resourceType) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/resources/${resourceType}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,23 +90,20 @@ class ResourcesPage extends Component {
             const data = await response.json();
             
             if (data.success && data.data) {
-                const resources = data.data;
-                console.log('Resources loaded from API:', resources);
-                
-                this.setState({
-                    resources: resources,
-                    loading: false
-                });
+                console.log(`${resourceType} loaded from API:`, data.data);
+                return data.data;
             } else {
-                throw new Error(data.message || 'Failed to fetch resources');
+                throw new Error(data.message || `Failed to fetch ${resourceType}`);
             }
         } catch (error) {
-            console.error('Error fetching resources:', error);
-            this.setState({ 
-                error: 'Failed to load resources. Please try again later.',
-                loading: false 
-            });
+            console.error(`Error fetching ${resourceType}:`, error);
+            throw error;
         }
+    }
+
+    async fetchResources() {
+        // Legacy method - keeping for backward compatibility
+        await this.fetchAllResources();
     }
 
     getStatusColor = (status) => {
@@ -129,7 +172,7 @@ class ResourcesPage extends Component {
                         </div>
                         <h3>Error Loading Resources</h3>
                         <p>{error}</p>
-                        <button className="retry-btn" onClick={this.fetchResources}>
+                        <button className="retry-btn" onClick={this.fetchAllResources}>
                             Try Again
                         </button>
                     </div>

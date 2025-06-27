@@ -582,6 +582,56 @@ class DatabaseManager:
         
         print(f"\n📊 Database setup complete: {tables_created}/{total_tables} tables created successfully.")
         return tables_created == total_tables
+    
+    def load_all_data(self):
+        """Load all data using the individual loading scripts"""
+        print("\n📝 Loading data from JSON files...")
+        
+        # Import and run loading scripts
+        try:
+            import subprocess
+            import sys
+            import os
+            
+            # Get the directory of this script
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            
+            # List of loading scripts to run
+            loading_scripts = [
+                'load_article.py',
+                'load_resources.py', 
+                'load_projects.py',
+                'load_testimonials.py'
+            ]
+            
+            for script in loading_scripts:
+                script_path = os.path.join(script_dir, script)
+                if os.path.exists(script_path):
+                    print(f"\n🔄 Running {script}...")
+                    try:
+                        result = subprocess.run([sys.executable, script_path], 
+                                              cwd=script_dir, 
+                                              capture_output=True, 
+                                              text=True)
+                        if result.returncode == 0:
+                            print(f"✅ {script} completed successfully")
+                            if result.stdout:
+                                print(result.stdout)
+                        else:
+                            print(f"⚠️ {script} completed with warnings")
+                            if result.stderr:
+                                print(result.stderr)
+                    except Exception as e:
+                        print(f"❌ Error running {script}: {e}")
+                else:
+                    print(f"⚠️ {script} not found, skipping...")
+            
+            print("\n✅ All data loading scripts completed.")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Error loading data: {e}")
+            return False
 
 def main():
     """Main function to run the database setup"""
@@ -617,8 +667,13 @@ def main():
             sys.exit(1)
         
         # Insert sample data
-        print("\n📝 Inserting sample data...")
-        db_manager.insert_sample_data()
+        # print("\n📝 Inserting sample data...")
+        # db_manager.insert_sample_data()
+        
+        # Load all data
+        if not db_manager.load_all_data():
+            print("❌ Failed to load all data. Exiting.")
+            sys.exit(1)
         
         print("\n🎉 Database setup completed successfully!")
         print("\n📋 Next steps:")
@@ -647,4 +702,3 @@ if __name__ == "__main__":
 # DROP TABLE youtube_channels;
 # DROP TABLE theology_resources;
 # DROP TABLE testimonials;
-# DROP TABLE users;

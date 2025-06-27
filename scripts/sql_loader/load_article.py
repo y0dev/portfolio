@@ -20,6 +20,47 @@ DB_CONFIG = {
     'charset': 'utf8mb4',
 }
 
+def get_articles_file():
+    """Get the articles.json file path"""
+    # Check command line arguments first
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+    
+    # Check environment variable
+    env_path = os.getenv('ARTICLES_JSON_PATH')
+    if env_path:
+        return env_path
+    
+    # Default path
+    default_path = 'src/assets/json/articles.json'
+    
+    if os.path.exists(default_path):
+        return default_path
+    
+    print(f"❌ Articles file not found: {default_path}")
+    print("   Create a articles.json file or specify the path as an argument")
+    sys.exit(1)
+
+def load_articles_from_file(file_path: str) -> List[Dict[str, Any]]:
+    """Load articles from JSON file"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Handle both array and object with 'articles' key
+        if isinstance(data, list):
+            articles = data
+        elif isinstance(data, dict) and 'articles' in data:
+            articles = data['articles']
+        else:
+            print("❌ Invalid JSON format. Expected array of articles or object with 'articles' key.")
+            sys.exit(1)
+        
+        print(f"✅ Loaded {len(articles)} articles from: {file_path}")
+        return articles
+    except Exception as e:
+        print(f"❌ Failed to load articles from {file_path}: {e}")
+        sys.exit(1)
 
 def get_input_directory():
     """Get the input directory from environment variable, command line argument, or use default"""
@@ -248,9 +289,20 @@ def main():
 
     if not os.path.exists(ARTICLES_DIR) or not os.path.isdir(ARTICLES_DIR):
         print(f"❌ Articles directory does not exist: {ARTICLES_DIR}")
-        sys.exit(1)
+        print("🔄 Falling back to JSON file loading...")
+        ARTICLES_DIR = None
+    
+    if not ARTICLES_DIR:
+        # Fall back to JSON file loading
+        # Projects file to load JSON from
+        ARTICLES_FILE = get_articles_file()
+        print(f"📁 Loading articles from file: {ARTICLES_FILE}")
 
-    articles = load_articles_from_dir(ARTICLES_DIR)
+        # Load projects data
+        if os.path.exists(ARTICLES_FILE):
+            articles = load_articles_from_file(ARTICLES_FILE)
+    else:
+        articles = load_articles_from_dir(ARTICLES_DIR)
 
     if not articles:
         print("⚠️ No articles found to process.")

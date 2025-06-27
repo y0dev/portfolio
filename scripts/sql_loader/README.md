@@ -215,4 +215,229 @@ This project is licensed under the MIT License.
 
 For support and questions, please contact:
 - Email: devontae@devontaereid.com
-- GitHub: https://github.com/devontaereid 
+- GitHub: https://github.com/devontaereid
+
+# Database Loading Scripts
+
+This directory contains Python scripts for loading data into the portfolio database.
+
+## Scripts Overview
+
+### 1. `load_projects.py`
+Loads project data into the `projects` table.
+
+### 2. `load_resources.py`
+Loads resource data into multiple tables:
+- `books`
+- `tools`
+- `dev_resources`
+- `podcasts`
+- `youtube_channels`
+- `theology_resources`
+
+### 3. `load_article.py`
+Loads article data into the `articles` table.
+
+### 4. `main.py`
+Main database setup script that creates all tables and inserts sample data.
+
+## Usage
+
+### Prerequisites
+
+1. **Database Setup**: Ensure your MySQL database is running and accessible
+2. **Environment Variables**: Create a `.env` file in the project root with:
+   ```env
+   DB_USER=your_username
+   DB_PASSWORD=your_password
+   DB_HOST=localhost
+   DB_NAME=portfolio_db
+   ```
+
+### Loading Projects
+
+```bash
+# Use default projects.json file
+python scripts/sql_loader/load_projects.py
+
+# Specify custom projects file
+python scripts/sql_loader/load_projects.py /path/to/projects.json
+
+# Use environment variable
+export PROJECTS_JSON_PATH=/path/to/projects.json
+python scripts/sql_loader/load_projects.py
+```
+
+### Loading Resources
+
+```bash
+# Use default resources.json file
+python scripts/sql_loader/load_resources.py
+
+# Specify custom resources file
+python scripts/sql_loader/load_resources.py /path/to/resources.json
+
+# Use environment variable
+export RESOURCES_JSON_PATH=/path/to/resources.json
+python scripts/sql_loader/load_resources.py
+```
+
+### Loading Articles
+
+```bash
+# Use default articles directory
+python scripts/sql_loader/load_article.py
+
+# Specify custom articles directory
+python scripts/sql_loader/load_article.py /path/to/articles/directory
+
+# Use environment variable
+export BLOG_ARTICLES_DIR=/path/to/articles/directory
+python scripts/sql_loader/load_article.py
+```
+
+### Database Setup
+
+```bash
+# Create all tables and insert sample data
+python scripts/sql_loader/main.py
+```
+
+## Data Formats
+
+### Projects JSON Format
+
+```json
+[
+  {
+    "title": "Project Title",
+    "description": "Project description",
+    "category": "web-development",
+    "technologies": ["React", "Node.js", "MySQL"],
+    "link": "https://project-demo.com",
+    "github_link": "https://github.com/user/project",
+    "images": [
+      {
+        "url": "/images/project.png",
+        "alt": "Project Screenshot"
+      }
+    ],
+    "featured": true,
+    "date_created": "2024-01-15 10:00:00"
+  }
+]
+```
+
+### Resources JSON Format
+
+```json
+{
+  "books": [
+    {
+      "title": "Book Title",
+      "author": "Author Name",
+      "category": "Programming",
+      "description": "Book description",
+      "cover": "📚",
+      "rating": 5,
+      "status": "Read",
+      "featured": true,
+      "link": "https://amazon.com/book",
+      "image": "/images/book.jpg"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Tool Name",
+      "category": "Editor",
+      "description": "Tool description",
+      "icon": "💻"
+    }
+  ],
+  "dev_resources": [
+    {
+      "name": "Resource Name",
+      "category": "Documentation",
+      "description": "Resource description",
+      "url": "https://resource.com",
+      "icon": "📖"
+    }
+  ],
+  "podcasts": [
+    {
+      "name": "Podcast Name",
+      "description": "Podcast description",
+      "url": "https://podcast.com",
+      "icon": "🎧"
+    }
+  ],
+  "youtube_channels": [
+    {
+      "name": "Channel Name",
+      "description": "Channel description",
+      "url": "https://youtube.com/channel",
+      "icon": "📺"
+    }
+  ],
+  "theology_resources": [
+    {
+      "name": "Resource Name",
+      "category": "Sermons",
+      "description": "Resource description",
+      "url": "https://resource.com",
+      "icon": "✝️"
+    }
+  ]
+}
+```
+
+## Features
+
+### Automatic Features
+
+- **Slug Generation**: Automatically generates URL-friendly slugs from project titles
+- **JSON Handling**: Properly handles JSON fields for technologies, images, and other arrays
+- **Error Handling**: Graceful error handling with detailed error messages
+- **Upsert Logic**: Uses `ON DUPLICATE KEY UPDATE` to handle existing records
+- **Sample Data**: Generates sample data if no file is provided
+
+### Database Compatibility
+
+- **MySQL**: Optimized for MySQL 8.0+
+- **UTF-8 Support**: Full Unicode support for international content
+- **Indexing**: Proper database indexing for performance
+- **Constraints**: Appropriate foreign key and unique constraints
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Connection Error**: Check your database credentials in `.env` file
+2. **Permission Error**: Ensure your MySQL user has CREATE/INSERT permissions
+3. **JSON Parse Error**: Validate your JSON file format
+4. **Duplicate Key Error**: The script handles this automatically with upsert logic
+
+### Debug Mode
+
+Add debug logging by setting the environment variable:
+```bash
+export DEBUG=1
+python scripts/sql_loader/load_projects.py
+```
+
+## API Integration
+
+These scripts load data that can be accessed through the portfolio API:
+
+- **Projects**: `GET /api/projects`
+- **Resources**: `GET /api/resources/{type}` (books, tools, etc.)
+- **Articles**: `GET /api/articles`
+
+## Contributing
+
+When adding new data types:
+
+1. Create the corresponding table in `main.py`
+2. Create a load script following the existing pattern
+3. Update this README with usage instructions
+4. Add sample data format documentation 
