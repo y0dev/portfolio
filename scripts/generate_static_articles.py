@@ -60,9 +60,9 @@ def render_article(post, is_note=False):
     <title>{title} - Devontae Reid</title>
     <meta name="description" content="{esc(post.get('description', title))}" />
     <link rel="icon" href="images/logos/logo192.png" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/viewarticle.css" />
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/viewarticle.css" />
+    <link rel="stylesheet" href="/css/index.css" />
 </head>
 <body>
     <div class="article-page">
@@ -105,6 +105,7 @@ def render_article(post, is_note=False):
             </div>
         </article>
     </div>
+    <script type="text/javascript" src="/scripts/viewarticle.js"></script>
 </body>
 </html>'''
 

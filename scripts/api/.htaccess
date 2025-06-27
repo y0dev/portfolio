@@ -16,22 +16,25 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-# Security headers
+# CORS Headers - Set these before any output
 <IfModule mod_headers.c>
-    # Prevent MIME type sniffing
+    # Allow all origins for development (change in production)
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Accept, Origin"
+    Header always set Access-Control-Max-Age "86400"
+    Header always set Access-Control-Allow-Credentials "true"
+    
+    # Handle preflight requests
+    Header always set Access-Control-Allow-Origin "*" env=HTTP_ORIGIN
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS" env=HTTP_ORIGIN
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Accept, Origin" env=HTTP_ORIGIN
+    
+    # Security headers
     Header always set X-Content-Type-Options nosniff
-    
-    # Prevent clickjacking
     Header always set X-Frame-Options DENY
-    
-    # Enable XSS protection
     Header always set X-XSS-Protection "1; mode=block"
-    
-    # Referrer policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
-    
-    # Content Security Policy
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
 </IfModule>
 
 # Disable directory browsing

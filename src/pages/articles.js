@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import './css/articles.css';
-import _articles from '../assets/json/articles.json';
-import _notes from '../assets/json/notes.json';
 import ArticleModule from '../components/articlemodule';
 import Pagination from '../components/pagination';
 
+// Import static JSON files as fallback
+import _articles from '../assets/json/articles.json';
+import _notes from '../assets/json/notes.json';
+
+// API Configuration
+const API_BASE_URL = 'https://devontaereid.com/scripts/api';
+const ARTICLES_ENDPOINT = `${API_BASE_URL}/articles`;
+
 function filtered(json_object) {
-    return json_object.sort((a, b) => b.date - a.date);
+    return json_object.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 class ArticlesPage extends Component {
@@ -22,7 +28,10 @@ class ArticlesPage extends Component {
             searchTerm: '',
             selectedCategory: 'all',
             categories: ['all', 'programming', 'technology', 'tutorial', 'theology', 'health'],
-            filteredPosts: []
+            filteredPosts: [],
+            loading: true,
+            error: null,
+            usingFallback: false
         }
         
         this.handleSearch = this.handleSearch.bind(this);
@@ -31,9 +40,17 @@ class ArticlesPage extends Component {
         this.goToVerifiedPage = this.goToVerifiedPage.bind(this);
         this.goToPostPage = this.goToPostPage.bind(this);
         this.clearFilters = this.clearFilters.bind(this);
+        this.fetchArticles = this.fetchArticles.bind(this);
+        this.loadFallbackData = this.loadFallbackData.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await this.fetchArticles();
+    }
+
+    loadFallbackData() {
+        console.log('Loading fallback data from static JSON files');
+        
         // Get both articles and notes and sort by date
         const articles_sorted = filtered(_articles);
         const notes_sorted = filtered(_notes);
@@ -73,7 +90,9 @@ class ArticlesPage extends Component {
             filteredPosts: mergeArray,
             posts: posts,
             currentPosts: currentPosts,
-            postsLength: posts.length
+            postsLength: posts.length,
+            loading: false,
+            usingFallback: true
         });
 
         // Only show paginate if greater than postsPerPage
@@ -82,6 +101,103 @@ class ArticlesPage extends Component {
             if (article_pa) {
                 article_pa.classList.add('hidden');
             }
+        }
+    }
+
+    async fetchArticles() {
+        try {
+            this.setState({ loading: true, error: null });
+            
+            console.log('Fetching articles from:', ARTICLES_ENDPOINT);
+            
+            const response = await fetch(ARTICLES_ENDPOINT, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                mode: 'cors', // Explicitly set CORS mode
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Response error text:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, response: ${errorText}`);
+            }
+
+            const data = await response.json();
+            console.log('Response data:', data);
+            
+            if (data.success && data.data) {
+                const articles = data.data;
+                const articles_sorted = filtered(articles);
+                
+                console.log('Articles loaded from API:', articles.length);
+                
+                const posts = articles_sorted.map((article, idx) => {
+                    // Check if it's a note based on 'type' field or 'file-id' field
+                    let noteValue = 0;
+                    if (article.type === 'note' || article['file-id'] === 'note') {
+                        noteValue = 1;
+                    }
+                    
+                    return <ArticleModule key={idx}
+                        title={article.title}
+                        date={article.date}
+                        image={article.image}
+                        id={article.id}
+                        tags={article.tags}
+                        note={noteValue}/>
+                });
+
+                console.log('Posts created:', posts.length);
+
+                // Get current posts
+                let indexOfLastPost = this.state.currentPostPage * this.state.postsPerPage;
+                let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
+                const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+                console.log('Current posts:', currentPosts.length);
+
+                this.setState({
+                    mergeArray: articles_sorted,
+                    filteredPosts: articles_sorted,
+                    posts: posts,
+                    currentPosts: currentPosts,
+                    postsLength: posts.length,
+                    loading: false,
+                    usingFallback: false
+                });
+
+                // Only show paginate if greater than postsPerPage
+                if (posts.length <= this.state.postsPerPage) {
+                    const article_pa = document.getElementById('article-paginate');
+                    if (article_pa) {
+                        article_pa.classList.add('hidden');
+                    }
+                }
+            } else {
+                throw new Error(data.message || 'Failed to fetch articles');
+            }
+        } catch (error) {
+            console.error('Error fetching articles:', error);
+            
+            // Provide more specific error messages
+            let errorMessage = 'Failed to load articles. Please try again later.';
+            
+            if (error.message.includes('CORS')) {
+                errorMessage = 'CORS error: The API server is not allowing requests from this domain. Please check your server configuration.';
+            } else if (error.message.includes('404')) {
+                errorMessage = 'API endpoint not found (404). Please check if the API is properly deployed to your server.';
+            } else if (error.message.includes('Failed to fetch')) {
+                errorMessage = 'Network error: Unable to connect to the API server. Please check your internet connection and server status.';
+            }
+            
+            console.log('API failed, loading fallback data...');
+            this.loadFallbackData();
         }
     }
     
@@ -220,6 +336,58 @@ class ArticlesPage extends Component {
         console.log('Render - currentPosts length:', this.state.currentPosts.length);
         console.log('Render - posts length:', this.state.posts.length);
         console.log('Render - mergeArray length:', this.state.mergeArray.length);
+        
+        // Loading state
+        if (this.state.loading) {
+            return (
+                <div className='app-body' id='articles-container'>
+                    <div className='articles-header'>
+                        <div className="header-content">
+                            <div className="header-text">
+                                <h1 className="articles-title">Blog & Articles</h1>
+                                <p className="articles-subtitle">
+                                    Exploring technology, development, and thoughts on building better software
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="loading-container">
+                        <div className="loading-spinner"></div>
+                        <p>Loading articles...</p>
+                    </div>
+                </div>
+            );
+        }
+
+        // Error state
+        if (this.state.error) {
+            return (
+                <div className='app-body' id='articles-container'>
+                    <div className='articles-header'>
+                        <div className="header-content">
+                            <div className="header-text">
+                                <h1 className="articles-title">Blog & Articles</h1>
+                                <p className="articles-subtitle">
+                                    Exploring technology, development, and thoughts on building better software
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="error-container">
+                        <div className="error-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                            </svg>
+                        </div>
+                        <h3>Error Loading Articles</h3>
+                        <p>{this.state.error}</p>
+                        <button className="retry-btn" onClick={this.fetchArticles}>
+                            Try Again
+                        </button>
+                    </div>
+                </div>
+            );
+        }
         
         return (
             <div className='app-body' id='articles-container'>

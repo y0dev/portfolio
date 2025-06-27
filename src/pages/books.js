@@ -1,20 +1,67 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import './css/books.css';
-import resources from '../assets/json/resources.json';
+
+// API Configuration
+const API_BASE_URL = 'https://devontaereid.com/scripts/api';
+const BOOKS_ENDPOINT = `${API_BASE_URL}/books`;
 
 class BooksPage extends Component {
     constructor() {
         super();
         this.state = {
-            books: resources.books,
-            filteredBooks: resources.books,
+            books: [],
+            filteredBooks: [],
             searchTerm: '',
             statusFilter: 'all',
             categoryFilter: 'all',
             sortBy: 'title',
-            isFilterModalOpen: false
+            isFilterModalOpen: false,
+            loading: true,
+            error: null
         };
+    }
+
+    async componentDidMount() {
+        await this.fetchBooks();
+    }
+
+    async fetchBooks() {
+        try {
+            this.setState({ loading: true, error: null });
+            
+            const response = await fetch(BOOKS_ENDPOINT, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.success && data.data) {
+                const books = data.data;
+                console.log('Books loaded from API:', books.length);
+                
+                this.setState({
+                    books: books,
+                    filteredBooks: books,
+                    loading: false
+                });
+            } else {
+                throw new Error(data.message || 'Failed to fetch books');
+            }
+        } catch (error) {
+            console.error('Error fetching books:', error);
+            this.setState({ 
+                error: 'Failed to load books. Please try again later.',
+                loading: false 
+            });
+        }
     }
 
     getStatusColor = (status) => {
@@ -105,9 +152,57 @@ class BooksPage extends Component {
     };
 
     render() {
-        const { filteredBooks, searchTerm, statusFilter, categoryFilter, sortBy, isFilterModalOpen } = this.state;
+        const { filteredBooks, searchTerm, statusFilter, categoryFilter, sortBy, isFilterModalOpen, loading, error } = this.state;
         const categories = this.getUniqueCategories();
         const hasActiveFilters = searchTerm || statusFilter !== 'all' || categoryFilter !== 'all';
+
+        // Loading state
+        if (loading) {
+            return (
+                <div className="books-page">
+                    <section className="books-hero">
+                        <div className="books-hero-container">
+                            <h1 className="books-hero-title">📚 My Bookshelf</h1>
+                            <p className="books-hero-subtitle">
+                                A collection of books that have influenced my thinking, from programming to theology.
+                            </p>
+                        </div>
+                    </section>
+                    <div className="loading-container">
+                        <div className="loading-spinner"></div>
+                        <p>Loading books...</p>
+                    </div>
+                </div>
+            );
+        }
+
+        // Error state
+        if (error) {
+            return (
+                <div className="books-page">
+                    <section className="books-hero">
+                        <div className="books-hero-container">
+                            <h1 className="books-hero-title">📚 My Bookshelf</h1>
+                            <p className="books-hero-subtitle">
+                                A collection of books that have influenced my thinking, from programming to theology.
+                            </p>
+                        </div>
+                    </section>
+                    <div className="error-container">
+                        <div className="error-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                            </svg>
+                        </div>
+                        <h3>Error Loading Books</h3>
+                        <p>{error}</p>
+                        <button className="retry-btn" onClick={this.fetchBooks}>
+                            Try Again
+                        </button>
+                    </div>
+                </div>
+            );
+        }
 
         return (
                 <div className="books-page">

@@ -1,13 +1,66 @@
 import React, { Component } from 'react';
 import './css/resources.css';
-import resources from '../assets/json/resources.json';
+
+// API Configuration
+const API_BASE_URL = 'https://devontaereid.com/scripts/api';
+const RESOURCES_ENDPOINT = `${API_BASE_URL}/resources`;
 
 class ResourcesPage extends Component {
     constructor() {
         super();
         this.state = {
-            resources: resources
+            resources: {
+                books: [],
+                tools: [],
+                dev_resources: [],
+                podcasts: [],
+                youtube_channels: [],
+                theology_resources: []
+            },
+            loading: true,
+            error: null
         };
+    }
+
+    async componentDidMount() {
+        await this.fetchResources();
+    }
+
+    async fetchResources() {
+        try {
+            this.setState({ loading: true, error: null });
+            
+            const response = await fetch(RESOURCES_ENDPOINT, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.success && data.data) {
+                const resources = data.data;
+                console.log('Resources loaded from API:', resources);
+                
+                this.setState({
+                    resources: resources,
+                    loading: false
+                });
+            } else {
+                throw new Error(data.message || 'Failed to fetch resources');
+            }
+        } catch (error) {
+            console.error('Error fetching resources:', error);
+            this.setState({ 
+                error: 'Failed to load resources. Please try again later.',
+                loading: false 
+            });
+        }
     }
 
     getStatusColor = (status) => {
@@ -34,6 +87,56 @@ class ResourcesPage extends Component {
     );
 
     render() {
+        const { resources, loading, error } = this.state;
+
+        // Loading state
+        if (loading) {
+            return (
+                <div className="resources-page">
+                    <section className="hero-section">
+                        <div className="hero-container">
+                            <h1 className="hero-title">Resources</h1>
+                            <p className="hero-subtitle">
+                                A curated collection of books, tools, and developer resources that have shaped my journey.
+                            </p>
+                        </div>
+                    </section>
+                    <div className="loading-container">
+                        <div className="loading-spinner"></div>
+                        <p>Loading resources...</p>
+                    </div>
+                </div>
+            );
+        }
+
+        // Error state
+        if (error) {
+            return (
+                <div className="resources-page">
+                    <section className="hero-section">
+                        <div className="hero-container">
+                            <h1 className="hero-title">Resources</h1>
+                            <p className="hero-subtitle">
+                                A curated collection of books, tools, and developer resources that have shaped my journey.
+                            </p>
+                        </div>
+                    </section>
+                    <div className="error-container">
+                        <div className="error-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                            </svg>
+                        </div>
+                        <h3>Error Loading Resources</h3>
+                        <p>{error}</p>
+                        <button className="retry-btn" onClick={this.fetchResources}>
+                            Try Again
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="resources-page">
                 {/* Hero */}
@@ -59,7 +162,7 @@ class ResourcesPage extends Component {
                             </p>
                         </div>
                         <div className="books-grid">
-                            {this.state.resources.books
+                            {resources.books
                                 .filter(book => book.featured)
                                 .map(book => (
                                     <a
@@ -95,7 +198,7 @@ class ResourcesPage extends Component {
                 {this.renderSection(
                     "🛠️ Tools & Software",
                     "Essential tools and software I use in my daily development workflow",
-                    this.state.resources.tools,
+                    resources.tools,
                     (tool, index) => (
                         <div key={index} className="resource-card">
                             <div className="resource-content">
@@ -112,7 +215,7 @@ class ResourcesPage extends Component {
                 {this.renderSection(
                     "🌐 Developer Resources",
                     "Websites and platforms I frequently visit for learning and development",
-                    this.state.resources.dev_resources,
+                    resources.dev_resources,
                     (item, index) => (
                         <a
                             key={index}
@@ -135,7 +238,7 @@ class ResourcesPage extends Component {
                 {this.renderSection(
                     "🎙️ Podcasts",
                     "Podcasts I recommend for developers and lifelong learners",
-                    this.state.resources.podcasts,
+                    resources.podcasts,
                     (item, index) => (
                         <a
                             key={index}
@@ -157,7 +260,7 @@ class ResourcesPage extends Component {
                 {this.renderSection(
                     "📺 YouTube Channels",
                     "YouTube channels I recommend for learning and inspiration",
-                    this.state.resources.youtube_channels,
+                    resources.youtube_channels,
                     (item, index) => (
                         <a
                             key={index}
@@ -179,7 +282,7 @@ class ResourcesPage extends Component {
                 {this.renderSection(
                     "⛪ Theology Resources",
                     "Biblical teaching, sermons, evangelism, and apologetics resources",
-                    this.state.resources.theology_resources,
+                    resources.theology_resources,
                     (item, index) => (
                         <a
                             key={index}

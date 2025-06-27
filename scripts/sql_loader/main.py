@@ -89,6 +89,7 @@ class DatabaseManager:
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 title VARCHAR(255) NOT NULL,
                 slug VARCHAR(255) NOT NULL UNIQUE,
+                category VARCHAR(100),
                 description TEXT,
                 content LONGTEXT,
                 body TEXT NOT NULL,
@@ -267,6 +268,7 @@ class DatabaseManager:
         try:
             # Sample articles
             self.insert_article('Getting Started with React', 'getting-started-with-react', 
+                               'Web Development',
                                'A comprehensive guide to building modern web applications with React',
                                '{"sections": [{"title": "Introduction", "content": "React is a powerful JavaScript library..."}]}',
                                '2024-01-15 10:00:00', '["react", "javascript", "web-development"]', 'article')
@@ -293,11 +295,6 @@ class DatabaseManager:
                                 'https://developer.mozilla.org', 'documentation', 'website',
                                 '["web", "documentation", "reference"]', True)
             
-            # Sample user (admin)
-            self.insert_user('admin', 'admin@devontaereid.com', 
-                           '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-                           'Devontae Reid', 'admin')
-            
             print("✅ Sample data inserted successfully.")
             return True
             
@@ -305,15 +302,15 @@ class DatabaseManager:
             print(f"❌ Error inserting sample data: {err}")
             return False
     
-    def insert_article(self, title, slug, description, content, date, tags, type_article):
+    def insert_article(self, title, slug, category, description, content, date, tags, type_article):
         """Insert article with error handling"""
         try:
             query = """
-            INSERT INTO articles (title, slug, description, content, date, tags, type, body)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO articles (title, slug, category, description, content, date, tags, type, body)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             body = f"{title}\n\n{description}"
-            data = (title, slug, description, content, date, tags, type_article, body)
+            data = (title, slug, category, description, content, date, tags, type_article, body)
             self.cursor.execute(query, data)
             self.connection.commit()
             print(f"✅ Article '{title}' inserted.")
@@ -416,7 +413,7 @@ class DatabaseManager:
         print("\n🚀 Creating database tables...")
         
         tables_created = 0
-        total_tables = 6
+        total_tables = 5
         
         if self.create_articles_table():
             tables_created += 1
@@ -427,8 +424,6 @@ class DatabaseManager:
         if self.create_books_table():
             tables_created += 1
         if self.create_resources_table():
-            tables_created += 1
-        if self.create_users_table():
             tables_created += 1
         
         print(f"\n📊 Database setup complete: {tables_created}/{total_tables} tables created successfully.")
@@ -487,3 +482,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# DROP TABLE articles;
+# DROP TABLE books;
+# DROP TABLE projects;
+# DROP TABLE resources;
+# DROP TABLE testimonials;
+# DROP TABLE users;

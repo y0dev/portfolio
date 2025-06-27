@@ -178,4 +178,23 @@ echo "<li><a href='./articles' target='_blank'>Articles Endpoint</a></li>\n";
 echo "<li><a href='./projects' target='_blank'>Projects Endpoint</a></li>\n";
 echo "<li><a href='./test-page.html' target='_blank'>Test Page</a></li>\n";
 echo "</ul>\n";
+
+// Debug file to test API connectivity
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+echo json_encode([
+    'success' => true,
+    'message' => 'API is working!',
+    'timestamp' => date('Y-m-d H:i:s'),
+    'method' => $_SERVER['REQUEST_METHOD'],
+    'uri' => $_SERVER['REQUEST_URI']
+]);
 ?> 
