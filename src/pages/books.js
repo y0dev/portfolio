@@ -4,7 +4,7 @@ import './css/books.css';
 
 // API Configuration
 const API_BASE_URL = 'https://devontaereid.com/scripts/api';
-const BOOKS_ENDPOINT = `${API_BASE_URL}/books`;
+const BOOKS_ENDPOINT = `${API_BASE_URL}/resources/books`;
 
 class BooksPage extends Component {
     constructor() {
