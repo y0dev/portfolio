@@ -108,10 +108,6 @@ def render_article(post, is_note=False):
 </body>
 </html>'''
 
-def copy_css_files(out_dir):
-    shutil.copy(NAVBAR_CSS, os.path.join(out_dir, 'navbar.css'))
-    shutil.copy(VIEWARTICLE_CSS, os.path.join(out_dir, 'viewarticle.css'))
-    shutil.copy(INDEX_CSS, os.path.join(out_dir, 'index.css'))
 
 def generate_all(output_dir):
     # Articles
@@ -123,7 +119,6 @@ def generate_all(output_dir):
         html = render_article(post, is_note=False)
         with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as outf:
             outf.write(html)
-        # copy_css_files(out_dir)
     # Notes
     if os.path.exists(NOTES_PATH):
         with open(NOTES_PATH, 'r') as f:
@@ -134,7 +129,6 @@ def generate_all(output_dir):
             html = render_article(post, is_note=True)
             with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as outf:
                 outf.write(html)
-            # copy_css_files(out_dir)
 
 if __name__ == '__main__':
     output_dir = sys.argv[1] if len(sys.argv) > 1 else 'dist/'
