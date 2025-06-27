@@ -31,12 +31,26 @@ def render_article(post, is_note=False):
     tags = ''.join(f'<span class="post-header-tag">{esc(tag)}</span>' for tag in post.get('tags', []))
     image_html = ''
     if post.get('image'):
-        image_html = f'''<div class="post-hero-image"><img class="post-header-image" src="/{esc(post['image']['name'])}" alt="{esc(post['image'].get('alt', ''))}" /></div>'''
+        image_html = f'''<div class="post-hero-image"><img class="post-header-image" src="{esc(post['image']['name'])}" alt="{esc(post['image'].get('alt', ''))}" /></div>'''
     date = format_date(post.get('date', ''))
     meta_badge = f'<span>{"Note" if is_note else "Article"}</span>'
     title = esc(post.get('title', 'Untitled'))
-    # Content placeholder
-    content_html = '''<div class="post-content-placeholder"><div class="placeholder-content"><h3>Content Coming Soon</h3><p>This article is being prepared. Check back soon for the full content!</p></div></div>'''
+    
+    # Process content sections
+    content_html = ''
+    if post.get('content') and isinstance(post['content'], list):
+        for section in post['content']:
+            section_title = section.get('title', '')
+            section_content = section.get('htmlContent', '')
+            
+            if section_title:
+                content_html += f'<h2>{esc(section_title)}</h2>'
+            if section_content:
+                content_html += section_content
+    else:
+        # Fallback to placeholder if no content
+        content_html = '''<div class="post-content-placeholder"><div class="placeholder-content"><h3>Content Coming Soon</h3><p>This article is being prepared. Check back soon for the full content!</p></div></div>'''
+    
     # Main HTML
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -45,10 +59,10 @@ def render_article(post, is_note=False):
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} - Devontae Reid</title>
     <meta name="description" content="{esc(post.get('description', title))}" />
-    <link rel="icon" href="/src/assets/images/logos/logo192.png" />
-    <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="viewarticle.css" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="images/logos/logo192.png" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/viewarticle.css" />
+    <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
     <div class="article-page">
@@ -109,7 +123,7 @@ def generate_all(output_dir):
         html = render_article(post, is_note=False)
         with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as outf:
             outf.write(html)
-        copy_css_files(out_dir)
+        # copy_css_files(out_dir)
     # Notes
     if os.path.exists(NOTES_PATH):
         with open(NOTES_PATH, 'r') as f:
@@ -120,7 +134,7 @@ def generate_all(output_dir):
             html = render_article(post, is_note=True)
             with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as outf:
                 outf.write(html)
-            copy_css_files(out_dir)
+            # copy_css_files(out_dir)
 
 if __name__ == '__main__':
     output_dir = sys.argv[1] if len(sys.argv) > 1 else 'dist/'

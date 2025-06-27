@@ -44,7 +44,12 @@ class ArticlesPage extends Component {
         console.log('Total items:', mergeArray.length);
         
         const posts = mergeArray.map((article, idx) => {
-            let noteValue = article['file-id'] === 'note' ? 1 : 0;
+            // Check if it's a note based on 'type' field or 'file-id' field
+            let noteValue = 0;
+            if (article.type === 'note' || article['file-id'] === 'note') {
+                noteValue = 1;
+            }
+            
             return <ArticleModule key={idx}
                 title={article.title}
                 date={article.date}
@@ -136,19 +141,24 @@ class ArticlesPage extends Component {
         if (searchTerm) {
             filtered = filtered.filter(article => 
                 article.title.toLowerCase().includes(searchTerm) ||
-                article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+                (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
             );
         }
 
         // Filter by category
         if (category !== 'all') {
             filtered = filtered.filter(article =>
-                article.tags.some(tag => tag.toLowerCase() === category.toLowerCase())
+                article.tags && article.tags.some(tag => tag.toLowerCase() === category.toLowerCase())
             );
         }
 
         const filteredPosts = filtered.map((article, idx) => {
-            let noteValue = article['file-id'] === 'note' ? 1 : 0;
+            // Check if it's a note based on 'type' field or 'file-id' field
+            let noteValue = 0;
+            if (article.type === 'note' || article['file-id'] === 'note') {
+                noteValue = 1;
+            }
+            
             return <ArticleModule key={idx}
                 title={article.title}
                 date={article.date}
@@ -171,7 +181,12 @@ class ArticlesPage extends Component {
             searchTerm: '',
             selectedCategory: 'all',
             posts: this.state.mergeArray.map((article, idx) => {
-                let noteValue = article['file-id'] === 'note' ? 1 : 0;
+                // Check if it's a note based on 'type' field or 'file-id' field
+                let noteValue = 0;
+                if (article.type === 'note' || article['file-id'] === 'note') {
+                    noteValue = 1;
+                }
+                
                 return <ArticleModule key={idx}
                     title={article.title}
                     date={article.date}
@@ -182,7 +197,12 @@ class ArticlesPage extends Component {
             }),
             currentPostPage: 1,
             currentPosts: this.state.mergeArray.map((article, idx) => {
-                let noteValue = article['file-id'] === 'note' ? 1 : 0;
+                // Check if it's a note based on 'type' field or 'file-id' field
+                let noteValue = 0;
+                if (article.type === 'note' || article['file-id'] === 'note') {
+                    noteValue = 1;
+                }
+                
                 return <ArticleModule key={idx}
                     title={article.title}
                     date={article.date}
