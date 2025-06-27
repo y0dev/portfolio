@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio API Test Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .test-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .response-area {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .error {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-online {
+            background-color: #28a745;
+        }
+
+        .status-offline {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Portfolio API Test Page</h1>
+            <p>Test and explore the RESTful API endpoints for your portfolio</p>
+        </div>
+
+        <!-- API Status -->
+        <div class="test-section">
+            <h2>API Status</h2>
+            <div id="api-status">
+                <span class="status-indicator status-offline"></span>
+                Checking API status...
+            </div>
+            <div id="debug-info" style="margin-top: 10px; font-size: 12px; color: #666;">
+                <strong>Debug Info:</strong><br>
+                <span id="debug-url"></span><br>
+                <span id="debug-response"></span>
+            </div>
+        </div>
+
+        <!-- Articles Section -->
+        <div class="test-section">
+            <h2>Articles API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getArticles()">Get Articles</button>
+                <button class="btn btn-success" onclick="showCreateArticleForm()">Create Article</button>
+                <button class="btn btn-warning" onclick="showUpdateArticleForm()">Update Article</button>
+                <button class="btn btn-danger" onclick="showDeleteArticleForm()">Delete Article</button>
+            </div>
+            
+            <div id="articles-form" style="display: none;">
+                <form id="articleForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="articleTitle">Title</label>
+                            <input type="text" id="articleTitle" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="articleCategory">Category</label>
+                            <select id="articleCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="technology">Technology</option>
+                                <option value="programming">Programming</option>
+                                <option value="tutorial">Tutorial</option>
+                                <option value="theology">Theology</option>
+                                <option value="health">Health</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleContent">Content</label>
+                        <textarea id="articleContent" name="content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleTags">Tags (comma-separated)</label>
+                        <input type="text" id="articleTags" name="tags" placeholder="react, javascript, web-development">
+                    </div>
+                    <div class="form-group">
+                        <label for="articleImage">Image URL</label>
+                        <input type="url" id="articleImage" name="image" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="articles-response" class="response-area"></div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="test-section">
+            <h2>Projects API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getProjects()">Get Projects</button>
+                <button class="btn btn-success" onclick="showCreateProjectForm()">Create Project</button>
+                <button class="btn btn-warning" onclick="showUpdateProjectForm()">Update Project</button>
+                <button class="btn btn-danger" onclick="showDeleteProjectForm()">Delete Project</button>
+            </div>
+            
+            <div id="projects-form" style="display: none;">
+                <form id="projectForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="projectTitle">Title</label>
+                            <input type="text" id="projectTitle" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectCategory">Category</label>
+                            <select id="projectCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="web-development">Web Development</option>
+                                <option value="mobile-development">Mobile Development</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="ai-ml">AI/ML</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <textarea id="projectDescription" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectTechnologies">Technologies (comma-separated)</label>
+                        <input type="text" id="projectTechnologies" name="technologies" placeholder="React, Node.js, MySQL">
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="projectGithub">GitHub URL</label>
+                            <input type="url" id="projectGithub" name="github_url" placeholder="https://github.com/user/project">
+                        </div>
+                        <div class="form-group">
+                            <label for="projectLive">Live URL</label>
+                            <input type="url" id="projectLive" name="live_url" placeholder="https://project.com">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="projects-response" class="response-area"></div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="test-section">
+            <h2>Testimonials API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getTestimonials()">Get Testimonials</button>
+                <button class="btn btn-success" onclick="showCreateTestimonialForm()">Create Testimonial</button>
+                <button class="btn btn-warning" onclick="showUpdateTestimonialForm()">Update Testimonial</button>
+                <button class="btn btn-danger" onclick="showDeleteTestimonialForm()">Delete Testimonial</button>
+            </div>
+            
+            <div id="testimonials-form" style="display: none;">
+                <form id="testimonialForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="testimonialName">Name</label>
+                            <input type="text" id="testimonialName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="testimonialCompany">Company</label>
+                            <input type="text" id="testimonialCompany" name="company" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="testimonialContent">Content</label>
+                        <textarea id="testimonialContent" name="content" required></textarea>
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="testimonialRating">Rating (1-5)</label>
+                            <select id="testimonialRating" name="rating" required>
+                                <option value="">Select Rating</option>
+                                <option value="1">1 Star</option>
+                                <option value="2">2 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="5">5 Stars</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="testimonialImage">Image URL</label>
+                            <input type="url" id="testimonialImage" name="image" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="testimonials-response" class="response-area"></div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading">
+            <div>Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = window.location.origin + '/scripts/api/';
+        console.log('API Base URL:', API_BASE_URL);
+        
+        // Check API status on page load
+        window.addEventListener('load', checkApiStatus);
+
+        async function checkApiStatus() {
+            try {
+                // Show debug info
+                document.getElementById('debug-url').textContent = 'Testing URL: ' + API_BASE_URL;
+                
+                const response = await fetch(API_BASE_URL);
+                const statusElement = document.getElementById('api-status');
+                
+                // Check if response is JSON
+                const contentType = response.headers.get('content-type');
+                document.getElementById('debug-response').textContent = 
+                    'Response Type: ' + contentType + ' | Status: ' + response.status;
+                
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    if (response.ok) {
+                        statusElement.innerHTML = '<span class="status-indicator status-online"></span>API is online and responding';
+                    } else {
+                        statusElement.innerHTML = '<span class="status-indicator status-offline"></span>API error: ' + (data.message || 'Unknown error');
+                    }
+                } else {
+                    // Response is HTML (probably an error page)
+                    const text = await response.text();
+                    console.log('HTML Response:', text.substring(0, 200) + '...');
+                    statusElement.innerHTML = '<span class="status-indicator status-offline"></span>API returned HTML instead of JSON - check server configuration';
+                    
+                    // Show first 200 characters of HTML response
+                    document.getElementById('debug-response').textContent += ' | HTML: ' + text.substring(0, 200).replace(/\n/g, ' ');
+                }
+            } catch (error) {
+                console.error('API Status Check Error:', error);
+                document.getElementById('api-status').innerHTML = 
+                    '<span class="status-indicator status-offline"></span>API is offline - ' + error.message;
+                document.getElementById('debug-response').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Utility functions
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function hideForms() {
+            document.querySelectorAll('[id$="-form"]').forEach(form => {
+                form.style.display = 'none';
+            });
+        }
+
+        function showResponse(elementId, data) {
+            const element = document.getElementById(elementId);
+            element.textContent = JSON.stringify(data, null, 2);
+        }
+
+        // Enhanced fetch function with better error handling
+        async function apiFetch(url, options = {}) {
+            try {
+                const response = await fetch(url, options);
+                
+                // Get response text first
+                const text = await response.text();
+                
+                // Check if the response looks like JSON (starts with { or [)
+                if (text.trim().startsWith('{') || text.trim().startsWith('[')) {
+                    try {
+                        return JSON.parse(text);
+                    } catch (parseError) {
+                        console.error('JSON Parse Error:', parseError);
+                        console.error('Response text:', text.substring(0, 500));
+                        throw new Error('Response looks like JSON but failed to parse: ' + parseError.message);
+                    }
+                } else {
+                    // Response is not JSON
+                    console.error('Non-JSON Response received:', text.substring(0, 500));
+                    throw new Error('Server returned non-JSON response. Check if API is properly configured.');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                throw error;
+            }
+        }
+
+        // Articles API functions
+        async function getArticles() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'articles');
+                showResponse('articles-response', data);
+            } catch (error) {
+                showResponse('articles-response', { 
+                    error: error.message,
+                    details: 'This usually means the API files are not in the correct location or there is a server configuration issue.'
+                });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateArticleForm() {
+            hideForms();
+            document.getElementById('articles-form').style.display = 'block';
+            document.getElementById('articleForm').onsubmit = createArticle;
+        }
+
+        function showUpdateArticleForm() {
+            hideForms();
+            document.getElementById('articles-form').style.display = 'block';
+            document.getElementById('articleForm').onsubmit = updateArticle;
+        }
+
+        function showDeleteArticleForm() {
+            const id = prompt('Enter article ID to delete:');
+            if (id) {
+                deleteArticle(id);
+            }
+        }
+
+        async function createArticle(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                content: formData.get('content'),
+                category: formData.get('category'),
+                tags: formData.get('tags').split(',').map(tag => tag.trim()).filter(tag => tag),
+                image: formData.get('image') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'articles', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('articles-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('articles-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateArticle(event) {
+            event.preventDefault();
+            const id = prompt('Enter article ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                content: formData.get('content'),
+                category: formData.get('category'),
+                tags: formData.get('tags').split(',').map(tag => tag.trim()).filter(tag => tag),
+                image: formData.get('image') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'articles/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('articles-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('articles-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteArticle(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'articles/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('articles-response', data);
+            } catch (error) {
+                showResponse('articles-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Projects API functions
+        async function getProjects() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'projects');
+                showResponse('projects-response', data);
+            } catch (error) {
+                showResponse('projects-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateProjectForm() {
+            hideForms();
+            document.getElementById('projects-form').style.display = 'block';
+            document.getElementById('projectForm').onsubmit = createProject;
+        }
+
+        function showUpdateProjectForm() {
+            hideForms();
+            document.getElementById('projects-form').style.display = 'block';
+            document.getElementById('projectForm').onsubmit = updateProject;
+        }
+
+        function showDeleteProjectForm() {
+            const id = prompt('Enter project ID to delete:');
+            if (id) {
+                deleteProject(id);
+            }
+        }
+
+        async function createProject(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                description: formData.get('description'),
+                category: formData.get('category'),
+                technologies: formData.get('technologies').split(',').map(tech => tech.trim()).filter(tech => tech),
+                github_url: formData.get('github_url') || null,
+                live_url: formData.get('live_url') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'projects', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('projects-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('projects-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateProject(event) {
+            event.preventDefault();
+            const id = prompt('Enter project ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                description: formData.get('description'),
+                category: formData.get('category'),
+                technologies: formData.get('technologies').split(',').map(tech => tech.trim()).filter(tech => tech),
+                github_url: formData.get('github_url') || null,
+                live_url: formData.get('live_url') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'projects/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('projects-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('projects-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteProject(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'projects/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('projects-response', data);
+            } catch (error) {
+                showResponse('projects-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Testimonials API functions
+        async function getTestimonials() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'testimonials');
+                showResponse('testimonials-response', data);
+            } catch (error) {
+                showResponse('testimonials-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateTestimonialForm() {
+            hideForms();
+            document.getElementById('testimonials-form').style.display = 'block';
+            document.getElementById('testimonialForm').onsubmit = createTestimonial;
+        }
+
+        function showUpdateTestimonialForm() {
+            hideForms();
+            document.getElementById('testimonials-form').style.display = 'block';
+            document.getElementById('testimonialForm').onsubmit = updateTestimonial;
+        }
+
+        function showDeleteTestimonialForm() {
+            const id = prompt('Enter testimonial ID to delete:');
+            if (id) {
+                deleteTestimonial(id);
+            }
+        }
+
+        async function createTestimonial(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                content: formData.get('content'),
+                company: formData.get('company'),
+                rating: parseInt(formData.get('rating')),
+                image: formData.get('image') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'testimonials', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('testimonials-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('testimonials-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function updateTestimonial(event) {
+            event.preventDefault();
+            const id = prompt('Enter testimonial ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                content: formData.get('content'),
+                company: formData.get('company'),
+                rating: parseInt(formData.get('rating')),
+                image: formData.get('image') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'testimonials/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('testimonials-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('testimonials-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteTestimonial(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'testimonials/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('testimonials-response', data);
+            } catch (error) {
+                showResponse('testimonials-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+    </script>
+</body>
+</html> 
