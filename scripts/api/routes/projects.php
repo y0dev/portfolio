@@ -152,7 +152,7 @@ function getProjects($pdo) {
     // Process projects
     foreach ($projects as &$project) {
         $project['technologies'] = json_decode($project['technologies'], true) ?: [];
-        $project['images'] = json_decode($project['images'], true) ?: [];
+        $project['image'] = json_decode($project['image'], true) ?: [];
         $project['created_at'] = date('Y-m-d H:i:s', strtotime($project['created_at']));
         $project['updated_at'] = $project['updated_at'] ? date('Y-m-d H:i:s', strtotime($project['updated_at'])) : null;
     }

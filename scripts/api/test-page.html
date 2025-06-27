@@ -402,6 +402,118 @@
             <div id="testimonials-response" class="response-area"></div>
         </div>
 
+        <!-- Books Section -->
+        <div class="test-section">
+            <h2>Books API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getBooks()">Get Books</button>
+                <button class="btn btn-success" onclick="showCreateBookForm()">Create Book</button>
+                <button class="btn btn-warning" onclick="showUpdateBookForm()">Update Book</button>
+                <button class="btn btn-danger" onclick="showDeleteBookForm()">Delete Book</button>
+            </div>
+            
+            <div id="books-form" style="display: none;">
+                <form id="bookForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="bookTitle">Title</label>
+                            <input type="text" id="bookTitle" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookAuthor">Author</label>
+                            <input type="text" id="bookAuthor" name="author" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookDescription">Description</label>
+                        <textarea id="bookDescription" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCategory">Category</label>
+                        <select id="bookCategory" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="technology">Technology</option>
+                            <option value="programming">Programming</option>
+                            <option value="tutorial">Tutorial</option>
+                            <option value="theology">Theology</option>
+                            <option value="health">Health</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookRating">Rating (1-5)</label>
+                        <select id="bookRating" name="rating" required>
+                            <option value="">Select Rating</option>
+                            <option value="1">1 Star</option>   
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCoverImage">Cover Image URL</label>
+                        <input type="url" id="bookCoverImage" name="cover_image" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAmazonURL">Amazon URL</label>
+                        <input type="url" id="bookAmazonURL" name="amazon_url" placeholder="https://www.amazon.com/dp/B08N5L5RG2">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="books-response" class="response-area"></div>   
+        </div>
+
+         <!-- Resources Section -->
+         <div class="test-section">
+            <h2>Resources API</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="getResources()">Get Resources</button>
+                <button class="btn btn-success" onclick="showCreateResourceForm()">Create Resource</button>
+                <button class="btn btn-warning" onclick="showUpdateResourceForm()">Update Resource</button>
+                <button class="btn btn-danger" onclick="showDeleteResourceForm()">Delete Resource</button>
+            </div>
+            
+            <div id="resources-form" style="display: none;">
+                <form id="resourceForm">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="resourceTitle">Title</label>
+                            <input type="text" id="resourceTitle" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="resourceDescription">Description</label>
+                            <textarea id="resourceDescription" name="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="resourceCategory">Category</label>
+                            <select id="resourceCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="technology">Technology</option>  
+                                <option value="programming">Programming</option>
+                                <option value="tutorial">Tutorial</option>
+                                <option value="theology">Theology</option>
+                                <option value="health">Health</option>
+                            </select>
+                        </div>      
+                        <div class="form-group">
+                            <label for="resourceLink">Link</label>
+                            <input type="url" id="resourceLink" name="link" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="resourceImage">Image URL</label>    
+                            <input type="url" id="resourceImage" name="image" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideForms()">Cancel</button>
+                    </form>
+                </div>  
+            </div>
+            <div id="resources-response" class="response-area"></div>
+        </div>
+
         <!-- Loading Indicator -->
         <div id="loading" class="loading">
             <div>Loading...</div>
@@ -837,7 +949,220 @@
             } finally {
                 hideLoading();
             }
+        }       
+
+        // Books API functions
+        async function getBooks() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'books');
+                showResponse('books-response', data);
+            } catch (error) {   
+                showResponse('books-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
         }
+
+        function showCreateBookForm() {
+            hideForms();
+            document.getElementById('books-form').style.display = 'block';
+            document.getElementById('bookForm').onsubmit = createBook;
+        }
+
+        function showUpdateBookForm() {
+            hideForms();
+            document.getElementById('books-form').style.display = 'block';
+            document.getElementById('bookForm').onsubmit = updateBook;
+        }
+
+        function showDeleteBookForm() {
+            const id = prompt('Enter book ID to delete:');
+            if (id) {
+                deleteBook(id);
+            }
+        }
+
+        async function createBook(event) {
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                author: formData.get('author'),
+                description: formData.get('description'),
+                category: formData.get('category'),
+                rating: parseInt(formData.get('rating')),
+                cover_image: formData.get('cover_image') || null,
+                amazon_url: formData.get('amazon_url') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'books', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('books-response', result);
+                if (result.success) {
+                    event.target.reset();   
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('books-response', { error: error.message });
+            } finally {
+                hideLoading();  
+            }
+        }
+
+        async function updateBook(event) {
+            event.preventDefault();
+            const id = prompt('Enter book ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                author: formData.get('author'), 
+                description: formData.get('description'),
+                category: formData.get('category'),
+                rating: parseInt(formData.get('rating')),
+                cover_image: formData.get('cover_image') || null,
+                amazon_url: formData.get('amazon_url') || null
+            };      
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'books/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)  
+                });
+                showResponse('books-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }   
+            } catch (error) {
+                showResponse('books-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }   
+
+        // Resources API functions
+        async function getResources() {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources');
+                showResponse('resources-response', data);
+            } catch (error) {
+                showResponse('resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showCreateResourceForm() {
+            hideForms();
+            document.getElementById('resources-form').style.display = 'block';
+            document.getElementById('resourceForm').onsubmit = createResource;
+        }   
+
+        function showUpdateResourceForm() {
+            hideForms();
+            document.getElementById('resources-form').style.display = 'block';
+            document.getElementById('resourceForm').onsubmit = updateResource;
+        }
+
+        function showDeleteResourceForm() { 
+            const id = prompt('Enter resource ID to delete:');
+            if (id) {
+                deleteResource(id);
+            }
+        }
+
+        async function createResource(event) {  
+            event.preventDefault();
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),       
+                description: formData.get('description'),
+                category: formData.get('category'),
+                link: formData.get('link'),
+                image: formData.get('image') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources', {     
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('resources-response', result);
+                if (result.success) {           
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }   
+
+        async function updateResource(event) {
+            event.preventDefault();
+            const id = prompt('Enter resource ID to update:');
+            if (!id) return;
+            
+            showLoading();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                title: formData.get('title'),
+                description: formData.get('description'),
+                category: formData.get('category'),
+                link: formData.get('link'), 
+                image: formData.get('image') || null
+            };
+
+            try {
+                const result = await apiFetch(API_BASE_URL + 'resources/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showResponse('resources-response', result);
+                if (result.success) {
+                    event.target.reset();
+                    hideForms();
+                }
+            } catch (error) {
+                showResponse('resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function deleteResource(id) {
+            showLoading();
+            try {
+                const data = await apiFetch(API_BASE_URL + 'resources/' + id, {
+                    method: 'DELETE'
+                });
+                showResponse('resources-response', data);
+            } catch (error) {
+                showResponse('resources-response', { error: error.message });
+            } finally {
+                hideLoading();
+            }
+        }
+
     </script>
 </body>
 </html> 
