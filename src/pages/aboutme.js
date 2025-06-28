@@ -3,14 +3,10 @@ import './css/aboutme.css';
 import AboutMeSection from '../sections/about_me';
 import TimelineSection from '../sections/experience';
 import GospelTeaserSection from '../sections/gospel_teaser';
+import FavoritesSection from '../sections/FavoritesSection';
 import Footer from '../components/footer';
 import headshot from '../assets/images/headshot.jpeg';
 // import TestimonialSection from '../sections/testimonials';
-
-// Placeholder for FavoritesSection
-function FavoritesSection() {
-  return null;
-}
 
 function AboutMePage() {
   return (
@@ -142,6 +138,7 @@ function AboutMePage() {
       <TimelineSection />
       {/* Gospel Teaser Section */}
       <GospelTeaserSection />
+
       {/* Favorites Section */}
       <FavoritesSection />
     </div>
