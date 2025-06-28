@@ -11,10 +11,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
 	// Single entry point - all pages will use the same bundle with conditional rendering
 	entry: {
-		main: path.resolve(__dirname, 'src/index.js'),
+		main: path.resolve('src/index.js'),
 	},
 	resolve: {
-		modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
+		modules: [path.resolve('node_modules'), 'node_modules'],
 		alias: {
 			react: path.resolve('./node_modules/react')
 		}
@@ -41,11 +41,39 @@ module.exports = {
 			},
 			// ===== JSON Rule =====
 			{ test: /\.json$/, type: 'json' },
-			// ====== Images Rule =======
+			// ====== Images Rules =======
 			{
-				test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+				test: /\.(png|jpe?g|gif|svg|ico)$/i,
+				include: path.resolve(__dirname, 'src/assets/images/icons'),
 				type: 'asset/resource',
+				generator: {
+					filename: 'images/icons/[name][ext]',
+				},
+			},
+			{
+				test: /\.(png|jpe?g|gif|svg|ico)$/i,
+				include: path.resolve(__dirname, 'src/assets/images/logos'),
+				type: 'asset/resource',
+				generator: {
+					filename: 'images/logos/[name][ext]',
+				},
+			},
+			{
+				test: /\.(png|jpe?g|gif|svg|ico)$/i,
+				exclude: [
+					path.resolve(__dirname, 'src/assets/images/icons'),
+					path.resolve(__dirname, 'src/assets/images/logos'),
+				],
+				type: 'asset/resource',
+				generator: {
+					filename: 'images/[name][ext]',
+				},
 			}
+			
+			// {
+			// 	test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+			// 	type: 'asset/resource',
+			// }
 		]
 	},
 	plugins: [
