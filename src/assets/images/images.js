@@ -23,41 +23,12 @@ import logo192_logos from './logos/logo192.png';
 import logo512 from './logos/logo512.png';
 import favicon from './logos/favicon.ico';
 
+// Sports icons
+import dodgers from './sports/dodgers.png';
+import eagles from './sports/eagles.png';
+import lbj from './sports/lbj_jersey.jpg';
+
 // Website icons
 import github from './websites/github.png';
 import linkedin from './websites/linkedin.png';
 import twitter from './websites/twitter.png';
-
-const images = [
-    // Main images
-    bible_icon,
-    family_icon,
-    heart_strength,
-    hotel_icon,
-    house_icon,
-    idea,
-    notepad,
-    web_dev,
-    share_icon,
-    share_icon_svg,
-    jenkins,
-    logo,
-    logo192,
-    headshot,
-    copy_icon,
-    docker,
-    arrow_left,
-    arrow_right,
-    
-    // Logo images
-    logo192_logos,
-    logo512,
-    favicon,
-    
-    // Website icons
-    github,
-    linkedin,
-    twitter
-];
-
-export default images;
