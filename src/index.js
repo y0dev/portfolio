@@ -10,6 +10,8 @@ import './index.css';
 // Additional utility CSS (Tailwind, custom classes, etc.)
 import './sections/css/utilities.css';
 
+import { } from './assets/images/images'
+
 // Layout component that wraps all pages with a common structure (e.g., header, footer)
 import Layout from './components/Layout';
 

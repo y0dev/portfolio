@@ -9,7 +9,7 @@ const API_BASE_URL = 'https://devontaereid.com/scripts/api';
 const ARTICLES_ENDPOINT = `${API_BASE_URL}/articles`;
 
 function filtered(json_object) {
-    return json_object.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return json_object.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 class ArticlesPage extends Component {
@@ -137,11 +137,12 @@ class ArticlesPage extends Component {
                     if (article.type === 'note' || article['file-id'] === 'note') {
                         noteValue = 1;
                     }
-                    
+                    const parsedImage = JSON.parse(article.image);
+                    // console.log(parsedImage);
                     return <ArticleModule key={idx}
                         title={article.title}
-                        date={article.date}
-                        image={article.image}
+                        date={new Date(article.date).getTime()}
+                        image={parsedImage}
                         slug={article.slug}
                         tags={article.tags}
                         note={noteValue}/>

@@ -47,6 +47,24 @@ html.dark-mode {
   --color-text-secondary: #d1d5db;
   --color-accent: #451a03;
   --color-accent-text: #fbbf24;
+  
+  /* Text Color Variables for Dark Mode */
+  --color-text-default: #f9fafb;
+  --color-text-muted: #d1d5db;
+  --color-text-light: #9ca3af;
+  --color-text-lighter: #6b7280;
+  --color-text-inverse: #111827;
+  --color-text-link: #60a5fa;
+  --color-text-link-hover: #93c5fd;
+  --color-text-success: #34d399;
+  --color-text-warning: #fbbf24;
+  --color-text-error: #f87171;
+  --color-text-code: #f3f4f6;
+  --color-text-code-bg: #1f2937;
+  --color-text-quote: #d1d5db;
+  --color-text-quote-bg: #374151;
+  --color-text-selection: #3b82f6;
+  --color-text-placeholder: #9ca3af;
 }
 
 html {
@@ -97,6 +115,24 @@ html {
   --color-text-secondary: #6b7280;
   --color-accent: #fef3c7;
   --color-accent-text: #92400e;
+  
+  /* Text Color Variables for Light Mode */
+  --color-text-default: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-text-lighter: #d1d5db;
+  --color-text-inverse: #ffffff;
+  --color-text-link: #2563eb;
+  --color-text-link-hover: #1d4ed8;
+  --color-text-success: #059669;
+  --color-text-warning: #d97706;
+  --color-text-error: #dc2626;
+  --color-text-code: #1f2937;
+  --color-text-code-bg: #f3f4f6;
+  --color-text-quote: #374151;
+  --color-text-quote-bg: #f9fafb;
+  --color-text-selection: #3b82f6;
+  --color-text-placeholder: #9ca3af;
 }
 
 * {
@@ -134,8 +170,12 @@ h1, h2, h3, h4, h5 {
 }
 
 a {    
-  color: var(--color-heading);
+  color: var(--color-text-link);
   text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-text-link-hover);
 }
 
 h2 {
@@ -147,7 +187,7 @@ h2 {
 p {
   font-size: clamp(14px, 1.0vw, 1.2vw);
   line-height: 2;
-  color: var(--color-body);
+  color: var(--color-text-default);
   margin-bottom: 20px;
   text-indent: 40px;
 }
@@ -224,6 +264,54 @@ input[type="text" i] {
     --color-view-writeup-bg: var(--color-tag-bg);
     --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);
   }
+}
+
+/* Text Color Utility Classes */
+.text-default { color: var(--color-text-default); }
+.text-muted { color: var(--color-text-muted); }
+.text-light { color: var(--color-text-light); }
+.text-lighter { color: var(--color-text-lighter); }
+.text-inverse { color: var(--color-text-inverse); }
+.text-link { color: var(--color-text-link); }
+.text-success { color: var(--color-text-success); }
+.text-warning { color: var(--color-text-warning); }
+.text-error { color: var(--color-text-error); }
+.text-code { color: var(--color-text-code); }
+.text-quote { color: var(--color-text-quote); }
+
+/* Text Selection */
+::selection {
+  background-color: var(--color-text-selection);
+  color: var(--color-text-inverse);
+}
+
+::-moz-selection {
+  background-color: var(--color-text-selection);
+  color: var(--color-text-inverse);
+}
+
+/* Placeholder text */
+::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+/* Code blocks */
+code {
+  color: var(--color-text-code);
+  background-color: var(--color-text-code-bg);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Blockquotes */
+blockquote {
+  color: var(--color-text-quote);
+  background-color: var(--color-text-quote-bg);
+  border-left: 4px solid var(--color-primary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
 }
 
 

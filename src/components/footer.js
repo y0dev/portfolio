@@ -109,11 +109,6 @@ function Footer() {
           <p className="copyright">
             © {currentYear} {personal.name}. All rights reserved.
           </p>
-          <div className="footer-bottom-links">
-            <a href="/privacy" className="footer-bottom-link">Privacy Policy</a>
-            <span className="footer-separator">•</span>
-            <a href="/terms" className="footer-bottom-link">Terms of Service</a>
-          </div>
         </div>
       </div>
     </footer>

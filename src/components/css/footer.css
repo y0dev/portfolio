@@ -1,7 +1,7 @@
 /* Footer Styles */
 .footer {
-  background-color: #111827;
-  color: white;
+  background-color: var(--color-footer);
+  color: var(--color-text-inverse);
   margin-top: auto;
 }
 
@@ -23,12 +23,12 @@ html.dark-mode .footer {
 .brand-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--color-text-inverse);
   margin: 0 0 0.5rem 0;
 }
 
 .brand-description {
-  color: #d1d5db;
+  color: var(--color-text-muted);
   margin-bottom: 1.5rem;
   max-width: 28rem;
   line-height: 1.6;
@@ -43,7 +43,7 @@ html.dark-mode .footer {
 }
 
 .social-link {
-  color: #9ca3af;
+  color: var(--color-text-light);
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@ html.dark-mode .footer {
 }
 
 .social-link:hover {
-  color: white;
+  color: var(--color-text-inverse);
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
@@ -88,7 +88,7 @@ html.dark-mode .footer {
 .footer-section-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: white;
+  color: var(--color-text-inverse);
   margin-bottom: 1rem;
   position: relative;
 }
@@ -100,7 +100,7 @@ html.dark-mode .footer {
   left: 0;
   width: 2rem;
   height: 2px;
-  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   border-radius: 1px;
 }
 
@@ -115,7 +115,7 @@ html.dark-mode .footer {
 }
 
 .footer-link {
-  color: #d1d5db;
+  color: var(--color-text-muted);
   text-decoration: none;
   transition: all 0.2s ease;
   font-size: 0.95rem;
@@ -124,7 +124,7 @@ html.dark-mode .footer {
 }
 
 .footer-link:hover {
-  color: white;
+  color: var(--color-text-inverse);
   padding-left: 0.5rem;
 }
 
@@ -136,7 +136,7 @@ html.dark-mode .footer {
   transform: translateY(-50%);
   width: 0;
   height: 1px;
-  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   transition: width 0.2s ease;
 }
 
@@ -161,7 +161,7 @@ html.dark-mode .footer {
 
 /* Footer Bottom */
 .footer-bottom {
-  border-top: 1px solid #374151;
+  border-top: 1px solid var(--color-border);
   padding-top: 2rem;
   margin-top: 2rem;
 }
@@ -174,7 +174,7 @@ html.dark-mode .footer {
 }
 
 .copyright {
-  color: #9ca3af;
+  color: var(--color-text-light);
   font-size: 0.875rem;
   margin: 0;
   text-align: center;
@@ -189,14 +189,14 @@ html.dark-mode .footer {
 }
 
 .footer-bottom-link {
-  color: #9ca3af;
+  color: var(--color-text-light);
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.2s ease;
 }
 
 .footer-bottom-link:hover {
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 .footer-separator {

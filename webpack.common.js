@@ -68,10 +68,19 @@ module.exports = {
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg|ico)$/i,
+				include: path.resolve(__dirname, 'src/assets/images/websites'),
+				type: 'asset/resource',
+				generator: {
+					filename: 'images/websites/[name][ext]',
+				},
+			},
+			{
+				test: /\.(png|jpe?g|gif|svg|ico)$/i,
 				exclude: [
 					path.resolve(__dirname, 'src/assets/images/icons'),
 					path.resolve(__dirname, 'src/assets/images/logos'),
-					path.resolve(__dirname, 'src/assets/images/sports')
+					path.resolve(__dirname, 'src/assets/images/sports'),
+					path.resolve(__dirname, 'src/assets/images/websites')
 				],
 				type: 'asset/resource',
 				generator: {

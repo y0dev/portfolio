@@ -602,7 +602,7 @@
       ],
       "type": "article",
       "image": {
-        "name": "images/bible-icon.png",
+        "name": "/images/bible-icon.png",
         "alt": "bible-icon"
       },
       "content": [
@@ -624,7 +624,7 @@
       ],
       "type": "article",
       "image": {
-        "name": "images/web-dev.png",
+        "name": "/images/web-dev.png",
         "alt": "web-dev-img"
       },
       "content": [
@@ -641,7 +641,7 @@
       "date": 1644825601000,
       "id": "theology-103-week-5",
       "image": {
-        "name": "images/bible-icon.png",
+        "name": "/images/bible-icon.png",
         "alt": "bible-icon"
       },
       "tags": [
@@ -658,7 +658,7 @@
       "date": 1644220801000,
       "id": "theology-103-week-4",
       "image": {
-        "name": "images/bible-icon.png",
+        "name": "/images/bible-icon.png",
         "alt": "bible-icon"
       },
       "tags": [
@@ -675,7 +675,7 @@
       "date": 1643616001000,
       "id": "theology-103-week-3",
       "image": {
-        "name": "images/bible-icon.png",
+        "name": "/images/bible-icon.png",
         "alt": "bible-icon"
       },
       "tags": [

@@ -7,6 +7,7 @@ import mysql.connector
 from mysql.connector import errorcode
 from typing import List, Dict, Any
 from dotenv import load_dotenv
+from datetime import datetime
 
 # Load .env if exists for DB credentials
 load_dotenv()
@@ -155,12 +156,60 @@ def replace_placeholders(paragraph: str,
     return paragraph
 
 
+def convert_timestamp_to_datetime(timestamp_value):
+    """
+    Convert timestamp value to MySQL datetime format.
+    Handles various timestamp formats:
+    - Unix timestamp in milliseconds (e.g., 1749848487000)
+    - Unix timestamp in seconds (e.g., 1749848487)
+    - ISO datetime string (e.g., "2025-06-11 22:01:27")
+    - Already formatted datetime string
+    """
+    if timestamp_value is None:
+        return None
+    
+    try:
+        # If it's already a string that looks like a datetime, return as is
+        if isinstance(timestamp_value, str):
+            # Check if it's already in datetime format
+            if re.match(r'\d{4}-\d{2}-\d{2}', timestamp_value):
+                return timestamp_value
+            # Try to parse as ISO format
+            try:
+                dt = datetime.fromisoformat(timestamp_value.replace('Z', '+00:00'))
+                return dt.strftime('%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                pass
+        
+        # Convert to integer if it's a string number
+        if isinstance(timestamp_value, str) and timestamp_value.isdigit():
+            timestamp_value = int(timestamp_value)
+        
+        # Handle Unix timestamp (milliseconds or seconds)
+        if isinstance(timestamp_value, (int, float)):
+            # If timestamp is in seconds (10 digits), convert to milliseconds
+            if timestamp_value < 10000000000:  # Less than year 2286 in seconds
+                timestamp_value = timestamp_value * 1000
+            
+            dt = datetime.fromtimestamp(timestamp_value / 1000)
+            return dt.strftime('%Y-%m-%d %H:%M:%S')
+        
+        # If it's already a datetime object
+        if isinstance(timestamp_value, datetime):
+            return timestamp_value.strftime('%Y-%m-%d %H:%M:%S')
+        
+        return None
+    except Exception as e:
+        print(f"⚠️ Warning: Could not convert timestamp {timestamp_value}: {e}")
+        return None
+
+
 def process_article(json_data: Dict[str, Any]) -> Dict[str, Any]:
     transformed = {
         "id": json_data["id"],
         "title": json_data["title"],
         "description": json_data.get("description"),
-        "date": json_data["date"],
+        "date": convert_timestamp_to_datetime(json_data["date"]),
         "tags": json_data["tags"],
         "type": "article",
         "image": json_data.get("image"),
@@ -258,6 +307,12 @@ def save_article(cursor, article):
     author_id = 1
     like_count = 0
     share_count = 0
+    
+    # Ensure date is properly converted
+    article_date = convert_timestamp_to_datetime(article.get('date'))
+    if not article_date:
+        print(f"⚠️ Warning: Invalid date for article '{article.get('title', '')}'. Using current timestamp.")
+        article_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     data = (
         article.get('title', ''),
@@ -266,7 +321,7 @@ def save_article(cursor, article):
         article.get('description', ''),
         full_content,
         body_text,
-        article.get('date', None),
+        article_date,
         tags_json,
         article.get('type', 'article'),
         image_json,
@@ -277,7 +332,7 @@ def save_article(cursor, article):
 
     try:
         cursor.execute(insert_sql, data)
-        print(f"✅ Saved article '{article.get('title', '')}' with slug '{slug}'")
+        print(f"✅ Saved article '{article.get('title', '')}' with slug '{slug}' (date: {article_date})")
     except mysql.connector.Error as e:
         print(f"❌ DB error saving article '{article.get('title', '')}': {e}")
 

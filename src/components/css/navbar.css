@@ -70,7 +70,7 @@ html.dark-mode .navbar.scrolled {
    margin: 0 0 0 1rem;
    font-size: 1.25rem;
    font-weight: 700;
-   color: var(--color-heading);
+   color: var(--color-text-default);
    letter-spacing: 1px;
    text-transform: uppercase;
 }
@@ -93,7 +93,7 @@ html.dark-mode .navbar.scrolled {
 
 .nav-link {
    text-decoration: none;
-   color: var(--color-heading);
+   color: var(--color-text-default);
    font-weight: 500;
    font-size: 0.95rem;
    text-transform: uppercase;
@@ -111,7 +111,7 @@ html.dark-mode .navbar.scrolled {
    left: 0;
    width: 0;
    height: 2px;
-   background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
    transition: width 0.3s ease;
 }
 
@@ -121,11 +121,11 @@ html.dark-mode .navbar.scrolled {
 }
 
 .nav-link:hover {
-   color: #3b82f6;
+   color: var(--color-text-link);
 }
 
 .nav-link.active {
-   color: #3b82f6;
+   color: var(--color-text-link);
    font-weight: 600;
 }
 
@@ -289,7 +289,7 @@ html.dark-mode .mobile-dropdown {
 .mobile-nav-link {
    display: block;
    text-decoration: none;
-   color: var(--color-heading);
+   color: var(--color-text-default);
    font-weight: 500;
    font-size: 1rem;
    text-transform: uppercase;
@@ -307,7 +307,7 @@ html.dark-mode .mobile-dropdown {
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
    background: rgba(59, 130, 246, 0.1);
-   color: #3b82f6;
+   color: var(--color-text-link);
 }
 
 .mobile-nav-link.active::before {
@@ -317,7 +317,7 @@ html.dark-mode .mobile-dropdown {
    top: 0;
    bottom: 0;
    width: 4px;
-   background: #3b82f6;
+   background: var(--color-primary);
 }
 
 html.dark-mode .mobile-nav-item {
@@ -327,6 +327,7 @@ html.dark-mode .mobile-nav-item {
 html.dark-mode .mobile-nav-link:hover,
 html.dark-mode .mobile-nav-link.active {
    background: rgba(59, 130, 246, 0.2);
+   color: var(--color-text-link);
 }
 
 /* Mobile Menu Overlay */

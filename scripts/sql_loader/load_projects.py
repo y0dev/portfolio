@@ -95,22 +95,12 @@ def save_project(cursor, project):
     if isinstance(technologies, str):
         technologies = [tech.strip() for tech in technologies.split(',')]
     technologies_json = json.dumps(technologies, ensure_ascii=False)
-    
-    # Prepare images as JSON (handle both 'image' and 'images' fields)
-    images = project.get('images', project.get('image', []))
-    if isinstance(images, str):
-        images = [{"url": images, "alt": project.get('title', '')}]
-    elif isinstance(images, dict):
-        images = [images]
-    elif not isinstance(images, list):
-        images = []
-    images_json = json.dumps(images, ensure_ascii=False)
-    
+    print(project.get('image', {}))
     data = (
         project.get('title', ''),
         slug,
         project.get('description', ''),
-        images_json,
+        project.get('image', {}),
         project.get('link') or project.get('live_url', ''),
         project.get('github_link') or project.get('github_url', ''),
         technologies_json,
