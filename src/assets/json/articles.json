@@ -1,116 +1,65 @@
 [
   {
-    "id": "why-am-i-presbyterian",
-    "title": "Why am I Presbyterian",
-    "description": "Many in the reformed camp seemed to be either Baptist or Presbyterian. This is article is to show my view in Reformed Theology.",
-    "date": "1677909600000",
+    "id": "xilinx-fsbl-notes-p1",
+    "title": "Xilinx FSBL Notes 2",
+    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
+    "date": "2024-12-08 00:00:00",
     "tags": [
-      "Christ",
-      "Covenant",
-      "Reformed",
-      "Gospel"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "content": [
-      {
-        "title": "Why am I Presbyterian",
-        "htmlContent": "<p>There is an endless debate on covenant membership. Who is a part of the covenant and who is not? This question is a good question to cause you to search the scriptures for answers. I would start from Genesis and end in Revelation. </p>"
-      }
-    ]
-  },
-  {
-    "id": "system-design",
-    "title": "Help with System Design Interviews",
-    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
-    "date": "1675836000000",
-    "tags": [
-      "System Design",
       "Technology",
-      "MAANG"
+      "Embedded",
+      "Engineer"
     ],
     "type": "article",
     "image": {
-      "name": "/images/icons/web-dev.png",
-      "alt": "web-dev-img"
+      "name": "/images/icons/binary-code.png",
+      "alt": "binary-code-img"
     },
     "content": [
       {
-        "title": "Preparation for the Interview",
-        "htmlContent": "<p><img src=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\" alt=\"system-design\" title=\"Load Balancing from G4G\"></p>\n<p>Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.</p>\n<p>Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are <a href=\"https://engineering.fb.com/\">Engineering at Meta</a>, <a href=\"https://research.fb.com/\">Meta Research</a>, <a href=\"https://aws.amazon.com/blogs/architecture/\">AWS Architecture Blog</a>, <a href=\"https://www.amazon.science/blog\">Amazon Science Blog</a>, <a href=\"https://netflixtechblog.com/\">Netflix TechBlog</a>, <a href=\"https://research.google/\">Google Research</a>, <a href=\"https://quoraengineering.quora.com/\">Engineering at Quora</a>, <a href=\"https://eng.uber.com/\">Uber Engineering Blog</a>, <a href=\"https://databricks.com/blog/category/engineering\">Databricks Blog</a>, <a href=\"https://medium.com/@Pinterest_Engineering\">Pinterest Engineering</a>, <a href=\"https://medium.com/blackrock-engineering\">BlackRock Engineering</a>, <a href=\"https://eng.lyft.com/\">Lyft Engineering</a>, and <a href=\"https://engineering.salesforce.com/\">Salesforce Engineering</a>.</p>\n<p>Some thoughts that should happen when designing a system should be \u201cWhy does this system works?\u201d. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction.</p>"
-      },
-      {
-        "title": "Stay on track",
-        "htmlContent": "<p>At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.</p>\n<p>Key things to remember when thinking of deliverables expected from the developed design <ol><li>Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.</li><li>Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on.</li></ol></p>"
-      },
-      {
-        "title": "The Interview",
-        "htmlContent": "<p>When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.</p>\n<p>The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: <ul><li>What is the size of the data right now? (Guessing this is the size of data type)</li><li>At what rate is the data expected to grow over time?</li><li>How will the data be consumed by other subsystems or end users?</li><li>Is the data read-heavy or write-heavy?</li><li>Do we need strict consistency of data, or will eventual consistency work?</li><li>What is the durability target of the data?</li><li>What privacy and regulatory requirements do we require for storing or transmitting user data?</li></ul></p>"
-      },
-      {
-        "title": "Abstraction",
-        "htmlContent": "<p>Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system.</p>"
-      },
-      {
-        "title": "Remote Procedure Calls",
-        "htmlContent": "<p>Remote Procedure Calls (RPC) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.</p>"
-      },
-      {
-        "title": "Consistency",
-        "htmlContent": "<p>Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.</p>\n<p>There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities.</p>"
-      },
-      {
-        "title": "Availability",
-        "htmlContent": "<p>Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers.</p>"
-      },
-      {
-        "title": "Reliability",
-        "htmlContent": "<p>Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions.</p>"
-      },
-      {
-        "title": "Scalability",
-        "htmlContent": "<p>Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: <ul><li>Request workload: This is the number of requests served by the system.</li><li>Data/storage workload: This is the amount of data stored by the system.</li></ul></p>\n<p>There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. <ul><li>Vertical Scaling = more space in a single system</li><li>Horizontal Scaling = more nodes that need to be in sync with one another</li></ul></p>"
-      },
-      {
-        "title": "Maintainability",
-        "htmlContent": "<p>Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights.</p>"
-      },
-      {
-        "title": "Fault Tolerance",
-        "htmlContent": "<p>Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures\u2014a reality that is outlined in the CAP theorem.</p>\n<p>Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems.</p>"
-      },
-      {
-        "title": "Back-Of-The-Envelope",
-        "htmlContent": "<p>This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.</p>\n<p>For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.</p>\n<p><img src=\"/images/system-design/database_rates.png\" alt=\"system-design-db-rates\" title=\"Database Rates\"></p>\n<p><img src=\"/images/system-design/latency_values.png\" alt=\"system-design-latency-rates\" title=\"Latency Rates\"></p>\n<p><img src=\"/images/system-design/server_specs.png\" alt=\"system-design-server-specs\" title=\"Server Specs\"></p>"
+        "title": "Xilinx Running Custom Application from FSBL",
+        "htmlContent": ""
       }
     ]
   },
   {
-    "id": "sample-template",
-    "title": "",
-    "description": "This the sample template for testing purposes only.",
-    "date": "1691730000000",
+    "id": "xilinx-fsbl-notes-p1",
+    "title": "Xilinx FSBL Notes 1",
+    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
+    "date": "2024-12-08 00:00:00",
     "tags": [
-      "Template",
-      "Info",
-      "Beginner"
+      "Technology",
+      "Embedded",
+      "Engineer"
     ],
     "type": "article",
     "image": {
-      "name": "/images/icons/image.png",
-      "alt": "image-title"
+      "name": "/images/icons/binary-code.png",
+      "alt": "binary-code-img"
     },
     "content": [
       {
-        "title": "Why am I Presbyterian",
-        "htmlContent": "<p>There is an endless debate on covenant bold . Who is a part of the covenant and who is not? This question is a good question bold you to search the scriptures for answers. I would start from Genesis and end in Revelation. <ul><li>List</li><li>Asnot</li><li>Jlks</li></ul></p>"
+        "title": "Xilinx Notes: First Stage Boot Loader Part 1",
+        "htmlContent": ""
       },
       {
-        "title": "fgfd",
-        "htmlContent": "<p><ol><li>Sjklsdk</li><li>Djljdsljds </li></ol></p>\n<p>Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it\u2019s like working at their company. The tech blogs are <a href=\"https://engineering.fb.com/\">Engineering at Meta</a>,\u00a0<a href=\"https://research.fb.com/\">Meta Research</a>,\u00a0<a href=\"https://aws.amazon.com/blogs/architecture/\">AWS Architecture Blog</a>,\u00a0<a href=\"https://www.amazon.science/blog\">Amazon Science Blog</a>,\u00a0<a href=\"https://netflixtechblog.com/\">Netflix TechBlog</a>,\u00a0<a href=\"https://research.google/\">Google Research</a>,\u00a0<a href=\"https://quoraengineering.quora.com/\">Engineering at Quora</a>,\u00a0<a href=\"https://eng.uber.com/\">Uber Engineering Blog</a>,\u00a0<a href=\"https://databricks.com/blog/category/engineering\">Databricks Blog</a>,\u00a0<a href=\"https://medium.com/@Pinterest_Engineering\">Pinterest Engineering</a>,\u00a0<a href=\"https://medium.com/blackrock-engineering\">BlackRock Engineering</a>,\u00a0<a href=\"https://eng.lyft.com/\">Lyft Engineering</a>, and\u00a0<a href=\"https://engineering.salesforce.com/\">Salesforce Engineering</a>. <img src=\"https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw2hMJ6hulVPWkdInwTZ47jW&ust=1677979010711000&source=images&cd=vfe&ved=0CA4QjRxqFwoTCJjfqoiNwf0CFQAAAAAdAAAAABAE\" alt=\"\" title=\"Figure 1\"></p>"
+        "title": "What does the Partition Load Stage do?",
+        "htmlContent": ""
+      },
+      {
+        "title": "How FSBL launches the Application in the Bitstream?",
+        "htmlContent": ""
+      },
+      {
+        "title": "Loading the Bitstream:",
+        "htmlContent": ""
+      },
+      {
+        "title": "Removing Isolation:",
+        "htmlContent": ""
+      },
+      {
+        "title": "Resetting the PL:",
+        "htmlContent": ""
       }
     ]
   },
@@ -118,7 +67,7 @@
     "id": "depth-first-search",
     "title": "Depth First Search",
     "description": "Article on the depth first search definition and its usage for a tree and a graph.",
-    "date": "1692680400000",
+    "date": "2023-08-22 00:00:00",
     "tags": [
       "Data Structures",
       "Algorithms",
@@ -132,43 +81,44 @@
     "content": [
       {
         "title": "Introduction",
-        "htmlContent": "<p>In this article, I will define the bold bold bold bold bold bold algorithm. I will be explaining the definition and the uses of the search on a tree and a graph.</p>"
+        "htmlContent": ""
       },
       {
         "title": "Definition",
-        "htmlContent": "<p>DFS is a tree and graph traversal algorithm used to explore node(s) in a tree or graph data structure. Depending on the data structure a node will have different meaning in regards to the relationship with other nodes. For example, a node in a tree is a single element in a tree that will either be connected to another node via parent-child relationship. While a node in graph will be connected to other nodes via neighbor relationship. </p>\n<p>DFS on a tree has three traversal methods: pre-order, in-order, and post-order. These tree traversals generally go from left to right. In the pre-order traversal, we would start from the current node, then traverse the left subtree, and finally traverse the right subtree. In-order traversal, we would start from the root node and traverse the left subtree, then the current node, and finally traverse the right subtree. The last traversal method post-order traversal, we would start from the root node and traverse the left subtree, then the right subtree, and finally visit the current node. Below is an example of in-order traversal these steps are basis for how each traversal method operates:<ol><li>Traverse the left subtree</li><li>Visit the current node</li><li>Traverse the right subtree</li></ol></p>\n<p>We now get into using these same traversals with a graph data structure. The main difference in using these traversal methods with graphs are that you have to mark each visited node. The reason for the marking of nodes because graph contains cycles and we don\u2019t want to get stuck in an infinite loop.</p>"
+        "htmlContent": ""
       },
       {
         "title": "Uses",
-        "htmlContent": "<p>\tWhen determining when to use the following algorithm we chose by first understanding if the problem is a tree/graph problem or not. This can be difficult at first because all tree/graph problem don\u2019t just same \u201cI\u2019m a tree\u201d or \u201cI\u2019m a graph\u201d. Determining whether a problem is a tree/graph is done by understanding what the problem is asking just like any other algorithm. Generally identifying DFS problem you will notice whether the question is asking for the following:<ul><li>Max Depth of Tree, *anything* tree</li><li>Combination Search :listPlace(002)</li></ul></p>\n<p>The strategy to determining which traversal methods to use depends on the algorithm that is being design. When thinking about picking pre-order method, you may be thinking of exploring the root prior to the leaves. While using post-order method, you may be thinking of exploring the leaves before the root. In-order is best used, when you know that the tree has a sequence in the nodes.</p>"
+        "htmlContent": ""
       },
       {
         "title": "Implementation",
-        "htmlContent": "<p>\tTo implement DFS algorithm is simple for both a tree and a graph. It is implemented just as it is defined. See the example below written in Python:<img src=\"/images/articles/dfs_in-order.png\" alt=\"\" title=\"In-Order DFS Implementation\"></p>\n<p>\tThe difference in the implementation for a tree and a graph is including a visited set as a state. In the implementation of DFS in a graph you will add a visited set to store all the vertices/nodes that were already visited. Since a graph uses a visited set, you no longer need to used the goal state that a tree would used to find a left node. The python example below shows the basic implementation to start from: <img src=\"/images/articles/dfs_graph-traversal.png\" alt=\"\" title=\"DFS Implementation of Graph Traversal\"></p>"
+        "htmlContent": ""
       }
     ]
   },
   {
-    "id": "debugging-in-node",
-    "title": "Debugging In NodeJS",
-    "description": "How to properly debug in NodeJS",
-    "date": "1679979600000",
+    "id": "sample-template",
+    "title": "",
+    "description": "This the sample template for testing purposes only.",
+    "date": "2023-08-11 00:00:00",
     "tags": [
-      "Technology",
-      "Engineer"
+      "Template",
+      "Info",
+      "Beginner"
     ],
     "type": "article",
     "image": {
-      "name": "/images/icons/web-dev.png",
-      "alt": "web-dev-img"
+      "name": "/images/icons/image.png",
+      "alt": "image-title"
     },
     "content": [
       {
-        "title": "Debugging in Node Using Chrome Devtools",
-        "htmlContent": "<p>As I\u2019m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you\u2019re a web developer. It is done by adding simply italic flag. What happens is that when using italic italic flag Node opens a port to accept WebSocket connections. Now you will be presented with the following:<img src=\"/images/articles/node-inspect.png\" alt=\"\" title=\"node --inspect snippet\"></p>\n<p>Once successful, now open up Google Chrome and type the following URL italic italic italic italic italic. This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure\u2026 which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.</p>\n<p>One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful.</p>"
+        "title": "Why am I Presbyterian",
+        "htmlContent": ""
       },
       {
-        "title": "Soli Deo Gloria",
+        "title": "fgfd",
         "htmlContent": ""
       }
     ]
@@ -177,7 +127,7 @@
     "id": "debugging-in-node",
     "title": "Debugging in NodeJS",
     "description": "How to properly debug in NodeJS",
-    "date": "1680066000000",
+    "date": "2023-03-29 00:00:00",
     "tags": [
       "Technology",
       "Engineer"
@@ -190,11 +140,11 @@
     "content": [
       {
         "title": "Debugging in Node Using Chrome Devtools",
-        "htmlContent": "<p>As I\u2019m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you\u2019re a web developer. It is done by adding simply italic italic flag. What happens is that when using italic italic flag Node opens a port to accept WebSocket connections. Now you will be presented with the following:</p>\n<p><img src=\"/images/articles/node-inspect.png\" alt=\"\" title=\"node --inspect snippet\"></p>\n<p>Once successful, now open up Google Chrome and type the following URL italic italic italic italic italic . This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure\u2026 which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.</p>\n<p>One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful.</p>"
+        "htmlContent": ""
       },
       {
         "title": "Setting up Stack Trace",
-        "htmlContent": "<p>The basics behind displaying stack trace is simple in node. All one would have to do is.</p>"
+        "htmlContent": ""
       },
       {
         "title": "Soli Deo Gloria",
@@ -203,14 +153,13 @@
     ]
   },
   {
-    "id": "system-design",
-    "title": "Help with System Design Interviews",
-    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
-    "date": "1675836000000",
+    "id": "debugging-in-node",
+    "title": "Debugging In NodeJS",
+    "description": "How to properly debug in NodeJS",
+    "date": "2023-03-28 00:00:00",
     "tags": [
-      "System Design",
       "Technology",
-      "MAANG"
+      "Engineer"
     ],
     "type": "article",
     "image": {
@@ -219,52 +168,12 @@
     },
     "content": [
       {
-        "title": "Preparation for the Interview",
-        "htmlContent": "<p><img src=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\" alt=\"system-design\" title=\"Load Balancing from G4G\"></p>\n<p>Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.</p>\n<p>Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are <a href=\"https://engineering.fb.com/\">Engineering at Meta</a>, <a href=\"https://research.fb.com/\">Meta Research</a>, <a href=\"https://aws.amazon.com/blogs/architecture/\">AWS Architecture Blog</a>, <a href=\"https://www.amazon.science/blog\">Amazon Science Blog</a>, <a href=\"https://netflixtechblog.com/\">Netflix TechBlog</a>, <a href=\"https://research.google/\">Google Research</a>, <a href=\"https://quoraengineering.quora.com/\">Engineering at Quora</a>, <a href=\"https://eng.uber.com/\">Uber Engineering Blog</a>, <a href=\"https://databricks.com/blog/category/engineering\">Databricks Blog</a>, <a href=\"https://medium.com/@Pinterest_Engineering\">Pinterest Engineering</a>, <a href=\"https://medium.com/blackrock-engineering\">BlackRock Engineering</a>, <a href=\"https://eng.lyft.com/\">Lyft Engineering</a>, and <a href=\"https://engineering.salesforce.com/\">Salesforce Engineering</a>.</p>\n<p>Some thoughts that should happen when designing a system should be \u201cWhy does this system works?\u201d. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction.</p>"
+        "title": "Debugging in Node Using Chrome Devtools",
+        "htmlContent": ""
       },
       {
-        "title": "Stay on track",
-        "htmlContent": "<p>At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.</p>\n<p>Key things to remember when thinking of deliverables expected from the developed design <ol><li>Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.</li><li>Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on.</li></ol></p>"
-      },
-      {
-        "title": "The Interview",
-        "htmlContent": "<p>When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.</p>\n<p>The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: <ul><li>What is the size of the data right now?:listPlace(002)</li><li>At what rate is the data expected to grow over time?</li><li>How will the data be consumed by other subsystems or end users?</li><li>Is the data read-heavy or write-heavy?</li><li>Do we need strict consistency of data, or will eventual consistency work?</li><li>What is the durability target of the data?</li><li>What privacy and regulatory requirements do we require for storing or transmitting user data?</li></ul></p>"
-      },
-      {
-        "title": "Abstraction",
-        "htmlContent": "<p>Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system.</p>"
-      },
-      {
-        "title": "Remote Procedure Calls",
-        "htmlContent": "<p>Remote Procedure Calls (bold) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.</p>"
-      },
-      {
-        "title": "Consistency",
-        "htmlContent": "<p>Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.</p>\n<p>There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities.</p>"
-      },
-      {
-        "title": "Availability",
-        "htmlContent": "<p>Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers.</p>"
-      },
-      {
-        "title": "Reliability",
-        "htmlContent": "<p>Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions.</p>"
-      },
-      {
-        "title": "Scalability",
-        "htmlContent": "<p>Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: <ul><li>Request workload: This is the number of requests served by the system.</li><li>Data/storage workload: This is the amount of data stored by the system.</li></ul></p>\n<p>There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. <ul><li>Vertical Scaling = more space in a single system</li><li>Horizontal Scaling = more nodes that need to be in sync with one another</li></ul></p>"
-      },
-      {
-        "title": "Maintainability",
-        "htmlContent": "<p>Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights.</p>"
-      },
-      {
-        "title": "Fault Tolerance",
-        "htmlContent": "<p>Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures\u2014a reality that is outlined in the CAP theorem.</p>\n<p>Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems.</p>"
-      },
-      {
-        "title": "Back-Of-The-Envelope",
-        "htmlContent": "<p>This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.</p>\n<p>For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.</p>\n<p><img src=\"/images/system-design/database_rates.png\" alt=\"system-design-db-rates\" title=\"Database Rates\"></p>\n<p><img src=\"/images/system-design/latency_values.png\" alt=\"system-design-latency-rates\" title=\"Latency Rates\"></p>\n<p><img src=\"/images/system-design/server_specs.png\" alt=\"system-design-server-specs\" title=\"Server Specs\"></p>"
+        "title": "Soli Deo Gloria",
+        "htmlContent": ""
       }
     ]
   },
@@ -272,7 +181,7 @@
     "id": "thankfulness",
     "title": "Command for Thankfulness",
     "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
-    "date": "1678856400000",
+    "date": "2023-03-15 00:00:00",
     "tags": [
       "Christ",
       "Salvation",
@@ -287,71 +196,162 @@
     "content": [
       {
         "title": "Command for Thankfulness",
-        "htmlContent": "<p>We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren\u2019t. Prime example of this in scripture is Israel\u2019s ungrateful heart throughout their time in the wilderness (Num. 14:1-4;20:3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2:24-25).</p>\n<p>The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1:8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They\u2019re not the only ones that think this way.</p>\n<p>As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they\u2019ve been wrong by someone and that person deserves it. As I was reminded by a brother, \u201cWe deserve much worse than what this person just said about us even though it may not be true.\u201d God did not need to save Israel from Egypt nor did he need to save us from our sins.</p>\n<p>So, to close as the Apostle Paul commands, \u201cBe Thankful\u201d. We ought to always be thankful in all circumstances because we deserve much more than we are receiving.</p>"
+        "htmlContent": ""
       }
     ]
   },
   {
-    "id": "xilinx-fsbl-notes-p1",
-    "title": "Xilinx FSBL Notes 2",
-    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
-    "date": "1733637600000",
+    "id": "why-am-i-presbyterian",
+    "title": "Why am I Presbyterian",
+    "description": "Many in the reformed camp seemed to be either Baptist or Presbyterian. This is article is to show my view in Reformed Theology.",
+    "date": "2023-03-04 00:00:00",
     "tags": [
-      "Technology",
-      "Embedded",
-      "Engineer"
+      "Christ",
+      "Covenant",
+      "Reformed",
+      "Gospel"
     ],
     "type": "article",
     "image": {
-      "name": "/images/icons/binary-code.png",
-      "alt": "binary-code-img"
+      "name": "/images/icons/bible-icon.png",
+      "alt": "bible-icon"
     },
     "content": [
       {
-        "title": "Xilinx Running Custom Application from FSBL",
-        "htmlContent": "<p>bold bold : Ensure that QSPI has already been initialized in your FSBL. Since you\u2019re already working after stage 4 in FSBL, this step might already be complete.</p>\n<p>bold bold bold bold bold bold bold bold :</p>\n<p>Identify the QSPI flash address where the custom application is stored.</p>\n<p>Choose a location in DDR where you want to load the application.</p>\n<p>bold bold bold bold bold bold : Use the bold bold bold to read data from the flash memory into DDR. For example:<pre><code>['#define QSPI_APP_ADDRESS  0x01000000   // Example QSPI address where the app is stored\\x0b#define DDR_APP_ADDRESS   0x10000000   // Example DDR address where the app will be loaded\\x0b#define APP_SIZE          0x00100000   // Size of the application in bytes (1MB for example)\\x0b\\x0bStatus = XFsbl_Qspi32Copy(QSPI_APP_ADDRESS, DDR_APP_ADDRESS, APP_SIZE);\\x0bif (Status != XFSBL_SUCCESS) {\\x0b    XFsbl_Printf(DEBUG_GENERAL, \"Failed to load application from QSPI.\\\\r\\\\n\");\\x0b    return Status;\\x0b}', 'language=c', 'Xil_DCacheFlush();', 'language=c', 'typedef void (*AppEntryPoint)(void);\\x0bAppEntryPoint AppStart = (AppEntryPoint)DDR_APP_ADDRESS;\\x0b\\x0bXFsbl_Printf(DEBUG_GENERAL, \"Launching application at 0x%08X...\\\\r\\\\n\", DDR_APP_ADDRESS);\\x0b\\x0bAppStart();   // Jump to the application']</code></pre></p>\n<p>bold bold bold bold bold bold bold bold Ensure that any data in the CPU cache is flushed to DDR before execution:<pre><code>['#define QSPI_APP_ADDRESS  0x01000000   // Example QSPI address where the app is stored\\x0b#define DDR_APP_ADDRESS   0x10000000   // Example DDR address where the app will be loaded\\x0b#define APP_SIZE          0x00100000   // Size of the application in bytes (1MB for example)\\x0b\\x0bStatus = XFsbl_Qspi32Copy(QSPI_APP_ADDRESS, DDR_APP_ADDRESS, APP_SIZE);\\x0bif (Status != XFSBL_SUCCESS) {\\x0b    XFsbl_Printf(DEBUG_GENERAL, \"Failed to load application from QSPI.\\\\r\\\\n\");\\x0b    return Status;\\x0b}', 'language=c', 'Xil_DCacheFlush();', 'language=c', 'typedef void (*AppEntryPoint)(void);\\x0bAppEntryPoint AppStart = (AppEntryPoint)DDR_APP_ADDRESS;\\x0b\\x0bXFsbl_Printf(DEBUG_GENERAL, \"Launching application at 0x%08X...\\\\r\\\\n\", DDR_APP_ADDRESS);\\x0b\\x0bAppStart();   // Jump to the application']</code></pre></p>\n<p>bold bold bold bold : This involves setting the Program Counter (PC) to the starting address of your loaded application:<pre><code>['#define QSPI_APP_ADDRESS  0x01000000   // Example QSPI address where the app is stored\\x0b#define DDR_APP_ADDRESS   0x10000000   // Example DDR address where the app will be loaded\\x0b#define APP_SIZE          0x00100000   // Size of the application in bytes (1MB for example)\\x0b\\x0bStatus = XFsbl_Qspi32Copy(QSPI_APP_ADDRESS, DDR_APP_ADDRESS, APP_SIZE);\\x0bif (Status != XFSBL_SUCCESS) {\\x0b    XFsbl_Printf(DEBUG_GENERAL, \"Failed to load application from QSPI.\\\\r\\\\n\");\\x0b    return Status;\\x0b}', 'language=c', 'Xil_DCacheFlush();', 'language=c', 'typedef void (*AppEntryPoint)(void);\\x0bAppEntryPoint AppStart = (AppEntryPoint)DDR_APP_ADDRESS;\\x0b\\x0bXFsbl_Printf(DEBUG_GENERAL, \"Launching application at 0x%08X...\\\\r\\\\n\", DDR_APP_ADDRESS);\\x0b\\x0bAppStart();   // Jump to the application']</code></pre></p>"
+        "title": "Why am I Presbyterian",
+        "htmlContent": ""
       }
     ]
   },
   {
-    "id": "xilinx-fsbl-notes-p1",
-    "title": "Xilinx FSBL Notes 1",
-    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
-    "date": "1733637600000",
+    "id": "system-design",
+    "title": "Help with System Design Interviews",
+    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+    "date": "2023-02-08 00:00:00",
     "tags": [
+      "System Design",
       "Technology",
-      "Embedded",
-      "Engineer"
+      "MAANG"
     ],
     "type": "article",
     "image": {
-      "name": "/images/icons/binary-code.png",
-      "alt": "binary-code-img"
+      "name": "/images/icons/web-dev.png",
+      "alt": "web-dev-img"
     },
     "content": [
       {
-        "title": "Xilinx Notes: First Stage Boot Loader Part 1",
-        "htmlContent": "<p>A bold bold bold bold bold bold bold or a bold bold , the bold bold bold bold bold (ARM cores) runs software, while the bold bold bold bold bold implements custom hardware. This sequence ensures that the hardware (PL) is correctly initialized before the software on the PS interacts with it. The source code is found in xfsbl_partition_load.c which can be found in <a href=\"https://github.com/Xilinx/embeddedsw/tree/master/lib/sw_apps/zynqmp_fsbl/src\">Xilinx/embeddedsw Github</a>. </p>"
+        "title": "Preparation for the Interview",
+        "htmlContent": ""
       },
       {
-        "title": "What does the Partition Load Stage do?",
-        "htmlContent": "<p>This code launches the application by performing key operations that configure and initialize the Programmable Logic (PL) in a Xilinx Zynq-based system. Let\u2019s break down each part to understand how it works:</p>"
+        "title": "Stay on track",
+        "htmlContent": ""
       },
       {
-        "title": "How FSBL launches the Application in the Bitstream?",
-        "htmlContent": "<p><ol><li>Configure FPGA Logic: Loading the bitstream configures the custom logic into the FPGA.</li><li>Enable Communication: Removing isolation allows the newly configured logic to interface with the rest of the system.</li><li>Reset for Synchronization: Resetting the PL ensures that the logic starts executing in a clean state.</li></ol></p>"
+        "title": "The Interview",
+        "htmlContent": ""
       },
       {
-        "title": "Loading the Bitstream:",
-        "htmlContent": "<p><pre><code>['BitstreamWordSize = PartitionHeader->UnEncryptedDataWordLength;\\x0b\\x0bStatus = XFsbl_WriteToPcap(BitstreamWordSize, (u8 *) LoadAddress);']</code></pre></p>\n<p>bold : This is a binary file that configures the programmable logic (PL) part of the FPGA. The bitstream defines the custom logic or design that will be implemented on the FPGA.</p>\n<p>bold bold bold : This function uses the bold bold (Central Security Unit Direct Memory Access) to transfer the bitstream data from memory to the FPGA\u2019s bold bold bold bold bold bold bold This port is used to load the configuration data into the PL.</p>\n<p>bold : This is the memory address where the bitstream is stored before being transferred. The bitstream\u2019s length is given by BitstreamWordSize.</p>"
+        "title": "Abstraction",
+        "htmlContent": ""
       },
       {
-        "title": "Removing Isolation:",
-        "htmlContent": "<p><pre><code>['psu_ps_pl_isolation_removal_data();']</code></pre></p>\n<p>bold : When the PL is powered up, it is initially isolated from the rest of the system to prevent any unintended interactions or glitches during configuration.</p>\n<p>bold bold : After successfully configuring the PL, this function removes the isolation, allowing the PL to communicate with the Processing System (PS) and other parts of the design.</p>"
+        "title": "Remote Procedure Calls",
+        "htmlContent": ""
       },
       {
-        "title": "Resetting the PL:",
-        "htmlContent": "<p><pre><code>['(void)psu_ps_pl_reset_config_data();']</code></pre></p>\n<p>bold bold : This function resets the PL if the system is configured to do so. A reset ensures that the newly loaded design starts in a known state.</p>\n<p>bold bold bold Sometimes, after loading a bitstream, it\u2019s necessary to reset the PL to ensure that all logic starts cleanly and synchronizes with the PS.</p>"
+        "title": "Consistency",
+        "htmlContent": ""
+      },
+      {
+        "title": "Availability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Reliability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Scalability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Maintainability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Fault Tolerance",
+        "htmlContent": ""
+      },
+      {
+        "title": "Back-Of-The-Envelope",
+        "htmlContent": ""
+      }
+    ]
+  },
+  {
+    "id": "system-design",
+    "title": "Help with System Design Interviews",
+    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+    "date": "2023-02-08 00:00:00",
+    "tags": [
+      "System Design",
+      "Technology",
+      "MAANG"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Preparation for the Interview",
+        "htmlContent": ""
+      },
+      {
+        "title": "Stay on track",
+        "htmlContent": ""
+      },
+      {
+        "title": "The Interview",
+        "htmlContent": ""
+      },
+      {
+        "title": "Abstraction",
+        "htmlContent": ""
+      },
+      {
+        "title": "Remote Procedure Calls",
+        "htmlContent": ""
+      },
+      {
+        "title": "Consistency",
+        "htmlContent": ""
+      },
+      {
+        "title": "Availability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Reliability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Scalability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Maintainability",
+        "htmlContent": ""
+      },
+      {
+        "title": "Fault Tolerance",
+        "htmlContent": ""
+      },
+      {
+        "title": "Back-Of-The-Envelope",
+        "htmlContent": ""
       }
     ]
   }

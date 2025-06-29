@@ -33,7 +33,10 @@ class ArticlesPage extends Component {
             notes: [],
             filteredArticles: [],
             filteredNotes: [],
-            activeFilter: 'all'
+            activeFilter: 'all',
+            totalArticles: 0,
+            currentPage: 1,
+            totalPages: 1
         }
         
         this.handleSearch = this.handleSearch.bind(this);
@@ -44,6 +47,8 @@ class ArticlesPage extends Component {
         this.clearFilters = this.clearFilters.bind(this);
         this.fetchArticles = this.fetchArticles.bind(this);
         this.loadFallbackData = this.loadFallbackData.bind(this);
+        this.fetchArticlesForPage = this.fetchArticlesForPage.bind(this);
+        this.scrollToTop = this.scrollToTop.bind(this);
     }
 
     async componentDidMount() {
@@ -92,13 +97,14 @@ class ArticlesPage extends Component {
             filteredPosts: mergeArray,
             posts: posts,
             currentPosts: currentPosts,
-            postsLength: posts.length,
+            postsLength: mergeArray.length, // Use total count from mergeArray
             loading: false,
-            usingFallback: true
+            usingFallback: true,
+            totalArticles: mergeArray.length // Set total for fallback data
         });
 
         // Only show paginate if greater than postsPerPage
-        if (posts.length <= this.state.postsPerPage) {
+        if (mergeArray.length <= this.state.postsPerPage) {
             const article_pa = document.getElementById('article-paginate');
             if (article_pa) {
                 article_pa.classList.add('hidden');
@@ -129,6 +135,19 @@ class ArticlesPage extends Component {
             
             if (data.success && data.data) {
                 const articles = data.data;
+                const pagination = data.pagination || {};
+                const totalArticles = pagination.total || articles.length;
+                
+                console.log('API Response:', {
+                    articles: articles.length,
+                    total: totalArticles,
+                    pagination: pagination,
+                    currentPage: pagination.current_page,
+                    totalPages: pagination.total_pages,
+                    hasNext: pagination.has_next,
+                    hasPrev: pagination.has_prev
+                });
+                
                 const articles_sorted = filtered(articles);
                 
                 const posts = articles_sorted.map((article, idx) => {
@@ -137,8 +156,18 @@ class ArticlesPage extends Component {
                     if (article.type === 'note' || article['file-id'] === 'note') {
                         noteValue = 1;
                     }
-                    const parsedImage = JSON.parse(article.image);
-                    // console.log(parsedImage);
+                    
+                    // Handle image parsing - check if it's already an object or needs parsing
+                    let parsedImage = article.image;
+                    if (typeof article.image === 'string') {
+                        try {
+                            parsedImage = JSON.parse(article.image);
+                        } catch (e) {
+                            console.warn('Failed to parse image JSON:', article.image);
+                            parsedImage = { name: '', alt: '' };
+                        }
+                    }
+                    
                     return <ArticleModule key={idx}
                         title={article.title}
                         date={new Date(article.date).getTime()}
@@ -148,25 +177,31 @@ class ArticlesPage extends Component {
                         note={noteValue}/>
                 });
 
-                // Get current posts
-                let indexOfLastPost = this.state.currentPostPage * this.state.postsPerPage;
-                let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
-                const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+                console.log('State being set:', {
+                    postsLength: totalArticles,
+                    currentPosts: posts.length,
+                    totalArticles: totalArticles,
+                    currentPage: pagination.current_page || 1,
+                    totalPages: pagination.total_pages || Math.ceil(totalArticles / this.state.postsPerPage)
+                });
 
                 this.setState({
                     mergeArray: articles_sorted,
                     filteredPosts: articles_sorted,
                     posts: posts,
-                    currentPosts: currentPosts,
-                    postsLength: posts.length,
+                    currentPosts: posts, // Show all articles from current page
+                    postsLength: totalArticles, // Use total from pagination
                     loading: false,
                     usingFallback: false,
                     articles: articles,
-                    notes: data.notes || []
+                    notes: data.notes || [],
+                    totalArticles: totalArticles, // Store total for reference
+                    currentPage: pagination.current_page || 1,
+                    totalPages: pagination.total_pages || Math.ceil(totalArticles / this.state.postsPerPage)
                 });
 
                 // Only show paginate if greater than postsPerPage
-                if (posts.length <= this.state.postsPerPage) {
+                if (totalArticles <= this.state.postsPerPage) {
                     const article_pa = document.getElementById('article-paginate');
                     if (article_pa) {
                         article_pa.classList.add('hidden');
@@ -194,14 +229,34 @@ class ArticlesPage extends Component {
         }
     }
     
+    // Scroll to top of articles content
+    scrollToTop() {
+        const articlesContent = document.querySelector('.articles-content');
+        if (articlesContent) {
+            articlesContent.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+    }
+
     // This is used to select number for page
     postPaginate(pageNumber) {
-        let indexOfLastPost = pageNumber * this.state.postsPerPage;
-        let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
-        this.setState({ 
-            currentPostPage: pageNumber,
-            currentPosts: this.state.posts.slice(indexOfFirstPost, indexOfLastPost)
-        });
+        if (this.state.usingFallback) {
+            // Use client-side pagination for fallback data
+            let indexOfLastPost = pageNumber * this.state.postsPerPage;
+            let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
+            this.setState({ 
+                currentPostPage: pageNumber,
+                currentPosts: this.state.posts.slice(indexOfFirstPost, indexOfLastPost)
+            }, () => {
+                // Scroll to top after state update
+                this.scrollToTop();
+            });
+        } else {
+            // Use API pagination
+            this.fetchArticlesForPage(pageNumber);
+        }
     }
     
     // Make sure that we are not going beyond the borders
@@ -213,21 +268,13 @@ class ArticlesPage extends Component {
     goToPostPage(dec, totalPages) {
         if (dec === 1) {
             if (this.goToVerifiedPage(dec, this.state.currentPostPage, totalPages)) {
-                let indexOfLastNote = (this.state.currentPostPage - 1) * this.state.postsPerPage;
-                let indexOfFirstNote = indexOfLastNote - this.state.postsPerPage;
-                this.setState({ 
-                    currentPostPage: this.state.currentPostPage - 1,
-                    currentPosts: this.state.posts.slice(indexOfFirstNote, indexOfLastNote)
-                });
+                const newPage = this.state.currentPostPage - 1;
+                this.postPaginate(newPage);
             }
         } else {
             if (this.goToVerifiedPage(dec, this.state.currentPostPage, totalPages)) {
-                let indexOfLastNote = (this.state.currentPostPage + 1) * this.state.postsPerPage;
-                let indexOfFirstNote = indexOfLastNote - this.state.postsPerPage;
-                this.setState({ 
-                    currentPostPage: this.state.currentPostPage + 1,
-                    currentPosts: this.state.posts.slice(indexOfFirstNote, indexOfLastNote)
-                });
+                const newPage = this.state.currentPostPage + 1;
+                this.postPaginate(newPage);
             }
         }
     }
@@ -323,8 +370,87 @@ class ArticlesPage extends Component {
         });
     }
 
+    async fetchArticlesForPage(pageNumber) {
+        try {
+            const response = await fetch(`${ARTICLES_ENDPOINT}?page=${pageNumber}&per_page=${this.state.postsPerPage}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                mode: 'cors',
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.success && data.data) {
+                const articles = data.data;
+                const pagination = data.pagination || {};
+                
+                const articles_sorted = filtered(articles);
+                
+                const posts = articles_sorted.map((article, idx) => {
+                    let noteValue = 0;
+                    if (article.type === 'note' || article['file-id'] === 'note') {
+                        noteValue = 1;
+                    }
+                    
+                    let parsedImage = article.image;
+                    if (typeof article.image === 'string') {
+                        try {
+                            parsedImage = JSON.parse(article.image);
+                        } catch (e) {
+                            parsedImage = { name: '', alt: '' };
+                        }
+                    }
+                    
+                    return <ArticleModule key={idx}
+                        title={article.title}
+                        date={new Date(article.date).getTime()}
+                        image={parsedImage}
+                        slug={article.slug}
+                        tags={article.tags}
+                        note={noteValue}/>
+                });
+
+                this.setState({
+                    posts: posts,
+                    currentPosts: posts, // Show all articles from current page
+                    currentPostPage: pageNumber,
+                    currentPage: pagination.current_page || pageNumber,
+                    totalPages: pagination.total_pages || this.state.totalPages,
+                    mergeArray: articles_sorted, // Update mergeArray for filtering
+                    filteredPosts: articles_sorted // Update filteredPosts for filtering
+                }, () => {
+                    // Scroll to top after state update
+                    this.scrollToTop();
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching articles for page:', error);
+            // Fall back to client-side pagination if API fails
+            this.postPaginate(pageNumber);
+        }
+    }
+
     render() {
         const hasActiveFilters = this.state.searchTerm || this.state.selectedCategory !== 'all';
+        
+        // Debug logging
+        console.log('Render state:', {
+            postsLength: this.state.postsLength,
+            totalArticles: this.state.totalArticles,
+            currentPosts: this.state.currentPosts.length,
+            posts: this.state.posts.length,
+            mergeArray: this.state.mergeArray.length,
+            currentPage: this.state.currentPage,
+            totalPages: this.state.totalPages,
+            usingFallback: this.state.usingFallback
+        });
         
         // Loading state
         if (this.state.loading) {
@@ -391,7 +517,7 @@ class ArticlesPage extends Component {
                         </div>
                         <div className="header-stats">
                             <div className="stat-item">
-                                <span className="stat-number">{this.state.mergeArray.length}</span>
+                                <span className="stat-number">{this.state.postsLength}</span>
                                 <span className="stat-label">Total Posts</span>
                             </div>
                         </div>
@@ -473,10 +599,10 @@ class ArticlesPage extends Component {
                     )}
                     
                     {/* Pagination */}
-                    {this.state.posts.length > this.state.postsPerPage && (
+                    {this.state.postsLength > this.state.postsPerPage && (
                         <Pagination 
                             postsPerPage={this.state.postsPerPage}
-                            totalPosts={this.state.posts.length}
+                            totalPosts={this.state.postsLength}
                             paginate={this.postPaginate}
                             goToPage={this.goToPostPage}
                             active={this.state.currentPostPage}

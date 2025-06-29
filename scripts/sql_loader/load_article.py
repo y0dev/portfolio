@@ -205,32 +205,85 @@ def convert_timestamp_to_datetime(timestamp_value):
 
 
 def process_article(json_data: Dict[str, Any]) -> Dict[str, Any]:
-    transformed = {
-        "id": json_data["id"],
-        "title": json_data["title"],
-        "description": json_data.get("description"),
-        "date": convert_timestamp_to_datetime(json_data["date"]),
-        "tags": json_data["tags"],
-        "type": "article",
-        "image": json_data.get("image"),
-        "content": []
-    }
+    """Process article or note data into a unified format for database storage"""
+    # Handle different data formats
+    if "file-id" in json_data:
+        # This is a note format from notes.json
+        transformed = {
+            "id": json_data["id"],
+            "title": json_data["title"],
+            "description": json_data.get("description", ""),
+            "date": convert_timestamp_to_datetime(json_data["date"]),
+            "tags": json_data["tags"],
+            "type": "note",  # Notes are always type "note"
+            "image": json_data.get("image"),
+            "content": []
+        }
+        
+        # Process note content sections
+        for section in json_data.get("content", []):
+            title = section.get("title", {})
+            if isinstance(title, dict):
+                title_text = title.get("text", "")
+            else:
+                title_text = str(title) if title else ""
+            
+            paragraphs = section.get("paragraphs", [])
+            images = section.get("images", [])
+            links = section.get("links", [])
+            lists = section.get("lists", [])
+            codes = section.get("code", []) if "code" in section else section.get("codes", [])
 
-    for section in json_data["content"]:
-        title = section.get("title", {}).get("text")
-        paragraphs = section.get("paragraphs", [])
-        images = section.get("images", [])
-        links = section.get("links", [])
-        lists = section.get("lists", [])
-        codes = section.get("code", []) if "code" in section else section.get("codes", [])
+            html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes)}</p>' for p in paragraphs]
+            htmlContent = "\n".join(html_paragraphs)
 
-        html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes)}</p>' for p in paragraphs]
-        htmlContent = "\n".join(html_paragraphs)
+            transformed["content"].append({
+                "title": title_text,
+                "htmlContent": htmlContent
+            })
+            
+    else:
+        # This is a full article format with content sections
+        transformed = {
+            "id": json_data["id"],
+            "title": json_data["title"],
+            "description": json_data.get("description"),
+            "date": convert_timestamp_to_datetime(json_data["date"]),
+            "tags": json_data["tags"],
+            "type": json_data.get("type", "article"),  # Default to "article" if not specified
+            "image": json_data.get("image"),
+            "content": []
+        }
 
-        transformed["content"].append({
-            "title": title,
-            "htmlContent": htmlContent
-        })
+        # Process article content sections
+        for section in json_data.get("content", []):
+            title = section.get("title", {})
+            if isinstance(title, dict):
+                title_text = title.get("text", "")
+            else:
+                title_text = str(title) if title else ""
+            
+            # For articles, content might be directly in htmlContent
+            if "htmlContent" in section:
+                transformed["content"].append({
+                    "title": title_text,
+                    "htmlContent": section["htmlContent"]
+                })
+            else:
+                # Process paragraphs like notes
+                paragraphs = section.get("paragraphs", [])
+                images = section.get("images", [])
+                links = section.get("links", [])
+                lists = section.get("lists", [])
+                codes = section.get("code", []) if "code" in section else section.get("codes", [])
+
+                html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes)}</p>' for p in paragraphs]
+                htmlContent = "\n".join(html_paragraphs)
+
+                transformed["content"].append({
+                    "title": title_text,
+                    "htmlContent": htmlContent
+                })
 
     return transformed
 
@@ -275,83 +328,161 @@ def create_articles_table(cursor):
 
 
 def save_article(cursor, article):
-    insert_sql = """
-    INSERT INTO articles
-    (title, slug, description, content, date, tags, type, image, like_count, share_count)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    ON DUPLICATE KEY UPDATE
-        title = VALUES(title),
-        description = VALUES(description),
-        content = VALUES(content),
-        date = VALUES(date),
-        tags = VALUES(tags),
-        type = VALUES(type),
-        image = VALUES(image),
-        updated_at = CURRENT_TIMESTAMP
-    """
-
-    slug = article.get('slug')
-    if not slug and article.get('title'):
-        slug = article['title'].lower().replace(' ', '-')
-
-    full_content = "\n".join(section['htmlContent'] for section in article.get('content', []))
-    description = article.get('description', '')
-    tags_json = json.dumps(article.get('tags', []), ensure_ascii=False)
-    image_json = json.dumps(article.get('image', {}), ensure_ascii=False)
-    like_count = 0
-    share_count = 0
-    
-    # Ensure date is properly converted
-    article_date = convert_timestamp_to_datetime(article.get('date'))
-    if not article_date:
-        print(f"⚠️ Warning: Invalid date for article '{article.get('title', '')}'. Using current timestamp.")
-        article_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-    data = (
-        article.get('title', ''),
-        slug,
-        description,
-        full_content,
-        article_date,
-        tags_json,
-        article.get('type', 'article'),
-        image_json,
-        like_count,
-        share_count
-    )
-
+    """Save a single article to the database with enhanced error handling"""
     try:
+        # Validate required fields
+        if not article.get('title'):
+            print(f"⚠️ Warning: Article missing title, skipping...")
+            return False
+            
+        if not article.get('id'):
+            print(f"⚠️ Warning: Article '{article.get('title', '')}' missing ID, skipping...")
+            return False
+
+        insert_sql = """
+        INSERT INTO articles
+        (title, slug, description, content, date, tags, type, image, like_count, share_count)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ON DUPLICATE KEY UPDATE
+            title = VALUES(title),
+            description = VALUES(description),
+            content = VALUES(content),
+            date = VALUES(date),
+            tags = VALUES(tags),
+            type = VALUES(type),
+            image = VALUES(image),
+            updated_at = CURRENT_TIMESTAMP
+        """
+
+        slug = article.get('id')  # Use 'id' field as slug for both articles and notes
+        if not slug:
+            slug = article['title'].lower().replace(' ', '-').replace(':', '').replace('?', '')
+
+        # Combine all content sections
+        content_sections = []
+        for section in article.get('content', []):
+            if section.get('title'):
+                content_sections.append(f"<h2>{section['title']}</h2>")
+            if section.get('htmlContent'):
+                content_sections.append(section['htmlContent'])
+        
+        full_content = "\n".join(content_sections) if content_sections else article.get('description', '')
+        
+        description = article.get('description', '')
+        tags_json = json.dumps(article.get('tags', []), ensure_ascii=False)
+        image_json = json.dumps(article.get('image', {}), ensure_ascii=False)
+        like_count = 0
+        share_count = 0
+        
+        # Ensure date is properly converted
+        article_date = convert_timestamp_to_datetime(article.get('date'))
+        if not article_date:
+            print(f"⚠️ Warning: Invalid date for article '{article.get('title', '')}'. Using current timestamp.")
+            article_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        data = (
+            article.get('title', ''),
+            slug,
+            description,
+            full_content,
+            article_date,
+            tags_json,
+            article.get('type', 'article'),
+            image_json,
+            like_count,
+            share_count
+        )
+
         cursor.execute(insert_sql, data)
-        print(f"✅ Saved article '{article.get('title', '')}' with slug '{slug}' (date: {article_date})")
+        print(f"✅ Saved {article.get('type', 'article')} '{article.get('title', '')}' with slug '{slug}' (date: {article_date})")
+        return True
+        
     except mysql.connector.Error as e:
-        print(f"❌ DB error saving article '{article.get('title', '')}': {e}")
+        print(f"❌ DB error saving {article.get('type', 'article')} '{article.get('title', '')}': {e}")
+        return False
+    except Exception as e:
+        print(f"❌ Unexpected error saving {article.get('type', 'article')} '{article.get('title', '')}': {e}")
+        return False
+
+
+def print_summary(articles):
+    """Print summary statistics about the loaded articles and notes"""
+    if not articles:
+        print("📊 No articles or notes to process.")
+        return
+    
+    article_count = sum(1 for art in articles if art.get('type') == 'article')
+    note_count = sum(1 for art in articles if art.get('type') == 'note')
+    
+    print(f"\n📊 Summary:")
+    print(f"   Total items: {len(articles)}")
+    print(f"   Articles: {article_count}")
+    print(f"   Notes: {note_count}")
+    
+    # Show some examples
+    print(f"\n📝 Sample items:")
+    for i, art in enumerate(articles[:3]):  # Show first 3 items
+        print(f"   {i+1}. {art.get('type', 'unknown')}: '{art.get('title', 'No title')}' (ID: {art.get('id', 'No ID')})")
+    
+    if len(articles) > 3:
+        print(f"   ... and {len(articles) - 3} more items")
 
 
 def main():
-    # Articles directory to load JSON files from
-    ARTICLES_DIR = get_input_directory()
-    print(f"📁 Loading articles from directory: {ARTICLES_DIR}")
-
-    if not os.path.exists(ARTICLES_DIR) or not os.path.isdir(ARTICLES_DIR):
-        print(f"❌ Articles directory does not exist: {ARTICLES_DIR}")
-        print("🔄 Falling back to JSON file loading...")
-        ARTICLES_DIR = None
+    articles = []
     
-    if not ARTICLES_DIR:
-        # Fall back to JSON file loading
-        # Projects file to load JSON from
-        ARTICLES_FILE = get_articles_file()
+    # Load articles from articles.json
+    ARTICLES_FILE = get_articles_file()
+    if os.path.exists(ARTICLES_FILE):
         print(f"📁 Loading articles from file: {ARTICLES_FILE}")
-
-        # Load projects data
-        if os.path.exists(ARTICLES_FILE):
-            articles = load_articles_from_file(ARTICLES_FILE)
+        articles_from_file = load_articles_from_file(ARTICLES_FILE)
+        articles.extend(articles_from_file)
+        print(f"✅ Loaded {len(articles_from_file)} articles from articles.json")
     else:
-        articles = load_articles_from_dir(ARTICLES_DIR)
+        print(f"⚠️ Articles file not found: {ARTICLES_FILE}")
+    
+    # Load notes from notes.json
+    NOTES_FILE = 'src/assets/json/notes.json'
+    if os.path.exists(NOTES_FILE):
+        print(f"📁 Loading notes from file: {NOTES_FILE}")
+        try:
+            with open(NOTES_FILE, 'r', encoding='utf-8') as f:
+                notes_data = json.load(f)
+            
+            # Process each note
+            processed_notes = []
+            for note in notes_data:
+                try:
+                    processed_note = process_article(note)
+                    processed_notes.append(processed_note)
+                except Exception as e:
+                    print(f"❌ Failed to process note {note.get('id', 'unknown')}: {e}")
+            
+            articles.extend(processed_notes)
+            print(f"✅ Loaded {len(processed_notes)} notes from notes.json")
+        except Exception as e:
+            print(f"❌ Failed to load notes from {NOTES_FILE}: {e}")
+    else:
+        print(f"⚠️ Notes file not found: {NOTES_FILE}")
+    
+    # If no files were found, try to load from directory
+    if not articles:
+        ARTICLES_DIR = get_input_directory()
+        print(f"📁 Loading articles from directory: {ARTICLES_DIR}")
+
+        if os.path.exists(ARTICLES_DIR) and os.path.isdir(ARTICLES_DIR):
+            articles_from_dir = load_articles_from_dir(ARTICLES_DIR)
+            articles.extend(articles_from_dir)
+            print(f"✅ Loaded {len(articles_from_dir)} articles from directory")
+        else:
+            print(f"❌ Articles directory does not exist: {ARTICLES_DIR}")
 
     if not articles:
-        print("⚠️ No articles found to process.")
+        print("⚠️ No articles or notes found to process.")
         sys.exit(0)
+
+    print(f"📊 Total articles and notes to process: {len(articles)}")
+    print_summary(articles)
 
     # Connect to DB
     try:
@@ -366,13 +497,18 @@ def main():
     create_articles_table(cursor)
 
     # Save articles
+    saved_count = 0
     for art in articles:
-        save_article(cursor, art)
+        try:
+            if save_article(cursor, art):
+                saved_count += 1
+        except Exception as e:
+            print(f"❌ Failed to save article '{art.get('title', 'unknown')}': {e}")
 
     conn.commit()
     cursor.close()
     conn.close()
-    print(f"🎉 Completed saving {len(articles)} articles to the database.")
+    print(f"🎉 Completed saving {saved_count} articles and notes to the database.")
 
 
 if __name__ == "__main__":
