@@ -151,7 +151,7 @@
 }
 
 .read-more:hover {
-    color: var(--color-primary-dark, #2563eb);
+    color: var(--color-primary, #2563eb);
 }
 
 .arrow-icon {
@@ -222,8 +222,8 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     .article-card {
-        background: var(--color-bg-secondary-dark, #1f2937);
-        border-color: var(--color-border-dark, #374151);
+        background: var(--color-bg-secondary, #1f2937);
+        border-color: var(--color-border, #374151);
     }
     
     .article-card:hover {
@@ -231,23 +231,23 @@
     }
     
     .article-title {
-        color: var(--color-text-primary-dark, #f9fafb);
+        color: var(--color-text-primary, #f9fafb);
     }
     
     .article-meta {
-        color: var(--color-text-secondary-dark, #9ca3af);
+        color: var(--color-text-secondary, #9ca3af);
     }
     
     .article-image-container {
-        background: var(--color-bg-tertiary-dark, #374151);
+        background: var(--color-bg-tertiary, #374151);
     }
     
     .article-tag {
-        background: var(--color-tag-bg-dark, #374151);
-        color: var(--color-tag-text-dark, #d1d5db);
+        background: var(--color-tag-bg, #374151);
+        color: var(--color-tag-text, #d1d5db);
     }
     
     .article-card-footer {
-        border-color: var(--color-border-dark, #374151);
+        border-color: var(--color-border, #374151);
     }
 }

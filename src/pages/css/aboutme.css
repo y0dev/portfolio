@@ -26,6 +26,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  padding-top: 80px; /* Add padding to account for fixed navbar */
 }
 
 .hero-container {

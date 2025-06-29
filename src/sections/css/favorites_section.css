@@ -1,7 +1,7 @@
 /* Favorites Section Styles */
 .favorites-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f3e8ff 100%);
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
   position: relative;
   overflow: hidden;
   display: block !important;
@@ -42,7 +42,7 @@
   left: 10%;
   width: 200px;
   height: 200px;
-  background: #3b82f6;
+  background: var(--color-primary);
 }
 
 .bg-decoration-2 {
@@ -50,7 +50,7 @@
   right: 10%;
   width: 250px;
   height: 250px;
-  background: #8b5cf6;
+  background: var(--color-secondary);
 }
 
 .bg-decoration-3 {
@@ -59,7 +59,7 @@
   transform: translate(-50%, -50%);
   width: 300px;
   height: 300px;
-  background: #10b981;
+  background: var(--color-text-success);
 }
 
 .section-container {
@@ -80,7 +80,7 @@
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #10b981);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-text-success));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -96,7 +96,7 @@
 
 .section-description {
   font-size: 1.25rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
@@ -107,15 +107,15 @@
 }
 
 .highlight-excellence {
-  color: #3b82f6;
+  color: var(--color-primary);
 }
 
 .highlight-dedication {
-  color: #8b5cf6;
+  color: var(--color-secondary);
 }
 
 .highlight-achievements {
-  color: #10b981;
+  color: var(--color-text-success);
 }
 
 /* Section Subheaders */
@@ -135,20 +135,20 @@
 .subheader-icon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-weight: 700;
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 .subheader-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -167,11 +167,11 @@
 .favorite-team-card {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #ffffff, #f9fafb);
+  background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border);
   text-decoration: none;
   color: inherit;
   display: block;
@@ -218,7 +218,7 @@
 .team-logo-glow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   border-radius: 50%;
   filter: blur(20px);
   opacity: 0;
@@ -231,7 +231,7 @@
 
 .team-logo-wrapper {
   position: relative;
-  background: white;
+  background: var(--color-bg-secondary);
   border-radius: 50%;
   padding: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -252,13 +252,13 @@
 .team-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--color-text-primary);
   margin-bottom: 15px;
   transition: color 0.3s ease;
 }
 
 .favorite-team-card:hover .team-name {
-  color: #3b82f6;
+  color: var(--color-primary);
 }
 
 .team-achievements {
@@ -273,7 +273,7 @@
 
 .team-stats {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
 
@@ -286,17 +286,18 @@
 
 .stat-label {
   font-weight: 500;
+  color: var(--color-text-secondary);
 }
 
 .stat-value {
-  color: #3b82f6;
+  color: var(--color-primary);
   font-weight: 700;
 }
 
 .team-visit-link {
   display: flex;
   align-items: center;
-  color: #3b82f6;
+  color: var(--color-primary);
   font-size: 0.875rem;
   font-weight: 500;
   opacity: 0;
@@ -329,11 +330,11 @@
 .favorite-player-card {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #ffffff, #f9fafb);
+  background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border);
   opacity: 1;
   transform: translateY(0);
 }
@@ -379,7 +380,7 @@
 .player-image-glow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #10b981, #3b82f6);
+  background: linear-gradient(135deg, var(--color-text-success), var(--color-primary));
   border-radius: 50%;
   filter: blur(20px);
   opacity: 0;
@@ -392,7 +393,7 @@
 
 .player-image-wrapper {
   position: relative;
-  background: white;
+  background: var(--color-bg-secondary);
   border-radius: 50%;
   padding: 8px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -413,13 +414,13 @@
 .player-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--color-text-primary);
   margin: 0;
   transition: color 0.3s ease;
 }
 
 .favorite-player-card:hover .player-name {
-  color: #10b981;
+  color: var(--color-text-success);
 }
 
 .player-rings {
@@ -434,7 +435,7 @@
 
 .player-stats {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
 
@@ -455,7 +456,7 @@
 }
 
 .player-stat-item .stat-value {
-  color: #10b981;
+  color: var(--color-text-success);
   font-weight: 700;
 }
 
@@ -470,7 +471,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #10b981;
+  color: var(--color-text-success);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -478,7 +479,7 @@
 .status-dot {
   width: 8px;
   height: 8px;
-  background: #10b981;
+  background: var(--color-text-success);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -564,7 +565,7 @@
 
 .team-name,
 .player-name {
-  color: #1f2937 !important;
+  color: var(--color-text-primary) !important;
   opacity: 1 !important;
   visibility: visible !important;
 }

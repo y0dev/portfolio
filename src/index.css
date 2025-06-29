@@ -1,122 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-html.dark-mode {
-  --color-background: #333544;
-  --color-heading: #fff;
-  --color-subheading: #ddd;
-  --color-body: #ccc;
-  --color-code-bg: #333340;
-  --color-footer: #223;
-  --color-article-hover: #445;
-  --color-about-highlight-bg: #443944;
-  --color-about-highlight-hover: #333544;
-  --color-highlight-container-bg: #223;
-  --color-code-file-label: #223;
-  --color-code-language-label-bg: #223;
-  --color-code-border: #445;
-  --color-console-header-bg: #445;
-  --color-divider: #556;
-  --color-border-code-file-label: #ddd;
-  --color-viewMore-bg: #445;
-  --color-viewMore-text: white;
-  --color-viewMore-bg--hover: #223;
-  --color-header-shadow: #223;
-  --color-tooltip-icon-background: #112;
-  --color-tooltip-icon-border: #6246ea;
-  --color-tooltip-icon-text: #6246ea;
-  --color-tag-bg: #223;
-  --color-tag-text: #fff;
-  --color-tag-bg-active: #6246ea;
-  --color-tag-text-active: #000;
-  --color-view-tag-bg: #6246ea;
-  --color-view-tag-bg-hover: #3c1ae3;
-  --color-search-background: #445;
-  --color-search-border: #4a5568;
-  --color-view-writeup-text: var(--color-tag-text);
-  --color-view-writeup-bg: var(--color-tag-bg);
-  --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);
-  
-  /* Article Module Dark Mode CSS Variables */
-  --color-bg-secondary: #1f2937;
-  --color-bg-tertiary: #374151;
-  --color-border: #4b5563;
-  --color-primary: #3b82f6;
-  --color-secondary: #8b5cf6;
-  --color-primary-dark: #60a5fa;
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #d1d5db;
-  --color-accent: #451a03;
-  --color-accent-text: #fbbf24;
-  
-  /* Text Color Variables for Dark Mode */
-  --color-text-default: #f9fafb;
-  --color-text-muted: #d1d5db;
-  --color-text-light: #9ca3af;
-  --color-text-lighter: #6b7280;
-  --color-text-inverse: #111827;
-  --color-text-link: #60a5fa;
-  --color-text-link-hover: #93c5fd;
-  --color-text-success: #34d399;
-  --color-text-warning: #fbbf24;
-  --color-text-error: #f87171;
-  --color-text-code: #f3f4f6;
-  --color-text-code-bg: #1f2937;
-  --color-text-quote: #d1d5db;
-  --color-text-quote-bg: #374151;
-  --color-text-selection: #3b82f6;
-  --color-text-placeholder: #9ca3af;
-}
-
-html {
+/* Base CSS Variables - Light Mode (Default) */
+:root {
+  /* Background Colors */
   --color-background: #fcfcff;
-  --color-heading: #2d3748;
-  --color-subheading: #4a5568;
-  --color-body: #444444;
-  --color-code-bg: #f9f9ff;
-  --color-code-border: rgba(74, 85, 104, 0.1);
-  --color-footer: var(--color-heading);
-  --color-article-hover: #eeeeee;
-  --color-about-highlight-bg: #b0b0bb;
-  --color-about-highlight-hover: #808088;
-  --color-highlight-container-bg: #eae6fc;
-  --color-code-file-label: #2d3748;
-  --color-code-language-label-bg: #2d3748;
-  --color-divider: #eeeeee;
-  --color-border-code-file-label: transparent;
-  --color-console-header-bg: #eeeeee;
-  --color-viewMore-bg: #eeeeee;
-  --color-viewMore-text: #4a5568;
-  --color-viewMore-bg--hover: #d5d5d5;
-  --color-header-shadow: #eeeeee;
-  --color-tooltip-icon-background: #fcfcff;
-  --color-tooltip-icon-border: rgba(98, 70, 234, 0.5);
-  --color-tooltip-icon-text: #6246ea;
-  --color-tag-bg: #eee;
-  --color-tag-text: #333;
-  --color-tag-bg-active: #6246ea;
-  --color-tag-text-active: #FFF;
-  --color-view-tag-bg: #6246ea;
-  --color-view-tag-bg-hover: #3c1ae3;
-  --color-search-background: #ffffff;
-  --color-search-border: #eeeeee;
-  --color-search-placeholder: #848991;
-  --color-view-writeup-text: #e45858;
-  --color-view-writeup-bg: #fdf2f2;
-  --color-view-writeup-bg--hover: #f9dcdc;
-  
-  /* Article Module CSS Variables */
   --color-bg-secondary: #ffffff;
   --color-bg-tertiary: #f3f4f6;
-  --color-border: #e5e7eb;
-  --color-primary: #3b82f6;
-  --color-secondary: #8b5cf6;
-  --color-primary-dark: #2563eb;
+  
+  /* Text Colors */
   --color-text-primary: #111827;
   --color-text-secondary: #6b7280;
-  --color-accent: #fef3c7;
-  --color-accent-text: #92400e;
-  
-  /* Text Color Variables for Light Mode */
   --color-text-default: #111827;
   --color-text-muted: #6b7280;
   --color-text-light: #9ca3af;
@@ -133,6 +26,146 @@ html {
   --color-text-quote-bg: #f9fafb;
   --color-text-selection: #3b82f6;
   --color-text-placeholder: #9ca3af;
+  
+  /* Heading Colors */
+  --color-heading: #2d3748;
+  --color-subheading: #4a5568;
+  --color-body: #444444;
+  
+  /* Border Colors */
+  --color-border: #e5e7eb;
+  --color-code-border: rgba(74, 85, 104, 0.1);
+  --color-divider: #eeeeee;
+  
+  /* Component Colors */
+  --color-footer: var(--color-heading);
+  --color-article-hover: #eeeeee;
+  --color-about-highlight-bg: #b0b0bb;
+  --color-about-highlight-hover: #808088;
+  --color-highlight-container-bg: #eae6fc;
+  --color-code-file-label: #2d3748;
+  --color-code-language-label-bg: #2d3748;
+  --color-border-code-file-label: transparent;
+  --color-console-header-bg: #eeeeee;
+  --color-viewMore-bg: #eeeeee;
+  --color-viewMore-text: #4a5568;
+  --color-viewMore-bg--hover: #d5d5d5;
+  --color-header-shadow: #eeeeee;
+  --color-tooltip-icon-background: #fcfcff;
+  --color-tooltip-icon-border: rgba(98, 70, 234, 0.5);
+  --color-tooltip-icon-text: #6246ea;
+  
+  /* Tag Colors */
+  --color-tag-bg: #eee;
+  --color-tag-text: #333;
+  --color-tag-bg-active: #6246ea;
+  --color-tag-text-active: #FFF;
+  --color-view-tag-bg: #6246ea;
+  --color-view-tag-bg-hover: #3c1ae3;
+  
+  /* Search Colors */
+  --color-search-background: #ffffff;
+  --color-search-border: #eeeeee;
+  --color-search-placeholder: #848991;
+  
+  /* Writeup Colors */
+  --color-view-writeup-text: #e45858;
+  --color-view-writeup-bg: #fdf2f2;
+  --color-view-writeup-bg--hover: #f9dcdc;
+  
+  /* Brand Colors */
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-primary-dark: #2563eb;
+  --color-accent: #fef3c7;
+  --color-accent-text: #92400e;
+  
+  /* Code Colors */
+  --color-code-bg: #f9f9ff;
+}
+
+/* Dark Mode Overrides */
+html.dark-mode {
+  /* Background Colors */
+  --color-background: #333544;
+  --color-bg-secondary: #1f2937;
+  --color-bg-tertiary: #374151;
+  
+  /* Text Colors */
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-default: #f9fafb;
+  --color-text-muted: #d1d5db;
+  --color-text-light: #9ca3af;
+  --color-text-lighter: #6b7280;
+  --color-text-inverse: #111827;
+  --color-text-link: #60a5fa;
+  --color-text-link-hover: #93c5fd;
+  --color-text-success: #34d399;
+  --color-text-warning: #fbbf24;
+  --color-text-error: #f87171;
+  --color-text-code: #f3f4f6;
+  --color-text-code-bg: #1f2937;
+  --color-text-quote: #d1d5db;
+  --color-text-quote-bg: #374151;
+  --color-text-selection: #3b82f6;
+  --color-text-placeholder: #9ca3af;
+  
+  /* Heading Colors */
+  --color-heading: #fff;
+  --color-subheading: #ddd;
+  --color-body: #ccc;
+  
+  /* Border Colors */
+  --color-border: #4b5563;
+  --color-code-border: #445;
+  --color-divider: #556;
+  
+  /* Component Colors */
+  --color-footer: #223;
+  --color-article-hover: #445;
+  --color-about-highlight-bg: #443944;
+  --color-about-highlight-hover: #333544;
+  --color-highlight-container-bg: #223;
+  --color-code-file-label: #223;
+  --color-code-language-label-bg: #223;
+  --color-border-code-file-label: #ddd;
+  --color-console-header-bg: #445;
+  --color-viewMore-bg: #445;
+  --color-viewMore-text: white;
+  --color-viewMore-bg--hover: #223;
+  --color-header-shadow: #223;
+  --color-tooltip-icon-background: #112;
+  --color-tooltip-icon-border: #6246ea;
+  --color-tooltip-icon-text: #6246ea;
+  
+  /* Tag Colors */
+  --color-tag-bg: #223;
+  --color-tag-text: #fff;
+  --color-tag-bg-active: #6246ea;
+  --color-tag-text-active: #000;
+  --color-view-tag-bg: #6246ea;
+  --color-view-tag-bg-hover: #3c1ae3;
+  
+  /* Search Colors */
+  --color-search-background: #445;
+  --color-search-border: #4a5568;
+  --color-search-placeholder: #9ca3af;
+  
+  /* Writeup Colors */
+  --color-view-writeup-text: var(--color-tag-text);
+  --color-view-writeup-bg: var(--color-tag-bg);
+  --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);
+  
+  /* Brand Colors */
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-primary-dark: #60a5fa;
+  --color-accent: #451a03;
+  --color-accent-text: #fbbf24;
+  
+  /* Code Colors */
+  --color-code-bg: #333340;
 }
 
 * {
@@ -229,43 +262,6 @@ input[type="text" i] {
    background-color: var(--color-view-tag-bg-hover);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #333544;
-    --color-heading: #fff;
-    --color-subheading: #ddd;
-    --color-body: #ccc;
-    --color-code-bg: #333340;
-    --color-footer: #223;
-    --color-article-hover: #445;
-    --color-about-highlight-bg: #443944;
-    --color-about-highlight-hover: #333544;
-    --color-highlight-container-bg: #223;
-    --color-code-file-label: #223;
-    --color-code-language-label-bg: #223;
-    --color-code-border: #445;
-    --color-console-header-bg: #445;
-    --color-divider: #556;
-    --color-border-code-file-label: #ddd;
-    --color-viewMore-bg: #445;
-    --color-viewMore-text: white;
-    --color-viewMore-bg--hover: #223;
-    --color-header-shadow: #223;
-    --color-tooltip-icon-background: #112;
-    --color-tooltip-icon-border: #6246ea;
-    --color-tooltip-icon-text: #6246ea;
-    --color-tag-bg: #223;
-    --color-tag-text: #fff;
-    --color-view-tag-bg: #6246ea;
-    --color-view-tag-bg-hover: #3c1ae3;
-    --color-search-background: #445;
-    --color-search-border: #4a5568;
-    --color-view-writeup-text: var(--color-tag-text);
-    --color-view-writeup-bg: var(--color-tag-bg);
-    --color-view-writeup-bg--hover: var(--color-tooltip-icon-background);
-  }
-}
-
 /* Text Color Utility Classes */
 .text-default { color: var(--color-text-default); }
 .text-muted { color: var(--color-text-muted); }
@@ -278,6 +274,8 @@ input[type="text" i] {
 .text-error { color: var(--color-text-error); }
 .text-code { color: var(--color-text-code); }
 .text-quote { color: var(--color-text-quote); }
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
 
 /* Text Selection */
 ::selection {

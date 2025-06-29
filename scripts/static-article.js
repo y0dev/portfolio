@@ -79,12 +79,16 @@
         // Theme toggle functionality
         if (themeToggle) {
             themeToggle.addEventListener('click', function() {
-                if (currentTheme === 'dark') {
+                const isCurrentlyDark = document.documentElement.classList.contains('dark-mode');
+                
+                if (isCurrentlyDark) {
+                    // Switch to light mode
                     currentTheme = 'light';
                     document.documentElement.classList.remove('dark-mode');
                     localStorage.setItem('theme', 'light');
                     themeToggle.innerHTML = '🌙';
                 } else {
+                    // Switch to dark mode
                     currentTheme = 'dark';
                     document.documentElement.classList.add('dark-mode');
                     localStorage.setItem('theme', 'dark');
@@ -515,10 +519,24 @@
         // Add theme toggle functionality if needed
         const themeToggle = document.querySelector('.theme-toggle');
         if (themeToggle) {
+            // Update initial button state
+            const isDark = document.documentElement.classList.contains('dark-mode');
+            themeToggle.innerHTML = isDark ? '☀️' : '🌙';
+            
             themeToggle.addEventListener('click', function() {
-                document.documentElement.classList.toggle('dark-mode');
-                const isDark = document.documentElement.classList.contains('dark-mode');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                const isCurrentlyDark = document.documentElement.classList.contains('dark-mode');
+                
+                if (isCurrentlyDark) {
+                    // Switch to light mode
+                    document.documentElement.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '🌙';
+                } else {
+                    // Switch to dark mode
+                    document.documentElement.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '☀️';
+                }
             });
         }
     }

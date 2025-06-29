@@ -15,7 +15,7 @@
 .gospel-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: var(--color-text-inverse);
-    padding: 80px 0;
+    padding: 120px 0 80px 0;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -687,6 +687,10 @@ html.dark-mode .gospel-status {
 
 /* Gospel Page Responsive */
 @media (max-width: 768px) {
+    .gospel-hero {
+        padding: 100px 0 80px 0; /* Maintain top padding for navbar */
+    }
+    
     .gospel-hero-title {
         font-size: 2.5rem;
     }
@@ -730,7 +734,7 @@ html.dark-mode .gospel-status {
 
 @media (max-width: 480px) {
     .gospel-hero {
-        padding: 60px 0;
+        padding: 80px 0 60px 0; /* Maintain top padding for navbar */
     }
     
     .gospel-hero-title {
