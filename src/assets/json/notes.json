@@ -17,7 +17,7 @@
             "Demons"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -101,7 +101,7 @@
             "Demons"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -177,7 +177,7 @@
             "Sin"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -259,7 +259,7 @@
             "Sin"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -344,7 +344,7 @@
             "God"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -426,7 +426,7 @@
             "God"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -500,7 +500,7 @@
             "God"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [
@@ -606,7 +606,7 @@
             "God"
         ],
         "image": {
-            "name": "images/bible-icon.png",
+            "name": "/images/icons/bible-icon.png",
             "alt": "bible-icon"
         },
         "content": [

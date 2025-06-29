@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import data from '../assets/json/data.json';
 import './css/navbar.css';
 // import { Link } from "react-router-dom";
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logos/logo.png';
 
 function NavBar() {
    const [theme, setTheme] = useState('light');

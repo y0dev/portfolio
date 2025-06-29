@@ -12,7 +12,6 @@ import share_icon_svg from './icons/share_icon.svg';
 import jenkins from './icons/jenkins.png';
 import copy_icon from './icons/copy-icon.png';
 import docker from './icons/docker.png';
-import logo from './logo.png';
 import headshot from './headshot.jpeg';
 import arrow_left from './arrow_left.png';
 import arrow_right from './arrow_right.png';
@@ -27,6 +26,7 @@ import api from './icons/api.png';
 import thankful from './icons/thankful.png';
 
 // Logo images
+import logo from './logos/logo.png';
 import logo192_logos from './logos/logo192.png';
 import logo512 from './logos/logo512.png';
 import favicon from './logos/favicon.ico';

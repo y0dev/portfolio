@@ -228,15 +228,55 @@ def process_article(json_data: Dict[str, Any]) -> Dict[str, Any]:
             else:
                 title_text = str(title) if title else ""
             
+            print(f"  📝 Processing section: {title_text}")
+            
+            # Build HTML content from all elements in the section
+            html_parts = []
+            
+            # Process paragraphs
             paragraphs = section.get("paragraphs", [])
-            images = section.get("images", [])
-            links = section.get("links", [])
+            print(f"    📄 Found {len(paragraphs)} paragraphs")
+            for paragraph in paragraphs:
+                if paragraph.strip():
+                    # Replace placeholders in paragraph
+                    processed_paragraph = replace_placeholders(
+                        paragraph, 
+                        section.get("images", []),
+                        section.get("links", []),
+                        section.get("lists", []),
+                        section.get("code", []) if "code" in section else section.get("codes", [])
+                    )
+                    html_parts.append(f'<p class="post-details">{processed_paragraph}</p>')
+            
+            # Process lists (they might also be referenced in paragraphs)
             lists = section.get("lists", [])
+            print(f"    📋 Found {len(lists)} lists")
+            for list_item in lists:
+                list_type = list_item.get('list_type') or list_item.get('listType', 'unordered')
+                tag = 'ol' if list_type == 'ordered' else 'ul'
+                items = ''.join(f'<li class="post-list-item">{item}</li>' for item in list_item.get('items', []))
+                html_parts.append(f"<{tag} class=\"post-list\">{items}</{tag}>")
+            
+            # Process code blocks
             codes = section.get("code", []) if "code" in section else section.get("codes", [])
-
-            html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes)}</p>' for p in paragraphs]
-            htmlContent = "\n".join(html_paragraphs)
-
+            print(f"    💻 Found {len(codes)} code blocks")
+            for code_item in codes:
+                language = code_item.get('language', 'text')
+                content = code_item.get('content', '')
+                html_parts.append(f'<pre class="language-{language}"><code class="language-{language}">{content}</code></pre>')
+            
+            # Process images (standalone images not in paragraphs)
+            images = section.get("images", [])
+            print(f"    🖼️ Found {len(images)} images")
+            for img in images:
+                if img.get("link") and img.get("alt"):
+                    caption = img.get("caption", "")
+                    html_parts.append(f'<div class="post-image-container"><a href="{img["link"]}"><img class="post-image" src="{img["link"]}" alt="{img["alt"]}" title="{caption}"></a><figcaption class="post-image-caption">{caption}</figcaption></div>')
+            
+            # Combine all HTML parts
+            htmlContent = "\n".join(html_parts)
+            print(f"    📊 Generated {len(html_parts)} HTML parts")
+            
             transformed["content"].append({
                 "title": title_text,
                 "htmlContent": htmlContent
@@ -368,6 +408,10 @@ def save_article(cursor, article):
         
         full_content = "\n".join(content_sections) if content_sections else article.get('description', '')
         
+        # If no content was generated, use description as fallback
+        if not full_content.strip():
+            full_content = article.get('description', 'No content available')
+        
         description = article.get('description', '')
         tags_json = json.dumps(article.get('tags', []), ensure_ascii=False)
         image_json = json.dumps(article.get('image', {}), ensure_ascii=False)
@@ -453,8 +497,10 @@ def main():
             processed_notes = []
             for note in notes_data:
                 try:
+                    print(f"📝 Processing note: {note.get('title', 'Unknown')} (ID: {note.get('id', 'Unknown')})")
                     processed_note = process_article(note)
                     processed_notes.append(processed_note)
+                    print(f"✅ Successfully processed note: {note.get('title', 'Unknown')}")
                 except Exception as e:
                     print(f"❌ Failed to process note {note.get('id', 'unknown')}: {e}")
             

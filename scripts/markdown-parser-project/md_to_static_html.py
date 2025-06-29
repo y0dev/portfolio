@@ -20,6 +20,10 @@ import glob
 from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import Error
+import ftplib
+import socket
+import shutil
+from bs4 import BeautifulSoup
 
 # Import category mapper functions
 def get_category_tags() -> dict:
@@ -82,6 +86,293 @@ def get_image_info_for_category(category: str) -> dict:
 
     # Default
     return {"alt": "image-title", "name": "images/image.png"}
+
+def upload_folder_to_ftp(local_folder: str, remote_folder: str = "", ftp_config: dict = None) -> bool:
+    """Upload a local folder to FTP server."""
+    if ftp_config is None:
+        ftp_config = {
+            'host': os.getenv('FTP_HOST', 'localhost'),
+            'user': os.getenv('FTP_USER', ''),
+            'password': os.getenv('FTP_PASSWORD', ''),
+            'port': int(os.getenv('FTP_PORT', 21))
+        }
+    
+    try:
+        print(f"📤 Connecting to FTP server: {ftp_config['host']}:{ftp_config['port']}")
+        ftp = ftplib.FTP()
+        ftp.connect(ftp_config['host'], ftp_config['port'])
+        ftp.login(ftp_config['user'], ftp_config['password'])
+        print("✅ Connected to FTP server")
+        
+        # Create remote folder if it doesn't exist
+        if remote_folder:
+            try:
+                ftp.mkd(remote_folder)
+                print(f"📁 Created remote folder: {remote_folder}")
+            except ftplib.error_perm as e:
+                if "550" in str(e):  # Folder already exists
+                    print(f"📁 Remote folder already exists: {remote_folder}")
+                else:
+                    print(f"⚠️ Could not create remote folder: {e}")
+        
+        # Change to remote folder
+        if remote_folder:
+            ftp.cwd(remote_folder)
+            print(f"📁 Changed to remote directory: {remote_folder}")
+        
+        # Upload all files in the folder
+        uploaded_count = 0
+        for root, dirs, files in os.walk(local_folder):
+            # Create remote directories
+            for dir_name in dirs:
+                remote_dir = os.path.join(root, dir_name).replace(local_folder, '').lstrip('/')
+                if remote_dir:
+                    try:
+                        ftp.mkd(remote_dir)
+                        print(f"📁 Created remote subfolder: {remote_dir}")
+                    except ftplib.error_perm as e:
+                        if "550" not in str(e):  # Not "already exists" error
+                            print(f"⚠️ Could not create remote subfolder {remote_dir}: {e}")
+            
+            # Upload files
+            for file_name in files:
+                local_file_path = os.path.join(root, file_name)
+                remote_file_path = os.path.join(root, file_name).replace(local_folder, '').lstrip('/')
+                
+                try:
+                    with open(local_file_path, 'rb') as file:
+                        ftp.storbinary(f'STOR {remote_file_path}', file)
+                    print(f"✅ Uploaded: {remote_file_path}")
+                    uploaded_count += 1
+                except Exception as e:
+                    print(f"❌ Failed to upload {remote_file_path}: {e}")
+        
+        ftp.quit()
+        print(f"🎉 FTP upload completed! Uploaded {uploaded_count} files.")
+        return True
+        
+    except ftplib.error_perm as e:
+        print(f"❌ FTP permission error: {e}")
+        return False
+    except ftplib.error_temp as e:
+        print(f"❌ FTP temporary error: {e}")
+        return False
+    except ftplib.error_proto as e:
+        print(f"❌ FTP protocol error: {e}")
+        return False
+    except socket.error as e:
+        print(f"❌ FTP connection error: {e}")
+        return False
+    except Exception as e:
+        print(f"❌ FTP upload error: {e}")
+        return False
+
+def upload_file_to_ftp(local_file: str, remote_file: str, ftp_config: dict = None) -> bool:
+    """Upload a single file to FTP server."""
+    if ftp_config is None:
+        ftp_config = {
+            'host': os.getenv('FTP_HOST', 'localhost'),
+            'user': os.getenv('FTP_USER', ''),
+            'password': os.getenv('FTP_PASSWORD', ''),
+            'port': int(os.getenv('FTP_PORT', 21))
+        }
+    
+    try:
+        print(f"📤 Connecting to FTP server: {ftp_config['host']}:{ftp_config['port']}")
+        ftp = ftplib.FTP()
+        ftp.connect(ftp_config['host'], ftp_config['port'])
+        ftp.login(ftp_config['user'], ftp_config['password'])
+        print("✅ Connected to FTP server")
+        
+        # Create remote directory if needed
+        remote_dir = os.path.dirname(remote_file)
+        if remote_dir:
+            try:
+                ftp.mkd(remote_dir)
+                print(f"📁 Created remote directory: {remote_dir}")
+            except ftplib.error_perm as e:
+                if "550" not in str(e):  # Not "already exists" error
+                    print(f"⚠️ Could not create remote directory {remote_dir}: {e}")
+        
+        # Upload file
+        with open(local_file, 'rb') as file:
+            ftp.storbinary(f'STOR {remote_file}', file)
+        print(f"✅ Uploaded: {remote_file}")
+        
+        ftp.quit()
+        return True
+        
+    except Exception as e:
+        print(f"❌ FTP upload error: {e}")
+        return False
+
+def copy_assets_to_output(output_dir: str) -> bool:
+    """Copy CSS, JS, and other assets to output directory for preview."""
+    try:
+        print(f"📁 Copying assets to output directory: {output_dir}")
+        
+        # Define source and destination paths
+        assets_to_copy = [
+            # CSS files
+            ('src/components/css/navbar.css', 'css/navbar.css'),
+            ('src/components/css/footer.css', 'css/footer.css'),
+            ('src/pages/css/viewarticle.css', 'css/viewarticle.css'),
+            ('src/index.css', 'css/index.css'),
+            
+            # JavaScript files
+            ('scripts/static-article.js', 'scripts/static-article.js'),
+            
+            # Images and logos
+            ('src/assets/images/logos/logo.png', 'images/logos/logo.png'),
+            ('src/assets/images/logos/logo192.png', 'images/logos/logo192.png'),
+            ('src/assets/images/logos/logo512.png', 'images/logos/logo512.png'),
+            ('src/assets/images/logos/favicon.ico', 'images/logos/favicon.ico'),
+            
+            # Icons
+            ('src/assets/images/icons/bible-icon.png', 'images/icons/bible-icon.png'),
+            ('src/assets/images/icons/thankful.png', 'images/icons/thankful.png'),
+            ('src/assets/images/icons/family.png', 'images/icons/family.png'),
+            ('src/assets/images/icons/heart_strength.png', 'images/icons/heart_strength.png'),
+            ('src/assets/images/icons/web-dev.png', 'images/icons/web-dev.png'),
+            ('src/assets/images/icons/algorithm.png', 'images/icons/algorithm.png'),
+            ('src/assets/images/icons/binary-code.png', 'images/icons/binary-code.png'),
+            ('src/assets/images/icons/physics-icon.png', 'images/icons/physics-icon.png'),
+            ('src/assets/images/icons/docker.png', 'images/icons/docker.png'),
+            ('src/assets/images/icons/jenkins.png', 'images/icons/jenkins.png'),
+            ('src/assets/images/icons/crypto.png', 'images/icons/crypto.png'),
+            
+            # Manifest and other files
+            ('public/manifest.json', 'manifest.json'),
+        ]
+        
+        copied_count = 0
+        for src_path, dest_path in assets_to_copy:
+            try:
+                if os.path.exists(src_path):
+                    # Create destination directory if it doesn't exist
+                    dest_dir = os.path.join(output_dir, os.path.dirname(dest_path))
+                    os.makedirs(dest_dir, exist_ok=True)
+                    
+                    # Copy file
+                    dest_file = os.path.join(output_dir, dest_path)
+                    shutil.copy2(src_path, dest_file)
+                    print(f"✅ Copied: {src_path} → {dest_path}")
+                    copied_count += 1
+                else:
+                    print(f"⚠️ Source file not found: {src_path}")
+            except Exception as e:
+                print(f"❌ Failed to copy {src_path}: {e}")
+        
+        print(f"📁 Assets copy completed. Successfully copied {copied_count} files.")
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error copying assets: {e}")
+        return False
+
+def move_to_done_folder(file_path: str, output_dir: str, done_folder: str = "done") -> str:
+    """Move processed markdown file to done folder inside output directory."""
+    try:
+        # Create done folder inside output directory
+        done_path = os.path.join(output_dir, done_folder)
+        os.makedirs(done_path, exist_ok=True)
+        
+        # Generate unique filename to avoid conflicts
+        filename = os.path.basename(file_path)
+        name, ext = os.path.splitext(filename)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        new_filename = f"{name}_{timestamp}{ext}"
+        
+        # Move file
+        new_path = os.path.join(done_path, new_filename)
+        shutil.move(file_path, new_path)
+        print(f"✅ Moved to done folder: {new_path}")
+        return new_path
+        
+    except Exception as e:
+        print(f"❌ Failed to move file to done folder: {e}")
+        return file_path
+
+def convert_table_to_responsive(html_content: str) -> str:
+    """Convert HTML tables to responsive design with cards for mobile."""
+    def table_to_cards(table_html):
+        """Convert a single table to responsive cards."""
+        soup = BeautifulSoup(table_html, 'html.parser')
+        table = soup.find('table')
+        if not table:
+            return table_html
+        
+        # Extract headers
+        headers = []
+        thead = table.find('thead')
+        if thead:
+            header_row = thead.find('tr')
+            if header_row:
+                headers = [th.get_text(strip=True) for th in header_row.find_all(['th', 'td'])]
+        
+        # If no headers in thead, try first row
+        if not headers:
+            first_row = table.find('tr')
+            if first_row:
+                headers = [th.get_text(strip=True) for th in first_row.find_all(['th', 'td'])]
+        
+        # Extract data rows
+        rows = []
+        tbody = table.find('tbody')
+        if tbody:
+            for row in tbody.find_all('tr'):
+                cells = [td.get_text(strip=True) for td in row.find_all('td')]
+                if cells:
+                    rows.append(cells)
+        else:
+            # No tbody, get all rows except header
+            all_rows = table.find_all('tr')
+            for row in all_rows[1:] if headers else all_rows:  # Skip first row if we have headers
+                cells = [td.get_text(strip=True) for td in row.find_all('td')]
+                if cells:
+                    rows.append(cells)
+        
+        # Generate responsive HTML
+        mobile_cards = []
+        for row in rows:
+            card_rows = []
+            for i, header in enumerate(headers):
+                value = row[i] if i < len(row) else ""
+                card_row = f'<div class="table-card-row"><span class="table-card-label">{header}</span><span class="table-card-value">{value}</span></div>'
+                card_rows.append(card_row)
+            
+            card_html = f'''
+            <div class="table-card">
+                {chr(10).join(card_rows)}
+            </div>
+            '''
+            mobile_cards.append(card_html)
+        
+        responsive_html = f'''
+        <div class="responsive-table-container">
+            <!-- Desktop Table -->
+            <div class="table-desktop">
+                {table_html}
+            </div>
+            
+            <!-- Mobile Cards -->
+            <div class="table-mobile">
+                {chr(10).join(mobile_cards)}
+            </div>
+        </div>
+        '''
+        
+        return responsive_html
+    
+    # Find and replace all tables
+    table_pattern = r'<table[^>]*>.*?</table>'
+    tables = re.findall(table_pattern, html_content, re.DOTALL)
+    
+    for table_html in tables:
+        responsive_table = table_to_cards(table_html)
+        html_content = html_content.replace(table_html, responsive_table)
+    
+    return html_content
 
 class MarkdownToStaticHTML:
     def __init__(self):
@@ -198,6 +489,9 @@ class MarkdownToStaticHTML:
         # Convert markdown to HTML
         html_content = self.md.convert(content_sections)
         
+        # Convert tables to responsive design
+        html_content = convert_table_to_responsive(html_content)
+        
         # Generate unique ID from filename and title
         file_id = Path(md_file_path).stem.lower().replace(' ', '-').replace('_', '-')
         title_id = metadata['title'].lower().replace(' ', '-').replace('_', '-').replace('.', '').replace(',', '')
@@ -269,6 +563,7 @@ class MarkdownToStaticHTML:
         """Generate static HTML similar to generate_static_articles.py format."""
         title = article_data['title']
         description = article_data['description']
+        article_id = article_data['id']
         
         # Handle date formatting - now it's already a datetime string
         if isinstance(article_data['date'], str):
@@ -302,41 +597,51 @@ class MarkdownToStaticHTML:
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} - Devontae Reid</title>
     <meta name="description" content="{description}" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Devontae Reid" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="distribution" content="web" />
+    <meta name="rating" content="general" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{title}" />
+    <meta property="og:description" content="{description}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://devontaereid.com/article/{article_id}" />
+    <meta property="og:site_name" content="Devontae Reid" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:author" content="Devontae Reid" />
+    <meta property="article:published_time" content="{article_data['date']}" />
+    <meta property="article:section" content="{article_data['category']}" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@_yodev_" />
+    <meta name="twitter:creator" content="@_yodev_" />
+    <meta name="twitter:title" content="{title}" />
+    <meta name="twitter:description" content="{description}" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="keywords" content="{', '.join(article_data['tags'])}" />
+    <meta name="category" content="{article_data['category']}" />
+    <meta name="article:tag" content="{', '.join(article_data['tags'])}" />
+    
+    <!-- Favicon and Icons -->
     <link rel="icon" href="/images/logos/logo192.png" />
+    <link rel="apple-touch-icon" href="/images/logos/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://devontaereid.com/article/{article_id}" />
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/viewarticle.css" />
     <link rel="stylesheet" href="/css/index.css" />
-    <style>
-        .highlight {{
-            background: #f4f4f4;
-            padding: 1rem;
-            border-radius: 4px;
-            overflow-x: auto;
-        }}
-        .highlight pre {{
-            margin: 0;
-        }}
-        table {{
-            border-collapse: collapse;
-            width: 100%;
-            margin: 1rem 0;
-        }}
-        th, td {{
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }}
-        th {{
-            background-color: #f2f2f2;
-        }}
-        blockquote {{
-            border-left: 4px solid #3b82f6;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
-            background: #f8f9fa;
-        }}
-    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -654,6 +959,14 @@ def main():
     parser.add_argument('-p', '--preview', action='store_true', default=True, help='Preview HTML in browser (default: True)')
     parser.add_argument('--no-preview', action='store_true', help='Disable preview')
     parser.add_argument('--no-db', action='store_true', help='Skip database update')
+    parser.add_argument('--upload', action='store_true', help='Upload generated files to FTP server')
+    parser.add_argument('--ftp-host', help='FTP server host (overrides FTP_HOST env var)')
+    parser.add_argument('--ftp-user', help='FTP username (overrides FTP_USER env var)')
+    parser.add_argument('--ftp-password', help='FTP password (overrides FTP_PASSWORD env var)')
+    parser.add_argument('--ftp-port', type=int, default=21, help='FTP server port (overrides FTP_PORT env var)')
+    parser.add_argument('--remote-path', default='', help='Remote path on FTP server (default: root)')
+    parser.add_argument('--no-assets', action='store_true', help='Skip copying assets to output directory')
+    parser.add_argument('--no-move', action='store_true', help='Skip moving processed files to done folder')
     
     args = parser.parse_args()
     
@@ -663,6 +976,11 @@ def main():
     
     # Initialize converter
     converter = MarkdownToStaticHTML()
+    
+    # Copy assets to output directory for proper previewing
+    if not args.no_assets:
+        print("📁 Setting up output directory with assets...")
+        copy_assets_to_output(args.output)
     
     # Get input files
     if args.input_file:
@@ -728,6 +1046,65 @@ def main():
                 print(f"💾 Database updated successfully")
             else:
                 print("⚠️ Database update failed")
+        
+        # Prompt for FTP upload if enabled
+        if args.upload and result['output_path']:
+            print(f"\n📤 Ready to upload: {result['article_data']['title']}")
+            print(f"📁 Article folder: {os.path.dirname(result['output_path'])}")
+            
+            # Ask user if they want to preview before upload
+            preview_choice = input("Would you like to preview the article in the output folder before uploading? (y/n): ").lower().strip()
+            if preview_choice in ['y', 'yes']:
+                # Open the generated HTML file in browser
+                html_file = result['output_path']
+                if os.path.exists(html_file):
+                    webbrowser.open(f'file://{os.path.abspath(html_file)}')
+                    print(f"🌐 Opened preview: {html_file}")
+                    input("Press Enter when ready to upload...")
+                else:
+                    print(f"❌ HTML file not found: {html_file}")
+            
+            # Confirm upload
+            upload_choice = input("Proceed with FTP upload? (y/n): ").lower().strip()
+            if upload_choice in ['y', 'yes']:
+                print(f"📤 Starting FTP upload for: {result['article_data']['title']}")
+                
+                # Prepare FTP configuration
+                ftp_config = {
+                    'host': args.ftp_host or os.getenv('FTP_HOST', 'localhost'),
+                    'user': args.ftp_user or os.getenv('FTP_USER', ''),
+                    'password': args.ftp_password or os.getenv('FTP_PASSWORD', ''),
+                    'port': args.ftp_port or int(os.getenv('FTP_PORT', 21))
+                }
+                
+                # Get the folder containing the HTML file
+                article_folder = os.path.dirname(result['output_path'])
+                article_type = result['article_data']['type'].lower()
+                article_id = result['article_data']['id']
+                
+                # Determine remote path
+                remote_path = args.remote_path.rstrip('/')
+                if remote_path:
+                    remote_folder = f"{remote_path}/{article_type}/{article_id}"
+                else:
+                    remote_folder = f"{article_type}/{article_id}"
+                
+                # Upload the entire article folder
+                if upload_folder_to_ftp(article_folder, remote_folder, ftp_config):
+                    print(f"🎉 FTP upload completed for: {result['article_data']['title']}")
+                    print(f"🌐 Article available at: https://devontaereid.com/{article_type}/{article_id}/")
+                    
+                    # Move processed file to done folder
+                    if not args.no_move:
+                        move_to_done_folder(md_file, args.output)
+                else:
+                    print(f"❌ FTP upload failed for: {result['article_data']['title']}")
+            else:
+                print("❌ FTP upload cancelled by user")
+        else:
+            # Move processed file to done folder even if no upload
+            if not args.no_move:
+                move_to_done_folder(md_file, args.output)
 
 if __name__ == '__main__':
     main() 

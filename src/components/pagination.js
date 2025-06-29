@@ -8,6 +8,23 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) =>
    pageNumbers.push(i);
   }
 
+  // Function to scroll to top of articles content
+  const scrollToTop = () => {
+    const articlesContent = document.querySelector('.articles-content');
+    if (articlesContent) {
+      articlesContent.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    } else {
+      // Fallback to window scroll if articles-content not found
+      window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+      });
+    }
+  };
+
   // Show limited page numbers for better UX
   const getVisiblePages = () => {
     const delta = 2;
@@ -35,12 +52,24 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) =>
     return rangeWithDots;
   };
 
+  // Handle previous button click
+  const handlePrevClick = () => {
+    goToPage(1, totalPages);
+    scrollToTop();
+  };
+
+  // Handle next button click
+  const handleNextClick = () => {
+    goToPage(0, totalPages);
+    scrollToTop();
+  };
+
   return (
     <nav className='pagination-nav'>
       <div className="pagination-container">
         <button 
           className="pagination-arrow prev" 
-          onClick={() => goToPage(1, totalPages)}
+          onClick={handlePrevClick}
           disabled={active === 1}
         >
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +95,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, goToPage, active }) =>
         
         <button 
           className="pagination-arrow next" 
-          onClick={() => goToPage(0, totalPages)}
+          onClick={handleNextClick}
           disabled={active === totalPages}
         >
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

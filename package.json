@@ -15,7 +15,14 @@
     "md-to-html": "python3 scripts/markdown-parser-project/md_to_static_html.py",
     "md-to-html-dev": "python3 scripts/markdown-parser-project/md_to_static_html.py -o dev/",
     "md-to-html-dist": "python3 scripts/markdown-parser-project/md_to_static_html.py -o dist/",
-    "build-with-md": "webpack --config webpack.prod.js && python3 scripts/generate_static_articles.py dist/ && python3 scripts/markdown-parser-project/md_to_static_html.py -o dist/"
+    "md-to-html-upload": "python3 scripts/markdown-parser-project/md_to_static_html.py --upload",
+    "md-to-html-upload-dev": "python3 scripts/markdown-parser-project/md_to_static_html.py -o dev/ --upload",
+    "md-to-html-upload-dist": "python3 scripts/markdown-parser-project/md_to_static_html.py -o dist/ --upload",
+    "md-to-html-preview": "python3 scripts/markdown-parser-project/md_to_static_html.py --no-upload",
+    "md-to-html-preview-dev": "python3 scripts/markdown-parser-project/md_to_static_html.py -o dev/ --no-upload",
+    "md-to-html-preview-dist": "python3 scripts/markdown-parser-project/md_to_static_html.py -o dist/ --no-upload",
+    "build-with-md": "webpack --config webpack.prod.js && python3 scripts/generate_static_articles.py dist/ && python3 scripts/markdown-parser-project/md_to_static_html.py -o dist/",
+    "build-with-md-upload": "webpack --config webpack.prod.js && python3 scripts/generate_static_articles.py dist/ && python3 scripts/markdown-parser-project/md_to_static_html.py -o dist/ --upload"
   },
   "keywords": [],
   "author": "",

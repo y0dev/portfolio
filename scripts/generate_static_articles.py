@@ -369,7 +369,47 @@ def render_article(post, is_note=False, articles=None, notes=None):
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} - Devontae Reid</title>
     <meta name="description" content="{esc(post.get('description', title))}" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Devontae Reid" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="distribution" content="web" />
+    <meta name="rating" content="general" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{title}" />
+    <meta property="og:description" content="{esc(post.get('description', title))}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://devontaereid.com/{'note' if is_note else 'article'}/{post.get('id', '')}" />
+    <meta property="og:site_name" content="Devontae Reid" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:author" content="Devontae Reid" />
+    <meta property="article:published_time" content="{post.get('date', '')}" />
+    <meta property="article:section" content="Technology" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@_yodev_" />
+    <meta name="twitter:creator" content="@_yodev_" />
+    <meta name="twitter:title" content="{title}" />
+    <meta name="twitter:description" content="{esc(post.get('description', title))}" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="keywords" content="{', '.join(esc(tag) for tag in post.get('tags', []))}" />
+    <meta name="category" content="Technology" />
+    <meta name="article:tag" content="{', '.join(esc(tag) for tag in post.get('tags', []))}" />
+    
+    <!-- Favicon and Icons -->
     <link rel="icon" href="images/logos/logo192.png" />
+    <link rel="apple-touch-icon" href="images/logos/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://devontaereid.com/{'note' if is_note else 'article'}/{post.get('id', '')}" />
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/viewarticle.css" />
