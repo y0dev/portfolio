@@ -3,3 +3,5 @@ pypugjs
 pyspellchecker
 markdown
 pygments
+python-dotenv
+mysql-connector-python

@@ -256,15 +256,12 @@ def create_articles_table(cursor):
             id INT AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             slug VARCHAR(255) NOT NULL UNIQUE,
-            category VARCHAR(100),
             description TEXT,
             content LONGTEXT,
-            body TEXT NOT NULL,
             date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             tags JSON,
             type ENUM('article', 'note') DEFAULT 'article',
             image JSON,
-            author_id INT DEFAULT 1,
             like_count INT DEFAULT 0,
             share_count INT DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -280,14 +277,12 @@ def create_articles_table(cursor):
 def save_article(cursor, article):
     insert_sql = """
     INSERT INTO articles
-    (title, slug, category, description, content, body, date, tags, type, image, author_id, like_count, share_count)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    (title, slug, description, content, date, tags, type, image, like_count, share_count)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     ON DUPLICATE KEY UPDATE
         title = VALUES(title),
-        category = VALUES(category),
         description = VALUES(description),
         content = VALUES(content),
-        body = VALUES(body),
         date = VALUES(date),
         tags = VALUES(tags),
         type = VALUES(type),
@@ -300,11 +295,9 @@ def save_article(cursor, article):
         slug = article['title'].lower().replace(' ', '-')
 
     full_content = "\n".join(section['htmlContent'] for section in article.get('content', []))
-    body_text = f"{article.get('title', '')}\n\n{article.get('description', '')}"
-    category = article.get('category') or ''
+    description = article.get('description', '')
     tags_json = json.dumps(article.get('tags', []), ensure_ascii=False)
     image_json = json.dumps(article.get('image', {}), ensure_ascii=False)
-    author_id = 1
     like_count = 0
     share_count = 0
     
@@ -317,15 +310,12 @@ def save_article(cursor, article):
     data = (
         article.get('title', ''),
         slug,
-        category,
-        article.get('description', ''),
+        description,
         full_content,
-        body_text,
         article_date,
         tags_json,
         article.get('type', 'article'),
         image_json,
-        author_id,
         like_count,
         share_count
     )
