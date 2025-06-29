@@ -702,3 +702,6 @@ if __name__ == "__main__":
 # DROP TABLE youtube_channels;
 # DROP TABLE theology_resources;
 # DROP TABLE testimonials;
+
+# Script to check if the files are in the correct place
+# ls -la dev/docs/ && echo "---" && ls -la dev/scripts/

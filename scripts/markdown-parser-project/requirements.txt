@@ -1,3 +1,5 @@
 marko
 pypugjs
 pyspellchecker
+markdown
+pygments

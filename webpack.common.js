@@ -7,6 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // Plugin to clean up the output directory before each build
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+// Plugin to copy files
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 // Export the Webpack configuration object
 module.exports = {
 	// Single entry point - all pages will use the same bundle with conditional rendering
@@ -96,6 +99,44 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
+		new CopyWebpackPlugin({
+			patterns: [
+				// Copy resume to /docs/ in output directory
+				{
+					from: path.resolve(__dirname, 'src/assets/devontae_resume.pdf'),
+					to: 'docs/devontae_resume.pdf'
+				},
+				// Copy static-article.js to /scripts/ in output directory
+				{
+					from: path.resolve(__dirname, 'scripts/static-article.js'),
+					to: 'scripts/static-article.js'
+				},
+				// Copy all CSS files to /css/ in output directory (flattened)
+				{
+					from: path.resolve(__dirname, 'src/pages/css'),
+					to: 'css',
+					noErrorOnMissing: true
+				},
+				{
+					from: path.resolve(__dirname, 'src/components/css'),
+					to: 'css',
+					noErrorOnMissing: true
+				},
+				{
+					from: path.resolve(__dirname, 'src/sections/css'),
+					to: 'css',
+					noErrorOnMissing: true
+				},
+				{
+					from: path.resolve(__dirname, 'src'),
+					to: 'css',
+					globOptions: {
+						ignore: ['**/*.html','**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.json', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.ico', '**/*.pdf', '**/templates/**', '**/pages/**', '**/components/**', '**/sections/**']
+					},
+					noErrorOnMissing: true
+				}
+			]
+		}),
 		new HtmlWebpackPlugin({
 			title: 'Devontae Reid - Software Developer & Theology Student',
 			favicon: './src/assets/images/logos/logo192.png',
