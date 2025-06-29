@@ -20,7 +20,6 @@ import ArticlesPage from './pages/articles';
 import ResourcesPage from './pages/resources';
 import BooksPage from './pages/books';
 import GospelPage from './pages/gospel';
-import ViewArticlePage from './pages/viewarticle';
 
 // ----------------------------------------------
 // Render each page conditionally based on the URL path
@@ -33,15 +32,7 @@ if (rootElement) {
     
     // Get the current pathname to determine which page to render
     const pathname = window.location.pathname;
-    // Check for individual article/note routes first
-    if (pathname.match(/^\/article\/[^\/]+$/) || pathname.match(/^\/note\/[^\/]+$/)) {
-        console.log('Viewing article/note:', pathname);
-        root.render(
-            <Layout>
-                <ViewArticlePage />
-            </Layout>
-        );
-    } else if (pathname.includes('/gospel')) {
+    if (pathname.includes('/gospel')) {
         console.log('Viewing gospel:', pathname);
         root.render(
             <Layout>

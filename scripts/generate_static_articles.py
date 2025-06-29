@@ -10,6 +10,7 @@ NOTES_PATH = 'src/assets/json/notes.json'
 NAVBAR_CSS = 'src/components/css/navbar.css'
 VIEWARTICLE_CSS = 'src/pages/css/viewarticle.css'
 INDEX_CSS = 'src/index.css'
+VIEWARTICLE_JS = 'src/pages/viewarticle.js'
 
 # Helper: format date
 
@@ -33,6 +34,36 @@ def format_short_date(ts):
 
 def esc(s):
     return (s or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+# Helper: copy CSS files to output directory
+
+def copy_css_files(output_dir):
+    css_dir = os.path.join(output_dir, 'css')
+    scripts_dir = os.path.join(output_dir, 'scripts')
+    os.makedirs(css_dir, exist_ok=True)
+    os.makedirs(scripts_dir, exist_ok=True)
+    
+    css_files = [
+        (NAVBAR_CSS, 'navbar.css'),
+        (VIEWARTICLE_CSS, 'viewarticle.css'),
+        (INDEX_CSS, 'index.css')
+    ]
+    
+    for src_path, dest_name in css_files:
+        if os.path.exists(src_path):
+            dest_path = os.path.join(css_dir, dest_name)
+            shutil.copy2(src_path, dest_path)
+            print(f"Copied {src_path} to {dest_path}")
+        else:
+            print(f"Warning: CSS file not found: {src_path}")
+    
+    # Copy JavaScript file
+    if os.path.exists(VIEWARTICLE_JS):
+        dest_js_path = os.path.join(scripts_dir, 'viewarticle.js')
+        shutil.copy2(VIEWARTICLE_JS, dest_js_path)
+        print(f"Copied {VIEWARTICLE_JS} to {dest_js_path}")
+    else:
+        print(f"Warning: JavaScript file not found: {VIEWARTICLE_JS}")
 
 # Helper: get latest articles
 
@@ -121,8 +152,49 @@ def render_article(post, is_note=False, articles=None, notes=None):
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/viewarticle.css" />
     <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        .article-navigation {{
+            margin-bottom: 1rem !important;
+            padding: 0.75rem 0 !important;
+            background: #ffffff !important;
+            border-bottom: 1px solid #e5e7eb !important;
+        }}
+        @media (prefers-color-scheme: dark) {{
+            .article-navigation {{
+                background: #1f2937 !important;
+                border-bottom: 1px solid #374151 !important;
+            }}
+        }}
+        .article-page {{
+            padding-top: 0 !important;
+        }}
+    </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-logo">
+                    <img src="/images/logos/logo192.png" alt="Devontae Reid" />
+                    <span>Devontae Reid</span>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <a href="/" class="navbar-link">Home</a>
+                <a href="/projects" class="navbar-link">Projects</a>
+                <a href="/articles" class="navbar-link">Articles</a>
+                <a href="/resources" class="navbar-link">Resources</a>
+                <a href="/books" class="navbar-link">Books</a>
+            </div>
+            <div class="navbar-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
     <div class="article-page">
         <div class="article-navigation">
             <a href="/articles" class="back-button">
@@ -191,6 +263,12 @@ def render_article(post, is_note=False, articles=None, notes=None):
 
 
 def generate_all(output_dir):
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Copy CSS files to output directory
+    copy_css_files(output_dir)
+    
     # Load articles and notes
     articles = []
     notes = []

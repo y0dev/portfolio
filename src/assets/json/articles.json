@@ -12,7 +12,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/bible-icon.png",
+      "name": "/images/icons/bible-icon.png",
       "alt": "bible-icon"
     },
     "content": [
@@ -34,7 +34,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/web-dev.png",
+      "name": "/images/icons/web-dev.png",
       "alt": "web-dev-img"
     },
     "content": [
@@ -100,7 +100,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/image.png",
+      "name": "/images/icons/image.png",
       "alt": "image-title"
     },
     "content": [
@@ -126,7 +126,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/algorithm.png",
+      "name": "/images/icons/algorithm.png",
       "alt": "algo-img"
     },
     "content": [
@@ -159,7 +159,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/web-dev.png",
+      "name": "/images/icons/web-dev.png",
       "alt": "web-dev-img"
     },
     "content": [
@@ -184,7 +184,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/web-dev.png",
+      "name": "/images/icons/web-dev.png",
       "alt": "web-dev-img"
     },
     "content": [
@@ -214,7 +214,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/web-dev.png",
+      "name": "/images/icons/web-dev.png",
       "alt": "web-dev-img"
     },
     "content": [
@@ -281,7 +281,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/thankful.png",
+      "name": "/images/icons/thankful.png",
       "alt": "thankful-icon"
     },
     "content": [
@@ -303,7 +303,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/binary-code.png",
+      "name": "/images/icons/binary-code.png",
       "alt": "binary-code-img"
     },
     "content": [
@@ -325,7 +325,7 @@
     ],
     "type": "article",
     "image": {
-      "name": "images/binary-code.png",
+      "name": "/images/icons/binary-code.png",
       "alt": "binary-code-img"
     },
     "content": [
