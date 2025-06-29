@@ -8,7 +8,7 @@ export const renderTeamAchievements = (type, value) => {
     case "trophies":
       return value ? "🏆".repeat(Math.min(value, 10)) : "🏆 x0";
     case "rings":
-      return value ? "💍".repeat(Math.min(value, 10)) : "💍 x0";
+      return value ? "💍".repeat(Math.min(value, 10)) : "";
     case "established":
       return `Established in ${value}`;
     default:
@@ -71,7 +71,7 @@ function FavoriteTeam({ name, logo, link, achievements }) {
   );
 }
 
-function FavoritePlayer({ name, image, achievements }) {
+function FavoritePlayer({ name, image, achievements, status }) {
   return (
     <div className="favorite-player-card">
       {/* Hover overlay */}
@@ -116,7 +116,7 @@ function FavoritePlayer({ name, image, achievements }) {
         <div className="player-status">
           <div className="status-indicator">
             <div className="status-dot"></div>
-            <span>Active Player</span>
+            <span>{status === "retired" ? "Retired Player" : "Active Player"}</span>
           </div>
         </div>
       </div>

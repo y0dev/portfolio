@@ -242,7 +242,8 @@
             "NBA Championships": 4,
             "All-time Leading Scorer": 1
           }
-        }
+        },
+        "status": "active"
       },
       {
         "name": "Derrick Rose",
@@ -253,7 +254,8 @@
             "NBA MVP": 1,
             "NBA All-Star": 3
           }
-        }
+        },
+        "status": "retired"
       },
       {
         "name": "Shai Gilgeous-Alexander",
@@ -266,7 +268,8 @@
             "All-NBA First Team": 1,
             "NBA All-Star": 1
           }
-        }
+        },
+        "status": "active"
       }
     ]
   },

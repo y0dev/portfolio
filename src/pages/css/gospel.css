@@ -105,6 +105,11 @@
 .gospel-text-content p {
     margin-bottom: 25px;
     text-align: justify;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #2c3e50;
+    line-height: 1.9;
+    text-align: left;
 }
 
 .gospel-text-content p:last-child {
@@ -112,9 +117,10 @@
 }
 
 .gospel-text-content p:first-child {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: #1a202c;
+    line-height: 2;
 }
 
 /* Gospel Cards */

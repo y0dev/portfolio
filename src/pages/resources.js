@@ -90,7 +90,7 @@ class ResourcesPage extends Component {
             const data = await response.json();
             
             if (data.success && data.data) {
-                console.log(`${resourceType} loaded from API:`, data.data);
+                // console.log(`${resourceType} loaded from API:`, data.data);
                 return data.data;
             } else {
                 throw new Error(data.message || `Failed to fetch ${resourceType}`);
