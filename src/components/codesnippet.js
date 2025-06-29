@@ -1,6 +1,6 @@
 import './css/codesnippet.css'
 import { Component } from 'react';
-import _languages from '../assets/json/languages.json';
+import data from '../assets/json/data.json';
 import copy_image from '../assets/images/copy-icon.png'
 
 
@@ -58,18 +58,18 @@ class CodeSnip extends Component {
       navigator.clipboard.writeText(codeBody.innerText);
    }
    findKeyword(language,text) {
-      const keywords = _languages[language].keywords;
+      const keywords = data.languages[language].keywords;
       return keywords.includes(text);
    }
 
    findOperator(language,text) {
-      const operators = _languages[language].operators;
+      const operators = data.languages[language].operators;
       console.log(text,operators.includes(text));
       return operators.includes(text);
    }
 
    findPunctuation(language,text) {
-      const punctuations = _languages[language].punctuations;
+      const punctuations = data.languages[language].punctuations;
       return punctuations.includes(text);
    }
 

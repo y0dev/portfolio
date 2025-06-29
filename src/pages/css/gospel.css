@@ -1,4 +1,10 @@
-/* Gospel Page Styles */
+/* ========================================
+   GOSPEL CSS - CONSOLIDATED
+   ======================================== */
+
+/* ========================================
+   GOSPEL PAGE STYLES
+   ======================================== */
 .gospel-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -75,7 +81,6 @@
 
 /* Main Content */
 .gospel-content {
-    background: #f8f9fa;
     padding: 80px 0;
 }
 
@@ -112,7 +117,7 @@
     color: #2c3e50;
 }
 
-/* Gospel Cards (keeping for reference) */
+/* Gospel Cards */
 .gospel-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -276,7 +281,337 @@
     font-size: 1.2rem;
 }
 
-/* Animations */
+/* ========================================
+   GOSPEL TEASER SECTION STYLES
+   ======================================== */
+
+/* Modern Gospel Teaser Section */
+.gospel-teaser-modern {
+    position: relative;
+    padding: 5rem 1rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Background decorations */
+.gospel-bg-decor {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.gospel-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3rem);
+}
+
+.bg-circle-1 {
+    top: 2.5rem;
+    left: 2.5rem;
+    width: 10rem;
+    height: 10rem;
+    background: #60a5fa;
+}
+
+.bg-circle-2 {
+    bottom: 2.5rem;
+    right: 2.5rem;
+    width: 15rem;
+    height: 15rem;
+    background: #a78bfa;
+}
+
+.bg-circle-3 {
+    top: 50%;
+    left: 33%;
+    width: 8rem;
+    height: 8rem;
+    background: #818cf8;
+    transform: translateY(-50%);
+}
+
+.bg-circle-4 {
+    bottom: 33%;
+    right: 25%;
+    width: 12rem;
+    height: 12rem;
+    background: #93c5fd;
+}
+
+/* Animated background elements */
+.gospel-bg-anim {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.gospel-ping {
+    position: absolute;
+    border-radius: 50%;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.ping-1 {
+    top: 5rem;
+    left: 5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #3b82f6;
+}
+
+.ping-2 {
+    top: 10rem;
+    right: 8rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: #8b5cf6;
+    animation-delay: 1s;
+}
+
+.ping-3 {
+    bottom: 8rem;
+    left: 25%;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #6366f1;
+    animation-delay: 2s;
+}
+
+/* Teaser Container and Content */
+.gospel-teaser-container {
+    position: relative;
+    max-width: 64rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.gospel-teaser-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Teaser Title styles */
+.gospel-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gospel-title-sub {
+    display: block;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Teaser Cards section */
+.gospel-cards {
+    margin-bottom: 2.5rem;
+}
+
+.gospel-text {
+    margin-bottom: 1.5rem;
+}
+
+/* Teaser Card styles (different from page cards) */
+.gospel-teaser-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.5s ease;
+    transform: translateY(0);
+}
+
+.gospel-teaser-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.25rem);
+}
+
+.gospel-card-1 {
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.gospel-card-2 {
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.gospel-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.gospel-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.gospel-card-desc {
+    font-size: 1.125rem;
+    color: #374151;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.floating-emoji {
+    font-size: 1.875rem;
+    animation: float-emoji 3s ease-in-out infinite;
+}
+
+@keyframes float-emoji {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.5rem); }
+}
+
+/* Teaser Highlight section */
+.gospel-highlight {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border-left: 4px solid #3b82f6;
+    margin-bottom: 2rem;
+}
+
+.gospel-highlight-text {
+    font-size: 1.125rem;
+    color: #374151;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Teaser Button styles */
+.gospel-button {
+    margin-bottom: 2rem;
+}
+
+.gospel-discover-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    text-decoration: none;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.gospel-discover-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.25rem);
+    border-color: #60a5fa;
+}
+
+.btn-text {
+    margin-right: 0.75rem;
+}
+
+.btn-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.3s ease;
+}
+
+.gospel-discover-btn:hover .btn-icon {
+    transform: translateX(0.25rem);
+}
+
+/* Teaser Status section */
+.gospel-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: #6b7280;
+}
+
+.status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-dot-delay {
+    animation-delay: 1s;
+}
+
+.status-text {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Decorative borders */
+.gospel-border-circle {
+    position: absolute;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+}
+
+.border-circle-1 {
+    top: 2.5rem;
+    left: 2.5rem;
+    width: 5rem;
+    height: 5rem;
+}
+
+.border-circle-2 {
+    bottom: 2.5rem;
+    right: 2.5rem;
+    width: 4rem;
+    height: 4rem;
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.border-circle-3 {
+    top: 50%;
+    left: 1.25rem;
+    width: 3rem;
+    height: 3rem;
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-50%);
+}
+
+.border-circle-4 {
+    bottom: 33%;
+    right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -288,7 +623,59 @@
     }
 }
 
-/* Responsive Design */
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ========================================
+   DARK MODE SUPPORT
+   ======================================== */
+html.dark-mode .gospel-teaser-modern {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+}
+
+html.dark-mode .gospel-title-sub {
+    color: #d1d5db;
+}
+
+html.dark-mode .gospel-teaser-card {
+    background: rgba(31, 41, 55, 0.8);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+html.dark-mode .gospel-card-title {
+    color: #f9fafb;
+}
+
+html.dark-mode .gospel-card-desc {
+    color: #d1d5db;
+}
+
+html.dark-mode .gospel-highlight {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+}
+
+html.dark-mode .gospel-highlight-text {
+    color: #d1d5db;
+}
+
+html.dark-mode .gospel-status {
+    color: #9ca3af;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Gospel Page Responsive */
 @media (max-width: 768px) {
     .gospel-hero-title {
         font-size: 2.5rem;
@@ -351,5 +738,47 @@
     
     .card-title {
         font-size: 1.3rem;
+    }
+}
+
+/* Gospel Teaser Responsive */
+@media (max-width: 900px) {
+    .gospel-teaser-content {
+        padding: 0 1rem;
+    }
+    
+    .gospel-teaser-card {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .gospel-teaser-modern {
+        padding: 3rem 0.5rem;
+    }
+    
+    .gospel-title {
+        font-size: 2rem;
+    }
+    
+    .gospel-title-sub {
+        font-size: 1.25rem;
+    }
+    
+    .gospel-teaser-card {
+        padding: 1rem;
+    }
+    
+    .gospel-card-title {
+        font-size: 1.125rem;
+    }
+    
+    .gospel-card-desc {
+        font-size: 1rem;
+    }
+    
+    .gospel-discover-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
     }
 } 

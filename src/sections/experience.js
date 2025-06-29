@@ -1,7 +1,9 @@
-import timeline from '../assets/json/timeline.json';
+import data from '../assets/json/data.json';
 import './css/experience.css';
 
 export default function TimelineSection() {
+  const timeline = data.timeline;
+
   // Group experience by company to show progression
   const groupedExperience = timeline.experience.reduce((acc, exp) => {
     if (!acc[exp.company]) {

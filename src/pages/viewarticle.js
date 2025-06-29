@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import fontawesome from '@fortawesome/fontawesome';
 import { faShareAlt, faArrowLeft, faCalendarAlt, faUser } from '@fortawesome/fontawesome-free-solid'
 // import { useParams } from "react-router-dom";
-import _articles from '../assets/json/articles.json';
-import _notes from '../assets/json/notes.json';
+import data from '../assets/json/data.json';
 import PostSection from '../sections/post_subsection';
 
 // Add Icons from Font Awesome
@@ -87,17 +86,55 @@ function copyURL() {
     }
 }
 
+function getLatestArticles(currentArticleId, limit = 3) {
+    // Combine articles and notes, sort by date, and exclude current article
+    const allPosts = [...data.articles, ...data.notes]
+        .filter(post => post.id !== currentArticleId)
+        .sort((a, b) => parseInt(b.date) - parseInt(a.date))
+        .slice(0, limit);
+    
+    return allPosts.map(post => {
+        const date = new Date(parseInt(post.date));
+        const formattedDate = date.toLocaleDateString("en-US", { 
+            month: 'short', 
+            day: 'numeric', 
+            year: 'numeric' 
+        });
+        
+        return (
+            <div className="latest-article-card" key={post.id}>
+                <a href={`/${post['file-id'] === 'note' ? 'note' : 'article'}/${post.id}`} className="latest-article-link">
+                    {post.image && (
+                        <div className="latest-article-image">
+                            <img src={post.image.name} alt={post.image.alt} />
+                        </div>
+                    )}
+                    <div className="latest-article-content">
+                        <h3 className="latest-article-title">{post.title}</h3>
+                        <p className="latest-article-excerpt">{post.description}</p>
+                        <div className="latest-article-meta">
+                            <span className="latest-article-date">{formattedDate}</span>
+                            <span className="latest-article-type">{post['file-id'] === 'note' ? 'Note' : 'Article'}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        );
+    });
+}
+
 function ViewArticlePage() {
     // Extract ID from URL pathname (e.g., /article/my-article-id -> my-article-id)
     const pathname = window.location.pathname;
     const _id = pathname.split('/').pop();
+    const personal = data.personal;
     
     console.log('Article ID:', _id);
     console.log('Current URL:', document.URL);
     
-    let post = _articles.find(article => article.id === _id);
+    let post = data.articles.find(article => article.id === _id);
     if (post === undefined) {
-        post = _notes.find(note => note.id === _id);
+        post = data.notes.find(note => note.id === _id);
     }
     
     // Handle case where post is not found
@@ -131,6 +168,7 @@ function ViewArticlePage() {
     const sections = getSections(post);
     const date = getDate(post);
     const isNote = post['file-id'] === 'note';
+    const latestArticles = getLatestArticles(_id);
 
     return (
         <div className="article-page">
@@ -142,77 +180,99 @@ function ViewArticlePage() {
                 </a>
             </div>
 
-            <article className='app-body' id='post-container'>
-                {/* Hero Section */}
-                <div className='post-hero'>
-                    <div className="post-hero-content">
-                        <div className="post-meta-badge">
-                            <FontAwesomeIcon icon={isNote ? "sticky-note" : "newspaper"} />
-                            <span>{isNote ? 'Note' : 'Article'}</span>
-                        </div>
-                        
-                        <h1 id='post-header-title'>{post.title}</h1>
-                        
-                        <div className='post-header-meta'>
-                            <div className="author-info">
-                                <img className='post-header-icon' src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="Devontae Reid" />
-                                <div className="author-details">
-                                    <span className="author-name">Devontae Reid</span>
-                                    <div className="post-date">
-                                        <FontAwesomeIcon icon="calendar-alt" />
-                                        <span>{date}</span>
-                                    </div>
-                                </div>
+            <div className="article-layout">
+                <article className='app-body' id='post-container'>
+                    {/* Hero Section */}
+                    <div className='post-hero'>
+                        <div className="post-hero-content">
+                            <div className="post-meta-badge">
+                                <FontAwesomeIcon icon={isNote ? "sticky-note" : "newspaper"} />
+                                <span>{isNote ? 'Note' : 'Article'}</span>
                             </div>
                             
-                            <button 
-                                className="post-header-shareButton" 
-                                id="shareButton" 
-                                onClick={copyURL}
-                                aria-label="Share article"
-                            >
-                                <FontAwesomeIcon icon="share-alt" />
-                                <span>Share</span>
-                            </button>
+                            <h1 id='post-header-title'>{post.title}</h1>
+                            
+                            <div className='post-header-meta'>
+                                <div className="author-info">
+                                    <img className='post-header-icon' src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt={personal.name} />
+                                    <div className="author-details">
+                                        <span className="author-name">{personal.name}</span>
+                                        <div className="post-date">
+                                            <FontAwesomeIcon icon="calendar-alt" />
+                                            <span>{date}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button 
+                                    className="post-header-shareButton" 
+                                    id="shareButton" 
+                                    onClick={copyURL}
+                                    aria-label="Share article"
+                                >
+                                    <FontAwesomeIcon icon="share-alt" />
+                                    <span>Share</span>
+                                </button>
+                            </div>
+                            
+                            {tags && tags.length > 0 && (
+                                <div className="post-header-tags">
+                                    {tags}
+                                </div>
+                            )}
                         </div>
                         
-                        {tags && tags.length > 0 && (
-                            <div className="post-header-tags">
-                                {tags}
+                        {image_obj && (
+                            <div className="post-hero-visual">
+                                {image_obj}
                             </div>
                         )}
                     </div>
-                    
-                    {image_obj && (
-                        <div className="post-hero-visual">
-                            {image_obj}
-                        </div>
-                    )}
-                </div>
 
-                {/* Article Content */}
-                <div className='post-content-wrapper'>
-                    <div className='post-content'>
-                        {sections}
-                    </div>
-                    
-                    {/* Article Footer */}
-                    <div className="post-footer">
-                        <div className="post-footer-content">
-                            <div className="post-footer-meta">
-                                <p>Thanks for reading! If you found this helpful, consider sharing it.</p>
+                    {/* Article Content */}
+                    <div className='post-content-wrapper'>
+                        <div className='post-content'>
+                            {sections}
+                        </div>
+                        
+                        {/* Article Footer */}
+                        <div className="post-footer">
+                            <div className="post-footer-content">
+                                <div className="post-footer-meta">
+                                    <p>Thanks for reading! If you found this helpful, consider sharing it.</p>
+                                </div>
+                                <button 
+                                    className="post-footer-share" 
+                                    onClick={copyURL}
+                                >
+                                    <FontAwesomeIcon icon="share-alt" />
+                                    Share Article
+                                </button>
                             </div>
-                            <button 
-                                className="post-footer-share" 
-                                onClick={copyURL}
-                            >
-                                <FontAwesomeIcon icon="share-alt" />
-                                Share Article
-                            </button>
                         </div>
                     </div>
+                </article>
+
+                {/* Latest Articles Sidebar */}
+                <aside className="latest-articles-sidebar">
+                    <div className="latest-articles-container">
+                        <h2 className="latest-articles-title">Latest Articles</h2>
+                        <div className="latest-articles-list">
+                            {latestArticles}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            {/* Latest Articles Section for Mobile */}
+            <section className="latest-articles-mobile">
+                <div className="latest-articles-container">
+                    <h2 className="latest-articles-title">Latest Articles</h2>
+                    <div className="latest-articles-list">
+                        {latestArticles}
+                    </div>
                 </div>
-            </article>
+            </section>
         </div>
     );
 }

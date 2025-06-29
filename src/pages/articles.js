@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import './css/articles.css';
 import ArticleModule from '../components/articlemodule';
 import Pagination from '../components/pagination';
-
-// Import static JSON files as fallback
-import _articles from '../assets/json/articles.json';
-import _notes from '../assets/json/notes.json';
+import data from '../assets/json/data.json';
 
 // API Configuration
 const API_BASE_URL = 'https://devontaereid.com/scripts/api';
@@ -31,7 +28,12 @@ class ArticlesPage extends Component {
             filteredPosts: [],
             loading: true,
             error: null,
-            usingFallback: false
+            usingFallback: false,
+            articles: [],
+            notes: [],
+            filteredArticles: [],
+            filteredNotes: [],
+            activeFilter: 'all'
         }
         
         this.handleSearch = this.handleSearch.bind(this);
@@ -52,12 +54,12 @@ class ArticlesPage extends Component {
         console.log('Loading fallback data from static JSON files');
         
         // Get both articles and notes and sort by date
-        const articles_sorted = filtered(_articles);
-        const notes_sorted = filtered(_notes);
+        const articles_sorted = filtered(this.state.articles);
+        const notes_sorted = filtered(this.state.notes);
         const mergeArray = filtered(articles_sorted.concat(notes_sorted));
         
-        console.log('Articles loaded:', _articles.length);
-        console.log('Notes loaded:', _notes.length);
+        console.log('Articles loaded:', this.state.articles.length);
+        console.log('Notes loaded:', this.state.notes.length);
         console.log('Total items:', mergeArray.length);
         
         const posts = mergeArray.map((article, idx) => {
@@ -157,7 +159,9 @@ class ArticlesPage extends Component {
                     currentPosts: currentPosts,
                     postsLength: posts.length,
                     loading: false,
-                    usingFallback: false
+                    usingFallback: false,
+                    articles: articles,
+                    notes: data.notes || []
                 });
 
                 // Only show paginate if greater than postsPerPage

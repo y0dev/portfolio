@@ -1,53 +1,159 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import data from '../assets/json/data.json';
+import headshot from '../assets/images/headshot.jpeg';
 import './css/aboutme.css';
-import AboutMeSection from '../sections/about_me';
 import TimelineSection from '../sections/experience';
 import GospelTeaserSection from '../sections/gospel_teaser';
 import FavoritesSection from '../sections/FavoritesSection';
-import Footer from '../components/footer';
-import headshot from '../assets/images/headshot.jpeg';
 // import TestimonialSection from '../sections/testimonials';
 
 function AboutMePage() {
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+  const sceneRef = useRef(null);
+  const imageRef = useRef(null);
+  const personal = data.personal;
+
+  const texts = [
+    "I'm a Software Engineer.",
+    "I'm a Servant of Christ.",
+    "I'm a Father.",
+    "I'm a Creator."
+  ];
+
+  useEffect(() => {
+    const typeSpeed = isDeleting ? 50 : 100;
+    const deleteSpeed = 50;
+    const pauseTime = 2000;
+
+    const typeText = () => {
+      const currentFullText = texts[currentIndex];
+      
+      if (isDeleting) {
+        setCurrentText(currentFullText.substring(0, currentText.length - 1));
+        if (currentText === '') {
+          setIsDeleting(false);
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+        }
+      } else {
+        setCurrentText(currentFullText.substring(0, currentText.length + 1));
+        if (currentText === currentFullText) {
+          setTimeout(() => setIsDeleting(true), pauseTime);
+        }
+      }
+    };
+
+    const timer = setTimeout(typeText, isDeleting ? deleteSpeed : typeSpeed);
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentIndex, texts]);
+
+  useEffect(() => {
+    const cursorTimer = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorTimer);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (sceneRef.current && imageRef.current) {
+        const rect = sceneRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const depth = 0.5;
+        const moveX = x * depth;
+        const moveY = y * depth;
+        
+        imageRef.current.style.transform = `translate3d(${moveX}px, ${moveY}px, 0px)`;
+      }
+    };
+
+    const scene = sceneRef.current;
+    if (scene) {
+      scene.addEventListener('mousemove', handleMouseMove);
+      return () => scene.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
+
+  const handleScrollDown = (e) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <div className="aboutme-landing">
-      {/* Hero Section */}
-      <section className="aboutme-hero-section">
-        <div className="aboutme-hero-content">
-          <img src={headshot} alt="Devontae Reid headshot" className="aboutme-hero-photo" />
-          <h1 className="hero-title">
-            Devontae Reid
-            <span className="hero-subtitle">Software Engineer</span>
-          </h1>
-          <p className="aboutme-hero-desc">Full-stack developer with a passion for building innovative applications and exploring new technologies.</p>
-          <div className="hero-buttons">
-            <a
-              href="/projects"
-              className="btn-primary"
-            >
-              View My Work
-            </a>
-            <a
-              href="/assets/Devontae+Reid+Resume.pdf"
-              download
-              className="btn-secondary"
-            >
-              <svg className="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download Resume
-            </a>
+      {/* Modern Hero Section with Typing Animation */}
+      <section className="modern-hero-section">
+        <div className="hero-container">
+          <div className="hero-content">
+            <div className="text-center">
+              <div className="typed-strings" style={{ display: 'none' }}>
+                <p>I'm a Software Engineer.</p>
+                <p>I'm a Web Developer.</p>
+                <p>I'm a Problem Solver.</p>
+                <p>I'm a Creator.</p>
+              </div>
+              <p className="hero-greeting">
+                Hello, <span className="typed-text">{currentText}</span>
+                <span className={`typed-cursor ${showCursor ? 'visible' : ''}`}>|</span>
+              </p>
+              {/* Parallax Mouse Move */}
+              <div 
+                ref={sceneRef}
+                className="parallax-scene"
+                data-relative-input="true"
+              >
+                <div 
+                  ref={imageRef}
+                  data-depth="0.5"
+                  className="parallax-image"
+                >
+                  <img 
+                    className="hero-profile-image" 
+                    src={headshot} 
+                    alt={personal.name} 
+                  />
+                </div>
+              </div>
+              {/* Parallax Mouse Move End */}
+              <div className="hero-name-container">
+                <h1 className="hero-name">
+                  {personal.name.split(' ').map((name, index) => (
+                    <React.Fragment key={index}>
+                      {name}
+                      {index < personal.name.split(' ').length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </h1>
+              </div>
+              <p className="hero-location">based in {personal.location}.</p>
+            </div>
           </div>
         </div>
+        <a href="#about" className="scroll-down-arrow" onClick={handleScrollDown}>
+          <span className="animated">
+            <i className="scroll-icon"></i>
+          </span>
+        </a>
       </section>
 
       {/* About Section */}
-      <section className="aboutme-about-section">
+      <section id="about" className="aboutme-about-section">
         <div className="aboutme-about-grid">
           <div className="about-content">
             <h2 className="aboutme-section-title">About Me</h2>
             <p className="aboutme-section-desc">
-              I am a Software Engineer currently working in embedded systems. I started in iOS development and eventually grew to enjoy web development—both front-end and back-end. Who would have known that user interfaces would be a love/hate relationship? There's a constant battle between finding inspiration and enjoying the final product.
+              {personal.bio}
             </p>
             <p className="aboutme-section-desc">
               While trying to discover inspiration for web design, I often spend my time building RESTful APIs. I'm proficient in HTML, CSS, JavaScript, C/C++, and Python, and I work primarily in ReactJS and VueJS.
@@ -70,15 +176,16 @@ function AboutMePage() {
               </a>
             </div>
             <div className="aboutme-skills">
-              <span className="skill-tag skill-blue">React</span>
-              <span className="skill-tag skill-green">Node.js</span>
-              <span className="skill-tag skill-purple">TypeScript</span>
-              <span className="skill-tag skill-yellow">Python</span>
+              {personal.skills.slice(0, 4).map((skill, index) => (
+                <span key={index} className={`skill-tag skill-${['blue', 'green', 'purple', 'yellow'][index % 4]}`}>
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
           <div className="about-image">
             <div className="aboutme-image-card">
-              <div className="floating-emoji">👨‍💻</div>
+              <div className="floating-emoji">👨🏾‍💻</div>
               <p className="aboutme-image-caption">Developer & Creator</p>
             </div>
           </div>
@@ -128,7 +235,7 @@ function AboutMePage() {
             <div className="featured-card-content">
               <h3 className="featured-card-title">Get In Touch</h3>
               <p className="featured-card-desc">Interested in working together? Let's discuss your project.</p>
-              <a href="mailto:devontae.reid@gmail.com" className="featured-card-link">Send Email →</a>
+              <a href={`mailto:${personal.email}`} className="featured-card-link">Send Email →</a>
             </div>
           </div>
         </div>

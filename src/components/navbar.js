@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import data from '../assets/json/data.json';
 import './css/navbar.css';
 // import { Link } from "react-router-dom";
-import logo from '../assets/images/logos/logo192.png';
+import logo from '../assets/images/logo.png';
 
 function NavBar() {
    const [theme, setTheme] = useState('light');
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [isScrolled, setIsScrolled] = useState(false);
    const pathname = window.location.pathname;
+   const personal = data.personal;
 
    useEffect(() => {
       // On mount, set theme from localStorage or system preference
@@ -77,13 +79,13 @@ function NavBar() {
       return pathname === itemHref || pathname.startsWith(itemHref + '/');
    }
 
-   return (
+      return (
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
          <div className="main-menu">
             <div className="menu-branding">
                <a href="/" className="brand-link">
-                  <img src={logo} alt="Devontae Reid Logo" className="brand-logo" />
-                  <h3 className="brand-text">DEVONTAE REID</h3>
+                  <img src={logo} alt={`${personal.name} Logo`} className="brand-logo" />
+                  <h3 className="brand-text">{personal.name.toUpperCase()}</h3>
                </a>
             </div>
 
@@ -99,7 +101,7 @@ function NavBar() {
                      </a>
                   </li>
                ))}
-            </ul>
+                  </ul>
 
             {/* Right Side Controls */}
             <div className="nav-controls">
@@ -127,7 +129,7 @@ function NavBar() {
                   </span>
                </button>
             </div>
-         </div>
+               </div>
 
          {/* Mobile Dropdown Menu */}
          <div className={`mobile-dropdown ${isMenuOpen ? 'open' : ''}`}>

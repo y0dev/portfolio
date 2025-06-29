@@ -215,7 +215,7 @@ This project is licensed under the MIT License.
 
 For support and questions, please contact:
 - Email: devontae@devontaereid.com
-- GitHub: https://github.com/devontaereid
+- GitHub: https://github.com/devontaereid 
 
 # Database Loading Scripts
 

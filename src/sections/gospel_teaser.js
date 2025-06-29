@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/gospel_teaser.css';
+import '../pages/css/gospel.css';
 
 function GospelTeaserSection() {
   return (
@@ -19,8 +19,8 @@ function GospelTeaserSection() {
         <div className="gospel-ping ping-3"></div>
       </div>
 
-      <div className="gospel-container">
-        <div className="gospel-content">
+      <div className="gospel-teaser-container">
+        <div className="gospel-teaser-content">
           <h2 className="gospel-title">
             The Most Important Question
             <span className="gospel-title-sub">
@@ -30,7 +30,7 @@ function GospelTeaserSection() {
 
           <div className="gospel-cards">
             <div className="gospel-text">
-              <div className="gospel-card gospel-card-1">
+              <div className="gospel-teaser-card gospel-card-1">
                 <div className="gospel-card-header">
                   <span className="floating-emoji">🌿</span>
                   <h3 className="gospel-card-title">
@@ -44,7 +44,7 @@ function GospelTeaserSection() {
             </div>
 
             <div className="gospel-text">
-              <div className="gospel-card gospel-card-2">
+              <div className="gospel-teaser-card gospel-card-2">
                 <div className="gospel-card-header">
                   <span className="floating-emoji">📖</span>
                   <h3 className="gospel-card-title">

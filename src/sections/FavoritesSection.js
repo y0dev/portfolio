@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import sportsData from '../assets/json/sports_favorites.json';
+import data from '../assets/json/data.json';
 import './css/favorites_section.css';
 
 // Helper function to render team achievements
@@ -80,16 +80,18 @@ function FavoritePlayer({ name, image, achievements }) {
       <div className="player-card-content">
         {/* Player image and name */}
         <div className="player-header">
-          <div className="player-image-container">
-            <div className="player-image-glow" />
-            <div className="player-image-wrapper">
-              <img 
-                src={image} 
-                alt={name} 
-                className="player-image"
-              />
+          {image && image !== "" && (
+            <div className="player-image-container">
+              <div className="player-image-glow" />
+              <div className="player-image-wrapper">
+                <img 
+                  src={image} 
+                  alt={name} 
+                  className="player-image"
+                />
+              </div>
             </div>
-          </div>
+          )}
           <h3 className="player-name">
             {name}
           </h3>
@@ -126,6 +128,8 @@ export default function FavoritesSection() {
   const sectionRef = useRef(null);
   const teamsRef = useRef(null);
   const playersRef = useRef(null);
+
+  const sportsData = data.sports_favorites;
 
   useEffect(() => {
     // Simple scroll animations using CSS classes
@@ -167,10 +171,7 @@ export default function FavoritesSection() {
             My Favorite Sports
           </h2>
           <p className="section-description">
-            A celebration of the teams I passionately support and the athletes who inspire me with their 
-            <span className="highlight highlight-excellence"> excellence</span>, 
-            <span className="highlight highlight-dedication"> dedication</span>, and 
-            <span className="highlight highlight-achievements"> unforgettable achievements</span>.
+            The teams and athletes that inspire me with their passion, skill, and dedication to excellence.
           </p>
         </div>
 

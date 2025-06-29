@@ -4,6 +4,24 @@
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f3e8ff 100%);
   position: relative;
   overflow: hidden;
+  display: block !important;
+}
+
+/* Ensure visibility - override any hidden states */
+.favorites-section,
+.sports-title,
+.favorite-team-card,
+.favorite-player-card,
+.team-card,
+.player-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+.favorite-team-card,
+.favorite-player-card {
+  transform: translateY(0) !important;
 }
 
 /* Background decorations */
@@ -66,8 +84,8 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(0);
   transition: all 0.8s ease;
 }
 
@@ -153,14 +171,12 @@
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
-  transform: translateY(0);
   border: 1px solid #e5e7eb;
   text-decoration: none;
   color: inherit;
   display: block;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.6s ease;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .favorite-team-card.animate-in {
@@ -317,11 +333,9 @@
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
-  transform: translateY(0);
   border: 1px solid #e5e7eb;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.6s ease;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .favorite-player-card.animate-in {
@@ -400,6 +414,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: #1f2937;
+  margin: 0;
   transition: color 0.3s ease;
 }
 
@@ -409,7 +424,7 @@
 
 .player-rings {
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   transition: transform 0.3s ease;
 }
 
@@ -418,6 +433,8 @@
 }
 
 .player-stats {
+  font-size: 0.875rem;
+  color: #6b7280;
   margin-bottom: 20px;
 }
 
@@ -425,30 +442,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  background: #f3f4f6;
-  border-radius: 8px;
   margin-bottom: 8px;
-  transition: background-color 0.3s ease;
+  padding: 8px 12px;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .favorite-player-card:hover .player-stat-item {
   background: rgba(16, 185, 129, 0.1);
+  transform: translateX(4px);
 }
 
 .player-stat-item .stat-value {
   color: #10b981;
+  font-weight: 700;
 }
 
 .player-status {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 15px;
 }
 
 .status-indicator {
   display: flex;
   align-items: center;
+  gap: 8px;
   color: #10b981;
   font-size: 0.875rem;
   font-weight: 500;
@@ -459,16 +480,17 @@
   height: 8px;
   background: #10b981;
   border-radius: 50%;
-  margin-right: 8px;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
+    transform: scale(1);
   }
   50% {
     opacity: 0.5;
+    transform: scale(1.2);
   }
 }
 
@@ -521,4 +543,34 @@
     width: 60px;
     height: 60px;
   }
+}
+
+/* Debug overrides - ensure visibility */
+.favorites-section,
+.sports-title,
+.favorite-team-card,
+.favorite-player-card,
+.team-card,
+.player-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+.favorite-team-card,
+.favorite-player-card {
+  transform: translateY(0) !important;
+}
+
+.team-name,
+.player-name {
+  color: #1f2937 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.team-stats,
+.player-stats {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
