@@ -1,358 +1,47 @@
 [
-  {
-    "id": "xilinx-fsbl-notes-p1",
-    "title": "Xilinx FSBL Notes 2",
-    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
-    "date": "2024-12-08 00:00:00",
-    "tags": [
-      "Technology",
-      "Embedded",
-      "Engineer"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/binary-code.png",
-      "alt": "binary-code-img"
+    {
+      "id": "why-am-i-presbyterian",
+      "title": "Why am I Presbyterian",
+      "description": "Many in the reformed camp seemed to be either Baptist or Presbyterian. This is article is to show my view in Reformed Theology.",
+      "date": "1677909600000",
+      "tags": [
+        "Christ",
+        "Covenant",
+        "Reformed",
+        "Gospel"
+      ],
+      "type": "article",
+      "image": {
+        "name": "/images/icons/bible-icon.png",
+        "alt": "bible-icon"
+      },
+      "content": [
+        {
+          "title": "Why am I Presbyterian",
+          "htmlContent": "<p>There is an endless debate on covenant membership. Who is a part of the covenant and who is not? This question is a good question to cause you to search the scriptures for answers. I would start from Genesis and end in Revelation. </p>"
+        }
+      ]
     },
-    "content": [
-      {
-        "title": "Xilinx Running Custom Application from FSBL",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "xilinx-fsbl-notes-p1",
-    "title": "Xilinx FSBL Notes 1",
-    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
-    "date": "2024-12-08 00:00:00",
-    "tags": [
-      "Technology",
-      "Embedded",
-      "Engineer"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/binary-code.png",
-      "alt": "binary-code-img"
-    },
-    "content": [
-      {
-        "title": "Xilinx Notes: First Stage Boot Loader Part 1",
-        "htmlContent": ""
+    {
+      "id": "system-design",
+      "title": "Help with System Design Interviews",
+      "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+      "date": "1675836000000",
+      "tags": [
+        "System Design",
+        "Technology",
+        "MAANG"
+      ],
+      "type": "article",
+      "image": {
+        "name": "/images/icons/web-dev.png",
+        "alt": "web-dev-img"
       },
-      {
-        "title": "What does the Partition Load Stage do?",
-        "htmlContent": ""
-      },
-      {
-        "title": "How FSBL launches the Application in the Bitstream?",
-        "htmlContent": ""
-      },
-      {
-        "title": "Loading the Bitstream:",
-        "htmlContent": ""
-      },
-      {
-        "title": "Removing Isolation:",
-        "htmlContent": ""
-      },
-      {
-        "title": "Resetting the PL:",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "depth-first-search",
-    "title": "Depth First Search",
-    "description": "Article on the depth first search definition and its usage for a tree and a graph.",
-    "date": "2023-08-22 00:00:00",
-    "tags": [
-      "Data Structures",
-      "Algorithms",
-      "Tech Interview"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/algorithm.png",
-      "alt": "algo-img"
-    },
-    "content": [
-      {
-        "title": "Introduction",
-        "htmlContent": ""
-      },
-      {
-        "title": "Definition",
-        "htmlContent": ""
-      },
-      {
-        "title": "Uses",
-        "htmlContent": ""
-      },
-      {
-        "title": "Implementation",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "sample-template",
-    "title": "",
-    "description": "This the sample template for testing purposes only.",
-    "date": "2023-08-11 00:00:00",
-    "tags": [
-      "Template",
-      "Info",
-      "Beginner"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/image.png",
-      "alt": "image-title"
-    },
-    "content": [
-      {
-        "title": "Why am I Presbyterian",
-        "htmlContent": ""
-      },
-      {
-        "title": "fgfd",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "debugging-in-node",
-    "title": "Debugging in NodeJS",
-    "description": "How to properly debug in NodeJS",
-    "date": "2023-03-29 00:00:00",
-    "tags": [
-      "Technology",
-      "Engineer"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "content": [
-      {
-        "title": "Debugging in Node Using Chrome Devtools",
-        "htmlContent": ""
-      },
-      {
-        "title": "Setting up Stack Trace",
-        "htmlContent": ""
-      },
-      {
-        "title": "Soli Deo Gloria",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "debugging-in-node",
-    "title": "Debugging In NodeJS",
-    "description": "How to properly debug in NodeJS",
-    "date": "2023-03-28 00:00:00",
-    "tags": [
-      "Technology",
-      "Engineer"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "content": [
-      {
-        "title": "Debugging in Node Using Chrome Devtools",
-        "htmlContent": ""
-      },
-      {
-        "title": "Soli Deo Gloria",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "thankfulness",
-    "title": "Command for Thankfulness",
-    "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
-    "date": "2023-03-15 00:00:00",
-    "tags": [
-      "Christ",
-      "Salvation",
-      "Love",
-      "Thankful"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/thankful.png",
-      "alt": "thankful-icon"
-    },
-    "content": [
-      {
-        "title": "Command for Thankfulness",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "why-am-i-presbyterian",
-    "title": "Why am I Presbyterian",
-    "description": "Many in the reformed camp seemed to be either Baptist or Presbyterian. This is article is to show my view in Reformed Theology.",
-    "date": "2023-03-04 00:00:00",
-    "tags": [
-      "Christ",
-      "Covenant",
-      "Reformed",
-      "Gospel"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/bible-icon.png",
-      "alt": "bible-icon"
-    },
-    "content": [
-      {
-        "title": "Why am I Presbyterian",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "system-design",
-    "title": "Help with System Design Interviews",
-    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
-    "date": "2023-02-08 00:00:00",
-    "tags": [
-      "System Design",
-      "Technology",
-      "MAANG"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "content": [
-      {
-        "title": "Preparation for the Interview",
-        "htmlContent": ""
-      },
-      {
-        "title": "Stay on track",
-        "htmlContent": ""
-      },
-      {
-        "title": "The Interview",
-        "htmlContent": ""
-      },
-      {
-        "title": "Abstraction",
-        "htmlContent": ""
-      },
-      {
-        "title": "Remote Procedure Calls",
-        "htmlContent": ""
-      },
-      {
-        "title": "Consistency",
-        "htmlContent": ""
-      },
-      {
-        "title": "Availability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Reliability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Scalability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Maintainability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Fault Tolerance",
-        "htmlContent": ""
-      },
-      {
-        "title": "Back-Of-The-Envelope",
-        "htmlContent": ""
-      }
-    ]
-  },
-  {
-    "id": "system-design",
-    "title": "Help with System Design Interviews",
-    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
-    "date": "2023-02-08 00:00:00",
-    "tags": [
-      "System Design",
-      "Technology",
-      "MAANG"
-    ],
-    "type": "article",
-    "image": {
-      "name": "/images/icons/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "content": [
-      {
-        "title": "Preparation for the Interview",
-        "htmlContent": ""
-      },
-      {
-        "title": "Stay on track",
-        "htmlContent": ""
-      },
-      {
-        "title": "The Interview",
-        "htmlContent": ""
-      },
-      {
-        "title": "Abstraction",
-        "htmlContent": ""
-      },
-      {
-        "title": "Remote Procedure Calls",
-        "htmlContent": ""
-      },
-      {
-        "title": "Consistency",
-        "htmlContent": ""
-      },
-      {
-        "title": "Availability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Reliability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Scalability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Maintainability",
-        "htmlContent": ""
-      },
-      {
-        "title": "Fault Tolerance",
-        "htmlContent": ""
-      },
-      {
-        "title": "Back-Of-The-Envelope",
-        "htmlContent": ""
-      }
-    ]
-  }
-]
+      "content": [
+        {
+          "title": "Preparation for the Interview",
+          "htmlContent": "<p>System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors. Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down.</p>"
+        }
+      ]
+    }
+  ]
