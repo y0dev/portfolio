@@ -1,1015 +1,556 @@
 [
   {
-    "title": "Web Development Choice",
-    "description": "my time looking for a framework to create my portfolio website along with blog site",
-    "date": "1636423946203",
-    "id": "web-dev-choice",
-    "time": {
-      "secs": "29",
-      "mins": "00",
-      "hours": "00"
-    },
-    "tags": ["Technology", "ReactJS", "NodeJS"],
+    "id": "xilinx-fsbl-notes-p2",
+    "title": "Xilinx FSBL Notes 2",
+    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
+    "date": "2024-12-10 00:00:00",
+    "tags": [
+      "Technology",
+      "Embedded",
+      "Engineer"
+    ],
+    "type": "article",
     "image": {
-      "name": "images/web-dev.png",
-      "alt": "js-image"
+      "name": "/images/icons/binary-code.png",
+      "alt": "binary-code-img"
     },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Beginning of NodeJS"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "As I embraced the task of creating a website, I ran into some problems. Those problems were choosing the right framework. There are many out there from React, VueJS, and even embedded JavaScript.",
-          "So the one that rose to the top of my list was React. I find React to be very powerful for something that seems so simple to use. There are many things that React offered that the others did not such as CSS animation. Working in VueJS I found it fairly difficult to work with CSS animation. I would've just JavaScript to handle my animations, but I don't need all that power when it something simple as moving a div.",
-          "My overall appreciation of React is :special-text(key='bold',great)special-text-end!"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "dev-work",
-            "caption": "Programming Away",
-            "link": "https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg"
-          }
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "javascript",
-            "content": "laboris"
-          }
-        ],
-        "blockquotes": [
-          {
-            "id": "001",
-            "content": "laboris"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "",
-            "website": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [],
-            "list_type": "unordered"
-          }
-        ]
+        "title": "Xilinx Running Custom Application from FSBL",
+        "htmlContent": "<p class=\"post-details\">bold bold : Ensure that QSPI has already been initialized in your FSBL. Since you\u2019re already working after stage 4 in FSBL, this step might already be complete.</p>\n<p class=\"post-details\">bold bold bold bold bold bold bold bold :</p>\n<p class=\"post-details\">Identify the QSPI flash address where the custom application is stored.</p>\n<p class=\"post-details\">Choose a location in DDR where you want to load the application.</p>\n<p class=\"post-details\">bold bold bold bold bold bold : Use the bold bold bold to read data from the flash memory into DDR. For example:<pre class=\"language-c\"><code class=\"language-c\">['#define QSPI_APP_ADDRESS  0x01000000   // Example QSPI address where the app is stored\\x0b#define DDR_APP_ADDRESS   0x10000000   // Example DDR address where the app will be loaded\\x0b#define APP_SIZE          0x00100000   // Size of the application in bytes (1MB for example)\\x0b\\x0bStatus = XFsbl_Qspi32Copy(QSPI_APP_ADDRESS, DDR_APP_ADDRESS, APP_SIZE);\\x0bif (Status != XFSBL_SUCCESS) {\\x0b    XFsbl_Printf(DEBUG_GENERAL, \"Failed to load application from QSPI.\\\\r\\\\n\");\\x0b    return Status;\\x0b}']</code></pre></p>\n<p class=\"post-details\">bold bold bold bold bold bold bold bold Ensure that any data in the CPU cache is flushed to DDR before execution:<pre class=\"language-c\"><code class=\"language-c\">['Xil_DCacheFlush();']</code></pre></p>\n<p class=\"post-details\">bold bold bold bold : This involves setting the Program Counter (PC) to the starting address of your loaded application:<pre class=\"language-c\"><code class=\"language-c\">['typedef void (*AppEntryPoint)(void);\\x0bAppEntryPoint AppStart = (AppEntryPoint)DDR_APP_ADDRESS;\\x0b\\x0bXFsbl_Printf(DEBUG_GENERAL, \"Launching application at 0x%08X...\\\\r\\\\n\", DDR_APP_ADDRESS);\\x0b\\x0bAppStart();   // Jump to the application']</code></pre></p>"
       }
     ]
   },
   {
-    "title": "Parenting with Few Rules | Doug Wilson",
-    "description": "parenting as a Christian with few rules from Doug Wilson podcast",
-    "date": "1628742217550",
-    "id": "parenting-with-few-rules",
-    "time": {
-      "secs": "47",
-      "mins": "00",
-      "hours": "00"
-    },
-    "tags": ["Parenting", "Christ", "Children"],
+    "id": "xilinx-fsbl-notes-p1",
+    "title": "Xilinx FSBL Notes 1",
+    "description": "Understanding the basis of Xilinx First Boot Loader. This gives specific information of how an application is loaded from the boot image and ran from the FSBL.",
+    "date": "2024-12-01 18:00:00",
+    "tags": [
+      "Technology",
+      "Embedded",
+      "Engineer"
+    ],
+    "type": "article",
     "image": {
-      "name": "images/family.png",
-      "alt": "parenting-img"
+      "name": "/images/icons/binary-code.png",
+      "alt": "binary-code-img"
     },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Is it That Simple?"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "As being a new father I felt like this video was very helpful for setting ground rules for my kids as they grow up. You may think that if you have too many rules or your too lenient, but there is a way that one is ought to parent. If we want to be parents that live obedient to Christ as we raise our children while at the same time not being a helicopter parent.",
-          "A video came up on my timeline from Pastor Doug Wilson of Christ Church in Moscow, Idaho. He speaks on being a parent who doesn't have so many rules and the reason why. He speaks on why as parents we shouldn't over complicate things for our children while at the same time teaching our children to think on their own when it comes to subject matters on what is right vs wrong. These rules not only established ground with you and your child, but also allows your child to critical think.",
-          "Three Rules to Live by as a Parent: :listPlace(001)",
-          "You can find the video on Youtube at the following :linkPlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "doug-wilson-parenting",
-            "caption": "Fewer Rules in Parenting? | Doug Wilson",
-            "link": "https://i.ytimg.com/vi/6S4LCPI9wk4/maxresdefault.jpg"
-          }
-        ],
-        "blockquotes": [
-          {
-            "id": "001",
-            "content": "laboris"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "video": 1,
-            "text": "Fewer Rules in Parenting? | Doug Wilson",
-            "link": "https://youtu.be/6S4LCPI9wk4"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "No lying",
-              "No disobedience",
-              "No disrespecting your mother"
-            ],
-            "list_type": "unordered"
-          }
-        ]
+        "title": "Xilinx Notes: First Stage Boot Loader Part 1",
+        "htmlContent": "<p class=\"post-details\">A bold bold bold bold bold bold bold or a bold bold , the bold bold bold bold bold (ARM cores) runs software, while the bold bold bold bold bold implements custom hardware. This sequence ensures that the hardware (PL) is correctly initialized before the software on the PS interacts with it. The source code is found in xfsbl_partition_load.c which can be found in <a class=\"post-link\" href=\"https://github.com/Xilinx/embeddedsw/tree/master/lib/sw_apps/zynqmp_fsbl/src\">Xilinx/embeddedsw Github</a>. </p>"
+      },
+      {
+        "title": "What does the Partition Load Stage do?",
+        "htmlContent": "<p class=\"post-details\">This code launches the application by performing key operations that configure and initialize the Programmable Logic (PL) in a Xilinx Zynq-based system. Let\u2019s break down each part to understand how it works:</p>"
+      },
+      {
+        "title": "How FSBL launches the Application in the Bitstream?",
+        "htmlContent": "<p class=\"post-details\"><ol class=\"post-list\"><li class=\"post-list-item\">Configure FPGA Logic: Loading the bitstream configures the custom logic into the FPGA.</li><li class=\"post-list-item\">Enable Communication: Removing isolation allows the newly configured logic to interface with the rest of the system.</li><li class=\"post-list-item\">Reset for Synchronization: Resetting the PL ensures that the logic starts executing in a clean state.</li></ol></p>"
+      },
+      {
+        "title": "Loading the Bitstream:",
+        "htmlContent": "<p class=\"post-details\"><pre class=\"language-c\"><code class=\"language-c\">['BitstreamWordSize = PartitionHeader->UnEncryptedDataWordLength;\\x0b\\x0bStatus = XFsbl_WriteToPcap(BitstreamWordSize, (u8 *) LoadAddress);']</code></pre></p>\n<p class=\"post-details\">bold : This is a binary file that configures the programmable logic (PL) part of the FPGA. The bitstream defines the custom logic or design that will be implemented on the FPGA.</p>\n<p class=\"post-details\">bold bold bold : This function uses the bold bold (Central Security Unit Direct Memory Access) to transfer the bitstream data from memory to the FPGA\u2019s bold bold bold bold bold bold bold This port is used to load the configuration data into the PL.</p>\n<p class=\"post-details\">bold : This is the memory address where the bitstream is stored before being transferred. The bitstream\u2019s length is given by BitstreamWordSize.</p>"
+      },
+      {
+        "title": "Removing Isolation:",
+        "htmlContent": "<p class=\"post-details\"><pre class=\"language-c\"><code class=\"language-c\">['psu_ps_pl_isolation_removal_data();']</code></pre></p>\n<p class=\"post-details\">bold : When the PL is powered up, it is initially isolated from the rest of the system to prevent any unintended interactions or glitches during configuration.</p>\n<p class=\"post-details\">bold bold : After successfully configuring the PL, this function removes the isolation, allowing the PL to communicate with the Processing System (PS) and other parts of the design.</p>"
+      },
+      {
+        "title": "Resetting the PL:",
+        "htmlContent": "<p class=\"post-details\"><pre class=\"language-c\"><code class=\"language-c\">['(void)psu_ps_pl_reset_config_data();']</code></pre></p>\n<p class=\"post-details\">bold bold : This function resets the PL if the system is configured to do so. A reset ensures that the newly loaded design starts in a known state.</p>\n<p class=\"post-details\">bold bold bold Sometimes, after loading a bitstream, it\u2019s necessary to reset the PL to ensure that all logic starts cleanly and synchronizes with the PS.</p>"
       }
     ]
   },
   {
-    "title": "Navy Seals & Breathing",
-    "description": "Learn how to breathe correctly while doing intense exercises to maximize performance and prevent injury. Tips to help you get the most out of your workouts.",
-    "date": "1665111900994",
-    "id": "navy-seals-breathing",
-    "time": {
-      "secs": "37",
-      "mins": "01",
-      "hours": "00"
-    },
-    "tags": ["Health", "Fitness"],
+    "id": "bit-manipulation",
+    "title": "bit manipulation",
+    "description": "bit manipulation involving performing operations on individual bits or groups of bits.",
+    "date": "2024-05-08 00:00:00",
+    "tags": [
+      "Technology",
+      "Embedded",
+      "Engineer"
+    ],
+    "type": "article",
     "image": {
-      "name": "images/heart_strength.png",
-      "alt": "health-img"
+      "name": "/images/icons/binary-code.png",
+      "alt": "binary-code"
     },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Intro"
-        },
-        "paragraphs": [
-          " :imagePlace(001)",
-          "Ever wonder why Navy SEALs are some of the world's most elite warriors? It's as simple as \"breathing\" literally. According to the Lung Association of Canada, we take on average 22,000 breaths a day. Wow, we take 22,000 breaths a day and don't give thanks for even a quarter of it.",
-          "Thanks God for His mercy to allow us to take these breaths! Psalm 136",
-          " :imagePlace(002)",
-          "We can do a lot to help ourselves by practicing better breathing patterns. There are many different breathing patterns that can result in more energy and a clearer head. The well known breathing pattern is known as \"Box Breathing\". In this pattern you would exhale and inhale for the same duration around a box so to speak. :listPlace(001)",
-          "Box breathing helps you deal effectively with stress and anxiety. It also brings balance to your body and mind along with regulating your natural heart rhythm."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "navy-seals",
-            "caption": "Navy Seals Training",
-            "link": "https://i0.wp.com/cms.sofrep.com/wp-content/uploads/2018/01/navy-seal-photo-065.jpg"
-          },
-          {
-            "id": "002",
-            "alt": "box-breathing-gif",
-            "caption": "Box Breathing",
-            "link": "https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif"
-          }
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "",
-            "content": "laboris"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Inhale along the left for 4 seconds",
-              "Exhale along the top for 4 seconds",
-              "Inside the along the right for 4 seconds",
-              "Exhale along the bottom for 4 seconds"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "title": "Bit Manipulation Basics",
+        "htmlContent": "<p class=\"post-details\">Bit manipulation involves performing operations on individual bits or groups of bits. It's a fundamental technique used in computer programming to optimize code, implement algorithms, and work with hardware interfaces efficiently.</p>"
       },
       {
-        "title": {
-          "tag": "h2",
-          "text": "Training"
-        },
-        "paragraphs": [
-          "Navy Seals train in such a way to help them control their breathing not only to stay calm, but to also conserve energy. It starts with breathing and proper breathing. Proper breathing begins with breathing through the nose and out the mouth. We heard this before early in our sports career. Little that we know, that is very beneficial to our health. The benefits are: :listPlace(001)",
-          "Here is a workout or things to do while working out that I believe will help with teaching yourself proper breathing and self control. 100s of pushups, burpees and squats. While at the bottom of a squat just breathe deep inhales, so that you will fill your lungs and slow exhales. The reasoning behind this is because shallow breaths leads to: :listPlace(002)",
-          "While running, fill your lungs by breathing in through your nose only after each run or after each set. Sharp inhales through the nose and soft exhales through the mouth or nose."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "image1",
-            "caption": "Breathing Counter",
-            "link": "https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Reduces exposure to foreign substances",
-              "Increases oxygen uptake and circulation",
-              "Aids our immune system",
-              "Slows down breathing",
-              "Improves lung volume",
-              "Humidifies inhaled air"
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Increased blood pressure",
-              "Increased stress response",
-              "Reduced oxygen intake",
-              "Impaired thinking",
-              "Slower recovery"
-            ],
-            "list_type": "unordered"
-          }
-        ]
+        "title": "AND (&)",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Performs a bitwise AND operation between corresponding bits of two operands.</li><li class=\"post-list-item\">Result is 1 only if both bits are 1, otherwise 0.</li><li class=\"post-list-item\">Example: \u201ca & b\u201d</li></ul></p>"
       },
       {
-        "title": {
-          "tag": "h2",
-          "text": "Finally"
-        },
-        "paragraphs": [
-          "Start small! :listPlace(001)",
-          "Link to the Twitter \ud83e\uddf5 : :linkPlace(001)"
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "Navy SEALs are the world's most elite warriors",
-            "link": "https://twitter.com/tobi_emonts/status/1577998885125033985?s=20&t=aJC2U0dfO1wUkyJpjw1lzQ"
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Break up your big goals into small chunks, one breath at a time",
-              "Breath control is stress control"
-            ],
-            "list_type": "ordered"
-          }
-        ]
+        "title": "AND (&) Use Case",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Use Case: Setting or clearing specific bits in a binary number.</li><li class=\"post-list-item\">Example: Checking the status of individual flags in a bit mask, such as permissions in a file system.</li><li class=\"post-list-item\">Explanation: When you want to isolate specific bits and determine if they are set or cleared in a binary number.</li></ul></p>"
+      },
+      {
+        "title": "OR (|)",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Performs a bitwise OR operation between corresponding bits of two operands.</li><li class=\"post-list-item\">Result is 1 if either of the bits is 1, otherwise 0.</li><li class=\"post-list-item\">Example: \u201ca | b\u201d</li></ul></p>"
+      },
+      {
+        "title": "OR (|) Use Case",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Use Case: Combining multiple options or flags into a single value.</li><li class=\"post-list-item\">Example: Creating compound flags that represent various options or settings.</li><li class=\"post-list-item\">Explanation: When you want to combine the effects of multiple flags or options into a single value.</li></ul></p>"
+      },
+      {
+        "title": "XOR (^)",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Performs a bitwise XOR (exclusive OR) operation between corresponding bits of two operands.</li><li class=\"post-list-item\">Result is 1 if the bits are different, otherwise 0.</li><li class=\"post-list-item\">Example: \u201ca ^ b\u201d</li></ul></p>"
+      },
+      {
+        "title": "XOR (^) Use Case",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Use Case: Toggling specific bits without affecting others.</li><li class=\"post-list-item\">Example: Flipping the state of certain flags while leaving others unchanged.</li><li class=\"post-list-item\">Explanation: When you want to toggle specific bits in a value without affecting the rest of the bits.</li></ul></p>"
+      },
+      {
+        "title": "Complement (~)",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Performs a bitwise complement (logical NOT) operation on each bit of the operand, flipping its value.</li><li class=\"post-list-item\">Example: \u201c~a\u201d</li></ul></p>"
+      },
+      {
+        "title": "Complement (~) Use Case",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Use Case: Inverting all bits in a binary number.</li><li class=\"post-list-item\">Example: Creating the bitwise complement of a value, which can have applications in cryptography and data encoding.</li><li class=\"post-list-item\">Explanation: When you want to flip the state of all bits in a binary number, changing 0s to 1s and vice versa.</li></ul></p>"
+      },
+      {
+        "title": "Left Shift (<<)",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Shifts all bits in the operand to the left by a specified number of positions.</li><li class=\"post-list-item\">Example: \u201ca << n\u201d</li></ul></p>"
+      },
+      {
+        "title": "Left Shift (<<) Use Case",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Use Case: Multiplying a value by a power of 2.</li><li class=\"post-list-item\">Example: Shifting a binary number left by a certain number of positions to multiply it by a power of 2.</li><li class=\"post-list-item\">Explanation: When you want to multiply a value by 2 raised to a specific power, effectively shifting its binary representation to the left.</li></ul></p>"
+      },
+      {
+        "title": "Right Shift (>>)",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Shifts all bits in the operand to the right by a specified number of positions.</li><li class=\"post-list-item\">Example: \u201ca >> n\u201d</li></ul></p>"
+      },
+      {
+        "title": "Right Shift (>>) Use Case",
+        "htmlContent": "<p class=\"post-details\"><ul class=\"post-list\"><li class=\"post-list-item\">Use Case: Dividing a value by a power of 2.</li><li class=\"post-list-item\">Example: Shifting a binary number right by a certain number of positions to divide it by a power of 2.</li><li class=\"post-list-item\">Explanation: When you want to divide a value by 2 raised to a specific power, effectively shifting its binary representation to the right.</li></ul></p>\n<p class=\"post-details\"><pre class=\"language-c\"><code class=\"language-c\">['#include <stdio.h>', '', 'int main() {', '    unsigned int a = 0b1010; // Binary representation of 10', '    unsigned int b = 0b1100; // Binary representation of 12', '', '    // Bitwise AND', '    printf(\"a & b = %d\\\\n\", a & b); // Output: 8 (0b1000)', '', '    // Bitwise OR', '    printf(\"a | b = %d\\\\n\", a | b); // Output: 14 (0b1110)', '', '    // Bitwise XOR', '    printf(\"a ^ b = %d\\\\n\", a ^ b); // Output: 6 (0b0110)', '', '    // Bitwise Complement', '    printf(\"~a = %d\\\\n\", ~a); // Output: -11 (In two\\'s complement)', '', '    // Left Shift', '    printf(\"a << 2 = %d\\\\n\", a << 2); // Output: 40 (0b101000)', '', '    // Right Shift', '    printf(\"b >> 1 = %d\\\\n\", b >> 1); // Output: 6 (0b110)', '    ', '    return 0;', '}']</code></pre></p>"
       }
     ]
   },
   {
-    "title": "Getting Started with Docker",
-    "description": "Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers.",
-    "date": "1667624400000",
-    "id": "docker-getting-started",
-    "time": {
-      "secs": "44",
-      "mins": "00",
-      "hours": "00"
-    },
-    "tags": ["Technology", "Docker"],
+    "id": "device-drivers",
+    "title": "device drivers",
+    "description": "Understanding and implementation of device drivers for a Linux Kernel",
+    "date": "2024-05-08 00:00:00",
+    "tags": [
+      "Technology",
+      "Embedded",
+      "Engineer"
+    ],
+    "type": "article",
     "image": {
-      "name": "images/docker.png",
-      "alt": "docker-image"
+      "name": "/images/icons/binary-code.png",
+      "alt": "binary-code-img"
     },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Initial Steps to Running Docker"
-        },
-        "paragraphs": [
-          ":imagePlace(001)",
-          "The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.",
-          "If you have installed docker on your pc or mac. The steps to run a docker container are as follows: :listPlace(001)",
-          "Creating a dockerfile and building and running it. Here's an example of a basic dockerfile :codePlace(001)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "docker",
-            "caption": "Docker @ Resource from Docker Website",
-            "link": "https://www.ondat.io/hubfs/Docker.png"
-          }
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "docker",
-            "title": "docker_file",
-            "content": [
-              ":comment # Parent Image: Software and version",
-              ":code-specific FROM :code-specific-end python:3",
-              ":code-specific WORKDIR :code-specific-end :path-start /Users/user_directory/docker/textblob :path-end",
-              ":code-specific COPY :code-specific-end requirements.txt :path-start ./ :path-end",
-              ":code-specific RUN :code-specific-end pip install --no-cache-dir -r requirements.txt",
-              ":comment # First dot is relative file path where dockerfile resides",
-              ":comment # Second dot is the root directory",
-              ":code-specific COPY :code-specific-end . .",
-              ":code-specific CMD :code-specific-end :bracket-open [ :string-open \"python :string-close\", :string-open \"./main.py :string-close\" :bracket-close ]"
-            ]
-          }
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Create a docker",
-              "Build docker image \" docker build -t :user-defined-code image:end . \"",
-              "Run the docker container \" docker run --name :user-defined-code container_name image:end \"",
-              "Stop container \"docker stop :user-defined-code container_name:end \"",
-              "List running containers \"docker ps -a \""
-            ],
-            "list_type": "ordered"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "Docker Help",
-            "link": ""
-          }
-        ]
+        "title": "Device Drivers",
+        "htmlContent": "<p class=\"post-details\">Device drivers are abstractions to a piece of hardware. Device drivers facilitate communication between a computer's operating system and hardware devices.  They are more than likely to be ran in the kernel space, but allow for devices on hardware (HW) to be used in the userspace. These drivers are imported into the userspace by using the filesystem (/dev, /sys, etc\u2026). A lot of the notes were from the following YouTube video <a class=\"post-link\" href=\"https://youtu.be/XoYkHUnmpQo?si=4M67_lSBChrxwm7L\">Understanding the Structure of a Linux Kernel Device Driver</a>. Source code used in the video can be found here <a class=\"post-link\" href=\"https://github.com/y0dev/device_drivers/tree/master/ldd\">https://github.com/y0dev/device_drivers/tree/master/ldd</a>. <div class=\"post-image-container\"><a href=\"/images/notes/device-driver.png\"><img class=\"post-image\" src=\"/images/notes/device-driver.png\" alt=\"\" title=\"Device Driver Explanation\"></a><figcaption class=\"post-image-caption\">Device Driver Explanation</figcaption></div></p>\n<p class=\"post-details\">Some of the common device drivers\u2019 types are char and block. A char device is a device that exchange bytes or communication is done through bytes or a string of bytes. While block on the other hand communication is done using blocks of data.</p>"
+      },
+      {
+        "title": "Implementing a Char Driver",
+        "htmlContent": "<p class=\"post-details\"><ol class=\"post-list\"><li class=\"post-list-item\">Allocate the device number (major/minor). This is done by using either register_chrdev_region() or alloc_chrdev_region().</li><li class=\"post-list-item\">Implement the file operation (open, read, write, ioctl, etc\u2026)</li><li class=\"post-list-item\">Register the char driver in the kernel with cdev_init() and cdev_add()</li></ol></p>\n<p class=\"post-details\"><pre class=\"language-c\"><code class=\"language-c\">['#include <linux/module.h>', '#include <linux/kernel.h>', '#include <linux/fs.h>', '#include <linux/uaccess.h>', '', '#define DEVICE_NAME \"chardev_example\"', '#define BUF_SIZE 1024', '', 'static int major_number;', 'static char device_buffer[BUF_SIZE];', 'static int device_open_count = 0;', '', 'static int device_open(struct inode *inode, struct file *file)', '{', '    if (device_open_count)', '        return -EBUSY;', '', '    device_open_count++;', '    printk(KERN_INFO \"Device opened\\\\n\");', '    return 0;', '}', '', 'static int device_release(struct inode *inode, struct file *file)', '{', '    device_open_count--;', '    printk(KERN_INFO \"Device closed\\\\n\");', '    return 0;', '}', '', 'static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_t *offset)', '{', '    int bytes_read = 0;', \"    while (length && device_buffer[*offset] != '\\\\0')\", '    {', '        put_user(device_buffer[*offset], buffer++);', '        bytes_read++;', '        length--;', '        (*offset)++;', '    }', '    return bytes_read;', '}', '', 'static ssize_t device_write(struct file *file, const char *buffer, size_t length, loff_t *offset)', '{', '    int bytes_written = 0;', '    while (length && (*offset) < BUF_SIZE - 1)', '    {', '        device_buffer[*offset] = buffer[bytes_written];', '        bytes_written++;', '        length--;', '        (*offset)++;', '    }', \"    device_buffer[*offset] = '\\\\0';\", '    return bytes_written;', '}', '', 'static long device_ioctl(struct file *file, unsigned int cmd, unsigned long arg)', '{', '    // Handle ioctl commands here', '    return 0;', '}', '', 'static struct file_operations fops = {', '    .open = device_open,', '    .release = device_release,', '    .read = device_read,', '    .write = device_write,', '    .unlocked_ioctl = device_ioctl,', '};', '', 'static int __init chardev_init(void)', '{', '    major_number = register_chrdev(0, DEVICE_NAME, &fops);', '    if (major_number < 0)', '    {', '        printk(KERN_ALERT \"Failed to register a major number\\\\n\");', '        return major_number;', '    }', '    printk(KERN_INFO \"Registered correctly with major number %d\\\\n\", major_number);', '    return 0;', '}', '', 'static void __exit chardev_exit(void)', '{', '    unregister_chrdev(major_number, DEVICE_NAME);', '    printk(KERN_INFO \"Unregistered %s\\\\n\", DEVICE_NAME);', '}', '', 'module_init(chardev_init);', 'module_exit(chardev_exit);', '', 'MODULE_LICENSE(\"GPL\");', 'MODULE_AUTHOR(\"Your Name\");', 'MODULE_DESCRIPTION(\"A simple character device driver example\");']</code></pre></p>\n<p class=\"post-details\">The makefile to build this driver would look like the following: <pre class=\"language-makefile\"><code class=\"language-makefile\">['obj-m += chardev_example.o', '', 'KERNELDIR ?= /lib/modules/$(shell uname -r)/build', 'PWD       := $(shell pwd)', '', 'all:', '    $(MAKE) -C $(KERNELDIR) M=$(PWD) modules', '', 'clean:', '    $(MAKE) -C $(KERNELDIR) M=$(PWD) clean']</code></pre></p>"
+      },
+      {
+        "title": "Communicating With the HW",
+        "htmlContent": "<p class=\"post-details\">Depending on the hw architecture, we can communicate with the hw using the following:<ul class=\"post-list\"><li class=\"post-list-item\">Port I/O: a dedicated us is used to communicate with the HW devices</li><li class=\"post-list-item\">Memory-mapped I/O: the memory address space is shared with the HW devices:listPlace(002)</li></ul></p>"
+      },
+      {
+        "title": "Communicating with MMIO Device",
+        "htmlContent": "<p class=\"post-details\"><ol class=\"post-list\"><li class=\"post-list-item\">Request access to MMIO registers using a few kernel APIs like request_mem_region()</li><li class=\"post-list-item\">Map the registers\u2019 physical addresses to virtual addresses, using functions like ioremap() </li><li class=\"post-list-item\">Use the kernel API to read from and write to the registers with functions like readl() and writel()</li></ol></p>\n<p class=\"post-details\"><pre class=\"language-c\"><code class=\"language-c\">['#include <linux/init.h>', '#include <linux/module.h>', '#include <linux/fs.h>', '#include <linux/uaccess.h>', '', '#define DEVICE_NAME \"mmio_device\"', '#define MMIO_BASE_ADDRESS 0x10000000 // Example MMIO base address', '', '// Define device structure to hold MMIO base address and other information', 'struct mmio_device {', '    void __iomem *base_addr;', '};', '', 'static struct mmio_device dev;', '', '// File operation functions', 'static int mmio_device_open(struct inode *inode, struct file *file)', '{', '    // Initialize device and map MMIO region', '    dev.base_addr = ioremap(MMIO_BASE_ADDRESS, 0x1000); // Example: Map 4 KB', '', '    if (!dev.base_addr) {', '        printk(KERN_ALERT \"Failed to map MMIO region\\\\n\");', '        return -EFAULT;', '    }', '', '    return 0;', '}', '', 'static int mmio_device_release(struct inode *inode, struct file *file)', '{', '    // Unmap MMIO region', '    iounmap(dev.base_addr);', '    return 0;', '}', '', 'static ssize_t mmio_device_read(struct file *file, char __user *buffer, size_t length, loff_t *offset)', '{', '    // Read data from MMIO device', '    // Example: Use readl() to read from a 32-bit register', '', '    return 0; // Return number of bytes read', '}', '', 'static ssize_t mmio_device_write(struct file *file, const char __user *buffer, size_t length, loff_t *offset)', '{', '    // Write data to MMIO device', '    // Example: Use writel() to write to a 32-bit register', '', '    return length; // Return number of bytes written', '}', '', '// File operations structure', 'static struct file_operations fops = {', '    .open = mmio_device_open,', '    .release = mmio_device_release,', '    .read = mmio_device_read,', '    .write = mmio_device_write,', '};', '', 'static int __init mmio_device_init(void)', '{', '    // Register character device', '    if (register_chrdev(0, DEVICE_NAME, &fops) < 0) {', '        printk(KERN_ALERT \"Failed to register MMIO device\\\\n\");', '        return -1;', '    }', '', '    printk(KERN_INFO \"MMIO device registered\\\\n\");', '    return 0;', '}', '', 'static void __exit mmio_device_exit(void)', '{', '    // Unregister character device', '    unregister_chrdev(0, DEVICE_NAME);', '    printk(KERN_INFO \"MMIO device unregistered\\\\n\");', '}', '', 'module_init(mmio_device_init);', 'module_exit(mmio_device_exit);', '', 'MODULE_LICENSE(\"GPL\");', 'MODULE_AUTHOR(\"Your Name\");', 'MODULE_DESCRIPTION(\"A simple MMIO device driver\");', 'MODULE_VERSION(\"1.0\");']</code></pre></p>"
       }
     ]
   },
   {
-    "title": "Basics of Jenkins",
-    "description": "Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily.",
-    "date": "1675365300000",
-    "id": "jenkins-getting-started",
-    "time": {
-      "secs": "06",
-      "mins": "01",
-      "hours": "00"
-    },
-    "tags": ["Technology", "Jenkins", "CI/CD"],
+    "id": "amd-xilinx-boot-seq",
+    "title": "booting using petalinux",
+    "description": "sequence of AMD/Xilinx boot process using PetaLinux.",
+    "date": "2024-05-03 00:00:00",
+    "tags": [
+      "Technology",
+      "Engineer"
+    ],
+    "type": "article",
     "image": {
-      "name": "images/jenkins.png",
-      "alt": "jenkins-image"
-    },
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Creating a Jenkinsfile"
-        },
-        "paragraphs": [
-          ":imagePlace(001)",
-          "When creating a Jenkinsfile the necessary fields must are: pipeline, agent, stages. \"pipeline\" is always needed and is at the top-level. From here we have the \"agent\" which describes where to execute (default would be set to any). Then we have stages which describes where the works happens, and within \"stages\" you define \"stage\" that will have parameters such as: (\"init\"), (\"build\"), (\"test\"), and (\"deploy\").",
-          "Another field that may be added and this is added after \"stages\". This is \"post\" and what this does is execute some logic after all stages have executed. The conditions that are within the \"post\" section are: always, success, failure. Always will always execute whether the script failed or not. Examples of this are sending emails out to the team after a build."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "jenkins",
-            "caption": "Jenkins Image from Jenkins Website",
-            "link": "https://www.jenkins.io/images/logo-title-opengraph.png"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Adding Environmental Variables"
-        },
-        "paragraphs": [
-          "In order to add environmental variables to your file, before \"stages\" you need to add \"environment\" into your pipeline.",
-          ":codePlace(001)"
-        ],
-        "code": [
-          {
-            "id": "001",
-            "language": "groovy",
-            "title": "jenkins_file_env",
-            "content": [
-              "pipeline {",
-              "\tagent any",
-              "\tenvironment {",
-              "\t\tEXAMPLE_VAR = 'Something'",
-              "\t}",
-              "\t...",
-              "}"
-            ]
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Adding Build Tools for Project"
-        },
-        "paragraphs": [":codePlace(001)"],
-        "code": [
-          {
-            "id": "001",
-            "language": "groovy",
-            "title": "jenkins_file_tools",
-            "content": [
-              "pipeline {",
-              "\tagent any",
-              "\ttools  {",
-              "\t\tnodejs 'NodeJS'",
-              "\t}",
-              "\t...",
-              "}"
-            ]
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Building Jenkinsfile"
-        },
-        "paragraphs": [
-          "After this you would then go to Jenkins localhost webpage and create a new job. Depending on the version of Jenkins you have downloaded this menu may be different. What you should see is a text field and beneath a list of types of projects you can create. The projects are Freestyle project, Pipeline, Multi-configuration project, Folder, GitHub Organization, and Multibranch Pipeline. For my example I am using Multibranch Pipeline.",
-          "Within the General Tab, scroll down to Branch Sources and add the link to the Git project repository and add the correct credentials. You can determine what branches you want to build by selecting the next drop-down. Click build and you should now be presented with a new page that displays the pipeline output/log."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Final Results"
-        },
-        "paragraphs": [":codePlace(001)"],
-        "code": [
-          {
-            "id": "001",
-            "language": "groovy",
-            "title": "jenkins_file_final",
-            "content": [
-              "def gv",
-              "pipeline {",
-              "\tagent any",
-              "\tparameters {",
-              "\t\tchoice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')",
-              "\t\tbooleanParam(name: 'executeTests', defaultValue: true, description: '')",
-              "\t}",
-              "\tstages {",
-              "\t\tstage (\"init\") {",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv = load \"script.groovy\"",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t\tstage (\"build\") {",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv.buildApp()",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t\tstage (\"test\") {",
-              "\t\t\twhen {",
-              "\t\t\t\texpression {",
-              "\t\t\t\t\tparams.executeTests",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv.testApp()",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t\tstage (\"deploy\") {",
-              "\t\t\tsteps {",
-              "\t\t\t\tscript {",
-              "\t\t\t\t\tgv.deployApp()",
-              "\t\t\t\t}",
-              "\t\t\t}",
-              "\t\t}",
-              "\t}",
-              "}"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Help with System Design Interviews",
-    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
-    "date": "1675836000000",
-    "id": "system-design",
-    "time": {
-      "secs": "12",
-      "mins": "07",
-      "hours": "00"
-    },
-    "tags": ["System Design", "Technology", "MAANG"],
-    "image": {
-      "name": "images/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Preparation for the Interview"
-        },
-        "paragraphs": [
-          ":imagePlace(001)",
-          "Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.",
-          "Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are :linkPlace(001), :linkPlace(002), :linkPlace(003), :linkPlace(004), :linkPlace(005), :linkPlace(006), :linkPlace(007), :linkPlace(008), :linkPlace(009), :linkPlace(010), :linkPlace(011), :linkPlace(012), and :linkPlace(013).",
-          "Some thoughts that should happen when designing a system should be \u201cWhy does this system works?\u201d. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "system-design",
-            "caption": "Load Balancing from G4G",
-            "link": "https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png"
-          }
-        ],
-        "links": [
-          {
-            "id": "001",
-            "text": "Engineering at Meta",
-            "link": "https://engineering.fb.com/"
-          },
-          {
-            "id": "002",
-            "text": "Meta Research",
-            "link": "https://research.fb.com/"
-          },
-          {
-            "id": "003",
-            "text": "AWS Architecture Blog",
-            "link": "https://aws.amazon.com/blogs/architecture/"
-          },
-          {
-            "id": "004",
-            "text": "Amazon Science Blog",
-            "link": "https://www.amazon.science/blog"
-          },
-          {
-            "id": "005",
-            "text": "Netflix TechBlog",
-            "link": "https://netflixtechblog.com/"
-          },
-          {
-            "id": "006",
-            "text": "Google Research",
-            "link": "https://research.google/"
-          },
-          {
-            "id": "007",
-            "text": "Engineering at Quora",
-            "link": "https://quoraengineering.quora.com/"
-          },
-          {
-            "id": "008",
-            "text": "Uber Engineering Blog",
-            "link": "https://eng.uber.com/"
-          },
-          {
-            "id": "009",
-            "text": "Databricks Blog",
-            "link": "https://databricks.com/blog/category/engineering"
-          },
-          {
-            "id": "010",
-            "text": "Pinterest Engineering",
-            "link": "https://medium.com/@Pinterest_Engineering"
-          },
-          {
-            "id": "011",
-            "text": "BlackRock Engineering",
-            "link": "https://medium.com/blackrock-engineering"
-          },
-          {
-            "id": "012",
-            "text": "Lyft Engineering",
-            "link": "https://eng.lyft.com/"
-          },
-          {
-            "id": "013",
-            "text": "Salesforce Engineering",
-            "link": "https://engineering.salesforce.com/"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Stay on track"
-        },
-        "paragraphs": [
-          "At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.",
-          "Key things to remember when thinking of deliverables expected from the developed design :listPlace(001)"
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.",
-              "Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on."
-            ],
-            "list_type": "ordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "The Interview"
-        },
-        "paragraphs": [
-          "When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.",
-          "The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: :listPlace(001)"
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "What is the size of the data right now? (Guessing this is the size of data type)",
-              "At what rate is the data expected to grow over time?",
-              "How will the data be consumed by other subsystems or end users?",
-              "Is the data read-heavy or write-heavy?",
-              "Do we need strict consistency of data, or will eventual consistency work?",
-              "What is the durability target of the data?",
-              "What privacy and regulatory requirements do we require for storing or transmitting user data?"
-            ],
-            "list_type": "unordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Abstraction"
-        },
-        "paragraphs": [
-          "Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Remote Procedure Calls"
-        },
-        "paragraphs": [
-          "Remote Procedure Calls (RPC) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Consistency"
-        },
-        "paragraphs": [
-          "Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.",
-          "There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Availability"
-        },
-        "paragraphs": [
-          "Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Reliability"
-        },
-        "paragraphs": [
-          "Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Scalability"
-        },
-        "paragraphs": [
-          "Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: :listPlace(001)",
-          "There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. :listPlace(002)"
-        ],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Request workload: This is the number of requests served by the system.",
-              "Data/storage workload: This is the amount of data stored by the system."
-            ],
-            "list_type": "unordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "Vertical Scaling = more space in a single system",
-              "Horizontal Scaling = more nodes that need to be in sync with one another"
-            ],
-            "list_type": "unordered"
-          }
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Maintainability"
-        },
-        "paragraphs": [
-          "Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Fault Tolerance"
-        },
-        "paragraphs": [
-          "Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures\u2014a reality that is outlined in the CAP theorem.",
-          "Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems."
-        ]
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Back-Of-The-Envelope"
-        },
-        "paragraphs": [
-          "This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.",
-          "For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.",
-          ":imagePlace(001)",
-          ":imagePlace(002)",
-          ":imagePlace(003)"
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "system-design-db-rates",
-            "caption": "Database Rates",
-            "link": "/images/system-design/database_rates.png"
-          },
-          {
-            "id": "002",
-            "alt": "system-design-latency-rates",
-            "caption": "Latency Rates",
-            "link": "/images/system-design/latency_values.png"
-          },
-          {
-            "id": "003",
-            "alt": "system-design-server-specs",
-            "caption": "Server Specs",
-            "link": "/images/system-design/server_specs.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Command for Thankfulness",
-    "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
-    "date": "1678428000000",
-    "id": "thankfulness",
-    "time": {
-      "secs": "20",
-      "mins": "01",
-      "hours": "00"
-    },
-    "tags": ["Christ", "Salvation", "Love", "Thankful"],
-    "image": {
-      "name": "images/thankful.png",
-      "alt": "thankful-icon"
-    },
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Command for Thankfulness"
-        },
-        "paragraphs": [
-          "We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren\u2019t. Prime example of this in scripture is Israel\u2019s ungrateful heart throughout their time in the wilderness (Num. 14:1-4;20:3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2:24-25).",
-          "The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1:8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They\u2019re not the only ones that think this way.",
-          "As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they\u2019ve been wrong by someone and that person deserves it. As I was reminded by a brother, \u201cWe deserve much worse than what this person just said about us even though it may not be true.\u201d God did not need to save Israel from Egypt nor did he need to save us from our sins.",
-          "So, to close as the Apostle Paul commands, \u201cBe Thankful\u201d. We ought to always be thankful in all circumstances because we deserve much more than we are receiving."
-        ],
-        "images": [],
-        "links": [],
-        "lists": []
-      }
-    ]
-  },
-  {
-    "title": "Debugging in NodeJS",
-    "description": "How to properly debug in NodeJS",
-    "date": "1680066000000",
-    "id": "debugging-in-node",
-    "time": {
-      "secs": "57",
-      "mins": "0",
-      "hours": "0"
-    },
-    "tags": ["Technology", "Engineer"],
-    "image": {
-      "name": "images/web-dev.png",
-      "alt": "web-dev-img"
-    },
-    "content": [
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Debugging in Node Using Chrome Devtools"
-        },
-        "paragraphs": [
-          "As I\u2019m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you\u2019re a web developer. It is done by adding simply :special-text(key=italic,--)special-text-end :special-text(key=italic,inspect )special-text-end flag. What happens is that when using :special-text(key=italic,--)special-text-end :special-text(key=italic,inspect )special-text-end flag Node opens a port to accept WebSocket connections. Now you will be presented with the following::imagePlace(001)",
-          "Once successful, now open up Google Chrome and type the following URL :special-text(key=italic,chrome)special-text-end :special-text(key=italic,://)special-text-end :special-text(key=italic,inspect)special-text-end :special-text(key=italic,/#)special-text-end :special-text(key=italic,devices)special-text-end . This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure\u2026 which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.",
-          "One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful."
-        ],
-        "images": [
-          {
-            "id": "001",
-            "alt": "",
-            "caption": "node --inspect snippet",
-            "link": "/images/articles/node-inspect.png"
-          }
-        ],
-        "links": [],
-        "lists": [],
-        "quotes": [],
-        "code": []
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Setting up Stack Trace"
-        },
-        "paragraphs": [
-          "The basics behind displaying stack trace is simple in node. All one would have to do is."
-        ],
-        "images": [],
-        "links": [],
-        "lists": [],
-        "quotes": [],
-        "code": []
-      },
-      {
-        "title": {
-          "tag": "h2",
-          "text": "Soli Deo Gloria"
-        },
-        "paragraphs": [],
-        "images": [],
-        "links": [],
-        "lists": [],
-        "quotes": [],
-        "code": []
-      }
-    ]
-  },
-  {
-    "title": "Depth First Search",
-    "description": "Article on the depth first search definition and its usage for a tree and a graph.",
-    "date": "1691730000000",
-    "id": "depth-first-search",
-    "time": {
-      "secs": "14",
-      "mins": "2",
-      "hours": "0"
-    },
-    "tags": ["Data Structures", "Algorithms", "Tech Interview"],
-    "image": {
-      "name": "images/algorithm.png",
+      "name": "/images/icons/algorithm.png",
       "alt": "algo-img"
     },
     "content": [
       {
-        "title": {
-          "tag": "h2",
-          "text": "Introduction"
-        },
-        "paragraphs": [
-          "In this article, I will define the :special-text(key=bold,Depth )special-text-end :special-text(key=bold,First )special-text-end :special-text(key=bold,Search )special-text-end :special-text(key=bold,()special-text-end :special-text(key=bold,DFS)special-text-end :special-text(key=bold,) )special-text-end algorithm. I will be explaining the definition and the uses of the search on a tree and a graph."
-        ],
-        "images": [],
-        "links": [],
-        "lists": [],
-        "quotes": [],
-        "code": []
+        "title": "Booting Using PetaLinux Notes",
+        "htmlContent": "<p class=\"post-details\">In PetaLinux, the boot process typically follows these steps:<ol class=\"post-list\"><li class=\"post-list-item\">ROM Code Execution: The boot process begins with the ROM code (Read-Only Memory) built into the processing system (PS) of the Xilinx Zynq device. This ROM code is responsible for initializing essential hardware components and loading the first-stage bootloader (FSBL) from the boot media.</li><li class=\"post-list-item\">First Stage Bootloader (FSBL): The FSBL is a small piece of code responsible for configuring the PS peripherals, initializing the DDR memory, and loading the second-stage bootloader (SSBL). It's stored in a dedicated region of the boot media and executed by the ROM code.</li><li class=\"post-list-item\">Second Stage Bootloader (SSBL): The SSBL, often U-Boot in the case of Petalinux, provides more sophisticated boot capabilities. It initializes additional hardware components, sets up the environment, and loads the Linux kernel from the boot media into memory.</li><li class=\"post-list-item\">Linux Kernel Initialization: Once the Linux kernel is loaded into memory, the SSBL passes control to it. The kernel initializes various subsystems, mounts the root filesystem, and starts the user-space initialization process.</li><li class=\"post-list-item\">User-Space Initialization: After the kernel initializes, it executes the /sbin/init process or another specified init process. This process sets up the user environment, starts essential system daemons, and launches user applications.</li><li class=\"post-list-item\">User-Space Operation: Once the user-space initialization is complete, the system is fully operational, and users can interact with it through the command line or graphical user interface.</li></ol></p>\n<p class=\"post-details\">So the bif file should look like this<pre class=\"language-bif\"><code class=\"language-bif\">['//arch = zynqmp; split = false; format = BIN', 'the_ROM_image:', '{', '    [bootloader] fsbl.elf', '    [pmufw_image] pmufw.elf', '    [destination_cpu = a53-0] devicetree.dtb', '    [destination_cpu = a53-0] system.bit', '', '    [destination_cpu = a53-0, exception_level = el-3, trustzone] u-boot.elf', '    [destination_cpu = a53-0, exception_level = el-2] bl31.elf', '    [destination_cpu = a53-0, exception_level = el-1, trustzone] image.elf', '}']</code></pre></p>\n<p class=\"post-details\">How to boot from QSPI using PetaLinux on a ZCU102 <a class=\"post-link\" href=\"https://support.xilinx.com/s/article/000033588?language=en_US\">https://support.xilinx.com/s/article/000033588?language=en_US</a> </p>\n<p class=\"post-details\">In many embedded systems, including those based on Xilinx Zynq UltraScale+ MPSoC, U-Boot (Universal Boot Loader) typically needs to be loaded to a specific offset within the boot media, such as an SD card or QSPI flash. This offset is usually determined by the boot ROM or FSBL (First Stage Boot Loader) and is often referred to as the \"boot offset\" or \"U-Boot offset\".</p>\n<p class=\"post-details\">When creating a boot image for these systems, you need to ensure that U-Boot is placed at the correct offset within the boot image file. This offset is specified in the Boot Image Format (BIF) file, which is used by tools like \u201cbootgen\u201d to generate the boot image.</p>"
+      }
+    ]
+  },
+  {
+    "id": "RESHADED",
+    "title": "The RESHADED Approach",
+    "description": "The RESHADED Approach for System Design",
+    "date": "2023-10-10 00:00:00",
+    "tags": [
+      "System Design",
+      "Technology",
+      "MAANG"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/image.png",
+      "alt": "image-title"
+    },
+    "content": [
+      {
+        "title": "The RESHADED Approach for System Design",
+        "htmlContent": "<p class=\"post-details\">Below, are describe what steps we take under each word in RESHADED:<ul class=\"post-list\"><li class=\"post-list-item\">Requirements: During this step, we gather all the requirements of the design problem and define its scope. Requirements include understanding what the service is, how it works, and what its main features are. Our goal in this step is to gather the functional and non-functional requirements of a service we are about to design.</li><li class=\"post-list-item\">Estimation: As the name suggests, this step estimates the resources required to provide the service to a defined number of users. By resources, we mean the hardware or infrastructural resources. Some sample estimation questions are the following::listPlace(002)</li><li class=\"post-list-item\">Storage schema (optional): This step involves articulating our data model\u2014that is, we define which tables we need and what type of fields are part of each table. However, this is an optional step, and we may not exercise this effort in every design problem.</li><li class=\"post-list-item\">High-level design: This step involves identifying the main components and building blocks we\u2019ll use to design our desired system. We do this by getting inspiration from our functional and non-functional requirements.:listPlace(003)</li><li class=\"post-list-item\">API design: The goal in this phase is to build interfaces for our service. Using these interfaces, users can call various services within our system. These interfaces are in the form of API calls and are generally a translation of our functional requirements.</li><li class=\"post-list-item\">Detailed design: The detailed design starts by recognizing the limitations of the high-level design. We\u2019ll capitalize on these limitations to evolve our design. During this step, we\u2019ll finalize our design by mentioning all the components and building blocks that we\u2019ll use.:listPlace(004)</li><li class=\"post-list-item\">Evaluation: This step will measure the effectiveness of our solution. In other words, we justify how our design fulfills the functional and non-functional requirements.:listPlace(005)</li><li class=\"post-list-item\">Distinctive component/feature: At the start of this lesson, we discussed how no one-size-fits-all solution exists. This step is to identify a unique aspect for each design problem and discuss it. For example, the Uber design problem has payment service and fraud detection as its unique feature. In contrast, Google Docs has concurrency control, which is required when different users want to edit the same section of a document simultaneously.</li></ul></p>\n<p class=\"post-details\">This is from System Design Course on <a class=\"post-link\" href=\"https://www.educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers/the-reshaded-approach-for-system-design\">educative.io</a></p>"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "title": "Why am I Presbyterian",
+    "description": "Many in the reformed camp seemed to be either Baptist or Presbyterian. This is article is to show my view in Reformed Theology.",
+    "date": "2023-10-10 00:00:00",
+    "tags": [
+      "Christ",
+      "Covenant",
+      "Reformed",
+      "Gospel"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "Why am I Presbyterian",
+        "htmlContent": "<p class=\"post-details\">There is an endless debate on covenant membership. Who is a part of the covenant and who is not? This question is a good question to bold you to search the scriptures for answers. I would start from Genesis and end in Revelation. </p>"
+      }
+    ]
+  },
+  {
+    "id": "depth-first-search",
+    "title": "Depth First Search",
+    "description": "Article on the depth first search definition and its usage for a tree and a graph.",
+    "date": "2023-10-09 00:00:00",
+    "tags": [
+      "Data Structures",
+      "Algorithms",
+      "Tech Interview"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/algorithm.png",
+      "alt": "algo-img"
+    },
+    "content": [
+      {
+        "title": "Introduction",
+        "htmlContent": "<p class=\"post-details\">In this article, I will define the bold bold bold bold bold bold algorithm. I will be explaining the definition and the uses of the search on a tree and a graph.</p>"
       },
       {
-        "title": {
-          "tag": "h3",
-          "text": "Definition"
-        },
-        "paragraphs": [
-          "DFS is a tree and graph traversal algorithm used to explore node(s) in a tree or graph data structure. Depending on the data structure a node will have different meaning in regards to the relationship with other nodes. For example, a node in a tree is a single element in a tree that will either be connected to another node via parent-child relationship. While a node in graph will be connected to other nodes via neighbor relationship. ",
-          "DFS on a tree has three traversal methods: pre-order, in-order, and post-order. These tree traversals generally go from left to right. In the pre-order traversal, we would start from the current node, then traverse the left subtree, and finally traverse the right subtree. In-order traversal, we would start from the root node and traverse the left subtree, then the current node, and finally traverse the right subtree. The last traversal method post-order traversal, we would start from the root node and traverse the left subtree, then the right subtree, and finally visit the current node. Below is an example of in-order traversal these steps are basis for how each traversal method operates::listPlace(001)",
-          "We now get into using these same traversals with a graph data structure. The main difference in using these traversal methods with graphs are that you have to mark each visited node. The reason for the marking of nodes because graph contains cycles and we don\u2019t want to get stuck in an infinite loop."
-        ],
-        "images": [],
-        "links": [],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Traverse the left subtree",
-              "Visit the current node",
-              "Traverse the right subtree"
-            ],
-            "listType": "ordered"
-          }
-        ],
-        "quotes": [],
-        "code": []
+        "title": "Definition",
+        "htmlContent": "<p class=\"post-details\">DFS is a tree and graph traversal algorithm used to explore node(s) in a tree or graph data structure. Depending on the data structure a node will have different meaning in regards to the relationship with other nodes. For example, a node in a tree is a single element in a tree that will either be connected to another node via parent-child relationship. While a node in graph will be connected to other nodes via neighbor relationship. </p>\n<p class=\"post-details\">DFS on a tree has three traversal methods: pre-order, in-order, and post-order. These tree traversals generally go from left to right. In the pre-order traversal, we would start from the current node, then traverse the left subtree, and finally traverse the right subtree. In-order traversal, we would start from the root node and traverse the left subtree, then the current node, and finally traverse the right subtree. The last traversal method post-order traversal, we would start from the root node and traverse the left subtree, then the right subtree, and finally visit the current node. Below is an example of in-order traversal these steps are basis for how each traversal method operates:<ol class=\"post-list\"><li class=\"post-list-item\">Traverse the left subtree</li><li class=\"post-list-item\">Visit the current node</li><li class=\"post-list-item\">Traverse the right subtree</li></ol></p>\n<p class=\"post-details\">We now get into using these same traversals with a graph data structure. The main difference in using these traversal methods with graphs are that you have to mark each visited node. The reason for the marking of nodes because graph contains cycles and we don\u2019t want to get stuck in an infinite loop.</p>"
       },
       {
-        "title": {
-          "tag": "h3",
-          "text": "Uses"
-        },
-        "paragraphs": [
-          "\tWhen determining when to use the following algorithm we chose by first understanding if the problem is a tree/graph problem or not. This can be difficult at first because all tree/graph problem don\u2019t just same \u201cI\u2019m a tree\u201d or \u201cI\u2019m a graph\u201d. Determining whether a problem is a tree/graph is done by understanding what the problem is asking just like any other algorithm. Generally identifying DFS problem you will notice whether the question is asking for the following::listPlace(001)",
-          "The strategy to determining which traversal methods to use depends on the algorithm that is being design. When thinking about picking pre-order method, you may be thinking of exploring the root prior to the leaves. While using post-order method, you may be thinking of exploring the leaves before the root. In-order is best used, when you know that the tree has a sequence in the nodes."
-        ],
-        "images": [],
-        "links": [],
-        "lists": [
-          {
-            "id": "001",
-            "items": [
-              "Max Depth of Tree, *anything* tree",
-              "Combination Search :listPlace(002)"
-            ],
-            "listType": "unordered"
-          },
-          {
-            "id": "002",
-            "items": [
-              "\u201cGenerate all possible\u201d",
-              "\u201cNumber of ways\u201d"
-            ],
-            "listType": "unordered"
-          }
-        ],
-        "quotes": [],
-        "code": []
+        "title": "Uses",
+        "htmlContent": "<p class=\"post-details\">\tWhen determining when to use the following algorithm we chose by first understanding if the problem is a tree/graph problem or not. This can be difficult at first because all tree/graph problem don\u2019t just same \u201cI\u2019m a tree\u201d or \u201cI\u2019m a graph\u201d. Determining whether a problem is a tree/graph is done by understanding what the problem is asking just like any other algorithm. Generally identifying DFS problem you will notice whether the question is asking for the following:<ul class=\"post-list\"><li class=\"post-list-item\">Max Depth of Tree, *anything* tree</li><li class=\"post-list-item\">Combination Search :listPlace(002)</li></ul></p>\n<p class=\"post-details\">The strategy to determining which traversal methods to use depends on the algorithm that is being design. When thinking about picking pre-order method, you may be thinking of exploring the root prior to the leaves. While using post-order method, you may be thinking of exploring the leaves before the root. In-order is best used, when you know that the tree has a sequence in the nodes.</p>"
       },
       {
-        "title": {
-          "tag": "h3",
-          "text": "Implementation"
-        },
-        "paragraphs": [
-          "\tTo implement DFS algorithm is simple for both a tree and a graph. It is implemented just as it is defined. See the example below written in Python::codePlace(001)",
-          "\tThe difference in the implementation for a tree and a graph is including a visited set as a state. In the implementation of DFS in a graph you will add a visited set to store all the vertices/nodes that were already visited. Since a graph uses a visited set, you no longer need to used the goal state that a tree would used to find a left node. The python example below shows the basic implementation to start from: :codePlace(002)"
-        ],
-        "images": [],
-        "links": [],
-        "lists": [],
-        "quotes": [],
-        "code": [
-          {
-            "id": "001",
-            "title": "DFS Implementation for Tree Traversal",
-            "language": "python",
-            "content": [
-              "def dfs(root):",
-              "\tif not root:",
-              "\t\treturn",
-              "\t# Traverse the left subtree",
-              "\tdfs(root.left)",
-              "\t# Visit current node",
-              "\tprint(root)",
-              "\t# Traverse the right subtree",
-              "\tdfs(root.right)",
-              "\treturn"
-            ]
-          },
-          {
-            "id": "002",
-            "title": "DFS Implementation for Graph Traversal",
-            "language": "python",
-            "content": [
-              "def dfs(root, visited):",
-              "\t# Visit all neighbors",
-              "\tfor neighbor in get_neighbors(root):",
-              "\t\t# Check if neighbor has been visited before",
-              "\t\tif neighbor in visited:",
-              "\t\t\tcontinue",
-              "",
-              "\t\t# Add neighbor to visited set",
-              "\t\tvisited.add(neighbor)",
-              "",
-              "\t\t# Add neighbor to stack",
-              "\t\tdfs(neighbor, visited)"
-            ]
-          }
-        ]
+        "title": "Implementation",
+        "htmlContent": "<p class=\"post-details\">\tTo implement DFS algorithm is simple for both a tree and a graph. It is implemented just as it is defined. See the example below written in Python:<pre class=\"language-python\"><code class=\"language-python\">['def dfs(root):', '\\tif not root:', '\\t\\treturn', '\\t# Traverse the left subtree', '\\tdfs(root.left)', '\\t# Visit current node', '\\tprint(root)', '\\t# Traverse the right subtree', '\\tdfs(root.right)', '\\treturn']</code></pre></p>\n<p class=\"post-details\">\tThe difference in the implementation for a tree and a graph is including a visited set as a state. In the implementation of DFS in a graph you will add a visited set to store all the vertices/nodes that were already visited. Since a graph uses a visited set, you no longer need to used the goal state that a tree would used to find a left node. The python example below shows the basic implementation to start from: <pre class=\"language-python\"><code class=\"language-python\">['def dfs(root, visited):', '\\t# Visit all neighbors', '\\tfor neighbor in get_neighbors(root):', '\\t\\t# Check if neighbor has been visited before', '\\t\\tif neighbor in visited:', '\\t\\t\\tcontinue', '', '\\t\\t# Add neighbor to visited set', '\\t\\tvisited.add(neighbor)', '', '\\t\\t# Add neighbor to stack', '\\t\\tdfs(neighbor, visited)']</code></pre></p>"
+      }
+    ]
+  },
+  {
+    "id": "system-design-part-2",
+    "title": "System Design Part II",
+    "description": "Second installment of system design interview practice. This part handles the explanation of the components and how to use them in a system design. Also go deeper into what a distributed system is.",
+    "date": "2023-10-09 00:00:00",
+    "tags": [
+      "System Design",
+      "Technology",
+      "MAANG"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/image.png",
+      "alt": "image-title"
+    },
+    "content": [
+      {
+        "title": "System Design Part II",
+        "htmlContent": "<p class=\"post-details\">In this part of System Design fundamentals, I will be describing the components of a distributed system. The basic building blocks for a distributed system are Domain Name System (DNS), Load Balancers, Databases, Key-value store, Content Delivery Network (CDN), Sequencer, Monitoring, Cache, Messaging Queue, Pub-Sub, Rate Limiter, Blob Store, Distributed Search, Logging, Task Scheduling, and Sharded Counters. I will define and explain when to use the listed components in their appropriate section.</p>\n<p class=\"post-details\">First before we get started, we must understand what a distributed system is and its components. A distributed system is a network of interconnected servers that work together as one single system in order to perform complex problems or tasks. Some examples of a distributed system are CDNs, Cloud computing platforms, distributed file systems, blockchain network, etc.\u2026 A distributed system consists of the following characteristics: <ul class=\"post-list\"><li class=\"post-list-item\">Multiple Nodes</li><li class=\"post-list-item\">Interconnection</li><li class=\"post-list-item\">Concurrency: Distributed system often involves concurrent execution of tasks across multiple nodes</li><li class=\"post-list-item\">Resource Sharing: Nodes can share resources such as::listPlace(002)</li></ul></p>"
+      },
+      {
+        "title": "Domain Name System",
+        "htmlContent": "<p class=\"post-details\">\tIn this section, I will describe the basics of a DNS what it is and how it is used in a distributed system. A DNS is the Internet\u2019s naming service that maps human-friendly domain names to machine-readable IP addresses. When a user enters a domain name in the browser, the browser has to translate the domain name to IP address by asking the DNS infrastructure. DNS is not a single server, but rather an infrastructure of many servers. It\u2019s is a distributed system by nature.</p>\n<p class=\"post-details\">\tThe DNS has a database which stores domain name to IP address by mapping them in a form of resource records (RR). (TODO)</p>"
+      },
+      {
+        "title": "Load Balancers",
+        "htmlContent": "<p class=\"post-details\">\tLoad balancers (LB) play an essential part in a distributed system. The LB is a layer after the request get past the firewall. Their purpose is to handle all the requests coming in and divide them up among the available servers. They can be place in between the clients and web server, web server and application server, or application server and database server.</p>\n<p class=\"post-details\">\tLBs can be placed locally or globally. The difference in the two are the placement and their uses. Global LBs are placed at multiple geographic locations with the purpose of decreasing latency of traffic by finding servers local to a region. Local LBs are what were explained in the previous paragraph.</p>"
+      },
+      {
+        "title": "Databases",
+        "htmlContent": "<p class=\"post-details\">\tDatabases (DB) handle the storing of information in which should be retrieved and used in the future. DB is an organized collection of data that can be managed and accessed easily. They were made to make it easy to handle storing, retrieving, modifying, and deleting data. Data is an asset for an organization because it drives the whole business. Data provides critical business insights into what\u2019s important and what needs to be changed. The two main types of databases are Structure Query Language (SQL) and NoSQL. SQL is a relational database while NoSQL is a non-relational database.</p>\n<p class=\"post-details\">\tRelational DBs provide the atomicity, consistency, isolation, and durability (ACID) properties to maintain the integrity of the database. ACID is a powerful abstraction that simplifies complex interactions with the data and hides many anomalies (like dirty reads, dirty writes, read skew, lost updates, write skew, and phantom reads) behind a simple transaction abort. ACID is like a big hammer by design so that it\u2019s generic enough for all the problems. Below is a detail description of ACID:<ul class=\"post-list\"><li class=\"post-list-item\">Atomicity: A transaction is considered an atomic unit. Therefore, either all the statements within a transaction will successfully execute, or none of them will execute. If a statement fails within a transaction, it should be aborted and rolled back.</li><li class=\"post-list-item\">Consistency: At any given time, the database should be in a consistent state, and it should remain in a consistent state after every transaction. For example, if multiple users want to view a record from the database, it should return a similar result each time.</li><li class=\"post-list-item\">Isolation: In the case of multiple transactions running concurrently, they shouldn\u2019t be affected by each other. The final state of the database should be the same as the transactions were executed sequentially.</li><li class=\"post-list-item\">Durability: The system should guarantee that completed transactions will survive permanently in the database even in system failure events</li></ul></p>\n<p class=\"post-details\">In simple terms, ACID ensures that database transactions are like well-behaved citizens: they do their work completely, follow the rules, don't mess with each other, and their changes are permanent.</p>\n<p class=\"post-details\">\tTo manage the availability of a database data is replicated on different servers, which can be concurrently updated. Along with that DBs are able to be scaled by dividing up the data using a method known as data partitioning. Data partitioning will reduce the load on a single node. Replication of the data is known as the keeping of copies of data on multiple nodes. Replication helps with scalability, availability, and performance. We are able to replicate the data in two manners: synchronous and asynchronous.</p>"
+      },
+      {
+        "title": "Data Replication",
+        "htmlContent": "<p class=\"post-details\">\tWhen data replication is handled in a synchronous manner the primary node that plans to copy the data copies the data to a secondary node and waits for a response from the second node. The second alerts the primary node that the task has been completed. While in asynchronous the primary node does not wait for a response from the secondary node. Both methods have there pros and cons. Below I have listed them both:<ul class=\"post-list\"><li class=\"post-list-item\">Synchronous Pros:listPlace(002)</li></ul></p>\n<p class=\"post-details\">Data replication has three models: Single leader or primary-secondary replication, multi-leader replication, and Peer-to-peer or leaderless replication. Primary-secondary replication is defined as a one node being the leader and copying to the secondary. It is appropriate to use this method when the program is read-heavy. Multi-leader replication is defined as multiple node processing write requests and sending them to other primary nodes to be copied to the secondary nodes. This kind of replication is quite useful in applications in which we can continue work even if we\u2019re offline\u2014for example, a calendar application in which we can set our meetings even if we don\u2019t have access to the internet. Once we\u2019re online, it replicates its changes from our local database (our mobile phone or laptop acts as a primary node) to other nodes. The peer-to-peer replication model resolves these problems by not having a single primary node. All the nodes have equal weightage and can accept reads and writes requests.</p>"
+      },
+      {
+        "title": "Data Partitioning",
+        "htmlContent": "<p class=\"post-details\">Data partitioning (or sharding) enables us to use multiple nodes where each node manages some part of the whole data. To handle increasing query rates and data amounts, we strive for balanced partitions and balanced read/write load. Sharding is the process of splitting dataset into smaller chucks of data to be stored on different nodes in the database. The common ways of portioning data are vertical sharding and horizontal sharding.</p>\n<p class=\"post-details\">Vertical sharding/scaling (VS) is considered when we would like to split a table by columns and place some columns in one table and some in another table. This is very usefully in uses cases where data is stored in binary large object (blob). VS allows for the data to be read and written easier, and also for the reconstruction of the table.</p>\n<p class=\"post-details\">Horizontal sharding/scaling (HS) is considered when we would like to split a table by splitting data row-wise. HS has two strategies of sharding its data: key-range based sharding and hash bashed sharding. Key-range based sharding is when each partition is given a continuous range of keys. Hash based sharding uses a hash function on the key and gets a hash value and mods that value by the number of partitions. Consistent hashing assigns each server or item in a distributed hash table a place on an abstract circle, called a ring, irrespective of the number of servers in the table. This permits servers and objects to scale without compromising the system\u2019s overall performance.</p>\n<p class=\"post-details\">Data distribution (vertical and horizontal sharding) across multiple nodes aims to improve the following features, considering that the queries are optimized:<ul class=\"post-list\"><li class=\"post-list-item\">Reliability (fault-tolerance)</li><li class=\"post-list-item\">Performance</li><li class=\"post-list-item\">Balanced storage capacity and dollar costs</li></ul></p>"
+      },
+      {
+        "title": "Content Delivery Network",
+        "htmlContent": "<p class=\"post-details\">\tA CDN is a group of geographically distributed proxy servers. A proxy server is an intermediate server between a client and the origin server. The proxy servers are placed on the network edge. As the network edge is close to the end users, the placement of proxy servers helps quickly deliver the content to the end users by reducing latency and saving bandwidth. A CDN has added intelligence on top of being a simple proxy server.</p>"
+      },
+      {
+        "title": "Sequencer",
+        "htmlContent": "<p class=\"post-details\">\tA Sequencer is a unique ID generator. Usually, the auto-increment feature in databases fulfills this requirement. However, that feature won\u2019t work for a distributed database, where different nodes independently generate the identifiers. For this case, we need a unique ID generator that acts as a primary key in a distributed setting\u2014for example, a horizontally-sharded table.</p>"
+      },
+      {
+        "title": "Distributed Monitoring",
+        "htmlContent": "<p class=\"post-details\">\tMonitoring distributed systems entails gathering, interpreting, and displaying data about the interactions between processes that are running at the same time. It assists in debugging, testing, performance evaluation, and having a bird\u2019s-eye view over multiple services.<ul class=\"post-list\"><li class=\"post-list-item\">Service-side errors: These are errors that are usually visible to monitoring services as they occur on servers. Such errors are reported as error 5xx in HTTP response codes.</li><li class=\"post-list-item\">Client-side errors: These are errors whose root cause is on the client-side. Such errors are reported as error 4xx in HTTP response codes. Some client-side errors are invisible to the service when client requests fail to reach the service.</li></ul></p>"
+      },
+      {
+        "title": "Distributed Cache",
+        "htmlContent": "<p class=\"post-details\">A cache is a temporary data storage that can serve data faster by keeping data entries in memory. Caches store only the most frequently accessed data. When a request reaches the serving host, it retrieves data from the cache (cache hit) and serves the user. However, if the data is unavailable in the cache (cache miss), the data will be queried from the database. Also, the cache is populated with the new value to avoid cache misses for the next time.</p>\n<p class=\"post-details\">A cache is a nonpersistent storage area used to keep repeatedly read and written data, which provides the end user with lower latency. Therefore, a cache must serve data from a storage component that is fast, has enough storage, and is affordable in terms of dollar cost as we scale the caching service.</p>\n<p class=\"post-details\">A distributed cache is a caching system where multiple cache servers coordinate to store frequently accessed data. Distributed caches are needed in environments where a single cache server isn\u2019t enough to store all the data.</p>"
+      },
+      {
+        "title": "Distributed Messaging Queue",
+        "htmlContent": "<p class=\"post-details\">A messaging queue is an intermediate component between the interacting entities known as producers and consumers. The producer produces messages and places them in the queue, while the consumer retrieves the messages from the queue and processes them. A messaging queue has many use cases, both in single-server and distributed environments. It may be used for sending many emails, data post-processing, recommender systems, etc\u2026</p>"
+      },
+      {
+        "title": "Publish-Subscribe Messaging",
+        "htmlContent": "<p class=\"post-details\">Publish-subscribe messaging, often known as pub-sub messaging, is an asynchronous service-to-service communication method that\u2019s popular in serverless and microservices architectures. Messages can be sent asynchronously to different subsystems of a system using the pub-sub system. For example, when Cristiano Ronaldo, a famous athlete, posts on Instagram or shares a tweet, all of his followers are updated. Here, Cristiano Ronaldo is the publisher, his post or tweet is the message, and all of his followers are subscribers.</p>"
+      },
+      {
+        "title": "Rate Limiter",
+        "htmlContent": "<p class=\"post-details\">A rate limiter, as the name suggests, puts a limit on the number of requests a service fulfills. It throttles requests that cross the predefined limit. For example, a client using a particular service\u2019s API that is configured to allow 500 requests per minute would block further incoming requests for the client if the number of requests the client makes exceeds that limit.</p>\n<p class=\"post-details\">\tA rate limiter is generally used as a defensive layer for services to avoid their excessive usage, whether intended or unintended. It also protects services against abusive behaviors that target the application layer, such as denial-of-service (DOS) attacks and brute-force password attempts.</p>"
+      },
+      {
+        "title": "Blob Store",
+        "htmlContent": "<p class=\"post-details\">\tBlob store is a storage solution for unstructured data. We can store photos, audio, videos, binary executable codes, or other multimedia items in a blob store. Every type of data is stored as a blob. It follows a flat data organization pattern where there are no hierarchies, that is, directories, sub-directories, and so on.</p>\n<p class=\"post-details\">\tMostly, it\u2019s used by applications with a particular business requirement called write once, read many (WORM), which states that data can only be written once and that no one can change it. Blob store is an important component of many data-intensive applications, such as YouTube, Netflix, Facebook, and so on. They require a storage solution that is easily scalable, reliable, and highly available, so that they can store large media files.</p>"
+      },
+      {
+        "title": "Distributed Search",
+        "htmlContent": "<p class=\"post-details\">\tA search system is a system that takes some text input, a search query, from the user and returns the relevant content in a few seconds or less. There are three main components of a search system, namely:<ul class=\"post-list\"><li class=\"post-list-item\">A crawler, which fetches content and creates documents.</li><li class=\"post-list-item\">An indexer, which builds a searchable index.</li><li class=\"post-list-item\">A searcher, which responds to search queries by running the search query on the index created by the indexer.</li></ul></p>"
+      }
+    ]
+  },
+  {
+    "id": "debugging-in-node",
+    "title": "Debugging in NodeJS",
+    "description": "How to properly debug in NodeJS",
+    "date": "2023-03-29 00:00:00",
+    "tags": [
+      "Technology",
+      "Engineer"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Debugging in Node Using Chrome Devtools",
+        "htmlContent": "<p class=\"post-details\">As I\u2019m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you\u2019re a web developer. It is done by adding simply italic italic flag. What happens is that when using italic italic flag Node opens a port to accept WebSocket connections. Now you will be presented with the following:</p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/articles/node-inspect.png\"><img class=\"post-image\" src=\"/images/articles/node-inspect.png\" alt=\"\" title=\"node --inspect snippet\"></a><figcaption class=\"post-image-caption\">node --inspect snippet</figcaption></div></p>\n<p class=\"post-details\">Once successful, now open up Google Chrome and type the following URL italic italic italic italic italic . This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure\u2026 which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.</p>\n<p class=\"post-details\">One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful.</p>"
+      },
+      {
+        "title": "Setting up Stack Trace",
+        "htmlContent": "<p class=\"post-details\">The basics behind displaying stack trace is simple in node. All one would have to do is.</p>"
+      },
+      {
+        "title": "Soli Deo Gloria",
+        "htmlContent": ""
+      }
+    ]
+  },
+  {
+    "id": "debugging-in-node",
+    "title": "Debugging In NodeJS",
+    "description": "How to properly debug in NodeJS",
+    "date": "2023-03-28 00:00:00",
+    "tags": [
+      "Technology",
+      "Engineer"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Debugging in Node Using Chrome Devtools",
+        "htmlContent": "<p class=\"post-details\">As I\u2019m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you\u2019re a web developer. It is done by adding simply italic flag. What happens is that when using italic italic flag Node opens a port to accept WebSocket connections. Now you will be presented with the following:<div class=\"post-image-container\"><a href=\"/images/articles/node-inspect.png\"><img class=\"post-image\" src=\"/images/articles/node-inspect.png\" alt=\"\" title=\"node --inspect snippet\"></a><figcaption class=\"post-image-caption\">node --inspect snippet</figcaption></div></p>\n<p class=\"post-details\">Once successful, now open up Google Chrome and type the following URL italic italic italic italic italic. This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure\u2026 which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.</p>\n<p class=\"post-details\">One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful.</p>"
+      },
+      {
+        "title": "Soli Deo Gloria",
+        "htmlContent": ""
+      }
+    ]
+  },
+  {
+    "id": "thankfulness",
+    "title": "Command for Thankfulness",
+    "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
+    "date": "2023-03-15 00:00:00",
+    "tags": [
+      "Christ",
+      "Salvation",
+      "Love",
+      "Thankful"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/thankful.png",
+      "alt": "thankful-icon"
+    },
+    "content": [
+      {
+        "title": "Command for Thankfulness",
+        "htmlContent": "<p class=\"post-details\">We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren\u2019t. Prime example of this in scripture is Israel\u2019s ungrateful heart throughout their time in the wilderness (Num. 14:1-4;20:3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2:24-25).</p>\n<p class=\"post-details\">The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1:8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They\u2019re not the only ones that think this way.</p>\n<p class=\"post-details\">As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they\u2019ve been wrong by someone and that person deserves it. As I was reminded by a brother, \u201cWe deserve much worse than what this person just said about us even though it may not be true.\u201d God did not need to save Israel from Egypt nor did he need to save us from our sins.</p>\n<p class=\"post-details\">So, to close as the Apostle Paul commands, \u201cBe Thankful\u201d. We ought to always be thankful in all circumstances because we deserve much more than we are receiving.</p>"
+      }
+    ]
+  },
+  {
+    "id": "system-design",
+    "title": "Help with System Design Interviews",
+    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+    "date": "2023-02-08 00:00:00",
+    "tags": [
+      "System Design",
+      "Technology",
+      "MAANG"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Preparation for the Interview",
+        "htmlContent": "<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\"><img class=\"post-image\" src=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\" alt=\"system-design\" title=\"Load Balancing from G4G\"></a><figcaption class=\"post-image-caption\">Load Balancing from G4G</figcaption></div></p>\n<p class=\"post-details\">Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.</p>\n<p class=\"post-details\">Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are <a class=\"post-link\" href=\"https://engineering.fb.com/\">Engineering at Meta</a>, <a class=\"post-link\" href=\"https://research.fb.com/\">Meta Research</a>, <a class=\"post-link\" href=\"https://aws.amazon.com/blogs/architecture/\">AWS Architecture Blog</a>, <a class=\"post-link\" href=\"https://www.amazon.science/blog\">Amazon Science Blog</a>, <a class=\"post-link\" href=\"https://netflixtechblog.com/\">Netflix TechBlog</a>, <a class=\"post-link\" href=\"https://research.google/\">Google Research</a>, <a class=\"post-link\" href=\"https://quoraengineering.quora.com/\">Engineering at Quora</a>, <a class=\"post-link\" href=\"https://eng.uber.com/\">Uber Engineering Blog</a>, <a class=\"post-link\" href=\"https://databricks.com/blog/category/engineering\">Databricks Blog</a>, <a class=\"post-link\" href=\"https://medium.com/@Pinterest_Engineering\">Pinterest Engineering</a>, <a class=\"post-link\" href=\"https://medium.com/blackrock-engineering\">BlackRock Engineering</a>, <a class=\"post-link\" href=\"https://eng.lyft.com/\">Lyft Engineering</a>, and <a class=\"post-link\" href=\"https://engineering.salesforce.com/\">Salesforce Engineering</a>.</p>\n<p class=\"post-details\">Some thoughts that should happen when designing a system should be \u201cWhy does this system works?\u201d. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction.</p>"
+      },
+      {
+        "title": "Stay on track",
+        "htmlContent": "<p class=\"post-details\">At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.</p>\n<p class=\"post-details\">Key things to remember when thinking of deliverables expected from the developed design <ol class=\"post-list\"><li class=\"post-list-item\">Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.</li><li class=\"post-list-item\">Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on.</li></ol></p>"
+      },
+      {
+        "title": "The Interview",
+        "htmlContent": "<p class=\"post-details\">When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.</p>\n<p class=\"post-details\">The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: <ul class=\"post-list\"><li class=\"post-list-item\">What is the size of the data right now?:listPlace(002)</li><li class=\"post-list-item\">At what rate is the data expected to grow over time?</li><li class=\"post-list-item\">How will the data be consumed by other subsystems or end users?</li><li class=\"post-list-item\">Is the data read-heavy or write-heavy?</li><li class=\"post-list-item\">Do we need strict consistency of data, or will eventual consistency work?</li><li class=\"post-list-item\">What is the durability target of the data?</li><li class=\"post-list-item\">What privacy and regulatory requirements do we require for storing or transmitting user data?</li></ul></p>"
+      },
+      {
+        "title": "Abstraction",
+        "htmlContent": "<p class=\"post-details\">Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system.</p>"
+      },
+      {
+        "title": "Remote Procedure Calls",
+        "htmlContent": "<p class=\"post-details\">Remote Procedure Calls (bold) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.</p>"
+      },
+      {
+        "title": "Consistency",
+        "htmlContent": "<p class=\"post-details\">Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.</p>\n<p class=\"post-details\">There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities.</p>"
+      },
+      {
+        "title": "Availability",
+        "htmlContent": "<p class=\"post-details\">Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers.</p>"
+      },
+      {
+        "title": "Reliability",
+        "htmlContent": "<p class=\"post-details\">Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions.</p>"
+      },
+      {
+        "title": "Scalability",
+        "htmlContent": "<p class=\"post-details\">Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: <ul class=\"post-list\"><li class=\"post-list-item\">Request workload: This is the number of requests served by the system.</li><li class=\"post-list-item\">Data/storage workload: This is the amount of data stored by the system.</li></ul></p>\n<p class=\"post-details\">There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. <ul class=\"post-list\"><li class=\"post-list-item\">Vertical Scaling = more space in a single system</li><li class=\"post-list-item\">Horizontal Scaling = more nodes that need to be in sync with one another</li></ul></p>"
+      },
+      {
+        "title": "Maintainability",
+        "htmlContent": "<p class=\"post-details\">Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights.</p>"
+      },
+      {
+        "title": "Fault Tolerance",
+        "htmlContent": "<p class=\"post-details\">Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures\u2014a reality that is outlined in the CAP theorem.</p>\n<p class=\"post-details\">Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems.</p>"
+      },
+      {
+        "title": "Back-Of-The-Envelope",
+        "htmlContent": "<p class=\"post-details\">This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.</p>\n<p class=\"post-details\">For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.</p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/system-design/database_rates.png\"><img class=\"post-image\" src=\"/images/system-design/database_rates.png\" alt=\"system-design-db-rates\" title=\"Database Rates\"></a><figcaption class=\"post-image-caption\">Database Rates</figcaption></div></p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/system-design/latency_values.png\"><img class=\"post-image\" src=\"/images/system-design/latency_values.png\" alt=\"system-design-latency-rates\" title=\"Latency Rates\"></a><figcaption class=\"post-image-caption\">Latency Rates</figcaption></div></p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/system-design/server_specs.png\"><img class=\"post-image\" src=\"/images/system-design/server_specs.png\" alt=\"system-design-server-specs\" title=\"Server Specs\"></a><figcaption class=\"post-image-caption\">Server Specs</figcaption></div></p>"
+      }
+    ]
+  },
+  {
+    "id": "system-design",
+    "title": "Help with System Design Interviews",
+    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+    "date": "2023-02-08 00:00:00",
+    "tags": [
+      "System Design",
+      "Technology",
+      "MAANG"
+    ],
+    "type": "article",
+    "image": {
+      "name": "/images/icons/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Preparation for the Interview",
+        "htmlContent": "<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\"><img class=\"post-image\" src=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\" alt=\"system-design\" title=\"Load Balancing from G4G\"></a><figcaption class=\"post-image-caption\">Load Balancing from G4G</figcaption></div></p>\n<p class=\"post-details\">Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.</p>\n<p class=\"post-details\">Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are <a class=\"post-link\" href=\"https://engineering.fb.com/\">Engineering at Meta</a>, <a class=\"post-link\" href=\"https://research.fb.com/\">Meta Research</a>, <a class=\"post-link\" href=\"https://aws.amazon.com/blogs/architecture/\">AWS Architecture Blog</a>, <a class=\"post-link\" href=\"https://www.amazon.science/blog\">Amazon Science Blog</a>, <a class=\"post-link\" href=\"https://netflixtechblog.com/\">Netflix TechBlog</a>, <a class=\"post-link\" href=\"https://research.google/\">Google Research</a>, <a class=\"post-link\" href=\"https://quoraengineering.quora.com/\">Engineering at Quora</a>, <a class=\"post-link\" href=\"https://eng.uber.com/\">Uber Engineering Blog</a>, <a class=\"post-link\" href=\"https://databricks.com/blog/category/engineering\">Databricks Blog</a>, <a class=\"post-link\" href=\"https://medium.com/@Pinterest_Engineering\">Pinterest Engineering</a>, <a class=\"post-link\" href=\"https://medium.com/blackrock-engineering\">BlackRock Engineering</a>, <a class=\"post-link\" href=\"https://eng.lyft.com/\">Lyft Engineering</a>, and <a class=\"post-link\" href=\"https://engineering.salesforce.com/\">Salesforce Engineering</a>.</p>\n<p class=\"post-details\">Some thoughts that should happen when designing a system should be \u201cWhy does this system works?\u201d. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction.</p>"
+      },
+      {
+        "title": "Stay on track",
+        "htmlContent": "<p class=\"post-details\">At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.</p>\n<p class=\"post-details\">Key things to remember when thinking of deliverables expected from the developed design <ol class=\"post-list\"><li class=\"post-list-item\">Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.</li><li class=\"post-list-item\">Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on.</li></ol></p>"
+      },
+      {
+        "title": "The Interview",
+        "htmlContent": "<p class=\"post-details\">When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.</p>\n<p class=\"post-details\">The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: <ul class=\"post-list\"><li class=\"post-list-item\">What is the size of the data right now? (Guessing this is the size of data type)</li><li class=\"post-list-item\">At what rate is the data expected to grow over time?</li><li class=\"post-list-item\">How will the data be consumed by other subsystems or end users?</li><li class=\"post-list-item\">Is the data read-heavy or write-heavy?</li><li class=\"post-list-item\">Do we need strict consistency of data, or will eventual consistency work?</li><li class=\"post-list-item\">What is the durability target of the data?</li><li class=\"post-list-item\">What privacy and regulatory requirements do we require for storing or transmitting user data?</li></ul></p>"
+      },
+      {
+        "title": "Abstraction",
+        "htmlContent": "<p class=\"post-details\">Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system.</p>"
+      },
+      {
+        "title": "Remote Procedure Calls",
+        "htmlContent": "<p class=\"post-details\">Remote Procedure Calls (RPC) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.</p>"
+      },
+      {
+        "title": "Consistency",
+        "htmlContent": "<p class=\"post-details\">Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.</p>\n<p class=\"post-details\">There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities.</p>"
+      },
+      {
+        "title": "Availability",
+        "htmlContent": "<p class=\"post-details\">Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers.</p>"
+      },
+      {
+        "title": "Reliability",
+        "htmlContent": "<p class=\"post-details\">Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions.</p>"
+      },
+      {
+        "title": "Scalability",
+        "htmlContent": "<p class=\"post-details\">Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: <ul class=\"post-list\"><li class=\"post-list-item\">Request workload: This is the number of requests served by the system.</li><li class=\"post-list-item\">Data/storage workload: This is the amount of data stored by the system.</li></ul></p>\n<p class=\"post-details\">There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. <ul class=\"post-list\"><li class=\"post-list-item\">Vertical Scaling = more space in a single system</li><li class=\"post-list-item\">Horizontal Scaling = more nodes that need to be in sync with one another</li></ul></p>"
+      },
+      {
+        "title": "Maintainability",
+        "htmlContent": "<p class=\"post-details\">Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights.</p>"
+      },
+      {
+        "title": "Fault Tolerance",
+        "htmlContent": "<p class=\"post-details\">Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures\u2014a reality that is outlined in the CAP theorem.</p>\n<p class=\"post-details\">Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems.</p>"
+      },
+      {
+        "title": "Back-Of-The-Envelope",
+        "htmlContent": "<p class=\"post-details\">This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.</p>\n<p class=\"post-details\">For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.</p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/system-design/database_rates.png\"><img class=\"post-image\" src=\"/images/system-design/database_rates.png\" alt=\"system-design-db-rates\" title=\"Database Rates\"></a><figcaption class=\"post-image-caption\">Database Rates</figcaption></div></p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/system-design/latency_values.png\"><img class=\"post-image\" src=\"/images/system-design/latency_values.png\" alt=\"system-design-latency-rates\" title=\"Latency Rates\"></a><figcaption class=\"post-image-caption\">Latency Rates</figcaption></div></p>\n<p class=\"post-details\"><div class=\"post-image-container\"><a href=\"/images/system-design/server_specs.png\"><img class=\"post-image\" src=\"/images/system-design/server_specs.png\" alt=\"system-design-server-specs\" title=\"Server Specs\"></a><figcaption class=\"post-image-caption\">Server Specs</figcaption></div></p>"
       }
     ]
   }
