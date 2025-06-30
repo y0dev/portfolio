@@ -592,7 +592,8 @@ class MarkdownToStaticHTML:
             else:
                 image_html = f'''<div class="post-hero-image"><img class="post-header-image" src="{article_data['image']}" alt="{title}" /></div>'''
         
-        return f'''<!DOCTYPE html>
+        # Generate HTML template
+        html_template = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -790,6 +791,10 @@ class MarkdownToStaticHTML:
 </body>
 </html>'''
 
+        # Prettify the HTML before returning
+        prettified_html = prettify_html(html_template)
+        return prettified_html
+
 def preview_html(html_content: str) -> str:
     """Create a temporary HTML file and open it in browser for preview."""
     with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
@@ -946,6 +951,38 @@ def list_markdown_files(input_dir: str = None) -> list:
     
     md_files = glob.glob(os.path.join(input_dir, '*.md'))
     return md_files
+
+def prettify_html(html_content: str) -> str:
+    """Prettify HTML content with proper indentation and formatting."""
+    try:
+        # Parse HTML with BeautifulSoup
+        soup = BeautifulSoup(html_content, 'html.parser')
+        
+        # Prettify with custom formatting
+        prettified = soup.prettify()
+        
+        # Clean up extra whitespace while preserving structure
+        lines = prettified.split('\n')
+        cleaned_lines = []
+        
+        for line in lines:
+            # Remove excessive whitespace but keep indentation
+            stripped = line.strip()
+            if stripped:
+                # Preserve original indentation level
+                indent_level = len(line) - len(line.lstrip())
+                cleaned_line = ' ' * indent_level + stripped
+                cleaned_lines.append(cleaned_line)
+            elif line.strip() == '':
+                # Keep empty lines for readability
+                cleaned_lines.append('')
+        
+        return '\n'.join(cleaned_lines)
+        
+    except Exception as e:
+        print(f"❌ Error prettifying HTML: {e}")
+        # Return original content if prettification fails
+        return html_content
 
 def main():
     # Load environment variables

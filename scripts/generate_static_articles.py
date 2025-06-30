@@ -4,6 +4,7 @@ from datetime import datetime
 import shutil
 import sys
 import traceback
+from bs4 import BeautifulSoup
 
 # Paths
 ARTICLES_PATH = 'src/assets/json/articles.json'
@@ -570,8 +571,11 @@ def render_article(post, is_note=False, articles=None, notes=None):
 </body>
 </html>'''
             
-            log_info(f"Successfully generated HTML for article: {post.get('id', 'unknown')}")
-            return html_template
+            # Prettify the HTML
+            prettified_html = prettify_html(html_template)
+            
+            log_info(f"Successfully generated and prettified HTML for article: {post.get('id', 'unknown')}")
+            return prettified_html
             
         except Exception as e:
             log_error("Error generating main HTML template", e)
@@ -762,6 +766,38 @@ def generate_all(output_dir):
     except Exception as e:
         log_error("Unexpected error in generate_all", e)
         return False
+
+def prettify_html(html_content: str) -> str:
+    """Prettify HTML content with proper indentation and formatting."""
+    try:
+        # Parse HTML with BeautifulSoup
+        soup = BeautifulSoup(html_content, 'html.parser')
+        
+        # Prettify with custom formatting
+        prettified = soup.prettify()
+        
+        # Clean up extra whitespace while preserving structure
+        lines = prettified.split('\n')
+        cleaned_lines = []
+        
+        for line in lines:
+            # Remove excessive whitespace but keep indentation
+            stripped = line.strip()
+            if stripped:
+                # Preserve original indentation level
+                indent_level = len(line) - len(line.lstrip())
+                cleaned_line = ' ' * indent_level + stripped
+                cleaned_lines.append(cleaned_line)
+            elif line.strip() == '':
+                # Keep empty lines for readability
+                cleaned_lines.append('')
+        
+        return '\n'.join(cleaned_lines)
+        
+    except Exception as e:
+        log_error(f"Error prettifying HTML: {e}")
+        # Return original content if prettification fails
+        return html_content
 
 if __name__ == '__main__':
     try:
