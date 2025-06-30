@@ -3,6 +3,8 @@ import './css/articles.css';
 import ArticleModule from '../components/articlemodule';
 import Pagination from '../components/pagination';
 import data from '../assets/json/data.json';
+import '../assets/js/article-likes.js';
+import '../assets/js/article-share.js';
 
 // API Configuration
 const API_BASE_URL = 'https://devontaereid.com/scripts/api';
@@ -58,9 +60,9 @@ class ArticlesPage extends Component {
     loadFallbackData() {
         console.log('Loading fallback data from static JSON files');
         
-        // Get both articles and notes and sort by date
-        const articles_sorted = filtered(this.state.articles);
-        const notes_sorted = filtered(this.state.notes);
+        // Get both articles and notes and sort by date, filter by published status
+        const articles_sorted = filtered(this.state.articles.filter(article => article.status === 'published'));
+        const notes_sorted = filtered(this.state.notes.filter(note => note.status === 'published'));
         const mergeArray = filtered(articles_sorted.concat(notes_sorted));
         
         console.log('Articles loaded:', this.state.articles.length);
@@ -75,11 +77,13 @@ class ArticlesPage extends Component {
             }
             
             return <ArticleModule key={idx}
+                id={article.id}
                 title={article.title}
                 date={article.date}
                 image={article.image}
                 slug={article.slug}
                 tags={article.tags}
+                likeCount={article.like_count || 0}
                 note={noteValue}/>
         });
 
@@ -116,7 +120,7 @@ class ArticlesPage extends Component {
         try {
             this.setState({ loading: true, error: null });
             
-            const response = await fetch(ARTICLES_ENDPOINT, {
+            const response = await fetch(`${ARTICLES_ENDPOINT}?status=published`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -169,11 +173,13 @@ class ArticlesPage extends Component {
                     }
                     
                     return <ArticleModule key={idx}
+                        id={article.id}
                         title={article.title}
                         date={new Date(article.date).getTime()}
                         image={parsedImage}
                         slug={article.slug}
                         tags={article.tags}
+                        likeCount={article.like_count || 0}
                         note={noteValue}/>
                 });
 
@@ -291,7 +297,7 @@ class ArticlesPage extends Component {
     }
 
     filterPosts(searchTerm, category) {
-        let filtered = this.state.mergeArray;
+        let filtered = this.state.mergeArray.filter(article => article.status === 'published');
 
         // Filter by search term
         if (searchTerm) {
@@ -316,11 +322,13 @@ class ArticlesPage extends Component {
             }
             
             return <ArticleModule key={idx}
+                id={article.id}
                 title={article.title}
                 date={article.date}
                 image={article.image}
                 slug={article.slug}
                 tags={article.tags}
+                likeCount={article.like_count || 0}
                 note={noteValue}/>
         });
 
@@ -333,10 +341,12 @@ class ArticlesPage extends Component {
     }
 
     clearFilters() {
+        const publishedArticles = this.state.mergeArray.filter(article => article.status === 'published');
+        
         this.setState({
             searchTerm: '',
             selectedCategory: 'all',
-            posts: this.state.mergeArray.map((article, idx) => {
+            posts: publishedArticles.map((article, idx) => {
                 // Check if it's a note based on 'type' field or 'file-id' field
                 let noteValue = 0;
                 if (article.type === 'note' || article['file-id'] === 'note') {
@@ -344,15 +354,17 @@ class ArticlesPage extends Component {
                 }
                 
                 return <ArticleModule key={idx}
+                    id={article.id}
                     title={article.title}
                     date={article.date}
                     image={article.image}
                     slug={article.slug}
                     tags={article.tags}
+                    likeCount={article.like_count || 0}
                     note={noteValue}/>
             }),
             currentPostPage: 1,
-            currentPosts: this.state.mergeArray.map((article, idx) => {
+            currentPosts: publishedArticles.map((article, idx) => {
                 // Check if it's a note based on 'type' field or 'file-id' field
                 let noteValue = 0;
                 if (article.type === 'note' || article['file-id'] === 'note') {
@@ -360,11 +372,13 @@ class ArticlesPage extends Component {
                 }
                 
                 return <ArticleModule key={idx}
+                    id={article.id}
                     title={article.title}
                     date={article.date}
                     image={article.image}
                     slug={article.slug}
                     tags={article.tags}
+                    likeCount={article.like_count || 0}
                     note={noteValue}/>
             }).slice(0, this.state.postsPerPage)
         });
@@ -372,7 +386,7 @@ class ArticlesPage extends Component {
 
     async fetchArticlesForPage(pageNumber) {
         try {
-            const response = await fetch(`${ARTICLES_ENDPOINT}?page=${pageNumber}&per_page=${this.state.postsPerPage}`, {
+            const response = await fetch(`${ARTICLES_ENDPOINT}?page=${pageNumber}&per_page=${this.state.postsPerPage}&status=published`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -409,11 +423,13 @@ class ArticlesPage extends Component {
                     }
                     
                     return <ArticleModule key={idx}
+                        id={article.id}
                         title={article.title}
                         date={new Date(article.date).getTime()}
                         image={parsedImage}
                         slug={article.slug}
                         tags={article.tags}
+                        likeCount={article.like_count || 0}
                         note={noteValue}/>
                 });
 

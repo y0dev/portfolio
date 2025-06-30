@@ -47,6 +47,9 @@ if (!$input) {
 try {
     $pdo = getDatabaseConnection();
     
+    // Ensure likes table exists
+    createLikesTable($pdo);
+    
     switch ($method) {
         case 'GET':
             if ($articleId) {
@@ -59,8 +62,25 @@ try {
             break;
             
         case 'POST':
-            // Create new article
-            createArticle($pdo, $input);
+            // Check if this is a like action
+            if (isset($_GET['action']) && $_GET['action'] === 'like') {
+                if ($articleId) {
+                    // Like/unlike article
+                    toggleArticleLike($pdo, $articleId);
+                } else {
+                    ApiResponse::sendError('Article ID is required for like action', 400);
+                }
+            } elseif (isset($_GET['action']) && $_GET['action'] === 'share') {
+                if ($articleId) {
+                    // Increment share count
+                    incrementArticleShare($pdo, $articleId);
+                } else {
+                    ApiResponse::sendError('Article ID is required for share action', 400);
+                }
+            } else {
+                // Create new article
+                createArticle($pdo, $input);
+            }
             break;
             
         case 'PUT':
@@ -101,6 +121,7 @@ function getArticles($pdo) {
     $search = $_GET['search'] ?? '';
     $category = $_GET['category'] ?? '';
     $tags = $_GET['tags'] ?? '';
+    $status = $_GET['status'] ?? 'published'; // Default to published only
     $sortBy = $_GET['sort_by'] ?? 'date';
     $sortOrder = strtoupper($_GET['sort_order'] ?? 'DESC');
     
@@ -109,9 +130,20 @@ function getArticles($pdo) {
         $sortOrder = 'DESC';
     }
     
+    // Validate status
+    if (!in_array($status, ['draft', 'published', 'all'])) {
+        $status = 'published';
+    }
+    
     // Build WHERE clause
     $whereConditions = [];
     $params = [];
+    
+    // Always filter by status unless 'all' is requested
+    if ($status !== 'all') {
+        $whereConditions[] = "status = ?";
+        $params[] = $status;
+    }
     
     if ($search) {
         $whereConditions[] = "(title LIKE ? OR content LIKE ?)";
@@ -174,11 +206,19 @@ function getArticle($pdo, $articleId) {
         return;
     }
     
+    // Check if current user has liked this article
+    $clientIP = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $likeCheckSql = "SELECT id FROM article_likes WHERE article_id = ? AND ip_address = ?";
+    $likeCheckStmt = $pdo->prepare($likeCheckSql);
+    $likeCheckStmt->execute([$articleId, $clientIP]);
+    $userLiked = $likeCheckStmt->fetch() ? true : false;
+    
     // Process article
     $article['tags'] = json_decode($article['tags'], true) ?: [];
     $article['date'] = date('Y-m-d H:i:s', strtotime($article['date']));
     $article['created_at'] = date('Y-m-d H:i:s', strtotime($article['created_at']));
     $article['updated_at'] = $article['updated_at'] ? date('Y-m-d H:i:s', strtotime($article['updated_at'])) : null;
+    $article['user_liked'] = $userLiked;
     
     ApiResponse::sendSuccess($article, 'Article retrieved successfully');
 }
@@ -192,7 +232,8 @@ function createArticle($pdo, $input) {
         'title' => 'required|max:255',
         'content' => 'required',
         'category' => 'required|max:100',
-        'tags' => 'required'
+        'tags' => 'required',
+        'status' => 'in:draft,published'
     ];
     
     $errors = validateInput($input, $rules);
@@ -213,8 +254,11 @@ function createArticle($pdo, $input) {
     // Prepare tags
     $tags = is_array($input['tags']) ? json_encode($input['tags']) : $input['tags'];
     
-    $sql = "INSERT INTO articles (title, content, category, tags, image, date, created_at) 
-            VALUES (?, ?, ?, ?, ?, NOW(), NOW())";
+    // Set default status if not provided
+    $status = $input['status'] ?? 'draft';
+    
+    $sql = "INSERT INTO articles (title, content, category, tags, status, image, date, created_at) 
+            VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -222,6 +266,7 @@ function createArticle($pdo, $input) {
         $content,  // This can be HTML
         $input['category'],
         $tags,
+        $status,
         $input['image'] ?? null
     ]);
     
@@ -282,7 +327,7 @@ function updateArticle($pdo, $articleId, $input) {
     $updateFields = [];
     $params = [];
     
-    $allowedFields = ['title', 'content', 'category', 'tags', 'image'];
+    $allowedFields = ['title', 'content', 'category', 'tags', 'status', 'image'];
     
     foreach ($allowedFields as $field) {
         if (isset($input[$field])) {
@@ -337,5 +382,120 @@ function deleteArticle($pdo, $articleId) {
     
     logMessage('INFO', "Article deleted: ID $articleId");
     ApiResponse::sendSuccess(['id' => $articleId], 'Article deleted successfully');
+}
+
+/**
+ * Toggle article like status
+ */
+function toggleArticleLike($pdo, $articleId) {
+    // Check if article exists
+    $checkSql = "SELECT id, like_count FROM articles WHERE id = ?";
+    $checkStmt = $pdo->prepare($checkSql);
+    $checkStmt->execute([$articleId]);
+    $article = $checkStmt->fetch();
+    
+    if (!$article) {
+        ApiResponse::sendError('Article not found', 404);
+        return;
+    }
+    
+    // Get client IP for tracking likes
+    $clientIP = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    
+    // Check if this IP has already liked this article
+    $likeCheckSql = "SELECT id FROM article_likes WHERE article_id = ? AND ip_address = ?";
+    $likeCheckStmt = $pdo->prepare($likeCheckSql);
+    $likeCheckStmt->execute([$articleId, $clientIP]);
+    $existingLike = $likeCheckStmt->fetch();
+    
+    if ($existingLike) {
+        // Unlike: remove the like record and decrease count
+        $deleteLikeSql = "DELETE FROM article_likes WHERE article_id = ? AND ip_address = ?";
+        $deleteLikeStmt = $pdo->prepare($deleteLikeSql);
+        $deleteLikeStmt->execute([$articleId, $clientIP]);
+        
+        $updateSql = "UPDATE articles SET like_count = GREATEST(0, like_count - 1) WHERE id = ?";
+        $updateStmt = $pdo->prepare($updateSql);
+        $updateStmt->execute([$articleId]);
+        
+        $action = 'unliked';
+        $newCount = max(0, $article['like_count'] - 1);
+    } else {
+        // Like: add the like record and increase count
+        $insertLikeSql = "INSERT INTO article_likes (article_id, ip_address, user_agent, created_at) VALUES (?, ?, ?, NOW())";
+        $insertLikeStmt = $pdo->prepare($insertLikeSql);
+        $insertLikeStmt->execute([$articleId, $clientIP, $userAgent]);
+        
+        $updateSql = "UPDATE articles SET like_count = like_count + 1 WHERE id = ?";
+        $updateStmt = $pdo->prepare($updateSql);
+        $updateStmt->execute([$articleId]);
+        
+        $action = 'liked';
+        $newCount = $article['like_count'] + 1;
+    }
+    
+    logMessage('INFO', "Article $action: ID $articleId by IP $clientIP");
+    ApiResponse::sendSuccess([
+        'article_id' => $articleId,
+        'action' => $action,
+        'like_count' => $newCount,
+        'liked' => $action === 'liked'
+    ], "Article $action successfully");
+}
+
+/**
+ * Create article_likes table if it doesn't exist
+ */
+function createLikesTable($pdo) {
+    $createTableSql = "
+        CREATE TABLE IF NOT EXISTS article_likes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            article_id INT NOT NULL,
+            ip_address VARCHAR(45) NOT NULL,
+            user_agent TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE KEY unique_like (article_id, ip_address),
+            INDEX idx_article_id (article_id),
+            INDEX idx_ip_address (ip_address),
+            FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    ";
+    
+    try {
+        $pdo->exec($createTableSql);
+        logMessage('INFO', 'Article likes table created or already exists');
+    } catch (Exception $e) {
+        logMessage('ERROR', 'Failed to create article_likes table: ' . $e->getMessage());
+    }
+}
+
+/**
+ * Increment article share count
+ */
+function incrementArticleShare($pdo, $articleId) {
+    // Check if article exists
+    $checkSql = "SELECT id, share_count FROM articles WHERE id = ?";
+    $checkStmt = $pdo->prepare($checkSql);
+    $checkStmt->execute([$articleId]);
+    $article = $checkStmt->fetch();
+    
+    if (!$article) {
+        ApiResponse::sendError('Article not found', 404);
+        return;
+    }
+    
+    // Increment share count
+    $updateSql = "UPDATE articles SET share_count = share_count + 1 WHERE id = ?";
+    $updateStmt = $pdo->prepare($updateSql);
+    $updateStmt->execute([$articleId]);
+    
+    $newShareCount = $article['share_count'] + 1;
+    
+    logMessage('INFO', "Article shared: ID $articleId");
+    ApiResponse::sendSuccess([
+        'article_id' => $articleId,
+        'share_count' => $newShareCount
+    ], 'Share count updated successfully');
 }
 ?> 

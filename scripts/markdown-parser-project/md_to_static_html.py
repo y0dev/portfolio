@@ -881,7 +881,7 @@ def update_sql_database(article_data: Dict[str, Any]):
             update_query = """
                 UPDATE articles 
                 SET title = %s, slug = %s, description = %s, content = %s, date = %s, 
-                    type = %s, tags = %s, image = %s, like_count = %s, share_count = %s, updated_at = NOW()
+                    type = %s, status = %s, tags = %s, image = %s, like_count = %s, share_count = %s, updated_at = NOW()
                 WHERE slug = %s
             """
             cursor.execute(update_query, (
@@ -891,6 +891,7 @@ def update_sql_database(article_data: Dict[str, Any]):
                 content_html,
                 article_data['date'],  # Now in datetime format
                 article_data['type'],
+                article_data.get('status', 'published'),
                 tags_json,
                 image_json,
                 like_count,
@@ -901,8 +902,8 @@ def update_sql_database(article_data: Dict[str, Any]):
         else:
             # Insert new article (id will be auto-generated)
             insert_query = """
-                INSERT INTO articles (title, slug, description, content, date, type, tags, image, like_count, share_count, created_at, updated_at)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
+                INSERT INTO articles (title, slug, description, content, date, type, status, tags, image, like_count, share_count, created_at, updated_at)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
             """
             cursor.execute(insert_query, (
                 article_data['title'],
@@ -911,6 +912,7 @@ def update_sql_database(article_data: Dict[str, Any]):
                 content_html,
                 article_data['date'],  # Now in datetime format
                 article_data['type'],
+                article_data.get('status', 'published'),
                 tags_json,
                 image_json,
                 like_count,

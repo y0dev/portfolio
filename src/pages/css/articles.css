@@ -627,3 +627,566 @@ html.dark-mode .results-summary {
         gap: 1rem;
     }
 }
+
+/* Article Like Button Styles */
+.article-like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 2px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.article-like-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+}
+
+.article-like-btn:active {
+    transform: translateY(0);
+}
+
+.article-like-btn.liked {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.article-like-btn.liked:hover {
+    background: rgba(239, 68, 68, 0.25);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+}
+
+.article-like-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.article-like-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.like-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.article-like-btn:hover .like-icon {
+    transform: scale(1.1);
+}
+
+.article-like-btn.liked .like-icon {
+    animation: heartBeat 0.6s ease;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.like-count {
+    font-weight: 700;
+    min-width: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.article-like-btn:hover .like-count {
+    transform: scale(1.05);
+}
+
+/* Like Message Styles */
+.like-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.like-message.show {
+    transform: translateX(0);
+}
+
+.like-message.success {
+    background: rgba(16, 185, 129, 0.95);
+    color: white;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.like-message.error {
+    background: rgba(239, 68, 68, 0.95);
+    color: white;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Article Card Like Button Integration */
+.article-card {
+    position: relative;
+}
+
+.article-card .article-like-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+html.dark-mode .article-card .article-like-btn {
+    background: rgba(31, 41, 55, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.article-card .article-like-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+}
+
+html.dark-mode .article-card .article-like-btn:hover {
+    background: rgba(31, 41, 55, 0.95);
+}
+
+/* Article Detail Page Like Button */
+.article-detail .article-like-btn {
+    margin: 2rem 0;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+    border: 2px solid rgba(239, 68, 68, 0.2);
+}
+
+.article-detail .article-like-btn:hover {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(239, 68, 68, 0.25);
+}
+
+.article-detail .article-like-btn.liked {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+    border-color: #ef4444;
+}
+
+/* Share Button Styles */
+.article-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.article-share-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+}
+
+.article-share-btn:active {
+    transform: translateY(0);
+}
+
+.share-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.article-share-btn:hover .share-icon {
+    transform: scale(1.1);
+}
+
+/* Article Actions Container */
+.article-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-like-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .article-card .article-like-btn {
+        top: 0.75rem;
+        right: 0.75rem;
+        padding: 0.375rem 0.625rem;
+        font-size: 0.7rem;
+    }
+    
+    .article-detail .article-like-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .article-actions {
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+    }
+    
+    .like-message {
+        top: 10px;
+        right: 10px;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-like-btn {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.75rem;
+    }
+    
+    .article-card .article-like-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+    }
+    
+    .article-detail .article-like-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+    }
+    
+    .article-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .like-message {
+        top: 5px;
+        right: 5px;
+        left: 5px;
+        padding: 0.75rem 1rem;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}
+
+/* Dark Mode Support */
+html.dark-mode .article-like-btn {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+html.dark-mode .article-like-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+html.dark-mode .article-like-btn.liked {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #f87171;
+    color: #f87171;
+}
+
+html.dark-mode .article-share-btn {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+}
+
+html.dark-mode .article-share-btn:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Accessibility Improvements */
+.article-like-btn:focus-visible {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+}
+
+.article-share-btn:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .article-like-btn,
+    .article-share-btn,
+    .like-message {
+        display: none !important;
+    }
+}
+
+/* Share Menu Styles */
+.share-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.share-menu.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.share-menu-content {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+html.dark-mode .share-menu-content {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+.share-menu.show .share-menu-content {
+    transform: scale(1);
+}
+
+.share-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+html.dark-mode .share-menu-header {
+    border-bottom: 1px solid #374151;
+}
+
+.share-menu-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.share-menu-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.share-menu-close:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+html.dark-mode .share-menu-close {
+    color: #9ca3af;
+}
+
+html.dark-mode .share-menu-close:hover {
+    background: #374151;
+    color: #f9fafb;
+}
+
+.share-options {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.share-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+}
+
+html.dark-mode .share-option {
+    background: #374151;
+    border: 1px solid #4b5563;
+    color: #f9fafb;
+}
+
+.share-option:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+html.dark-mode .share-option:hover {
+    background: #4b5563;
+    border-color: #6b7280;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.share-option .share-icon {
+    font-size: 1.25rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+/* Share Message Styles */
+.share-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.share-message.show {
+    transform: translateX(0);
+}
+
+.share-message.success {
+    background: rgba(16, 185, 129, 0.95);
+    color: white;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.share-message.error {
+    background: rgba(239, 68, 68, 0.95);
+    color: white;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Article Card Wrapper */
+.article-card-wrapper {
+    position: relative;
+}
+
+/* Responsive Share Menu */
+@media (max-width: 768px) {
+    .share-menu-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .share-menu-header h3 {
+        font-size: 1.125rem;
+    }
+    
+    .share-option {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+    }
+    
+    .share-message {
+        top: 10px;
+        right: 10px;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .share-menu-content {
+        padding: 1.25rem;
+        margin: 0.5rem;
+    }
+    
+    .share-menu-header h3 {
+        font-size: 1rem;
+    }
+    
+    .share-option {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .share-message {
+        top: 5px;
+        right: 5px;
+        left: 5px;
+        padding: 0.75rem 1rem;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}

@@ -354,6 +354,7 @@ def create_articles_table(cursor):
             date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             tags JSON,
             type ENUM('article', 'note') DEFAULT 'article',
+            status ENUM('draft', 'published') DEFAULT 'draft',
             image JSON,
             like_count INT DEFAULT 0,
             share_count INT DEFAULT 0,
@@ -361,6 +362,7 @@ def create_articles_table(cursor):
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             INDEX idx_date (date),
             INDEX idx_type (type),
+            INDEX idx_status (status),
             INDEX idx_slug (slug)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     """
@@ -381,8 +383,8 @@ def save_article(cursor, article):
 
         insert_sql = """
         INSERT INTO articles
-        (title, slug, description, content, date, tags, type, image, like_count, share_count)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        (title, slug, description, content, date, tags, type, status, image, like_count, share_count)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON DUPLICATE KEY UPDATE
             title = VALUES(title),
             description = VALUES(description),
@@ -390,6 +392,7 @@ def save_article(cursor, article):
             date = VALUES(date),
             tags = VALUES(tags),
             type = VALUES(type),
+            status = VALUES(status),
             image = VALUES(image),
             updated_at = CURRENT_TIMESTAMP
         """
@@ -432,6 +435,7 @@ def save_article(cursor, article):
             article_date,
             tags_json,
             article.get('type', 'article'),
+            article.get('status', 'published'),
             image_json,
             like_count,
             share_count

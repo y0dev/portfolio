@@ -32,41 +32,57 @@ function ArticleModule(props) {
         ));
     }
 
+    // Create like button HTML
+    const likeButton = `
+        <button class="article-like-btn" 
+                data-article-id="${props.id || ''}" 
+                aria-pressed="false"
+                aria-label="Like this article">
+            <span class="like-icon">🤍</span>
+            <span class="like-count">${props.likeCount || 0}</span>
+        </button>
+    `;
+
     return (
-        <a href={link + slug} className='article-card'>
-            <div className='article-card-header'>
-                {icon && (
-                    <div className='article-image-container'>
-                        {icon}
+        <div className='article-card-wrapper'>
+            <a href={link + slug} className='article-card'>
+                <div className='article-card-header'>
+                    {icon && (
+                        <div className='article-image-container'>
+                            {icon}
+                        </div>
+                    )}
+                    <div className='article-meta'>
+                        {date}
+                        {note === 1 && <span className="article-type">Note</span>}
                     </div>
-                )}
-                <div className='article-meta'>
-                    {date}
-                    {note === 1 && <span className="article-type">Note</span>}
                 </div>
-            </div>
+                
+                <div className='article-card-content'>
+                    {title}
+                    {tags && (
+                        <div className='article-tags'>
+                            {tags}
+                            {props.tags && props.tags.length > 3 && (
+                                <span className="more-tags">+{props.tags.length - 3}</span>
+                            )}
+                        </div>
+                    )}
+                </div>
+                
+                <div className='article-card-footer'>
+                    <span className="read-more">
+                        Read Article
+                        <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </div>
+            </a>
             
-            <div className='article-card-content'>
-                {title}
-                {tags && (
-                    <div className='article-tags'>
-                        {tags}
-                        {props.tags && props.tags.length > 3 && (
-                            <span className="more-tags">+{props.tags.length - 3}</span>
-                        )}
-                    </div>
-                )}
-            </div>
-            
-            <div className='article-card-footer'>
-                <span className="read-more">
-                    Read Article
-                    <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </span>
-            </div>
-        </a>
+            {/* Like button positioned absolutely over the card */}
+            <div dangerouslySetInnerHTML={{ __html: likeButton }} />
+        </div>
     )
 }
 
