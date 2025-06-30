@@ -5,6 +5,113 @@ import sys
 from typing import List, Dict, Any
 from datetime import datetime
 
+"""
+Enhanced Image and Video Caption System
+
+This script now supports advanced caption styling for images and videos with the following features:
+
+IMAGE CAPTION OPTIONS:
+- captionType: "above" | "below" (default: "below")
+- captionStyle: "default" | "with-source" | "with-tags" | "with-metadata" | "with-action" | "floating" | "video"
+
+VIDEO CAPTION OPTIONS:
+- captionType: "above" | "below" (default: "below")  
+- captionStyle: "video" | "with-duration" | "with-source" | "with-tags" | "with-metadata" | "with-action" | "floating"
+
+USAGE EXAMPLES:
+
+1. Basic Image with Caption:
+   {
+     "id": 1,
+     "link": "image.jpg",
+     "alt": "Description",
+     "caption": "Beautiful sunset"
+   }
+
+2. Image with Source Attribution:
+   {
+     "id": 2,
+     "link": "image.jpg", 
+     "alt": "Description",
+     "caption": "Mountain landscape",
+     "captionStyle": "with-source",
+     "source": "Unsplash"
+   }
+
+3. Image with Tags:
+   {
+     "id": 3,
+     "link": "image.jpg",
+     "alt": "Description", 
+     "caption": "Web development",
+     "captionStyle": "with-tags",
+     "tags": ["React", "JavaScript", "CSS"]
+   }
+
+4. Image with Metadata:
+   {
+     "id": 4,
+     "link": "image.jpg",
+     "alt": "Description",
+     "caption": "High-res photo",
+     "captionStyle": "with-metadata",
+     "resolution": "4K",
+     "size": "2.5MB",
+     "date": "2024-01-15",
+     "author": "John Doe"
+   }
+
+5. Image with Action Button:
+   {
+     "id": 5,
+     "link": "image.jpg",
+     "alt": "Description",
+     "caption": "Click to enlarge",
+     "captionStyle": "with-action",
+     "actionText": "View Full Size",
+     "actionUrl": "full-size.jpg"
+   }
+
+6. Video with Duration:
+   {
+     "id": 1,
+     "link": "video.mp4",
+     "caption": "Tutorial video",
+     "captionStyle": "with-duration",
+     "duration": "5:30",
+     "controls": true
+   }
+
+7. Floating Caption (appears on hover):
+   {
+     "id": 6,
+     "link": "image.jpg",
+     "alt": "Description",
+     "caption": "Hover to see details",
+     "captionStyle": "floating"
+   }
+
+8. Caption Above Content:
+   {
+     "id": 7,
+     "link": "image.jpg",
+     "alt": "Description",
+     "caption": "Preview image",
+     "captionType": "above"
+   }
+
+CSS CLASSES GENERATED:
+- .caption-above - Caption positioned above with gradient background
+- .caption-below - Caption positioned below with lightbulb icon
+- .video-caption - Video caption with video camera icon
+- .video-caption-above - Video caption above with film icon
+- .video-caption-with-duration - Video caption with duration badge
+- .caption-with-source - Caption with source attribution
+- .caption-with-tags - Caption with tag system
+- .caption-with-metadata - Caption with technical details
+- .caption-with-action - Caption with action button
+- .floating-caption - Overlay caption on hover
+"""
 
 # Paths
 ARTICLES_PATH = 'src/assets/json/articles.json'
@@ -63,13 +170,160 @@ def replace_placeholders(
     links: List[Dict],
     lists: List[Dict],
     codes: List[Dict] = [],
+    videos: List[Dict] = [],
 ) -> str:
     # Replace imagePlace
     def image_replacer(match):
         img_id = match.group(1)
         img = next((img for img in images if img["id"] == img_id), None)
         if img:
-            return f'<div class="post-image-container"><a href="{img["link"]}"><img class="post-image" src="{img["link"]}" alt="{img["alt"]}" title="{img.get("caption", "")}"></a><figcaption class="post-image-caption">{img.get("caption", "")}</figcaption></div>'
+            # Get caption and determine caption type
+            caption = img.get("caption", "")
+            caption_type = img.get("captionType", "below")  # Default to below
+            caption_style = img.get("captionStyle", "default")  # Default style
+            
+            # Determine the appropriate caption class based on type and style
+            if caption_type == "above":
+                if caption_style == "video":
+                    caption_class = "video-caption-above"
+                else:
+                    caption_class = "caption-above"
+            elif caption_type == "below":
+                if caption_style == "video":
+                    caption_class = "video-caption"
+                elif caption_style == "with-source":
+                    caption_class = "caption-with-source"
+                elif caption_style == "with-tags":
+                    caption_class = "caption-with-tags"
+                elif caption_style == "with-metadata":
+                    caption_class = "caption-with-metadata"
+                elif caption_style == "with-action":
+                    caption_class = "caption-with-action"
+                elif caption_style == "floating":
+                    caption_class = "floating-caption"
+                else:
+                    caption_class = "caption-below"
+            else:
+                caption_class = "caption-below"
+            
+            # Generate caption HTML based on style
+            if caption_style == "with-source":
+                source = img.get("source", "")
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="caption-source">{source}</div></div>'
+            elif caption_style == "with-tags":
+                tags = img.get("tags", [])
+                tags_html = ''.join(f'<span class="caption-tag">{tag}</span>' for tag in tags)
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="caption-tags">{tags_html}</div></div>'
+            elif caption_style == "with-metadata":
+                metadata_items = []
+                if img.get("resolution"):
+                    metadata_items.append(f'<span class="caption-metadata-item resolution">{img["resolution"]}</span>')
+                if img.get("size"):
+                    metadata_items.append(f'<span class="caption-metadata-item size">{img["size"]}</span>')
+                if img.get("date"):
+                    metadata_items.append(f'<span class="caption-metadata-item date">{img["date"]}</span>')
+                if img.get("author"):
+                    metadata_items.append(f'<span class="caption-metadata-item author">{img["author"]}</span>')
+                metadata_html = ''.join(metadata_items)
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="caption-metadata">{metadata_html}</div></div>'
+            elif caption_style == "with-action":
+                action_text = img.get("actionText", "View Full Size")
+                action_url = img.get("actionUrl", img["link"])
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><a href="{action_url}" class="caption-action-button">{action_text}</a></div>'
+            elif caption_style == "floating":
+                caption_html = f'<div class="{caption_class}">{caption}</div>'
+            else:
+                # Default caption
+                caption_html = f'<div class="{caption_class}">{caption}</div>'
+            
+            # Generate the complete image container
+            if caption_type == "above":
+                return f'<div class="image-container">{caption_html}<a href="{img["link"]}"><img class="post-image" src="{img["link"]}" alt="{img["alt"]}" title="{caption}"></a></div>'
+            else:
+                return f'<div class="image-container"><a href="{img["link"]}"><img class="post-image" src="{img["link"]}" alt="{img["alt"]}" title="{caption}"></a>{caption_html}</div>'
+        return match.group(0)
+
+    # Replace videoPlace
+    def video_replacer(match):
+        video_id = match.group(1)
+        video = next((v for v in videos if v["id"] == video_id), None)
+        if video:
+            # Get caption and determine caption type
+            caption = video.get("caption", "")
+            caption_type = video.get("captionType", "below")  # Default to below
+            caption_style = video.get("captionStyle", "video")  # Default to video style
+            
+            # Determine the appropriate caption class based on type and style
+            if caption_type == "above":
+                if caption_style == "video":
+                    caption_class = "video-caption-above"
+                else:
+                    caption_class = "caption-above"
+            elif caption_type == "below":
+                if caption_style == "with-duration":
+                    caption_class = "video-caption-with-duration"
+                elif caption_style == "with-source":
+                    caption_class = "caption-with-source"
+                elif caption_style == "with-tags":
+                    caption_class = "caption-with-tags"
+                elif caption_style == "with-metadata":
+                    caption_class = "caption-with-metadata"
+                elif caption_style == "with-action":
+                    caption_class = "caption-with-action"
+                elif caption_style == "floating":
+                    caption_class = "floating-caption"
+                else:
+                    caption_class = "video-caption"
+            else:
+                caption_class = "video-caption"
+            
+            # Generate caption HTML based on style
+            if caption_style == "with-duration":
+                duration = video.get("duration", "")
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="video-duration">{duration}</div></div>'
+            elif caption_style == "with-source":
+                source = video.get("source", "")
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="caption-source">{source}</div></div>'
+            elif caption_style == "with-tags":
+                tags = video.get("tags", [])
+                tags_html = ''.join(f'<span class="caption-tag">{tag}</span>' for tag in tags)
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="caption-tags">{tags_html}</div></div>'
+            elif caption_style == "with-metadata":
+                metadata_items = []
+                if video.get("resolution"):
+                    metadata_items.append(f'<span class="caption-metadata-item resolution">{video["resolution"]}</span>')
+                if video.get("size"):
+                    metadata_items.append(f'<span class="caption-metadata-item size">{video["size"]}</span>')
+                if video.get("date"):
+                    metadata_items.append(f'<span class="caption-metadata-item date">{video["date"]}</span>')
+                if video.get("author"):
+                    metadata_items.append(f'<span class="caption-metadata-item author">{video["author"]}</span>')
+                if video.get("duration"):
+                    metadata_items.append(f'<span class="caption-metadata-item duration">{video["duration"]}</span>')
+                metadata_html = ''.join(metadata_items)
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><div class="caption-metadata">{metadata_html}</div></div>'
+            elif caption_style == "with-action":
+                action_text = video.get("actionText", "Watch Full Video")
+                action_url = video.get("actionUrl", video["link"])
+                caption_html = f'<div class="{caption_class}"><div class="caption-text">{caption}</div><a href="{action_url}" class="caption-action-button">{action_text}</a></div>'
+            elif caption_style == "floating":
+                caption_html = f'<div class="{caption_class}">{caption}</div>'
+            else:
+                # Default video caption
+                caption_html = f'<div class="{caption_class}">{caption}</div>'
+            
+            # Generate the complete video container
+            video_controls = 'controls' if video.get("controls", True) else ''
+            video_autoplay = 'autoplay' if video.get("autoplay", False) else ''
+            video_loop = 'loop' if video.get("loop", False) else ''
+            video_muted = 'muted' if video.get("muted", False) else ''
+            
+            video_attributes = ' '.join(filter(None, [video_controls, video_autoplay, video_loop, video_muted]))
+            
+            if caption_type == "above":
+                return f'<div class="video-container">{caption_html}<video class="post-video" src="{video["link"]}" {video_attributes}><p>Your browser does not support the video tag.</p></video></div>'
+            else:
+                return f'<div class="video-container"><video class="post-video" src="{video["link"]}" {video_attributes}><p>Your browser does not support the video tag.</p></video>{caption_html}</div>'
         return match.group(0)
 
     # Replace linkPlace
@@ -120,6 +374,7 @@ def replace_placeholders(
 
 
     paragraph = re.sub(r":imagePlace\((\d+)\)", image_replacer, paragraph)
+    paragraph = re.sub(r":videoPlace\((\d+)\)", video_replacer, paragraph)
     paragraph = re.sub(r":linkPlace\((\d+)\)", link_replacer, paragraph)
     paragraph = re.sub(r":listPlace\((\d+)\)", list_replacer, paragraph)
     paragraph = re.sub(r":codePlace\((\d+)\)", code_replacer, paragraph)
@@ -166,8 +421,9 @@ def process_article(json_data: Dict[str, Any]) -> Dict[str, Any]:
             links = section.get("links", [])
             lists = section.get("lists", [])
             codes = section.get("code", []) if "code" in section else section.get("codes", [])
+            videos = section.get("videos", [])
 
-            html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes)}</p>' for p in paragraphs]
+            html_paragraphs = [f'<p class="post-details">{replace_placeholders(p, images, links, lists, codes, videos)}</p>' for p in paragraphs]
             htmlContent = "\n".join(html_paragraphs)
 
             transformed["content"].append({
