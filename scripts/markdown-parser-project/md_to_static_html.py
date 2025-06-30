@@ -91,10 +91,11 @@ def upload_folder_to_ftp(local_folder: str, remote_folder: str = "", ftp_config:
     """Upload a local folder to FTP server."""
     if ftp_config is None:
         ftp_config = {
-            'host': os.getenv('FTP_HOST', 'localhost'),
-            'user': os.getenv('FTP_USER', ''),
-            'password': os.getenv('FTP_PASSWORD', ''),
-            'port': int(os.getenv('FTP_PORT', 21))
+            'host': os.getenv('FTP_HOSTNAME', 'localhost'),
+            'user': os.getenv('FTP_USERNAME', ''),
+            'password': os.getenv('FTP_PASS', ''),
+            'port': int(os.getenv('FTP_PORT', 21)),
+            'path': os.getenv('FTP_BASE_PATH', './')
         }
     
     try:
@@ -171,10 +172,11 @@ def upload_file_to_ftp(local_file: str, remote_file: str, ftp_config: dict = Non
     """Upload a single file to FTP server."""
     if ftp_config is None:
         ftp_config = {
-            'host': os.getenv('FTP_HOST', 'localhost'),
-            'user': os.getenv('FTP_USER', ''),
-            'password': os.getenv('FTP_PASSWORD', ''),
-            'port': int(os.getenv('FTP_PORT', 21))
+            'host': os.getenv('FTP_HOSTNAME', 'localhost'),
+            'user': os.getenv('FTP_USERNAME', ''),
+            'password': os.getenv('FTP_PASS', ''),
+            'port': int(os.getenv('FTP_PORT', 21)),
+            'path': os.getenv('FTP_BASE_PATH', './')
         }
     
     try:
@@ -962,7 +964,7 @@ def main():
     parser.add_argument('--upload', action='store_true', help='Upload generated files to FTP server')
     parser.add_argument('--ftp-host', help='FTP server host (overrides FTP_HOST env var)')
     parser.add_argument('--ftp-user', help='FTP username (overrides FTP_USER env var)')
-    parser.add_argument('--ftp-password', help='FTP password (overrides FTP_PASSWORD env var)')
+    parser.add_argument('--ftp-password', help='FTP password (overrides FTP_PASS env var)')
     parser.add_argument('--ftp-port', type=int, default=21, help='FTP server port (overrides FTP_PORT env var)')
     parser.add_argument('--remote-path', default='', help='Remote path on FTP server (default: root)')
     parser.add_argument('--no-assets', action='store_true', help='Skip copying assets to output directory')
@@ -1071,10 +1073,11 @@ def main():
                 
                 # Prepare FTP configuration
                 ftp_config = {
-                    'host': args.ftp_host or os.getenv('FTP_HOST', 'localhost'),
-                    'user': args.ftp_user or os.getenv('FTP_USER', ''),
-                    'password': args.ftp_password or os.getenv('FTP_PASSWORD', ''),
-                    'port': args.ftp_port or int(os.getenv('FTP_PORT', 21))
+                    'host': os.getenv('FTP_HOSTNAME', 'localhost'),
+                    'user': os.getenv('FTP_USERNAME', ''),
+                    'password': os.getenv('FTP_PASS', ''),
+                    'port': int(os.getenv('FTP_PORT', 21)),
+                    'path': os.getenv('FTP_BASE_PATH', './')
                 }
                 
                 # Get the folder containing the HTML file
