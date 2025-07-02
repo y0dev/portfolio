@@ -788,6 +788,7 @@ class MarkdownToStaticHTML:
         </div>
     </footer>
     <script type="text/javascript" src="/scripts/static-article.js"></script>
+    <script type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js"></script>
 </body>
 </html>'''
 
