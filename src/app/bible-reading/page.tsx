@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Calendar from "@/components/Calendar";
 import ReadingDetailModal from "@/components/ReadingDetailModal";
 import { generateBibleReadingPlan, BibleReading, ReadingPlan } from "@/data/bible-reading-plan";
@@ -8,20 +8,8 @@ import { generateBibleReadingPlan, BibleReading, ReadingPlan } from "@/data/bibl
 export default function BibleReadingPlanPage() {
   const [selectedReading, setSelectedReading] = useState<BibleReading | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [startDate, setStartDate] = useState<string>("2025-01-01");
-  const [readingPlan, setReadingPlan] = useState<ReadingPlan>(generateBibleReadingPlan(startDate));
-  const [readings, setReadings] = useState<BibleReading[]>(readingPlan.readings);
-
-  // Regenerate plan when start date changes
-  useEffect(() => {
-    const newPlan = generateBibleReadingPlan(startDate);
-    setReadingPlan(newPlan);
-    setReadings(newPlan.readings);
-  }, [startDate]);
-
-  const handleStartDateChange = (newStartDate: string) => {
-    setStartDate(newStartDate);
-  };
+  const [readingPlan] = useState<ReadingPlan>(generateBibleReadingPlan());
+  const [readings] = useState<BibleReading[]>(readingPlan.readings);
 
   const handleReadingClick = (reading: BibleReading) => {
     setSelectedReading(reading);
@@ -104,23 +92,6 @@ export default function BibleReadingPlanPage() {
               </svg>
               View Original Reading Plan PDF
             </a>
-          </div>
-          
-          {/* Start Date Picker */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 max-w-md mx-auto">
-            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Plan Start Date
-            </label>
-            <input
-              type="date"
-              id="startDate"
-              value={startDate}
-              onChange={(e) => handleStartDateChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
-            />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Choose when you want to start your Bible reading journey
-            </p>
           </div>
         </div>
 
@@ -240,7 +211,6 @@ export default function BibleReadingPlanPage() {
               <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <li>• <strong>Month View:</strong> See all readings for the month</li>
                 <li>• <strong>Week View:</strong> Focus on current week's readings</li>
-                <li>• <strong>Day View:</strong> Detailed view of today's reading</li>
               </ul>
             </div>
             <div>
@@ -250,7 +220,7 @@ export default function BibleReadingPlanPage() {
               <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <li>• Click on any reading to view details</li>
                 <li>• Progress is based on calendar weeks and days</li>
-                <li>• Set your own start date for the plan</li>
+                <li>• Plan starts on the Monday of the week containing January 1st</li>
                 <li>• Track expected progress automatically</li>
               </ul>
             </div>
