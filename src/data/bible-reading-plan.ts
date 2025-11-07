@@ -29,9 +29,6 @@ export function generateBibleReadingPlan(customStartDate?: string): ReadingPlan 
   const readings: BibleReading[] = [];
   const startDate = customStartDate ? new Date(customStartDate) : new Date(2025, 0, 1); // Default to January 1, 2025
   
-  // Shift start date by one day to align with the actual reading plan
-  startDate.setDate(startDate.getDate() - 1);
-  
   const endDate = new Date(startDate.getFullYear() + 1, startDate.getMonth(), startDate.getDate() - 1); // One year from start
   
   let dayCounter = 1;
@@ -431,8 +428,8 @@ export function generateBibleReadingPlan(customStartDate?: string): ReadingPlan 
       dayCounter++;
       patternIndex++;
       
-      // Increment week counter every 5 readings (Monday-Friday)
-      if (dayCounter % 5 === 1) { // Every 5th reading starts a new week
+      // Increment week counter on Monday (day 1)
+      if (dayOfWeek === 1) { // Monday
         weekCounter++;
       }
     }
@@ -440,15 +437,11 @@ export function generateBibleReadingPlan(customStartDate?: string): ReadingPlan 
     currentDate.setDate(currentDate.getDate() + 1);
   }
   
-  // Adjust the returned start date to show the original intended start date
-  const originalStartDate = new Date(startDate);
-  originalStartDate.setDate(originalStartDate.getDate() + 1);
-  
   return {
     name: "5-Day Bible Reading Plan",
     description: "A comprehensive Bible reading plan that covers the entire Bible in one year, reading 5 days per week.",
-    year: originalStartDate.getFullYear(),
-    startDate: originalStartDate.toISOString().split('T')[0],
+    year: startDate.getFullYear(),
+    startDate: startDate.toISOString().split('T')[0],
     readings,
     source: "https://www.fivedaybiblereading.com/wp-content/uploads/2024/12/2025-5-Day-Bible-Reading.pdf"
   };

@@ -1,0 +1,87 @@
+[
+    {
+      "week": 1,
+      "day": 1,
+      "reading": {
+        "ot": {
+          "reference": "Genesis 1-2",
+          "description": "The creation of the world and humanity; God rests on the seventh day."
+        },
+        "psalm": {
+          "reference": "Psalm 19",
+          "description": "A psalm praising God's glory revealed in creation and His perfect law."
+        },
+        "nt": {
+          "reference": "Mark 1",
+          "description": "John the Baptist's ministry, the baptism of Jesus, and the beginning of His public ministry."
+        }
+      }
+    },
+    {
+      "week": 1,
+      "day": 2,
+      "reading": {
+        "ot": {
+          "reference": "Genesis 3-5",
+          "description": "The fall of man, Cain and Abel, and the generations from Adam to Noah."
+        },
+        "psalm": null,
+        "nt": {
+          "reference": "Mark 2",
+          "description": "Jesus heals the paralytic, calls Levi, and teaches about the Sabbath."
+        }
+      }
+    },
+    {
+      "week": 1,
+      "day": 3,
+      "reading": {
+        "ot": {
+          "reference": "Genesis 6-8",
+          "description": "The story of Noah, the flood, and God's covenant symbolized by the rainbow."
+        },
+        "psalm": {
+          "reference": "Psalm 104",
+          "description": "A hymn celebrating God as Creator and Sustainer of life."
+        },
+        "nt": {
+          "reference": "Mark 3",
+          "description": "Jesus heals on the Sabbath, appoints the twelve apostles, and faces opposition."
+        }
+      }
+    },
+    {
+      "week": 1,
+      "day": 4,
+      "reading": {
+        "ot": {
+          "reference": "Genesis 9-11",
+          "description": "God's covenant with Noah, the Tower of Babel, and the nations descended from Noah."
+        },
+        "psalm": null,
+        "nt": {
+          "reference": "Mark 4",
+          "description": "Parables of the sower, the lamp, and the mustard seed; Jesus calms the storm."
+        }
+      }
+    },
+    {
+      "week": 1,
+      "day": 5,
+      "reading": {
+        "ot": {
+          "reference": "Genesis 12-15",
+          "description": "God calls Abram, makes a covenant with him, and promises descendants and land."
+        },
+        "psalm": {
+          "reference": "Psalm 148",
+          "description": "All creation is called to praise the Lord."
+        },
+        "nt": {
+          "reference": "Mark 5",
+          "description": "Jesus heals a possessed man, a bleeding woman, and raises Jairus' daughter."
+        }
+      }
+    }
+  ]
+  

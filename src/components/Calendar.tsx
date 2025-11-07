@@ -124,13 +124,25 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
       );
     }
 
-    // Add days of the month
+    /*
+    * Description:
+    * This function adds the days of the month to the calendar.
+    * It loops through the days of the month and adds a div for each day.
+    * The div is styled with the appropriate border and background color.
+    * The div is also styled with the appropriate text color.
+    * The div is also styled with the appropriate cursor and hover effect.
+    * The div is also styled with the appropriate transition effect.
+    * The div is also styled with the appropriate flex-col layout.
+    * The div is also styled with the appropriate justify-between items-start flex-shrink-0 layout.
+    * Add days of the month
+    *
+    */
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentYear, currentMonth, day);
       const reading = getReadingForDate(date);
       const isCurrentDay = isToday(date);
       const isWeekend = date.getDay() === 0 || date.getDay() === 6;
-
+      console.log(day,reading?.readings[0]?.title);
       days.push(
         <div
           key={day}
@@ -162,6 +174,15 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
       );
     }
 
+    /*
+    * Description:
+    * This function renders the month view of the calendar.
+    * It renders the days of the month in a grid.
+    * The grid is styled with the appropriate border and background color.
+    * The grid is also styled with the appropriate text color.
+    * The grid is also styled with the appropriate cursor and hover effect.
+    * The grid is also styled with the appropriate transition effect.
+    */
     return (
       <div className="grid grid-cols-7 gap-0 bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-sm">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
