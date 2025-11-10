@@ -40,9 +40,6 @@ export interface ReadingPlan {
 import readingPlanData from './bible-reading-plan.json';
 import { getISOWeeksOfYear } from '@/utils';
 
-console.log('readingPlanData', readingPlanData);
-console.log('readingPlanData length', readingPlanData.length);
-
 // Generate 5-day Bible reading plan where each calendar date has the same reading each year
 export function generateBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
