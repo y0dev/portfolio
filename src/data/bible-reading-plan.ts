@@ -38,34 +38,41 @@ export interface ReadingPlan {
 
 // Import reading plan data from JSON
 import readingPlanData from './bible-reading-plan.json';
+import { getISOWeeksOfYear } from '@/utils';
+
+console.log('readingPlanData', readingPlanData);
+console.log('readingPlanData length', readingPlanData.length);
 
 // Generate 5-day Bible reading plan where each calendar date has the same reading each year
 export function generateBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
   const targetYear = year || new Date().getFullYear();
   
-  // Start from January 1st of the target year
-  const startDate = new Date(targetYear, 0, 1);
-  const endDate = new Date(targetYear, 11, 31); // December 31st
+  const { firstWeekStart } = getISOWeeksOfYear(targetYear);
+  
+  // Calculate end date: Friday of week 52 (exactly 52 weeks × 5 days = 260 readings)
+  // Week 52 starts at: firstWeekStart + (52 - 1) * 7 days
+  // Friday of week 52: firstWeekStart + (52 - 1) * 7 + 4 days
+  const endDate = new Date(firstWeekStart);
+  endDate.setDate(firstWeekStart.getDate() + (52 - 1) * 7 + 4);
   
   let dayCounter = 1;
   let weekCounter = 1;
-  const currentDate = new Date(startDate);
+  const currentDate = new Date(firstWeekStart);
   
   // Track which weekday we're on (1-5, Monday-Friday)
   let weekdayIndex = 0;
+  // Sequential reading day counter (1-260) - increments for each weekday
+  let readingDayCounter = 1;
   
   while (currentDate <= endDate) {
     const dayOfWeek = currentDate.getDay();
     
     // Skip weekends (Saturday and Sunday) for 5-day plan
     if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Not Sunday (0) or Saturday (6)
-      // Calculate day of year (1-365/366) to ensure same reading for same date each year
-      const startOfYear = new Date(targetYear, 0, 1);
-      const dayOfYear = Math.floor((currentDate.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-      
-      // Use day of year to determine reading pattern (cycles through 260 readings)
-      const patternIndex = (dayOfYear - 1) % readingPlanData.length;
+      // Use sequential reading day counter (1-260) to index into reading plan
+      // Exactly 52 weeks × 5 days = 260 readings, so we go through all readings exactly once
+      const patternIndex = readingDayCounter - 1;
       const planEntry = readingPlanData[patternIndex];
       const { reading } = planEntry;
       
@@ -136,6 +143,7 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
       
       dayCounter++;
       weekdayIndex++;
+      readingDayCounter++;
     }
     
     // Move to next day
@@ -146,7 +154,7 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
     name: "5-Day Bible Reading Plan",
     description: "A comprehensive Bible reading plan that covers the entire Bible in one year, reading 5 days per week.",
     year: targetYear,
-    startDate: startDate.toISOString().split('T')[0],
+    startDate: firstWeekStart.toISOString().split('T')[0],
     readings,
     source: "https://www.fivedaybiblereading.com/wp-content/uploads/2024/12/2025-5-Day-Bible-Reading.pdf"
   };
