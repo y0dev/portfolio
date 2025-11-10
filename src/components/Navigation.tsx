@@ -39,6 +39,7 @@ export default function Navigation() {
     { href: "/projects", label: "Projects" },
     { href: "/articles", label: "Articles" },
     { href: "/gospel", label: "Gospel" },
+    { href: "/bible-reading", label: "Bible Reading" },
     { href: "/resources", label: "Resources" },
   ];
 
