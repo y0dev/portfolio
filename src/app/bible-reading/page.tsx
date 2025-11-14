@@ -210,7 +210,7 @@ export default function BibleReadingPlanPage() {
               </h3>
               <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <li>• <strong>Month View:</strong> See all readings for the month</li>
-                <li>• <strong>Week View:</strong> Focus on current week's readings</li>
+                <li>• <strong>Week View:</strong> Focus on current week&apos;s readings</li>
               </ul>
             </div>
             <div>

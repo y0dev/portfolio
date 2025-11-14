@@ -45,17 +45,23 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
   const targetYear = year || new Date().getFullYear();
   
+  // Get ISO weeks for this year and next year to ensure rollover
   const { firstWeekStart } = getISOWeeksOfYear(targetYear);
+  const { firstWeekStart: nextYearFirstWeek, lastWeekNumber: nextYearLastWeek } = getISOWeeksOfYear(targetYear + 1);
   
-  // Calculate end date: Friday of week 52 (exactly 52 weeks × 5 days = 260 readings)
-  // Week 52 starts at: firstWeekStart + (52 - 1) * 7 days
-  // Friday of week 52: firstWeekStart + (52 - 1) * 7 + 4 days
-  const endDate = new Date(firstWeekStart);
-  endDate.setDate(firstWeekStart.getDate() + (52 - 1) * 7 + 4);
+  // Calculate start date: Monday of the first ISO week of target year
+  const startDate = new Date(firstWeekStart);
+  
+  // Calculate end date: Friday of the last ISO week of next year
+  // This ensures readings rollover into the next year
+  // Last week starts at: nextYearFirstWeek + (nextYearLastWeek - 1) * 7 days
+  // Friday of last week: nextYearFirstWeek + (nextYearLastWeek - 1) * 7 + 4 days
+  const endDate = new Date(nextYearFirstWeek);
+  endDate.setDate(nextYearFirstWeek.getDate() + (nextYearLastWeek - 1) * 7 + 4);
   
   let dayCounter = 1;
   let weekCounter = 1;
-  const currentDate = new Date(firstWeekStart);
+  const currentDate = new Date(startDate);
   
   // Track which weekday we're on (1-5, Monday-Friday)
   let weekdayIndex = 0;
@@ -67,9 +73,14 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
     
     // Skip weekends (Saturday and Sunday) for 5-day plan
     if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Not Sunday (0) or Saturday (6)
-      // Use sequential reading day counter (1-260) to index into reading plan
-      // Exactly 52 weeks × 5 days = 260 readings, so we go through all readings exactly once
-      const patternIndex = readingDayCounter - 1;
+      // Use sequential reading day counter to index into reading plan
+      // Cycle through 260 readings - if we exceed 260 (53 weeks = 265 days), roll over to next year's readings
+      // The modulo operator ensures we cycle back to reading 1 after reading 260
+      const patternIndex = (readingDayCounter - 1) % readingPlanData.length;
+      
+      // Rollover happens when readingDayCounter > 260 (e.g., reading 261 becomes reading 1, 262 becomes 2, etc.)
+      // This ensures years with 53 ISO weeks (265 reading days) continue with readings from the next year
+      
       const planEntry = readingPlanData[patternIndex];
       const { reading } = planEntry;
       
@@ -151,7 +162,7 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
     name: "5-Day Bible Reading Plan",
     description: "A comprehensive Bible reading plan that covers the entire Bible in one year, reading 5 days per week.",
     year: targetYear,
-    startDate: firstWeekStart.toISOString().split('T')[0],
+    startDate: startDate.toISOString().split('T')[0],
     readings,
     source: "https://www.fivedaybiblereading.com/wp-content/uploads/2024/12/2025-5-Day-Bible-Reading.pdf"
   };
