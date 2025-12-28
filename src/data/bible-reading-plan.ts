@@ -27,6 +27,15 @@ export interface BibleReading {
   completed?: boolean;
 }
 
+export interface AdventBibleReading {
+  id: string;
+  date: string;
+  day: number;
+  week: number;
+  month: number;
+  year: number;
+}
+
 export interface ReadingPlan {
   name: string;
   description: string;
@@ -39,6 +48,75 @@ export interface ReadingPlan {
 // Import reading plan data from JSON
 import readingPlanData from './bible-reading-plan.json';
 import { getISOWeeksOfYear } from '@/utils';
+import adventReadingPlanData from './advent-bible-reading-plan.json';
+
+export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
+  const readings: BibleReading[] = [];
+  const targetYear = year || new Date().getFullYear();
+  
+  // Advent starts on December 1st and ends on December 25th (25 days)
+  const startDate = new Date(targetYear, 11, 1); // Month 11 = December (0-indexed)
+  const endDate = new Date(targetYear, 11, 25); // December 25th
+  
+  let dayCounter = 1;
+  const currentDate = new Date(startDate);
+  
+  // Calculate which week of December we're in (for week numbering)
+  const firstDayOfMonth = new Date(targetYear, 11, 1);
+  const firstDayOfWeek = firstDayOfMonth.getDay(); // 0 = Sunday, 1 = Monday, etc.
+  const daysFromMonday = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1; // Convert to Monday = 0
+  const weekNumber = Math.floor((1 + daysFromMonday) / 7) + 1;
+  
+  while (currentDate <= endDate) {
+    // Get the Advent reading for this day (day 1 = Dec 1, day 25 = Dec 25)
+    const adventDay = dayCounter;
+    const planEntry = adventReadingPlanData[adventDay - 1]; // Array is 0-indexed
+    
+    if (planEntry && planEntry.reading) {
+      const { reading } = planEntry;
+      
+      // Calculate current week number
+      const daysSinceStart = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+      const currentWeek = weekNumber + Math.floor(daysSinceStart / 7);
+      
+      // Combine all readings into a single reference string
+      const referenceParts = reading.readings.map(r => r.reference);
+      const combinedReference = referenceParts.join('; ');
+      
+      // Combine descriptions
+      const descriptionParts = reading.readings.map(r => r.description).filter(Boolean);
+      const combinedDescription = descriptionParts.join(', ');
+      
+      readings.push({
+        id: `advent-reading-${dayCounter}`,
+        date: currentDate.toISOString().split('T')[0],
+        day: dayCounter,
+        week: currentWeek,
+        month: 12, // December
+        year: targetYear,
+        readings: reading.readings.map(r => ({
+          title: reading.title,
+          reference: r.reference,
+          description: r.description
+        })),
+        completed: false
+      });
+    }
+    
+    dayCounter++;
+    // Move to next day
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  
+  return {
+    name: "Advent Bible Reading Plan",
+    description: "A 25-day Advent Bible reading plan that walks through the promises, prophecies, and foreshadowings in Scripture that help us understand who our Savior Jesus is and the significance of His incarnation.",
+    year: targetYear,
+    startDate: startDate.toISOString().split('T')[0],
+    readings,
+    source: "https://www.precept.org/2025/11/advent-bible-reading-plan-for-2025/"
+  };
+}
 
 // Generate 5-day Bible reading plan where each calendar date has the same reading each year
 export function generateBibleReadingPlan(year?: number): ReadingPlan {

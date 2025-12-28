@@ -3,13 +3,15 @@
 import { useState, useMemo } from "react";
 import Calendar from "@/components/Calendar";
 import ReadingDetailModal from "@/components/ReadingDetailModal";
-import { generateBibleReadingPlan, BibleReading, ReadingPlan } from "@/data/bible-reading-plan";
+import { generateBibleReadingPlan, BibleReading, ReadingPlan, generateAdventBibleReadingPlan, AdventBibleReading } from "@/data/bible-reading-plan";
 
 export default function BibleReadingPlanPage() {
   const [selectedReading, setSelectedReading] = useState<BibleReading | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [readingPlan] = useState<ReadingPlan>(generateBibleReadingPlan());
+  const [adventReadingPlan] = useState<ReadingPlan>(generateAdventBibleReadingPlan());
   const [readings] = useState<BibleReading[]>(readingPlan.readings);
+  const [adventReadings] = useState<AdventBibleReading[]>(adventReadingPlan.readings);
 
   const handleReadingClick = (reading: BibleReading) => {
     setSelectedReading(reading);
