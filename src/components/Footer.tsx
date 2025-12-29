@@ -16,8 +16,7 @@ export default function Footer() {
               <h3 className="text-xl font-bold">Devontae Reid</h3>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
-              Full-stack developer and creative technologist passionate about building 
-              innovative solutions that make a difference.
+              Servant of Christ and a Senior Software Engineer with a passion for building innovative solutions that make a difference.
             </p>
             <div className="flex space-x-4">
               <a
@@ -118,14 +117,14 @@ export default function Footer() {
           <p className="text-gray-400 text-sm">
             © {currentYear} Devontae Reid. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          {/* <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
               Privacy Policy
             </Link>
             <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
               Terms of Service
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

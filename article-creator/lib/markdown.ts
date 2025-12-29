@@ -145,8 +145,8 @@ export function styleHTMLContent(html: string): string {
     ul.className = 'mb-4 space-y-2 list-disc list-inside';
     ul.querySelectorAll('li').forEach(li => {
       // Ensure list items are block-level elements
-      (li as HTMLElement).style.display = 'block';
-      li.className = 'mb-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200';
+      // (li as HTMLElement).style.display = 'block';
+      li.className = 'mb-2 text-gray-700 dark:text-gray-300 transition-colors duration-200';
       // Style nested paragraphs in list items
       li.querySelectorAll('p').forEach(p => {
         p.className = 'text-gray-700 dark:text-gray-300 leading-relaxed mb-2';
