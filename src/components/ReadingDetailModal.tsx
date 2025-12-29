@@ -130,6 +130,48 @@ export default function ReadingDetailModal({
                 </div>
               ))}
 
+              {reading.advent && (
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-green-900 dark:text-green-100">
+                      Advent Reading
+                    </h3>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                      Advent
+                    </span>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                      Reference:
+                    </h4>
+                    <p className="text-lg font-semibold text-green-600 dark:text-green-400">
+                      {reading.advent.reference}
+                    </p>
+                  </div>
+
+                  {reading.advent.description && (
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                        Description:
+                      </h4>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {reading.advent.description}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="bg-white dark:bg-gray-700 rounded-md p-4 border border-gray-200 dark:border-gray-600">
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Reading Notes:
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+                      Take time to read the passage slowly and thoughtfully. Consider what God is revealing about Himself, His character, and His plan for humanity.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {reading.notes && (
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
                   <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-2">

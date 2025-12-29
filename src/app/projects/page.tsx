@@ -1,5 +1,6 @@
 
 import projects from '@/data/projects.json';
+import Image from 'next/image';
 
 export default function Projects() {
   const featuredProjects = projects.filter(project => project.featured);
@@ -31,10 +32,14 @@ export default function Projects() {
                 key={project.id}
                 className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
               >
-                <div className="h-64 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="text-6xl mb-4">{project.image}</div>
-                    <p className="text-xl font-medium">{project.title}</p>
+                <div className={`h-64 flex items-center justify-center ${!project.isEmoji ? "bg-gradient-to-br from-blue-500 to-purple-600" : "bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700"}`}>
+                  <div className={!project.isEmoji ? "text-white text-center" : "text-center"}>
+                    {/* If emoji, display as text */}
+                    {!project.isEmoji ? (
+                      <Image src={`/assets/${project.image}`} alt={project.title} width={200} height={200} />
+                    ) : (
+                      <div className="text-7xl">{project.image}</div>
+                    )}
                   </div>
                 </div>
                 <div className="p-6">
@@ -90,10 +95,13 @@ export default function Projects() {
                 key={project.id}
                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="h-40 bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="text-4xl mb-2">{project.image}</div>
-                    <p className="font-medium">{project.title}</p>
+                <div className={`h-40 flex items-center justify-center ${!project.isEmoji ? "bg-gradient-to-br from-green-500 to-blue-600" : "bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700"}`}>
+                  <div className={!project.isEmoji ? "text-white text-center" : "text-center"}>
+                    {!project.isEmoji ? (
+                      <Image src={`/assets/${project.image}`} alt={project.title} width={150} height={150} />
+                    ) : (
+                      <div className="text-5xl">{project.image}</div>
+                    )}
                   </div>
                 </div>
                 <div className="p-4">

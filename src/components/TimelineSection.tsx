@@ -11,7 +11,7 @@ export default function TimelineSection() {
   }, {} as Record<string, typeof timeline.experience>);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <section id="timeline-section" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -57,7 +57,7 @@ export default function TimelineSection() {
                 
                 <div className="space-y-8">
                   {experiences.map((exp, i) => (
-                    <div key={i} className="timeline-item relative group">
+                    <div key={i} className="timeline-item relative group opacity-100">
                       {/* Timeline dot with promotion indicator */}
                       <div className="absolute left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800 shadow-lg timeline-dot group-hover:scale-125 transition-transform duration-300"></div>
                       
@@ -133,7 +133,7 @@ export default function TimelineSection() {
             
             <div className="space-y-12">
               {timeline.education.map((edu, i) => (
-                <div key={i} className="timeline-item relative group">
+                <div key={i} className="timeline-item relative group opacity-100">
                   {/* Timeline dot */}
                   <div className="absolute left-6 w-4 h-4 bg-green-600 dark:bg-green-400 rounded-full border-4 border-white dark:border-gray-800 shadow-lg timeline-dot group-hover:scale-125 transition-transform duration-300"></div>
                   

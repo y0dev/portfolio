@@ -31,5 +31,6 @@ export interface TeamProps {
 export interface PlayerProps {
   name: string;
   image: string;
+  retired: boolean;
   achievements: PlayerTeamAchievements;
 }

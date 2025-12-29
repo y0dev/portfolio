@@ -35,7 +35,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
       wrapper.innerHTML = `
         <div class="relative group my-6">
           <div class="absolute top-0 right-0 z-10">
-            <div class="bg-gray-800 dark:bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-bl-lg font-mono">
+            <div class="language-badge bg-gray-800 dark:bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-bl-lg font-mono">
               ${language}
             </div>
           </div>
@@ -46,8 +46,8 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
             </svg>
           </button>
 
-          <div class="bg-gray-900 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 dark:border-gray-600">
-            <pre class="p-4 overflow-x-auto"><code class="language-${language} text-gray-100 text-sm leading-relaxed">${codeContent}</code></pre>
+          <div class="bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+            <pre class="p-4 overflow-x-auto"><code class="language-${language} text-gray-100 dark:text-gray-100 text-sm leading-relaxed">${codeContent}</code></pre>
           </div>
         </div>
       `;

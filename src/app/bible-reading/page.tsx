@@ -23,9 +23,22 @@ export default function BibleReadingPlanPage() {
     const years = new Set([currentYear, planYear]);
     years.forEach(year => {
       const adventPlan = generateAdventBibleReadingPlan(year);
-      readingsList.push(...adventPlan.readings);
+      
+      // If advent reading fall on a day that already has bible reading add advent reading to the existing reading
+      adventPlan.readings.forEach(reading => {
+        const existingReading = readingsList.find(r => r.date === reading.date);
+        if (existingReading) {
+          existingReading.advent = {
+            reference: reading.readings[0]?.reference || '',
+            description: reading.readings[0]?.description || ''
+          };
+        } else {
+          // Add the advent reading to the readings list
+          readingsList.push(reading);
+        }
+      });
     });
-    
+
     // Sort by date
     return readingsList.sort((a, b) => 
       new Date(a.date).getTime() - new Date(b.date).getTime()

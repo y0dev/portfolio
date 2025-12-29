@@ -62,9 +62,9 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
       </button>
 
       {/* Code block */}
-      <div className="bg-gray-900 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 dark:border-gray-600">
+      <div className="rounded-lg overflow-hidden shadow-lg border">
         <pre className="p-4 overflow-x-auto">
-          <code className={`${className} text-gray-100 text-sm leading-relaxed`}>
+          <code className={`${className} text-sm leading-relaxed`}>
             {children}
           </code>
         </pre>

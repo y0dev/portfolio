@@ -140,12 +140,20 @@ export function styleHTMLContent(html: string): string {
     }
   });
 
-  // Style lists
-  tempDiv.querySelectorAll('ul, ol').forEach(ul => {
-    ul.className = 'mb-4 space-y-2 list-disc list-inside';
-    ul.querySelectorAll('li').forEach(li => {
-      // Ensure list items are block-level elements
-      // (li as HTMLElement).style.display = 'block';
+  // Style lists - handle nested lists properly
+  tempDiv.querySelectorAll('ul, ol').forEach(list => {
+    // Check if this list is nested (inside another list item)
+    const isNested = list.parentElement?.tagName === 'LI';
+    
+    // Use list-outside for proper nested list support
+    const listType = list.tagName === 'UL' ? 'list-disc' : 'list-decimal';
+    if (isNested) {
+      list.className = `mb-2 space-y-1 ${listType} list-outside ml-6`;
+    } else {
+      list.className = `mb-4 space-y-2 ${listType} list-outside ml-6`;
+    }
+    
+    list.querySelectorAll('li').forEach(li => {
       li.className = 'mb-2 text-gray-700 dark:text-gray-300 transition-colors duration-200';
       // Style nested paragraphs in list items
       li.querySelectorAll('p').forEach(p => {

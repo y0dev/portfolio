@@ -23,6 +23,10 @@ export interface BibleReading {
     reference: string;
     description: string;
   };
+  advent?: {
+    reference: string;
+    description: string;
+  };
   notes?: string;
   completed?: boolean;
 }
@@ -99,6 +103,10 @@ export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
           reference: r.reference,
           description: r.description
         })),
+        advent: {
+          reference: reading.readings[0]?.reference || '',
+          description: reading.readings[0]?.description || ''
+        },
         completed: false
       });
     }

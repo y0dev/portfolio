@@ -374,7 +374,8 @@ function generateNavigationHTML(): string {
             <a href="/resources" class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Resources</a>
             
             <button
-              id="theme-toggle"
+              id="theme-toggle-button"
+              onclick="toggleTheme()"
               aria-label="Toggle theme"
               class="ml-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
             >
@@ -391,6 +392,7 @@ function generateNavigationHTML(): string {
           <div class="md:hidden flex items-center">
             <button
               id="theme-toggle-mobile"
+              onclick="toggleTheme()"
               aria-label="Toggle theme"
               class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
             >

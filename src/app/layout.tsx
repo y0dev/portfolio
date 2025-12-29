@@ -120,30 +120,6 @@ export default function RootLayout({
         <meta name="twitter:label2" content="Author" />
         <meta name="twitter:data2" content="Devontae Reid" />
         
-        {/* Schema.org Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Devontae Reid",
-              "url": "https://www.devontaereid.com",
-              "jobTitle": "Full-Stack Developer",
-              "description": "Full-stack developer and creative technologist",
-              "image": "https://www.devontaereid.com/images/logo.png",
-              "sameAs": [
-                "https://twitter.com/_yodev_",
-                "https://github.com/devontaereid"
-              ],
-              "knowsAbout": ["Web Development", "React", "Next.js", "TypeScript", "Full-Stack Development"],
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Self-Employed"
-              }
-            })
-          }}
-        />
         
         {/* Additional Bot Recognition */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -165,22 +141,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/atom+xml" title="Devontae Reid Atom Feed" href="/atom.xml" />
         
         {/* Theme initialization script - runs before React hydrates to prevent flash */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const stored = localStorage.getItem('theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const isDark = stored === 'dark' || (!stored && prefersDark);
-                if (isDark) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              })();
-            `,
-          }}
-        />
+        
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}

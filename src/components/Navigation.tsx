@@ -23,7 +23,8 @@ export default function Navigation() {
   }, []);
 
   const toggleTheme = () => {
-    if (theme === "dark") {
+    const isDark = document.documentElement.classList.contains("dark");
+    if (isDark) {
       setTheme("light");
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
@@ -79,6 +80,7 @@ export default function Navigation() {
             {/* Theme toggle button */}
             <button
               onClick={toggleTheme}
+              id="theme-toggle-button"
               aria-label="Toggle theme"
               className="ml-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
             >
@@ -102,6 +104,7 @@ export default function Navigation() {
             {/* Theme toggle button */}
             <button
               onClick={toggleTheme}
+              id="theme-toggle-button-mobile"
               aria-label="Toggle theme"
               className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
             >

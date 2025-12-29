@@ -87,7 +87,7 @@ function FavoriteTeam({ name, logo, link, achievements }: TeamProps) {
   );
 }
 
-function FavoritePlayer({ name, image, achievements }: PlayerProps) {
+function FavoritePlayer({ name, image, retired, achievements }: PlayerProps) {
   return (
     <div className="group relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
       {/* Hover overlay */}
@@ -130,9 +130,9 @@ function FavoritePlayer({ name, image, achievements }: PlayerProps) {
         
         {/* Player status indicator */}
         <div className="mt-4 flex items-center justify-center">
-          <div className="flex items-center text-green-600 dark:text-green-400 text-sm font-medium">
-            <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-            <span>Active Player</span>
+          <div className={`flex items-center text-${retired ? "gray" : "green"}-600 dark:text-${retired ? "gray" : "green"}-400 text-sm font-medium`}>
+            <div className={`w-2 h-2 bg-${retired ? "gray" : "green"}-500 rounded-full mr-2 animate-pulse`}></div>
+            <span>{retired ? "Retired Player" : "Active Player"}</span>
           </div>
         </div>
       </div>

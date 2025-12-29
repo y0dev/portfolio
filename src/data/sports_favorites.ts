@@ -33,6 +33,7 @@ export const favoritePlayers: PlayerProps[] = [
   {
     name: "LeBron James",
     image: "/players/lebron.png",
+    retired: false,
     achievements: {
       rings: 4,
       achievements: {
@@ -45,6 +46,7 @@ export const favoritePlayers: PlayerProps[] = [
   {
     name: "Derrick Rose",
     image: "/players/rose.png",
+    retired: true,
     achievements: {
       rings: 0,
       achievements: {
@@ -56,6 +58,7 @@ export const favoritePlayers: PlayerProps[] = [
   {
     name: "Shai Gilgeous-Alexander",
     image: "/players/sga.png",
+    retired: false,
     achievements: {
       rings: 1,
       achievements: {
