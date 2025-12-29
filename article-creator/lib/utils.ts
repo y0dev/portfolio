@@ -1,4 +1,8 @@
-// Slugify function based on Python script's slugify_heading
+/*
+ * Slugify a title
+ * @param {string} title - The title to slugify
+ * @returns {string} The slugified title
+ */
 export function slugifyTitle(title: string): string {
   if (!title) return '';
   
@@ -23,6 +27,11 @@ export function slugifyTitle(title: string): string {
   return slug;
 }
 
+/*
+ * Format a date
+ * @param {string} date - The date to format
+ * @returns {string} The formatted date
+ */
 export function formatDate(date: string): string {
   const dateObj = new Date(date);
   if (isNaN(dateObj.getTime())) {
@@ -35,6 +44,23 @@ export function formatDate(date: string): string {
   });
 }
 
+export function formatDateFull(date: string): string {
+  const dateObj = new Date(date);
+  if (isNaN(dateObj.getTime())) {
+    return date;
+  }
+  return dateObj.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+/*
+ * Get all categories
+ * @returns {string[]} The categories
+ */
 const categories = [
   {
     name: "theology",
@@ -230,25 +256,12 @@ const categories = [
   }
 ];
 
-export function getTagsForCategory(category: string): string[] {
-  const normalizedCategory = category.toLowerCase();
-  const categoryObj = categories.find(cat => cat.name.toLowerCase() === normalizedCategory);
-  const defaultCategory = categories.find(cat => cat.name === "default");
-  return categoryObj?.tags || defaultCategory?.tags || [];
-}
-
-export function getImageForCategory(category: string): { alt: string; name: string } {
-  const normalizedCategory = category.toLowerCase();
-  const categoryObj = categories.find(cat => cat.name.toLowerCase() === normalizedCategory);
-  const defaultCategory = categories.find(cat => cat.name === "default");
-  return categoryObj?.image || defaultCategory?.image || { alt: "image-title", name: "images/image.png" };
-}
-
-export function getAllCategories() {
-  return categories.filter(cat => cat.name !== "default");
-}
-
-interface ParsedMarkdown {
+/*
+ * Get the tags for a category
+ * @param {string} category - The category to get the tags for
+ * @returns {string[]} The tags for the category
+ */
+export interface ParsedMarkdown {
   title: string;
   description: string;
   date: string;
@@ -257,6 +270,43 @@ interface ParsedMarkdown {
   content: string;
 }
 
+/*
+ * Get the tags for a category
+ * @param {string} category - The category to get the tags for
+ * @returns {string[]} The tags for the category
+ */
+export function getTagsForCategory(category: string): string[] {
+  const normalizedCategory = category.toLowerCase();
+  const categoryObj = categories.find(cat => cat.name.toLowerCase() === normalizedCategory);
+  const defaultCategory = categories.find(cat => cat.name === "default");
+  return categoryObj?.tags || defaultCategory?.tags || [];
+}
+
+/*
+ * Get the image for a category
+ * @param {string} category - The category to get the image for
+ * @returns {string} The image for the category
+ */
+export function getImageForCategory(category: string): { alt: string; name: string } {
+  const normalizedCategory = category.toLowerCase();
+  const categoryObj = categories.find(cat => cat.name.toLowerCase() === normalizedCategory);
+  const defaultCategory = categories.find(cat => cat.name === "default");
+  return categoryObj?.image || defaultCategory?.image || { alt: "image-title", name: "images/image.png" };
+}
+
+/*
+ * Get all categories
+ * @returns {string[]} The categories
+ */
+export function getAllCategories() {
+  return categories.filter(cat => cat.name !== "default");
+}
+
+/*
+ * Parse a markdown file and return the parsed content
+ * @param {string} markdownContent - The markdown content to parse
+ * @returns {ParsedMarkdown} The parsed content
+ */
 export function parseMarkdownFile(markdownContent: string): ParsedMarkdown {
   const lines = markdownContent.split('\n');
   
@@ -369,4 +419,20 @@ export function parseMarkdownFile(markdownContent: string): ParsedMarkdown {
     type: type === 'note' ? 'note' : 'article',
     content
   };
+}
+
+/*
+ * Check if the environment is development
+ * @returns {boolean} True if the environment is development, false otherwise
+ */
+export function isDevelopmentEnvironment(): boolean {
+  return process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_NODE_ENV === 'development';
+}
+
+/*
+ * Check if the environment is production
+ * @returns {boolean} True if the environment is production, false otherwise
+ */
+export function isProductionEnvironment(): boolean {
+  return process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_NODE_ENV === 'production';
 }

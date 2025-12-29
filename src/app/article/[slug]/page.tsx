@@ -2,8 +2,9 @@ import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
 import Link from "next/link";
 import Image from "next/image";
-import { formatDate, parseDate } from "@/utils";
+import { formatDateFull, parseDate } from "@/utils";
 import ContentRenderer from "@/components/ContentRenderer";
+import ShareButton from "@/components/ShareButton";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -107,38 +108,52 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </nav>
 
         {/* Header */}
-        <header className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            {/* Article Image */}
-            {article.image && (
-              <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
+        <div className="post-hero">
+          <div className="post-hero-content">
+            <div className="post-meta-badge">
+              <span>Article</span>
+            </div>
+            <h1 id="post-header-title">{article.title}</h1>
+            <div className="post-header-meta">
+              <div className="author-info">
                 <Image
-                  src={`/assets/${article.image.name}`}
-                  alt={article.image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="48px"
+                  src="https://i.ibb.co/HY4dx9s/headshot.jpg"
+                  alt="Devontae Reid"
+                  width={48}
+                  height={48}
+                  className="post-header-icon"
                 />
+                <div className="author-details">
+                  <span className="author-name">Devontae Reid</span>
+                  <div className="post-date">
+                    <span>{formatDateFull(article.date)}</span>
+                  </div>
+                </div>
               </div>
-            )}
-            
-            <div className="flex flex-wrap gap-2">
+              <ShareButton />
+            </div>
+            <div className="post-header-tags">
               {article.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium"
-                >
+                <span key={tag} className="post-header-tag">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-          
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            {article.title}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">{formatDate(article.date)}</p>
-        </header>
+          {article.image && (
+            <div className="post-hero-visual">
+              <div className="post-hero-image">
+                <Image
+                  src={`/assets/${article.image.name}`}
+                  alt={article.image.alt}
+                  width={200}
+                  height={200}
+                  className="post-header-image"
+                />
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Content */}
         <ContentRenderer content={article.content} />

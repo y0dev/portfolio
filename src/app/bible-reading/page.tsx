@@ -3,15 +3,34 @@
 import { useState, useMemo } from "react";
 import Calendar from "@/components/Calendar";
 import ReadingDetailModal from "@/components/ReadingDetailModal";
-import { generateBibleReadingPlan, BibleReading, ReadingPlan, generateAdventBibleReadingPlan, AdventBibleReading } from "@/data/bible-reading-plan";
+import { generateBibleReadingPlan, BibleReading, ReadingPlan, generateAdventBibleReadingPlan } from "@/data/bible-reading-plan";
 
 export default function BibleReadingPlanPage() {
   const [selectedReading, setSelectedReading] = useState<BibleReading | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [readingPlan] = useState<ReadingPlan>(generateBibleReadingPlan());
-  const [adventReadingPlan] = useState<ReadingPlan>(generateAdventBibleReadingPlan());
-  const [readings] = useState<BibleReading[]>(readingPlan.readings);
-  const [adventReadings] = useState<AdventBibleReading[]>(adventReadingPlan.readings);
+  
+  // Combine readings: include both regular readings and Advent readings for December 1-25
+  const readings = useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    const planYear = readingPlan.year;
+    const readingsList: BibleReading[] = [];
+    
+    // First, add all regular readings
+    readingsList.push(...readingPlan.readings);
+    
+    // Then, add Advent readings for December 1-25 (they will appear alongside regular readings)
+    const years = new Set([currentYear, planYear]);
+    years.forEach(year => {
+      const adventPlan = generateAdventBibleReadingPlan(year);
+      readingsList.push(...adventPlan.readings);
+    });
+    
+    // Sort by date
+    return readingsList.sort((a, b) => 
+      new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+  }, [readingPlan]);
 
   const handleReadingClick = (reading: BibleReading) => {
     setSelectedReading(reading);

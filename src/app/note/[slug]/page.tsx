@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
-import {formatDate, parseDate} from "@/utils"
+import {formatDateFull, parseDate} from "@/utils"
 import Link from "next/link";
 import Image from "next/image";
 import ContentRenderer from "@/components/ContentRenderer";
+import ShareButton from "@/components/ShareButton";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -109,45 +110,52 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
           </nav>
 
           {/* Note Header */}
-          <header className="mb-12">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">
-                Note
-              </span>
-              
-              {/* Note Image */}
-              {note.image && (
-                <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700">
+          <div className="post-hero">
+            <div className="post-hero-content">
+              <div className="post-meta-badge">
+                <span>Note</span>
+              </div>
+              <h1 id="post-header-title">{note.title}</h1>
+              <div className="post-header-meta">
+                <div className="author-info">
                   <Image
-                    src={`/assets/${note.image.name}`}
-                    alt={note.image.alt}
-                    fill
-                    className="object-cover hover:scale-110 transition-transform duration-300"
-                    sizes="64px"
+                    src="https://i.ibb.co/HY4dx9s/headshot.jpg"
+                    alt="Devontae Reid"
+                    width={48}
+                    height={48}
+                    className="post-header-icon"
                   />
+                  <div className="author-details">
+                    <span className="author-name">Devontae Reid</span>
+                    <div className="post-date">
+                      <span>{formatDateFull(note.date)}</span>
+                    </div>
+                  </div>
                 </div>
-              )}
-              
-              <div className="flex flex-wrap gap-2">
+                <ShareButton />
+              </div>
+              <div className="post-header-tags">
                 {note.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
-                  >
+                  <span key={tag} className="post-header-tag">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
-            
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-              {note.title}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-lg flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              {formatDate(note.date)}
-            </p>
-          </header>
+            {note.image && (
+              <div className="post-hero-visual">
+                <div className="post-hero-image">
+                  <Image
+                    src={`/assets/${note.image.name}`}
+                    alt={note.image.alt}
+                    width={200}
+                    height={200}
+                    className="post-header-image"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Note Content */}
           <ContentRenderer content={note.content} />

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import ArticleForm from '@/components/ArticleForm';
 import MarkdownEditor from '@/components/MarkdownEditor';
+import AddToPortfolioModal from '@/components/AddToPortfolioModal';
 import { parseMarkdownToSections, styleHTMLContent } from '@/lib/markdown';
 import { generateNoteHTML, generateArticleHTML } from '@/lib/html-generator';
 import { formatDate, slugifyTitle } from '@/lib/utils';
@@ -200,6 +201,42 @@ export default function Home() {
     alert('HTML copied to clipboard!');
   };
 
+  const [showAddToPortfolioModal, setShowAddToPortfolioModal] = useState(false);
+
+  const handleAddToPortfolio = async () => {
+    if (!articleData) {
+      alert('Please generate HTML first');
+      return;
+    }
+
+    setShowAddToPortfolioModal(true);
+  };
+
+  const handleConfirmAddToPortfolio = async () => {
+    if (!articleData) return;
+
+    try {
+      const response = await fetch('/api/articles/add-to-portfolio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(articleData)
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        const successMessage = result.message + (result.nextSteps ? `\n\n${result.nextSteps}` : '');
+        // Return success to modal to display
+        return { success: true, message: successMessage };
+      } else {
+        throw new Error(result.error || 'Failed to add article to portfolio');
+      }
+    } catch (error) {
+      throw error; // Let modal handle the error
+    }
+  };
+
   const handleUpload = async () => {
     if (!articleData) {
       alert('Please generate HTML first');
@@ -285,6 +322,12 @@ export default function Home() {
                   Export JSON
                 </button>
                 <button
+                  onClick={handleAddToPortfolio}
+                  className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
+                >
+                  Add to Portfolio
+                </button>
+                <button
                   onClick={handleUpload}
                   className="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
                 >
@@ -293,6 +336,16 @@ export default function Home() {
               </div>
             </div>
           </div>
+          
+          {/* Add to Portfolio Modal */}
+          {articleData && (
+            <AddToPortfolioModal
+              isOpen={showAddToPortfolioModal}
+              onClose={() => setShowAddToPortfolioModal(false)}
+              articleTitle={articleData.title}
+              onConfirm={handleConfirmAddToPortfolio}
+            />
+          )}
 
           {/* Preview and Output */}
           <div className="space-y-6">

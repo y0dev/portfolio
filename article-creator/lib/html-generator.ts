@@ -1,5 +1,5 @@
 import { ContentSection } from './markdown';
-import { formatDate, slugifyTitle } from './utils';
+import { formatDateFull, slugifyTitle } from './utils';
 
 function generateCodeCopyScript(): string {
   return `
@@ -165,6 +165,188 @@ function generateTableResponsiveScript(): string {
   `;
 }
 
+function generatePostHeroCSS(): string {
+  return `
+    <style>
+      /* Hero Section */
+      .post-hero {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 3rem;
+        align-items: start;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+      }
+
+      .post-hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .post-meta-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        width: fit-content;
+      }
+
+      #post-header-title {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: #1f2937;
+        margin: 0;
+      }
+
+      html.dark-mode #post-header-title,
+      .dark #post-header-title {
+        color: #f9fafb;
+      }
+
+      .post-header-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .post-header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #3b82f6;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      }
+
+      .author-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .author-name {
+        font-weight: 600;
+        color: #1f2937;
+        font-size: 1rem;
+      }
+
+      html.dark-mode .author-name,
+      .dark .author-name {
+        color: #f9fafb;
+      }
+
+      .post-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+
+      html.dark-mode .post-date,
+      .dark .post-date {
+        color: #d1d5db;
+      }
+
+      .post-header-shareButton {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.875rem;
+      }
+
+      .post-header-shareButton:hover {
+        background: #3b82f6;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+      }
+
+      .post-header-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .post-header-tag {
+        padding: 0.375rem 0.75rem;
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: capitalize;
+        transition: all 0.2s ease;
+      }
+
+      .post-header-tag:hover {
+        background: #3b82f6;
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      /* Hero Visual */
+      .post-hero-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .post-hero-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      html.dark-mode .post-hero-image,
+      .dark .post-hero-image {
+        background: #374151;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .post-header-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+      }
+    </style>
+  `;
+}
+
 function generateNavigationHTML(): string {
   return `
     <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
@@ -325,19 +507,6 @@ export function generateNoteHTML(
   imageAlt: string,
   sections: ContentSection[]
 ): string {
-  const imageHTML = imagePath ? `
-              <div class="relative w-16 h-16 rounded-xl overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700">
-                <img
-                  src="/assets/${imagePath}"
-                  alt="${imageAlt || 'Note image'}"
-                  class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>` : '';
-
-  const tagsHTML = tags.map(tag => `
-                  <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
-                    ${tag}
-                  </span>`).join('');
 
   const contentHTML = sections.map(section => {
     const titleId = section.title ? slugifyTitle(section.title) : '';
@@ -373,41 +542,38 @@ export function generateNoteHTML(
           </nav>
 
           <!-- Note Header -->
-          <header class="mb-12">
-            <div class="flex items-center gap-4 mb-6">
-              <span class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">
-                Note
-              </span>
-              ${imageHTML}
-              <div class="flex flex-wrap gap-2">
-                ${tagsHTML}
+          <div class="post-hero">
+            <div class="post-hero-content">
+              <div class="post-meta-badge">
+                <span>Note</span>
+              </div>
+              <h1 id="post-header-title">${title}</h1>
+              <div class="post-header-meta">
+                <div class="author-info">
+                  <img alt="Devontae Reid" class="post-header-icon" src="https://i.ibb.co/HY4dx9s/headshot.jpg">
+                  <div class="author-details">
+                    <span class="author-name">Devontae Reid</span>
+                    <div class="post-date">
+                      <span>${formatDateFull(date)}</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="post-header-shareButton" id="shareButton" onclick="if (navigator.share) { navigator.share({title: document.title, text: document.querySelector('meta[name=description]')?.content || '', url: window.location.href}).catch(() => {}); } else { navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => {}); }">
+                  Share
+                </button>
+              </div>
+              <div class="post-header-tags">
+                ${tags.map(tag => `<span class="post-header-tag">${tag}</span>`).join('')}
               </div>
             </div>
-            
-            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-              ${title}
-            </h1>
-            
-            <div class="flex items-center justify-between mb-4 flex-wrap gap-4">
-              <div class="flex items-center gap-4 flex-wrap">
-                <p class="text-gray-600 dark:text-gray-400 text-lg">
-                  Devontae Reid
-                </p>
-                <p class="text-gray-600 dark:text-gray-400 text-lg">
-                  Devontae Reid
-                </p>
-                <p class="text-gray-600 dark:text-gray-400 text-lg">
-                  ${date}
-                </p>
+            ${imagePath ? `
+            <div class="post-hero-visual">
+              <div class="post-hero-image">
+                <img alt="${imageAlt || 'Note image'}" class="post-header-image" src="/assets/${imagePath}">
               </div>
-              <button 
-                onclick="if (navigator.share) { navigator.share({title: document.title, text: document.querySelector('meta[name=description]')?.content || '', url: window.location.href}).catch(() => {}); } else { navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => {}); }"
-                class="px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium transition-colors"
-              >
-                Share
-              </button>
             </div>
-          </header>
+            ` : ''}
+          </div>
 
           <!-- Note Content -->
           <article class="prose prose-lg dark:prose-invert max-w-none">
@@ -431,20 +597,6 @@ export function generateArticleHTML(
   imageAlt: string,
   sections: ContentSection[]
 ): string {
-  const imageHTML = imagePath ? `
-            <div class="relative w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
-              <img
-                src="/assets/${imagePath}"
-                alt="${imageAlt || 'Article image'}"
-                class="w-full h-full object-cover"
-              />
-            </div>` : '';
-
-  const tagsHTML = tags.map(tag => `
-                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
-                  ${tag}
-                </span>`).join('');
-
   const contentHTML = sections.map(section => {
     const titleId = section.title ? slugifyTitle(section.title) : '';
     const titleHTML = section.title ? `<h2 id="${titleId}" class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7">${section.title}</h2>` : '';
@@ -471,6 +623,7 @@ export function generateArticleHTML(
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" data-autoloader-path="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/"></script>
+    ${generatePostHeroCSS()}
 </head>
 <body class="min-h-screen bg-gray-50 dark:bg-gray-900">
     ${generateNavigationHTML()}
@@ -484,19 +637,38 @@ export function generateArticleHTML(
       </nav>
 
       <!-- Header -->
-      <header class="mb-12">
-        <div class="flex items-center gap-4 mb-4">
-          ${imageHTML}
-          <div class="flex flex-wrap gap-2">
-            ${tagsHTML}
+      <div class="post-hero">
+        <div class="post-hero-content">
+          <div class="post-meta-badge">
+            <span>Article</span>
+          </div>
+          <h1 id="post-header-title">${title}</h1>
+          <div class="post-header-meta">
+            <div class="author-info">
+              <img alt="Devontae Reid" class="post-header-icon" src="https://i.ibb.co/HY4dx9s/headshot.jpg">
+              <div class="author-details">
+                <span class="author-name">Devontae Reid</span>
+                <div class="post-date">
+                  <span>${formatDateFull(date)}</span>
+                </div>
+              </div>
+            </div>
+            <button class="post-header-shareButton" id="shareButton" onclick="if (navigator.share) { navigator.share({title: document.title, text: document.querySelector('meta[name=description]')?.content || '', url: window.location.href}).catch(() => {}); } else { navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => {}); }">
+              Share
+            </button>
+          </div>
+          <div class="post-header-tags">
+            ${tags.map(tag => `<span class="post-header-tag">${tag}</span>`).join('')}
           </div>
         </div>
-        
-        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          ${title}
-        </h1>
-        <p class="text-gray-600 dark:text-gray-400 text-lg">${date}</p>
-      </header>
+        ${imagePath ? `
+        <div class="post-hero-visual">
+          <div class="post-hero-image">
+            <img alt="${imageAlt || 'Article image'}" class="post-header-image" src="/assets/${imagePath}">
+          </div>
+        </div>
+        ` : ''}
+      </div>
 
       <!-- Content -->
       <article class="prose prose-lg dark:prose-invert max-w-none">

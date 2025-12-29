@@ -163,10 +163,14 @@ export function styleHTMLContent(html: string): string {
   // Keep language classes for Prism.js
   tempDiv.querySelectorAll('pre').forEach(pre => {
     // Don't set background here - Prism.js theme will handle it
+    // Ensure whitespace is preserved for code blocks
+    (pre as HTMLElement).style.whiteSpace = 'pre';
     pre.className = 'p-4 rounded-lg overflow-x-auto';
     pre.querySelectorAll('code').forEach(code => {
       const language = code.className.match(/language-(\w+)/)?.[1] || 'text';
       // Keep language class for Prism.js, remove other classes
+      // Ensure code elements preserve whitespace
+      (code as HTMLElement).style.whiteSpace = 'pre';
       code.className = `language-${language}`;
     });
   });

@@ -19,7 +19,6 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
 
     // Find all pre > code elements and replace them with our custom component
     const preElements = contentRef.current.querySelectorAll('pre > code');
-    
     preElements.forEach((codeElement) => {
       const preElement = codeElement.parentElement;
       if (!preElement) return;
@@ -48,9 +47,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
           </button>
 
           <div class="bg-gray-900 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 dark:border-gray-600">
-            <pre class="p-4 overflow-x-auto">
-              <code class="language-${language} text-gray-100 text-sm leading-relaxed">${codeContent}</code>
-            </pre>
+            <pre class="p-4 overflow-x-auto"><code class="language-${language} text-gray-100 text-sm leading-relaxed">${codeContent}</code></pre>
           </div>
         </div>
       `;

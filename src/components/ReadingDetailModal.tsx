@@ -1,6 +1,7 @@
 "use client";
 
 import { BibleReading } from "@/data/bible-reading-plan";
+import { useEffect } from "react";
 
 interface ReadingDetailModalProps {
   reading: BibleReading | null;
@@ -13,6 +14,25 @@ export default function ReadingDetailModal({
   isOpen, 
   onClose
 }: ReadingDetailModalProps) {
+  // Handle Escape key to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen || !reading) return null;
 
@@ -36,7 +56,10 @@ export default function ReadingDetailModal({
         />
         
         {/* Modal */}
-        <div className="relative bg-white dark:bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+        <div 
+          className="relative bg-white dark:bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
             <div>
@@ -48,10 +71,15 @@ export default function ReadingDetailModal({
               </p>
             </div>
             <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
+              className="ml-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-label="Close modal"
+              type="button"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -118,8 +146,12 @@ export default function ReadingDetailModal({
           {/* Footer */}
           <div className="flex items-center justify-end p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
             <button
-              onClick={onClose}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
               className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              type="button"
             >
               Close
             </button>
