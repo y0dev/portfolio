@@ -163,6 +163,24 @@ export default function RootLayout({
         {/* RSS Feed */}
         <link rel="alternate" type="application/rss+xml" title="Devontae Reid RSS Feed" href="/rss.xml" />
         <link rel="alternate" type="application/atom+xml" title="Devontae Reid Atom Feed" href="/atom.xml" />
+        
+        {/* Theme initialization script - runs before React hydrates to prevent flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const stored = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = stored === 'dark' || (!stored && prefersDark);
+                if (isDark) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
