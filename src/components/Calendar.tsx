@@ -70,7 +70,16 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
 
   const getReadingForDate = (date: Date) => {
     const dateStr = date.toISOString().split('T')[0];
-    return readings.find(reading => reading.date === dateStr);
+    const reading = readings.find(reading => reading.date === dateStr);
+    if (reading) {
+      const readingDate = new Date(reading.date + 'T00:00:00');
+      const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const isPast = readingDate < todayMidnight;
+      if (isPast && !reading.completed) {
+        reading.completed = true;
+      }
+    }
+    return reading;
   };
 
   const isToday = (date: Date) => {
@@ -459,7 +468,9 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                 <div className="space-y-2">
                   {thisWeekReadings.slice(0, 3).map((reading) => {
                     const readingDate = new Date(reading.date + 'T00:00:00');
-                    const isPast = readingDate < today;
+                    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    const isPast = readingDate < todayMidnight;
+                    const isToday = readingDate.getTime() === todayMidnight.getTime();
                     if (isPast) {
                       reading.completed = true;
                     }
@@ -470,7 +481,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                         className={`flex flex-col gap-1 p-2 rounded-lg sm:flex-row sm:justify-between sm:items-center ${
                           reading.completed
                             ? 'bg-green-50 dark:bg-green-900/20'
-                            : isPast
+                            : isPast || isToday
                             ? 'bg-yellow-50 dark:bg-yellow-900/20'
                             : 'bg-blue-50 dark:bg-blue-900/20'
                         }`}
@@ -486,11 +497,11 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                         <span className={`text-xs font-medium sm:text-sm ${
                           reading.completed
                             ? 'text-green-600 dark:text-green-400'
-                            : isPast
+                            : isPast || isToday
                             ? 'text-yellow-600 dark:text-yellow-400'
                             : 'text-blue-600 dark:text-blue-400'
                         }`}>
-                          {reading.completed ? '✓ Done' : isPast ? 'Pending' : 'Upcoming'}
+                          {reading.completed ? '✓ Done' : isPast || isToday ? 'Pending' : 'Upcoming'}
                         </span>
                       </div>
                     );

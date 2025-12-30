@@ -59,6 +59,7 @@ export default function BibleReadingPlanPage() {
   const stats = useMemo(() => {
     const totalReadings = 260; 
     const today = new Date();
+    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     const planStartDate = new Date(readingPlan.startDate);
     
     // Calculate how many weeks have passed since start
@@ -66,12 +67,15 @@ export default function BibleReadingPlanPage() {
     const totalWeeks = 52; // 52 weeks in the plan
     const weekProgress = Math.min(weeksSinceStart, totalWeeks);
     const weekPercentage = Math.round((weekProgress / totalWeeks) * 100);
-    // console.log(weekProgress, totalWeeks, weekPercentage);
-    // Calculate how many readings should have been completed by now
-    const readingsPerWeek = 5; // 5 readings per week
-    const expectedReadingsCompleted = Math.min(weekProgress * readingsPerWeek, totalReadings);
+    
+    // Count actual completed readings (readings that are past today)
+    const actualCompletedReadings = readings.filter(reading => {
+      const readingDate = new Date(reading.date + 'T00:00:00');
+      return readingDate < todayMidnight || reading.completed === true;
+    }).length;
+    
+    const expectedReadingsCompleted = actualCompletedReadings;
     const readingPercentage = Math.round((expectedReadingsCompleted / totalReadings) * 100);
-    // console.log(expectedReadingsCompleted, totalReadings, readingPercentage);
     
     // Calculate current week progress
     const currentWeekStart = new Date(planStartDate);
@@ -147,7 +151,7 @@ export default function BibleReadingPlanPage() {
                   {stats.expectedReadingsCompleted}/{stats.totalReadings}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {stats.readingPercentage}% expected
+                  {stats.readingPercentage}% completed
                 </p>
               </div>
             </div>
