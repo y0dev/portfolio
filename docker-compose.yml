@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  article-creator:
+    build:
+      context: ./article-creator
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./article-creator/article-backups:/app/article-backups
+      - ./src/data/articles.ts:/app/portfolio-articles.ts:ro
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+  deploy:
+    build:
+      context: .
+      dockerfile: Dockerfile.deploy
+    volumes:
+      - .:/app/portfolio
+      - ./out:/app/portfolio/out
+      - ./node_modules:/app/portfolio/node_modules
+    working_dir: /app/portfolio
+    environment:
+      - FTP_HOST=${FTP_HOST}
+      - FTP_USER=${FTP_USER}
+      - FTP_PASSWORD=${FTP_PASSWORD}
+      - FTP_PORT=${FTP_PORT:-21}
+      - FTP_SECURE=${FTP_SECURE:-false}
+      - FTP_REMOTE_PATH=${FTP_REMOTE_PATH:-/}
+    env_file:
+      - .env
+    command: sh -c "cd /app/portfolio && sh scripts/deploy.sh"
+    networks:
+      - portfolio-network
+    profiles:
+      - deploy
+
+networks:
+  portfolio-network:
+    driver: bridge
+
