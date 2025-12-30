@@ -9,4 +9,11 @@ node_modules
 .DS_Store
 *.log
 article-backups
+@eaDir
+.@__thumb
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+*~
 

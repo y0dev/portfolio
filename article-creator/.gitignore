@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Synology NAS system directories
+@eaDir
+.@__thumb
+
+# OS generated files
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+*~
