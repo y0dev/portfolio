@@ -458,8 +458,11 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
               ) : (
                 <div className="space-y-2">
                   {thisWeekReadings.slice(0, 3).map((reading) => {
-                    const readingDate = new Date(reading.date);
+                    const readingDate = new Date(reading.date + 'T00:00:00');
                     const isPast = readingDate < today;
+                    if (isPast) {
+                      reading.completed = true;
+                    }
                     
                     return (
                       <div 

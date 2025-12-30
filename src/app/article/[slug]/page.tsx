@@ -117,52 +117,59 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
             {/* Header */}
             <div className="post-hero">
-              <div className="post-hero-content">
-                <div className="post-meta-badge">
-                  <span>Article</span>
-                </div>
-                <h1 id="post-header-title">{article.title}</h1>
-                <div className="post-header-meta">
-                  <div className="author-info">
-                    <Image
-                      src="https://i.ibb.co/HY4dx9s/headshot.jpg"
-                      alt="Devontae Reid"
-                      width={48}
-                      height={48}
-                      className="post-header-icon"
-                    />
-                    <div className="author-details">
-                      <span className="author-name">Devontae Reid</span>
-                      <div className="post-date flex items-center gap-3">
-                        <span>{formatDateFull(article.date)}</span>
-                        <span className="text-gray-400 dark:text-gray-500">•</span>
-                        <span>{calculateReadingTime(article.content)} min read</span>
-                      </div>
+              {/* Image, Badge, and Title Container */}
+              <div className="post-hero-header">
+                {article.image && (
+                  <div className="post-hero-visual">
+                    <div className="post-hero-image">
+                      <Image
+                        src={`/assets/${article.image.name}`}
+                        alt={article.image.alt}
+                        width={200}
+                        height={200}
+                        className="post-header-image"
+                      />
                     </div>
                   </div>
-                  <ShareButton />
-                </div>
-                <div className="post-header-tags">
-                  {article.tags.map((tag) => (
-                    <span key={tag} className="post-header-tag">
-                      {tag}
-                    </span>
-                  ))}
+                )}
+                <div className="post-hero-title-section">
+                  <div className="post-meta-badge">
+                    <span>Article</span>
+                  </div>
+                  <h1 id="post-header-title">{article.title}</h1>
                 </div>
               </div>
-              {article.image && (
-                <div className="post-hero-visual">
-                  <div className="post-hero-image">
-                    <Image
-                      src={`/assets/${article.image.name}`}
-                      alt={article.image.alt}
-                      width={200}
-                      height={200}
-                      className="post-header-image"
-                    />
+
+              {/* Metadata */}
+              <div className="post-header-meta">
+                <div className="author-info">
+                  <Image
+                    src="https://i.ibb.co/HY4dx9s/headshot.jpg"
+                    alt="Devontae Reid"
+                    width={48}
+                    height={48}
+                    className="post-header-icon"
+                  />
+                  <div className="author-details">
+                    <span className="author-name">Devontae Reid</span>
+                    <div className="post-date flex items-center gap-3">
+                      <span>{formatDateFull(article.date)}</span>
+                      <span className="text-gray-400 dark:text-gray-500">•</span>
+                      <span>{calculateReadingTime(article.content)} min read</span>
+                    </div>
                   </div>
                 </div>
-              )}
+                <ShareButton />
+              </div>
+
+              {/* Tags */}
+              <div className="post-header-tags">
+                {article.tags.map((tag) => (
+                  <span key={tag} className="post-header-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {/* Content */}
