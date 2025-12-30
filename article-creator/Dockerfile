@@ -13,7 +13,18 @@ RUN npm ci
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+# Copy files but exclude @eaDir and other system directories
+COPY package.json package-lock.json* ./
+COPY app ./app
+COPY components ./components
+COPY lib ./lib
+COPY public ./public
+COPY database ./database
+COPY types.ts ./
+COPY tsconfig.json ./
+COPY next.config.ts ./
+COPY postcss.config.mjs ./
+COPY eslint.config.mjs ./
 
 # Build the application
 ENV NEXT_TELEMETRY_DISABLED 1

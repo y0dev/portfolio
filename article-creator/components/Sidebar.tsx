@@ -13,6 +13,11 @@ export default function Sidebar() {
       icon: '📝',
     },
     {
+      href: '/articles',
+      label: 'Manage Articles',
+      icon: '📚',
+    },
+    {
       href: '/convert',
       label: 'Convert Articles',
       icon: '🔄',
@@ -25,7 +30,7 @@ export default function Sidebar() {
         <h1 className="text-xl font-bold mb-8">Article Creator</h1>
         <nav className="space-y-2">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href));
             return (
               <Link
                 key={item.href}

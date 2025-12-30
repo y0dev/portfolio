@@ -25,7 +25,7 @@ FTP_REMOTE_PATH=/
 2. **Build and start the article creator**:
 
 ```bash
-docker-compose up -d article-creator
+docker compose up -d article-creator
 ```
 
 This will:
@@ -43,7 +43,7 @@ Open your browser to `http://localhost:3000`
 To build and deploy the portfolio to your FTP server:
 
 ```bash
-docker-compose --profile deploy run --rm deploy
+docker compose --profile deploy run --rm deploy
 ```
 
 This will:
