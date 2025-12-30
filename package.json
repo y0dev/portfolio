@@ -6,6 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "build:export": "next build && node scripts/format-export.js",
+    "build:db": "USE_DATABASE=true next build",
+    "build:db:export": "USE_DATABASE=true next build && node scripts/format-export.js",
     "start": "next start",
     "lint": "next lint",
     "transform-articles": "ts-node scripts/transform-articles.ts",

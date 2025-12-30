@@ -81,7 +81,7 @@ No configuration needed. The app automatically uses static files from:
 ### Database Mode
 
 1. Set up your database and run the schema
-2. Set environment variables:
+2. Create `.env.local` file with database configuration:
    ```env
    USE_DATABASE=true
    DB_HOST=localhost
@@ -90,10 +90,16 @@ No configuration needed. The app automatically uses static files from:
    DB_NAME=portfolio
    DB_PORT=3306
    ```
-3. For runtime database access, remove `output: "export"` from `next.config.ts`
-4. Build and run:
+3. Build with database:
    ```bash
-   npm run build
+   # For static export (database accessed at build time)
+   npm run build:db:export
+   
+   # For standard build (database accessed at build time)
+   npm run build:db
+   
+   # For runtime database access, remove `output: "export"` from next.config.ts first
+   npm run build:db
    npm start
    ```
 
