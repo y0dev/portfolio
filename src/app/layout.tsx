@@ -140,6 +140,9 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="Devontae Reid RSS Feed" href="/rss.xml" />
         <link rel="alternate" type="application/atom+xml" title="Devontae Reid Atom Feed" href="/atom.xml" />
         
+        {/* Sitemap */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
         {/* Theme initialization script - runs before React hydrates to prevent flash */}
         
       </head>

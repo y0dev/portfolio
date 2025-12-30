@@ -1,0 +1,76 @@
+# Security Headers for Firewall Categorization and Security
+# Compatible with Hostinger Apache shared hosting
+
+# Content-Type headers
+<IfModule mod_mime.c>
+  AddType text/html .html
+  AddType text/css .css
+  AddType application/javascript .js
+  AddType application/json .json
+  AddType image/png .png
+  AddType image/jpeg .jpg .jpeg
+  AddType image/svg+xml .svg
+  AddType image/x-icon .ico
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+</IfModule>
+
+# Security Headers (Hostinger supports mod_headers)
+<IfModule mod_headers.c>
+  # X-Content-Type-Options - Prevent MIME type sniffing
+  Header set X-Content-Type-Options "nosniff"
+  
+  # X-Frame-Options - Prevent clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+  
+  # X-XSS-Protection
+  Header set X-XSS-Protection "1; mode=block"
+  
+  # Referrer Policy
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Permissions Policy
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  
+  # Content Security Policy (simplified for compatibility)
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.esvmedia.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self';"
+  
+  # Strict Transport Security (HSTS) - Uncomment if you have SSL enabled
+  # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Enable compression (Hostinger supports mod_deflate)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Browser Caching (Hostinger supports mod_expires)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Custom Error Pages
+ErrorDocument 404 /404/index.html
+
+# Rewrite rules for clean URLs (if needed)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Force HTTPS (uncomment if you have SSL)
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Remove trailing slashes (optional)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} (.+)/$
+  RewriteRule ^ %1 [R=301,L]
+</IfModule>

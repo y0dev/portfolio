@@ -8,7 +8,8 @@
     "build:export": "next build && node scripts/format-export.js",
     "start": "next start",
     "lint": "next lint",
-    "transform-articles": "ts-node scripts/transform-articles.ts"
+    "transform-articles": "ts-node scripts/transform-articles.ts",
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
