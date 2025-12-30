@@ -11,19 +11,19 @@ export default function NotFound() {
     // Page entrance animation
     const tl = gsap.timeline();
     
-    tl.fromTo(".404-title",
+    tl.fromTo(".not-found-title",
       { y: -100, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
     )
-    .fromTo(".404-subtitle",
+    .fromTo(".not-found-subtitle",
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.5"
     )
-    .fromTo(".404-message",
+    .fromTo(".not-found-message",
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.3"
     )
-    .fromTo(".404-buttons",
+    .fromTo(".not-found-buttons",
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.3"
     );
@@ -77,25 +77,25 @@ export default function NotFound() {
         <div className="max-w-4xl mx-auto text-center">
           {/* 404 Number */}
           <div className="mb-8">
-            <h1 className="404-title text-8xl md:text-9xl lg:text-[12rem] font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent leading-none">
+            <h1 className="not-found-title text-8xl md:text-9xl lg:text-[12rem] font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent leading-none">
               404
             </h1>
           </div>
 
           {/* Main Message */}
           <div className="mb-8">
-            <h2 className="404-subtitle text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="not-found-subtitle text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Page Not Found
             </h2>
-            <p className="404-subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-300">
+            <p className="not-found-subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-300">
               But here&apos;s something even more important...
             </p>
           </div>
 
           {/* Gospel Message Card */}
-          <div className="404-message mb-12">
+          <div className="not-found-message mb-12">
             <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-blue-200/50 dark:border-blue-700/50 max-w-3xl mx-auto">
-              <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="flex items-center justify-center gap-4 mb-8">
                 <span className="floating-cross text-4xl">✝️</span>
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
                   The Most Important Question
@@ -103,22 +103,43 @@ export default function NotFound() {
                 <span className="floating-heart text-4xl">❤️</span>
               </div>
               
-              <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                If you were to die today, do you know for sure that you would go to heaven? 
-                This page may be missing, but the answer to life&apos;s most important question 
-                is available to you right now.
-              </p>
+              <div className="space-y-6 mb-8">
+                <div>
+                  <h4 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-3">
+                    If you were to die today, do you know for sure that you would go to heaven?
+                  </h4>
+                  <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    This page may be missing, but the answer to life&apos;s most important question is available to you right now.
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6 border-l-4 border-purple-500">
+                  <h4 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                    Suppose you were to stand before God and He asked, &ldquo;Why should I let you into My heaven?&rdquo;
+                  </h4>
+                  <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    What would you say? The Bible offers a clear answer, and it&apos;s not about being &ldquo;good enough.&rdquo;
+                  </p>
+                </div>
+              </div>
               
-              <div className="bg-gradient-to-r from-blue-100/50 to-purple-100/50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl p-4 border-l-4 border-blue-500">
-                <p className="text-lg text-gray-700 dark:text-gray-300 italic">
-                  &ldquo;For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.&rdquo; - John 3:16
+              <div className="bg-gradient-to-r from-blue-100/50 to-purple-100/50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl p-6 border-l-4 border-blue-500 mb-6">
+                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 italic leading-relaxed">
+                  &ldquo;For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.&rdquo;
+                </p>
+                <p className="text-base text-gray-600 dark:text-gray-400 mt-2 text-right">- John 3:16</p>
+              </div>
+
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
+                <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 text-center">
+                  The good news of the Gospel is a gift — not something we earn. God offers you salvation through faith in Jesus Christ.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="404-buttons flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="not-found-buttons flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/gospel"
               className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg font-semibold rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border-2 border-transparent hover:border-blue-400"
@@ -141,7 +162,7 @@ export default function NotFound() {
           </div>
 
           {/* Additional Navigation */}
-          <div className="404-buttons mt-8">
+          <div className="not-found-buttons mt-8">
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/articles" className="text-blue-600 dark:text-blue-400 hover:underline transition-colors">
                 Articles

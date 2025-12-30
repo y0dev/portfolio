@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 export default function ArticlesPage() {
   const [filter, setFilter] = useState<"all" | "article" | "note">("all");
   const [tagFilter, setTagFilter] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -31,12 +32,22 @@ export default function ArticlesPage() {
       result = result.filter((article) => article.tags.includes(tagFilter));
     }
 
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (article) =>
+          article.title.toLowerCase().includes(query) ||
+          (article.description && article.description.toLowerCase().includes(query)) ||
+          article.tags.some((tag) => tag.toLowerCase().includes(query))
+      );
+    }
+
     return result.sort((a, b) => {
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
       return dateB - dateA;
     });
-  }, [filter, tagFilter]);
+  }, [filter, tagFilter, searchQuery]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -51,9 +62,36 @@ export default function ArticlesPage() {
       </section>
 
       <main className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        {/* Filters */}
+        {/* Search and Filters */}
         <div className="mb-12">
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+          {/* Search Bar */}
+          <div className="mb-6">
+            <div className="relative max-w-2xl mx-auto">
+              <input
+                type="text"
+                placeholder="Search articles and notes..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-3 pl-10 pr-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md"
+              />
+              <svg
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          {/* Filters and Count */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mb-4">
             {/* Type Filter */}
             <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-md">
               <button
@@ -87,97 +125,128 @@ export default function ArticlesPage() {
                 Notes
               </button>
             </div>
-            {/* Tag Filter */}
-            <div className="relative">
-              <select
-                onChange={(e) => setTagFilter(e.target.value || null)}
-                value={tagFilter || ""}
-                className="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg py-2 pl-4 pr-10 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md"
-              >
-                <option value="">All Tags</option>
-                {allTags.map((tag) => (
-                  <option key={tag} value={tag}>
-                    {tag}
-                  </option>
-                ))}
-              </select>
+            {/* Tag Filter and Count */}
+            <div className="flex items-center gap-4">
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                {filteredArticles.length} of {articles.length} articles
+              </div>
+              <div className="relative">
+                <select
+                  onChange={(e) => setTagFilter(e.target.value || null)}
+                  value={tagFilter || ""}
+                  className="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg py-2 pl-4 pr-10 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md"
+                >
+                  <option value="">All Tags</option>
+                  {allTags.map((tag) => (
+                    <option key={tag} value={tag}>
+                      {tag}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
-          {tagFilter && (
+          {(tagFilter || searchQuery) && (
             <div className="mt-4 text-center sm:text-left">
-              <span className="text-gray-600 dark:text-gray-400">
-                Filtering by tag:
-              </span>
-              <span className="inline-flex items-center ml-2 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">
-                {tagFilter}
-                <button
-                  onClick={() => setTagFilter(null)}
-                  className="ml-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
-                >
-                  &times;
-                </button>
-              </span>
+              {(tagFilter || searchQuery) && (
+                <div className="flex flex-wrap gap-2 items-center">
+                  {tagFilter && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">
+                      Tag: {tagFilter}
+                      <button
+                        onClick={() => setTagFilter(null)}
+                        className="ml-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
+                      >
+                        &times;
+                      </button>
+                    </span>
+                  )}
+                  {searchQuery && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200">
+                      Search: {searchQuery}
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="ml-2 text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200"
+                      >
+                        &times;
+                      </button>
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
 
         {/* Articles Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredArticles.map((article) => (
-            <Link
-              key={article.id}
-              href={`/${article.type}/${article.id}`}
-              className="group block bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 overflow-hidden"
-            >
-              {/* Article Image */}
-              {article.image && (
-                <div className="relative w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
-                  <Image
-                    src={`/assets/${article.image.name}`}
-                    alt={article.image.alt}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-              )}
-              
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                      article.type === "article"
-                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
-                        : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
-                    }`}
-                  >
-                    {article.type.charAt(0).toUpperCase() + article.type.slice(1)}
-                  </span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {formatDate(article.date)}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {article.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 h-20 overflow-hidden">
-                  {article.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {article.tags.map((tag) => (
+        {filteredArticles.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              No articles found. Try adjusting your search or filters.
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredArticles.map((article) => (
+              <Link
+                key={article.id}
+                href={`/${article.type}/${article.id}`}
+                className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Article Image */}
+                {article.image && (
+                  <div className="relative w-full h-32 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
+                    <Image
+                      src={`/assets/${article.image.name}`}
+                      alt={article.image.alt}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
+                )}
+                
+                <div className="p-4">
+                  <div className="flex items-center justify-between mb-3">
                     <span
-                      key={tag}
-                      className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs font-medium"
+                      className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+                        article.type === "article"
+                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                          : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
+                      }`}
                     >
-                      {tag}
+                      {article.type.charAt(0).toUpperCase() + article.type.slice(1)}
                     </span>
-                  ))}
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {formatDate(article.date)}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+                    {article.description || ""}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {article.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded text-xs"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {article.tags.length > 3 && (
+                      <span className="inline-block text-gray-500 dark:text-gray-400 text-xs px-2">
+                        +{article.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </main>
       <Footer />
     </div>

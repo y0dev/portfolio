@@ -54,6 +54,15 @@ import readingPlanData from './bible-reading-plan.json';
 import { getISOWeeksOfYear } from '@/utils';
 import adventReadingPlanData from './advent-bible-reading-plan.json';
 
+// Helper function to get ISO week number for a given date
+function getISOWeek(date: Date): number {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+}
+
 export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
   const targetYear = year || new Date().getFullYear();
@@ -64,7 +73,7 @@ export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
   
   let dayCounter = 1;
   const currentDate = new Date(startDate);
-  
+
   // Calculate which week of December we're in (for week numbering)
   const firstDayOfMonth = new Date(targetYear, 11, 1);
   const firstDayOfWeek = firstDayOfMonth.getDay(); // 0 = Sunday, 1 = Monday, etc.
@@ -129,8 +138,17 @@ export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
 // Generate 5-day Bible reading plan where each calendar date has the same reading each year
 export function generateBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
-  const targetYear = year || new Date().getFullYear();
-  
+  let targetYear = year || new Date().getFullYear();
+  console.log("Generating Bible reading plan for year:", targetYear);
+
+  // If we're in the last few weeks of the current year (week 52 or later), use next year's plan
+  const now = new Date();
+  if (targetYear === now.getFullYear()) {
+    const currentWeek = getISOWeek(now);
+    // If we're in week 52 or 53 (last weeks of the year), use next year's plan
+    if (currentWeek == 1) {
+    }
+  }
   // Get ISO weeks for this year and next year to ensure rollover
   const { firstWeekStart } = getISOWeeksOfYear(targetYear);
   const { firstWeekStart: nextYearFirstWeek, lastWeekNumber: nextYearLastWeek } = getISOWeeksOfYear(targetYear + 1);
