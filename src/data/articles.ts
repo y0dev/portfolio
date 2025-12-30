@@ -59,7 +59,7 @@ export const articles: Article[] = [
   {
     "id": "docker_net_app_notes",
     "title": "Setting Up Web Application on NAS",
-    "description": "Here’s the complete recall note now with Networking Tips for Docker containers, including linking containers and accessing them from other devices on your network.",
+    "description": "Here's the complete recall note now with Networking Tips for Docker containers, including linking containers and accessing them from other devices on your network.",
     "date": "May 8, 2025",
     "tags": [
       "Template",
@@ -69,7 +69,7 @@ export const articles: Article[] = [
     "type": "note",
     "image": {
       "alt": "image-title",
-      "name": "images/image.png"
+      "name": "images/nas.png"
     },
     "content": [
       {
@@ -77,7 +77,7 @@ export const articles: Article[] = [
       },
       {
         "title": "**Steps to Deploy:**",
-        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">1️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Login to the NAS</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Use SSH to access the NAS:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">ssh username@nas_ip\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">2️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Build the Docker Container</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Navigate to the app's directory on the NAS:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">cd /path/to/your/app\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Build the Docker image:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker build -t myapp-image .\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">3️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Start the Docker Container</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Run the container and expose the necessary ports:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run -d --name myapp-container -p 8080:8080 myapp-image\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">4️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Expose the Port in the Docker Network</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Verify that the port <strong class=\"font-bold text-gray-900 dark:text-white\">8080</strong> is mapped and accessible inside the NAS:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker port myapp-container\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Check connectivity from NAS to the Docker container:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">curl http://localhost:8080\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">5️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Configure the Web Server Application on the NAS</strong>\n In Web Portal Settings, select configure new settings</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Open the Web Server App interface on your NAS.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Add a Reverse Proxy or Port Forwarding entry:</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Source Port: 8080</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Destination IP: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">localhost</code> or the Docker container IP</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Destination Port: 8080</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Ensure the web server points correctly to the Docker container.</p>\n</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
+        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">1️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Login to the NAS</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Use SSH to access the NAS:</p>\n<pre><code class=\"language-bash\">ssh username@nas_ip\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">2️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Build the Docker Container</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Navigate to the app's directory on the NAS:</p>\n<pre><code class=\"language-bash\">cd /path/to/your/app\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Build the Docker image:</p>\n<pre><code class=\"language-bash\">docker build -t myapp-image .\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">3️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Start the Docker Container</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Run the container and expose the necessary ports:</p>\n<pre><code class=\"language-bash\">docker run -d --name myapp-container -p 8080:8080 myapp-image\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">4️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Expose the Port in the Docker Network</strong></p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Verify that the port <strong class=\"font-bold text-gray-900 dark:text-white\">8080</strong> is mapped and accessible inside the NAS:</p>\n<pre><code class=\"language-bash\">docker port myapp-container\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Check connectivity from NAS to the Docker container:</p>\n<pre><code class=\"language-bash\">curl http://localhost:8080\n</code></pre>\n</li>\n</ul>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">5️⃣ <strong class=\"font-bold text-gray-900 dark:text-white\">Configure the Web Server Application on the NAS</strong>\n In Web Portal Settings, select configure new settings</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Open the Web Server App interface on your NAS.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Add a Reverse Proxy or Port Forwarding entry:</p>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Source Port: 8080</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Destination IP: <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">localhost</code> or the Docker container IP</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Destination Port: 8080</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Ensure the web server points correctly to the Docker container.</p>\n</li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
       },
       {
         "title": "Quick Commands Reference",
@@ -101,19 +101,19 @@ export const articles: Article[] = [
       },
       {
         "title": "1️⃣ Accessing Container from Another Device on the Network",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">If you want to access the container from another device, use the NAS IP address and the exposed port:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">http://nas_ip:8080\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Ensure your NAS firewall allows the port (e.g., 8080).</p>\n</li>\n</ul>"
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">If you want to access the container from another device, use the NAS IP address and the exposed port:</p>\n<pre><code class=\"language-bash\">http://nas_ip:8080\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Ensure your NAS firewall allows the port (e.g., 8080).</p>\n</li>\n</ul>"
       },
       {
         "title": "2️⃣ Linking Containers Together (Legacy Method)",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">To link containers during <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run</code>:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run --name container1 --link container2:alias_name -d myapp-image\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Inside <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">container1</code>, you can access <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">container2</code> by the hostname <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">alias_name</code>.</p>\n</li>\n</ul>"
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">To link containers during <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run</code>:</p>\n<pre><code class=\"language-bash\">docker run --name container1 --link container2:alias_name -d myapp-image\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Inside <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">container1</code>, you can access <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">container2</code> by the hostname <code class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">alias_name</code>.</p>\n</li>\n</ul>"
       },
       {
         "title": "3️⃣ Docker Networks (Preferred Method)",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Create a Docker network:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker network create myapp-network\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Run containers on the same network:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run --network myapp-network --name backend -d backend-image\ndocker run --network myapp-network --name frontend -d frontend-image\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Containers can communicate using container names:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">curl http://backend:8080\n</code></pre>\n</li>\n</ul>"
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Create a Docker network:</p>\n<pre><code class=\"language-bash\">docker network create myapp-network\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Run containers on the same network:</p>\n<pre><code class=\"language-bash\">docker run --network myapp-network --name backend -d backend-image\ndocker run --network myapp-network --name frontend -d frontend-image\n</code></pre>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Containers can communicate using container names:</p>\n<pre><code class=\"language-bash\">curl http://backend:8080\n</code></pre>\n</li>\n</ul>"
       },
       {
         "title": "4️⃣ Bridge vs Host Network Modes",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Bridge Mode (default): Isolated networking, port mappings required.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Host Mode: Directly uses the host's network stack. Run with:</p>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-bash\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">docker run --network host -d myapp-image\n</code></pre>\n</li>\n</ul>"
+        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Bridge Mode (default): Isolated networking, port mappings required.</p>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Host Mode: Directly uses the host's network stack. Run with:</p>\n<pre><code class=\"language-bash\">docker run --network host -d myapp-image\n</code></pre>\n</li>\n</ul>"
       }
     ]
   },
@@ -197,48 +197,6 @@ export const articles: Article[] = [
     ]
   },
   {
-    "id": "launch_money_hound",
-    "title": "Launch Money Hound Using Docker",
-    "description": "This is a note for me to recall how to launch my mound hound application for budget.",
-    "date": "April 27, 2025",
-    "tags": [
-      "Template",
-      "Info",
-      "Beginner"
-    ],
-    "type": "note",
-    "image": {
-      "alt": "image-title",
-      "name": "images/image.png"
-    },
-    "content": [
-      {
-        "title": "Topic: Launching Docker",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Date:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">MM/DD/YYYY</strong>  </li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Source:</em>* <strong class=\"font-bold text-gray-900 dark:text-white\">Book, Lecture, Meeting, etc.</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">"
-      },
-      {
-        "title": "Key Points",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Summarize main ideas concisely</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Use bullet points for clarity</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Highlight important concepts, definitions, or formulas</strong></li>\n</ul>"
-      },
-      {
-        "title": "Examples & Details",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include real-world applications or personal examples</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write down supporting facts or case studies</strong></li>\n</ul>"
-      },
-      {
-        "title": "Questions & Clarifications",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">List any questions or doubts for further research</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Mark things you need to revisit</strong></li>\n</ul>"
-      },
-      {
-        "title": "Action Items / Next Steps",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">To-do list for applying what you learned</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Follow-up readings, exercises, or discussions</strong></li>\n</ul>"
-      },
-      {
-        "title": "Summary",
-        "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write a short recap in your own words</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include any mnemonics or memory aids</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This format ensures that your notes are clear, actionable, and easy to review. Let me know if you want a different structure!</p>"
-      }
-    ]
-  },
-  {
     "id": "engineering_template",
     "title": "Engineering Notes Template",
     "description": "Template for taking engineering notes",
@@ -288,27 +246,6 @@ export const articles: Article[] = [
       {
         "title": "References & Resources",
         "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Links to datasheets, documentation, research papers</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Mentions of past work, lessons learned</strong></li>\n</ul>"
-      }
-    ]
-  },
-  {
-    "id": "sample",
-    "title": "Sample Note or Blog",
-    "description": "Here's a simple description",
-    "date": "April 25, 2025",
-    "tags": [
-      "Technology",
-      "Embedded",
-      "Engineer"
-    ],
-    "type": "note",
-    "image": {
-      "alt": "binary-code-img",
-      "name": "images/binary-code.png"
-    },
-    "content": [
-      {
-        "htmlContent": "<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Lorem ipsum dolor sit amet, consectetur <strong class=\"font-bold text-gray-900 dark:text-white\">adipiscing</strong> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <em class=\"italic text-gray-800 dark:text-gray-100\">aliquip</em> ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">Rom. 1:17 and another to (John 3:16)</p>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">List Section</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Item 1</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Item 2<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Sub-item A</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Sub-item B</li>\n</ul>\n</li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\">Item 3</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Links Section</h2>\n<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><em class=\"italic text-gray-800 dark:text-gray-100\">Example Link</em>*(<a href=\"https://example.com\" class=\"text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200\">https://example.com</a>)</li>\n</ul>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Image Section</h2>\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">!<strong class=\"font-bold text-gray-900 dark:text-white\">Alt Text 1</strong>(<a href=\"https://example.com/image1.png\" class=\"text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200\">https://example.com/image1.png</a>)\n!<strong class=\"font-bold text-gray-900 dark:text-white\">Alt Text 2</strong>(<a href=\"https://example.com/image2.jpg\" class=\"text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200\">https://example.com/image2.jpg</a>)</p>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Blockquote Section</h2>\n<blockquote class=\"border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This is a blockquote.</p>\n</blockquote>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Code Block Section</h2>\n<pre class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\" class=\"bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4\"><code class=\"language-python\" class=\"bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono\">def hello_world():\n    print(\"Hello, World!\")\n</code></pre>\n<h2 class=\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7\">Table Section</h2>\n<table class=\"custom-table table table-striped table-hover\">\n<thead>\n<tr>\n<th>Header 1</th>\n<th>Header 2</th>\n<th>Header 3</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Cell 1</td>\n<td>Cell 2</td>\n<td>Cell 3</td>\n</tr>\n<tr>\n<td>Cell 4</td>\n<td>Cell 5</td>\n<td>Cell 6</td>\n</tr>\n<tr>\n<td>Cell 7</td>\n<td>Cell 8</td>\n<td>Cell 9</td>\n</tr>\n</tbody></table>"
       }
     ]
   },
@@ -400,6 +337,470 @@ export const articles: Article[] = [
       {
         "title": "Summary",
         "htmlContent": "<ul class=\"list-unstyled mb-4 space-y-2\">\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Write a short recap in your own words</strong></li>\n<li class=\"mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200\"><strong class=\"font-bold text-gray-900 dark:text-white\">Include any mnemonics or memory aids</strong></li>\n</ul>\n<hr class=\"border-gray-300 dark:border-gray-600 my-8\">\n<p class=\"text-gray-700 dark:text-gray-300 leading-relaxed mb-4\">This format ensures that your notes are clear, actionable, and easy to review. Let me know if you want a different structure!</p>"
+      }
+    ]
+  },
+  {
+    "id": "theology-103-week-5",
+    "title": "Theology 103",
+    "description": "week 5 of Theology 103 course",
+    "date": "2022-02-14",
+    "tags": [
+      "Theology",
+      "Christ",
+      "Sin",
+      "Angels",
+      "Demons"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "Week 5: Humans and Sin, Angels and Demons",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>These are the following learning that I was grateful to learn about this week: </p>\n<ol>\n<li>Satan can serve God&#39;s purposes in the realm of church discipline when repentance remains absent</li>\n<li>Believers are to gird up the loins with truth which show they have a heart for battle because of their commitment to Christ</li>\n<li>God has provided the breastplate of righteousness to protect the believer&#39;s mind and emotions</li>\n<li>Though Satan and one-third of the angel disqualified themselves from servest to the LORD, they weren&#39;t completely banned from heaven</li>\n<li>Satan will only bruise Christ heel (cause Him to suffer), while Christ will bruise Satan&#39;s head (destroy him with a fatal blow)</li>\n<li>When someone is demonize, the demon exercise living and dominant control over that person</li>\n<li>The sealing ministry of the Holy Spirit protects Christians against demon invasion, and its unbiblical and impossible for a true believer to have a demon invasion</li>\n<li>Demonization refers to the only unbelievers in whom a demon resides</li>\n<li>Believers can be tormented, oppressed, and harassed externally, even to to severe degree like Saul</li>\n<li>A demon is far more powerful than a human so we must trust the appeal to God in prayer to deal with situation of demonization</li>\n<li>The angel of the LORD has been identified as a special created angel, some say Michael the archangel, but no created angel has ever show traits of deity</li>\n<li>Also the angel of the LORD is a self-manifestation of Yahweh himself</li>\n<li>The angel of the LORD showed traits of deity (Ex, 3:2-5; Judg. 13:17-18; Ex. 23:21;33:14; Isa. 63:9)</li>\n<li>The identification of the angel of the LORD matches the NT explanation of the preincarnate Christ</li>\n<li>The words uttered by Christ asserts that He was the angel of the LORD mentioned in the OT because it asserts that more than one person can be God</li>\n<li>The attributes of the OT angel of the LORD compare perfectly with those of Christ</li>\n</ol>\n<p>I still have questions on the following: </p>\n<ol>\n<li>How can demons be pictured in today&#39;s age, such as in a homeless person who is talking to themselves, or can it be your average person?</li>\n<li>If one is demon possessed what do we do as Christians?</li>\n<li>Will the Antichrist be some type of leader like the king of Babylon in Isaiah 14?</li>\n<li>What portion in man&#39;s sinful action is Satan or demon deception; or just the man&#39;s own sinfulness? (The Devil made me do it theology)</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-103-week-4",
+    "title": "Theology 103",
+    "description": "week 4 of Theology 103 course",
+    "date": "2022-02-07",
+    "tags": [
+      "Theology",
+      "Christ",
+      "Sin",
+      "Angels",
+      "Demons"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "Week 4: Humans and Sin, Angels and Demons",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>These are the following learning that I was grateful to learn about this week: </p>\n<ol>\n<li>Angels(both holy and evil) were created at the start of creation and the demons fell somewhere after the seven day creation and prior to the fall. They existed with a set number and 1/3 of them falling</li>\n<li>The term “heaven” in scripture describes three different elevation levels above earth.</li>\n<li>“Third heaven” normally known as paradise where God resides</li>\n<li>“Second heaven” where the sun, moon, and stars reside</li>\n<li>“First heaven” earth&#39;s atmosphere</li>\n<li>Angels are ministering spirits this is presented in Heb. 1:14</li>\n<li>“God of this world” is Satan and he has superior power, but not deity. This title comes by virtue not his position nor his nature. The reason behind the title is Satan&#39;s work in the garden that cause the fall, and he is behind all false religions</li>\n<li>Satan&#39;s messages and activities are all built on deception and lies (1 Ki. 22:21-23)</li>\n<li>God used Satan to deceive Israel&#39;s King Ahab to go into battle which led to Ahab&#39;s death</li>\n<li>Satan and other demonic minions were most intensely engaged during Christ&#39;s earthly ministry</li>\n<li>Satan operates as the unrivaled master of disguise who also mimics and imitates the holy things of God, but gives his cheap version, which lures people to himself</li>\n<li>Satan wages an invisible spiritual war using deceitful and clever tactics</li>\n<li>Satan&#39;s target is the human mind more importantly the Christian&#39;s mind as he plays mind games with them</li>\n<li>Satan attempt to distort or deny the truth God&#39;s Word by sensualism, sensationalism, universalism, rationalism, existentialism, illusionism, ecumenism, humanism</li>\n<li>The question that Satan asked Eve in the garden was not a research question, but rather a ridicule</li>\n<li>Ex: You&#39;ve got to be kidding, Eve. God didn&#39;t really say you can&#39;t eat from any tree in the garden, did he?</li>\n<li>In the moment when Eve was deceived God&#39;s Word was no longer authoritative in her life now that she had an alternative</li>\n</ol>\n<p>I still have questions on the following: </p>\n<ol>\n<li>How can demons be pictured in today&#39;s age, such as in a homeless person who is talking to themselves, or can it be your average person?</li>\n<li>If one is demon possessed what do we do as Christians?</li>\n<li>Will the Antichrist be some type of leader like the king of Babylon in Isaiah 14?</li>\n<li>What portion in man’s sinful action is Satan or demon deception; or just the man’s own sinfulness? (The Devil made me do it theology)</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-103-week-3",
+    "title": "Theology 103",
+    "description": "week 3 of Theology 103 course",
+    "date": "2022-01-31",
+    "tags": [
+      "Theology",
+      "Christ",
+      "Sin"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "Week 3: Humans and Sin, Angels and Demons",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>Since the enlightenment, humans have thought of themselves as inherently &quot;good&quot;.</p>\n<p>These are the following learning that I was grateful to learn about this week: </p>\n<ol>\n<li>Society presents sin as stemming from the personal environment they grew up in. So if you grew up in a rough environment you are likely to be a greater sinner than someone in a good environment.</li>\n<li>From a biblical understanding sin is man usurping God&#39;s authority and acting as they are autonomist</li>\n<li>Both Satan and Adam were unsatisfied with their perfect condition, and the rebelled and desired to be like God</li>\n<li>There are three types of death: spiritual death(every unbeliever), physical death(everyone will face unless they are raptured), eternal death(final result for the unbeliever)</li>\n<li>Original sin not only includes the first sin that Adam commit, but also it include the state of people who descended from Adam</li>\n<li>Transmission of Adam sin seems to be best fit with the representative view. Representative headship asserts that the action of a representative results is seen as the action also for those united to him.</li>\n<li>The action of our federal head lead to not only a sinful nature, but also our condemnation, so in the same the action by our new federal head Christ we receive life. (Rom. 5; 1 Cor. 15)</li>\n<li>Total depravity does not conclude that man is not able to do good rather it teaches that the corruption of sin pollutes the person. Both body and spirit are corrupted by sin</li>\n<li>Man is not relatively neutral in which they are able to accept or reject God. Man is a hater of God who can not understand the things of God</li>\n<li>The &quot;sin that leads to death&quot; is a sin that lead to drastic chastisement</li>\n<li>Mortal and Venial sins are antithetical to the bible because it supposes that there are some sins that will not lead to condemnation which in turn leads to a faulty salvation</li>\n<li>The Roman Catholic idea of meritorious penance which is used for removal of mortal sin is an error and takes a blow at Christ atoning sacrifice for sin</li>\n<li>Personal sin does not break the bond between them and Christ, but they do have a negative impact on communion with Christ</li>\n<li>God created the world perfect, the reason the world is the way it is, is because man has to face the consequences for their sin</li>\n<li>The truth gives eternal perspective to our temporal sufferings in a fallen world</li>\n</ol>\n<p>I still have questions on the following: </p>\n<ol>\n<li>Is this denial from this British monk the reason why so many believe in free will?</li>\n<li>In understanding the a-mil or post-mil position on the end times, how can it be that the man of lawlessness isn&#39;t literally or has already come and deceived?</li>\n<li>Why was the woman promised the coming seed that would reverse the curse?</li>\n<li>Why did God not destroy all man again as he did in the flood even though man remained sinful as we see even Noah was sinful?</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-103-week-2",
+    "title": "Theology 103",
+    "description": "week 2 of Theology 103 course",
+    "date": "2022-01-24",
+    "tags": [
+      "Theology",
+      "Christ",
+      "Sin"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "Week 3: Humans and Sin, Angels and Demons",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>Since the enlightenment, humans have thought of themselves as inherently &quot;good&quot;.</p>\n<p>These are the following learning that I was grateful to learn about this week in my study on humans and sin: </p>\n<ol>\n<li>Anthropology helps me with understanding who I am as a person. This answers the question of why we all are here.</li>\n<li>Anthropology also helps with dealing with the time such as what Charles Spurgen dealt with evolution starting with Charles Darwin. This is where I am happy to learn about sudden creationism</li>\n<li>I noticed while going through Genesis 1 were the terms created, made, and formed. This was eye opening because I sometimes can gloss over these terms while reading and miss God&#39;s magnificent glory in creation</li>\n<li>Imago Dei is a unique difference that we humans possess that all other creatures and animals don&#39;t possess. We are his representation not in the divine sense, but in the sense of the Trinitrian nature how we live in relationship with others</li>\n<li>Our conscience can get overridden by lies and errors which in turn misinforms the conscience</li>\n<li>Scripture seems to support dichotomy and trichotomy where sometimes soul and spirit are interchangeable and other times they are not so interchangeable, but mean different things</li>\n<li>Creationism argument when it comes to the origin of the soul fails to understand that Adam creation is a unique creation, so using him for the argument that both the soul and body were created at the same time is wrong.</li>\n<li>Deut. 22:5 supports that God expects that said person to live according to the gender He granted them at birth</li>\n<li>After the creatures were created God seemed to still create Adam a helper, so we see that the creatures and animals weren&#39;t suitable for him</li>\n<li>Homosexual unions cannot be rightly seen as marriages because it goes against God meaning for marriage:</li>\n</ol>\n<ul>\n<li>He create man and seen that man needed a companion and this companion must fulfill His command to procreate</li>\n</ul>\n<ol>\n<li>Ex. 21:22-25 presents a strong case for life starting in the womb because of the severity of the punishment if the child in the mother is harmed.</li>\n<li>The soul/spirit lives in an intermediate state between death and bodily resurrection</li>\n</ol>\n<p>I still have questions on the following: </p>\n<ol>\n<li>Can one human constitution affect another human constitution?</li>\n<li>Similar to man initial command and go and fill the earth which they disobey which led to Gen. 11 in which they gathered in one place; is our command to go and make disciples of all nations can we be disobedient if we stick to trying to make disciples and our household and extended families?</li>\n<li>When talking about the role of government, is it wrong to disobey when they constitute something as being wrong such as the latest Canadian bill even though they are in place to punish people who do wrong?</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-102-week-6",
+    "title": "Theology 102",
+    "description": "week 6 of Theology 102 course",
+    "date": "2021-12-12",
+    "tags": [
+      "Theology",
+      "Christ",
+      "God"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "CHRISTOLOGY PT.2",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>These are the following learning that I was grateful to learn about this week: </p>\n<ol>\n<li>Doxologies of the NT ascribe the same glory and honor to Christ as was the commonality to ascribe to God in the OT (1 Chr. 29:10-11;1 Pet. 4:11;2 Pet. 3:18)</li>\n<li>Jesus instructs His disciples to pray to Him(Jh. 14:14;15:16;16:23-24) and we look at those passage we see that He describes Himself as our mediator between God and man</li>\n<li>Christ in emptying Himself in Phil. 2 did not empty Himself of His deity, but rather emptying by addition, not subtraction, by becoming man</li>\n<li>The Son of God fully possessed His divine nature, attributes, and prerogatives, he did not fully express them. They were veiled to be revealed by Him when he wanted</li>\n<li>Christ surrender the glories from which He came, from being worshipped by saints and angels to mocked by men</li>\n<li>Both Jesus&#39;s divine nature and human nature possesses their own will. (Jh. 17:24) His divine will; (Mat. 26:39) His human will</li>\n<li>His limited knowledge such as in passage like Mark 13 is a result of His voluntary surrender of the independent use of His divine attributes</li>\n<li>Jesus was baptized in order to fulfill the Father&#39;s will. He in turned identified Himself with sinners to ultimately bear their sins</li>\n<li>Jesus veiling the truth in parables acted as both judgement and mercy for the hearers. Judgement because it kept them in darkness and mercy because He grant them to see the light of God</li>\n<li>God prepared mankind for the atoning substitutionary sacrifice;of Christ by providing the instructions about sacrifice</li>\n<li>The display of Jesus&#39;s glory is most often associated with His second advent, not His resurrection</li>\n<li>Glory in the minds of the prophets and apostles were mostly associated with Christ&#39;s resurrection</li>\n<li>The believers resurrection they share in the same glory</li>\n<li>Every believer is ultimately accountable to him (1 Cor. 3:10-15) which motivates us to please God</li>\n<li>At the fullness of time, God will gather together believers in the millennial kingdom</li>\n<li>The real glory of eternity is when believers will reside in the presence of the Lord</li>\n</ol>\n<p>I still have questions on the following: </p>\n<ol>\n<li>Is this denial from this British monk the reason why so many believe in free will?</li>\n<li>In understanding the a-mil or post-mil position on the end times, how can it be that the man of lawlessness isn&#39;t literally or has already come and deceived?</li>\n<li>Why was the woman promised the coming seed that would reverse the curse?</li>\n<li>Why did God not destroy all man again as he did in the flood even though man remained sinful as we see even Noah was sinful?</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-102-week-5",
+    "title": "Theology 102",
+    "description": "week 5 of Theology 102 course",
+    "date": "2021-12-04",
+    "tags": [
+      "Theology",
+      "Christ",
+      "God"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "CHRISTOLOGY PT.2",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>These are the following learning that I was grateful to learn about this week: </p>\n<ol>\n<li>Christ is eternally begotten from the Father, this is not speaking that Christ had a beginning because that goes against John 1:2-3</li>\n<li>Begotten in an eternal sense is speaking of the relationship of the First and Second person of the Trinity</li>\n<li>The Holy Spirit is not begotten, but rather procession</li>\n<li>When talking about order in the Trinity we are not speaking of glory, majesty, or essence, but rather with relationship</li>\n<li>The word Trinity is not found in found in Scripture but it is based on the biblical verbiage presented</li>\n<li>The doctrine of the Trinity was formally articulated by the Councils of Nicea(AD 325) and Constantinople(AD 381), but weren&#39;t invented here</li>\n<li>The term arised to combat heresies that were arising from Gnosticism and Monarchianism</li>\n<li>Christ (Second person of the Trinity) was sent from the Father as a result of God&#39;s love for mankind (John 3:16)</li>\n<li>Christ has always existed as the Son of God but became a child only at the moment of His miraculous conception</li>\n<li>&quot;Son of God&quot; title was understood categorically by everyone as a title of deity</li>\n<li>Theophany meaning appearance of God usually is referred to the old testament and are seen in passage like Gen. 16: 7-3 and has to be seen through the author rather than the character</li>\n<li>As we read John 1:18 we see that &quot;no one has seen God...,he has made him known&quot; made known in greek ( ex geomai )</li>\n<li>Jesus (the Son of God) made the Father known to mankind</li>\n<li>We see Christ intervening in history when mankind rebelled along with establishing the Kingdom of God on earth</li>\n<li>The point of the word &quot;God-breathed&quot; points to the origin of Scripture which is the divine breath of the Holy Spirit</li>\n<li>The Son of God appears as the one speaking to the people both in the OT and NT</li>\n<li>Christ is the theophany giving revelation by means of His personal presence</li>\n<li>The Spirit plays a key role in the prophets&#39; recording of the revelation they seen</li>\n<li>He who is the Word of God speaks all thing into existence and pronounces judgement</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-102-week-4",
+    "title": "Theology 102",
+    "description": "week 4 of Theology 102 course",
+    "date": "2021-11-26",
+    "tags": [
+      "Theology",
+      "Trinity",
+      "God"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "The Trinity",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>These are the following learning that I was grateful to learn about this week: </p>\n<ol>\n<li>The trinity is a doctrine stating that God is absolutely and eternally one essence subsisting in three distinct and ordered persons without any division or replication</li>\n<li>The trinity is defined using negative statements which is known as apophatic theology</li>\n<li>Division and replication both results in three gods which the Trinity is not stating in their definition</li>\n</ol>\n<ul>\n<li>This will lead into many heresies hence the reasons of the cults of old and today</li>\n<li>Each person of the trinity possess equally the full and divine essence of God</li>\n</ul>\n<ol>\n<li>Modes of subsistence reveals the personal properties that distinguish each member of the Trinity</li>\n</ol>\n<ul>\n<li>Father, Son, and Holy Spirit</li>\n</ul>\n<ol>\n<li>These relationships establish a definite order within the Trinity, so with respect to relationship ONLY not essence or glory. (1. Father, 2. Son, 3. Holy Spirit)</li>\n<li>Psalm 45:6-7 refers to the Messiah as &quot;God&quot; and is enthroned, having been anointed by &quot;God&quot;</li>\n<li>New Testament writer identify that Jesus is the Lord that the psalmist is speaking of in Psalm 110:1</li>\n</ol>\n<ul>\n<li>The Son is both elohim and adonai</li>\n<li>The Shema in Deuteronomy 6:7 allows for a plurality in God</li>\n</ul>\n<ol>\n<li>The word one in the Hebrew &quot;ekhad&quot; affirms God&#39;s unity while also allowing for plurality. Gen 2:24 is a example &quot;one&quot; flesh even though there is two people</li>\n<li>OT presents the angel of Yahweh as Yahweh and also distinct from Yahweh</li>\n</ol>\n<ul>\n<li>(Ex. 23:20-23) Yahweh sent the angel of Yahweh</li>\n<li>Wisdom may be depicted as a distinct entity, but NT writers speak of Christ as &quot;the wisdom of God&quot;</li>\n</ul>\n<ol>\n<li>Scripture presents a emphasis on the number three such as the seraphim in (Isa. 6:3)</li>\n<li>(Isa. 48:12-16) This passage from the Old Testament presents at least two distinct entities</li>\n<li>The early church saw the threefold blessing as an indication as three persons of the Trinity</li>\n<li>During the great commission Jesus told His disciples to baptize in the &quot;name&quot; which is singular</li>\n</ol>\n<ul>\n<li>cf. Mat. 28:19</li>\n</ul>\n"
+      }
+    ]
+  },
+  {
+    "id": "theology-102-week-3",
+    "title": "Theology 102",
+    "description": "week 3 of Theology 102 course",
+    "date": "2021-11-20",
+    "tags": [
+      "Theology",
+      "Trinity",
+      "God"
+    ],
+    "type": "note",
+    "image": {
+      "name": "images/bible-icon.png",
+      "alt": "bible-icon"
+    },
+    "content": [
+      {
+        "title": "Attributes of God",
+        "htmlContent": "<p><img src=\"https://i.ibb.co/563qGkX/biblical-doctrine-cover-half.jpg\" alt=\"biblical-doctrine\"></p>\n<p><em>MacArthur/Mayhue Biblical Doctrine</em></p>\n<p>Here&#39;s what I learned this week studying the attributes/perfections of God: </p>\n<ol>\n<li>God is not dependent on no one or nothing. This is a common thought that we as human love to think that we can give something to God or God is somehow wouldn&#39;t be God if we don&#39;t choose Him for our salvation</li>\n<li>God&#39;s immutability, this is something that I would&#39;ve used to an Arminian brother or sister in understanding that since God doesn&#39;t change and He has decreed His elect from the being. I thought this would&#39;ve been a good argument, but reading this section understanding that open theist and their disbelief in God&#39;s immutability.</li>\n<li>Immutability does not mean that God is static, nor that He doesn&#39;t act distinctly in time or possess true affections</li>\n<li>Anthropopathic language is God&#39;s figurative expression of how He explains His change in actions towards a person</li>\n<li>His infinitude with regard to time is eternity, and His infinitude with regard to space is omnipresence</li>\n<li>God can experience time, but he is not controlled, confined, or condition by time</li>\n<li>God upholds the created order by being in every point of space</li>\n<li>God does know what would have happened if circumstances would have been different, but they aren&#39;t possible because they are not apart of God&#39;s plan</li>\n<li>God&#39;s knowledge is perfect He is never learning, so He does not have to look into the future to see how would accept His salvation</li>\n<li>God&#39;s knowledge has two aspects: Natural knowledge and free knowledge:</li>\n</ol>\n<ul>\n<li>Natural Knowledge: is His self-conscious knowledge of Himself</li>\n<li>Free Knowledge: all things that become known in time by His sovereign will, all things that do not become known in time, and how He is manifested and not manifested by all things outside of Him</li>\n</ul>\n<ol>\n<li>His natural knowledge is how He reveals himself to creation</li>\n<li>We as creation can know God through His free knowledge because He decrees of how He would reveal Himself to creation</li>\n<li>God&#39;s foreknowledge is not dependent on foresight of what humans would do</li>\n<li>Scripture reveals God&#39;s power (Eph. 3:20)</li>\n<li>God&#39;s power is that he has a theoretical absolute power to do more than what He actually does but not inconsistent with His essence</li>\n<li>Doctrine of divine perfection is the doctrine of divine blessedness</li>\n</ol>\n"
+      }
+    ]
+  },
+  {
+    "id": "web-dev-choice",
+    "title": "Web Development Choice",
+    "description": "my time looking for a framework to create my portfolio website along with blog site",
+    "date": "2021-11-08",
+    "tags": [
+      "Technology",
+      "ReactJS",
+      "NodeJS"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/web-dev.png",
+      "alt": "js-image"
+    },
+    "content": [
+      {
+        "title": "Beginning of NodeJS",
+        "htmlContent": "<p><img src=\"https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg\" alt=\"dev-work\"></p>\n<p><em>Programming Away</em></p>\n<p>As I embraced the task of creating a website, I ran into some problems. Those problems were choosing the right framework. There are many out there from React, VueJS, and even embedded JavaScript.</p>\n<p>So the one that rose to the top of my list was React. I find React to be very powerful for something that seems so simple to use. There are many things that React offered that the others did not such as CSS animation. Working in VueJS I found it fairly difficult to work with CSS animation. I would&#39;ve just JavaScript to handle my animations, but I don&#39;t need all that power when it something simple as moving a div.</p>\n<p>My overall appreciation of React is <strong>great</strong>!</p>\n<pre><code class=\"language-javascript\">laboris\n</code></pre>\n"
+      }
+    ]
+  },
+  {
+    "id": "parenting-with-few-rules",
+    "title": "Parenting with Few Rules | Doug Wilson",
+    "description": "parenting as a Christian with few rules from Doug Wilson podcast",
+    "date": "2021-08-11",
+    "tags": [
+      "Parenting",
+      "Christ",
+      "Children"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/family.png",
+      "alt": "parenting-img"
+    },
+    "content": [
+      {
+        "title": "Is it That Simple?",
+        "htmlContent": "<p><img src=\"https://i.ytimg.com/vi/6S4LCPI9wk4/maxresdefault.jpg\" alt=\"doug-wilson-parenting\"></p>\n<p><em>Fewer Rules in Parenting? | Doug Wilson</em></p>\n<p>As being a new father I felt like this video was very helpful for setting ground rules for my kids as they grow up. You may think that if you have too many rules or your too lenient, but there is a way that one is ought to parent. If we want to be parents that live obedient to Christ as we raise our children while at the same time not being a helicopter parent.</p>\n<p>A video came up on my timeline from Pastor Doug Wilson of Christ Church in Moscow, Idaho. He speaks on being a parent who doesn&#39;t have so many rules and the reason why. He speaks on why as parents we shouldn&#39;t over complicate things for our children while at the same time teaching our children to think on their own when it comes to subject matters on what is right vs wrong. These rules not only established ground with you and your child, but also allows your child to critical think.</p>\n<p>Three Rules to Live by as a Parent: </p>\n<ul>\n<li>No lying</li>\n<li>No disobedience</li>\n<li>No disrespecting your mother</li>\n</ul>\n<p>You can find the video on Youtube at the following <a href=\"https://youtu.be/6S4LCPI9wk4\">Fewer Rules in Parenting? | Doug Wilson</a></p>\n"
+      }
+    ]
+  },
+  {
+    "id": "navy-seals-breathing",
+    "title": "Navy Seals & Breathing",
+    "description": "Learn how to breathe correctly while doing intense exercises to maximize performance and prevent injury. Tips to help you get the most out of your workouts.",
+    "date": "2022-10-06",
+    "tags": [
+      "Health",
+      "Fitness"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/heart_strength.png",
+      "alt": "health-img"
+    },
+    "content": [
+      {
+        "title": "Intro",
+        "htmlContent": "<p><img src=\"https://i0.wp.com/cms.sofrep.com/wp-content/uploads/2018/01/navy-seal-photo-065.jpg\" alt=\"navy-seals\"></p>\n<p><em>Navy Seals Training</em></p>\n<p>Ever wonder why Navy SEALs are some of the world&#39;s most elite warriors? It&#39;s as simple as &quot;breathing&quot; literally. According to the Lung Association of Canada, we take on average 22,000 breaths a day. Wow, we take 22,000 breaths a day and don&#39;t give thanks for even a quarter of it.</p>\n<p>Thanks God for His mercy to allow us to take these breaths! Psalm 136</p>\n<p><img src=\"https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif\" alt=\"box-breathing-gif\"></p>\n<p><em>Box Breathing</em></p>\n<p>We can do a lot to help ourselves by practicing better breathing patterns. There are many different breathing patterns that can result in more energy and a clearer head. The well known breathing pattern is known as &quot;Box Breathing&quot;. In this pattern you would exhale and inhale for the same duration around a box so to speak. </p>\n<ol>\n<li>Inhale along the left for 4 seconds</li>\n<li>Exhale along the top for 4 seconds</li>\n<li>Inside the along the right for 4 seconds</li>\n<li>Exhale along the bottom for 4 seconds</li>\n</ol>\n<p>Box breathing helps you deal effectively with stress and anxiety. It also brings balance to your body and mind along with regulating your natural heart rhythm.</p>\n<pre><code>laboris\n</code></pre>\n"
+      },
+      {
+        "title": "Training",
+        "htmlContent": "<p>Navy Seals train in such a way to help them control their breathing not only to stay calm, but to also conserve energy. It starts with breathing and proper breathing. Proper breathing begins with breathing through the nose and out the mouth. We heard this before early in our sports career. Little that we know, that is very beneficial to our health. The benefits are: </p>\n<ul>\n<li>Reduces exposure to foreign substances</li>\n<li>Increases oxygen uptake and circulation</li>\n<li>Aids our immune system</li>\n<li>Slows down breathing</li>\n<li>Improves lung volume</li>\n<li>Humidifies inhaled air</li>\n</ul>\n<p>Here is a workout or things to do while working out that I believe will help with teaching yourself proper breathing and self control. 100s of pushups, burpees and squats. While at the bottom of a squat just breathe deep inhales, so that you will fill your lungs and slow exhales. The reasoning behind this is because shallow breaths leads to: </p>\n<ul>\n<li>Increased blood pressure</li>\n<li>Increased stress response</li>\n<li>Reduced oxygen intake</li>\n<li>Impaired thinking</li>\n<li>Slower recovery</li>\n</ul>\n<p>While running, fill your lungs by breathing in through your nose only after each run or after each set. Sharp inhales through the nose and soft exhales through the mouth or nose.</p>\n<p><img src=\"https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif\" alt=\"image1\"></p>\n<p><em>Breathing Counter</em></p>\n"
+      },
+      {
+        "title": "Finally",
+        "htmlContent": "<p>Start small! </p>\n<ol>\n<li>Break up your big goals into small chunks, one breath at a time</li>\n<li>Breath control is stress control</li>\n</ol>\n<p>Link to the Twitter 🧵 : <a href=\"https://twitter.com/tobi_emonts/status/1577998885125033985?s=20&t=aJC2U0dfO1wUkyJpjw1lzQ\">Navy SEALs are the world&#39;s most elite warriors</a></p>\n"
+      }
+    ]
+  },
+  {
+    "id": "docker-getting-started",
+    "title": "Getting Started with Docker",
+    "description": "Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers.",
+    "date": "2022-11-05",
+    "tags": [
+      "Technology",
+      "Docker"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/docker.png",
+      "alt": "docker-image"
+    },
+    "content": [
+      {
+        "title": "Initial Steps to Running Docker",
+        "htmlContent": "<p><img src=\"https://www.ondat.io/hubfs/Docker.png\" alt=\"docker\"></p>\n<p><em>Docker @ Resource from Docker Website</em></p>\n<p>The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.</p>\n<p>If you have installed docker on your pc or mac. The steps to run a docker container are as follows: </p>\n<ol>\n<li>Create a docker</li>\n<li>Build docker image &quot; docker build -t <code>image</code> . &quot;</li>\n<li>Run the docker container &quot; docker run --name <code>container_name image</code> &quot;</li>\n<li>Stop container &quot;docker stop <code>container_name</code> &quot;</li>\n<li>List running containers &quot;docker ps -a &quot;</li>\n</ol>\n<p>Creating a dockerfile and building and running it. Here&#39;s an example of a basic dockerfile </p>\n<pre><code class=\"language-docker\"># Parent Image: Software and version\nFROM  python:3\nWORKDIR  /Users/user_directory/docker/textblob \nCOPY  requirements.txt ./ \nRUN  pip install --no-cache-dir -r requirements.txt\n# First dot is relative file path where dockerfile resides\n# Second dot is the root directory\nCOPY  . .\nCMD  [ &quot;python &quot;, &quot;./main.py &quot;  ]\n</code></pre>\n"
+      }
+    ]
+  },
+  {
+    "id": "jenkins-getting-started",
+    "title": "Basics of Jenkins",
+    "description": "Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily.",
+    "date": "2023-02-02",
+    "tags": [
+      "Technology",
+      "Jenkins",
+      "CI/CD"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/jenkins.png",
+      "alt": "jenkins-image"
+    },
+    "content": [
+      {
+        "title": "Creating a Jenkinsfile",
+        "htmlContent": "<p><img src=\"https://www.jenkins.io/images/logo-title-opengraph.png\" alt=\"jenkins\"></p>\n<p><em>Jenkins Image from Jenkins Website</em></p>\n<p>When creating a Jenkinsfile the necessary fields must are: pipeline, agent, stages. &quot;pipeline&quot; is always needed and is at the top-level. From here we have the &quot;agent&quot; which describes where to execute (default would be set to any). Then we have stages which describes where the works happens, and within &quot;stages&quot; you define &quot;stage&quot; that will have parameters such as: (&quot;init&quot;), (&quot;build&quot;), (&quot;test&quot;), and (&quot;deploy&quot;).</p>\n<p>Another field that may be added and this is added after &quot;stages&quot;. This is &quot;post&quot; and what this does is execute some logic after all stages have executed. The conditions that are within the &quot;post&quot; section are: always, success, failure. Always will always execute whether the script failed or not. Examples of this are sending emails out to the team after a build.</p>\n"
+      },
+      {
+        "title": "Adding Environmental Variables",
+        "htmlContent": "<p>In order to add environmental variables to your file, before &quot;stages&quot; you need to add &quot;environment&quot; into your pipeline.</p>\n<pre><code class=\"language-groovy\">pipeline {\n\tagent any\n\tenvironment {\n\t\tEXAMPLE_VAR = &#39;Something&#39;\n\t}\n\t...\n}\n</code></pre>\n"
+      },
+      {
+        "title": "Adding Build Tools for Project",
+        "htmlContent": "<pre><code class=\"language-groovy\">pipeline {\n\tagent any\n\ttools  {\n\t\tnodejs &#39;NodeJS&#39;\n\t}\n\t...\n}\n</code></pre>\n"
+      },
+      {
+        "title": "Building Jenkinsfile",
+        "htmlContent": "<p>After this you would then go to Jenkins localhost webpage and create a new job. Depending on the version of Jenkins you have downloaded this menu may be different. What you should see is a text field and beneath a list of types of projects you can create. The projects are Freestyle project, Pipeline, Multi-configuration project, Folder, GitHub Organization, and Multibranch Pipeline. For my example I am using Multibranch Pipeline.</p>\n<p>Within the General Tab, scroll down to Branch Sources and add the link to the Git project repository and add the correct credentials. You can determine what branches you want to build by selecting the next drop-down. Click build and you should now be presented with a new page that displays the pipeline output/log.</p>\n"
+      },
+      {
+        "title": "Final Results",
+        "htmlContent": "<pre><code class=\"language-groovy\">def gv\npipeline {\n\tagent any\n\tparameters {\n\t\tchoice(name: &#39;VERSION&#39;, choices: [&#39;1.1.0&#39;, &#39;1.2.0&#39;, &#39;1.3.0&#39;], description: &#39;&#39;)\n\t\tbooleanParam(name: &#39;executeTests&#39;, defaultValue: true, description: &#39;&#39;)\n\t}\n\tstages {\n\t\tstage (&quot;init&quot;) {\n\t\t\tsteps {\n\t\t\t\tscript {\n\t\t\t\t\tgv = load &quot;script.groovy&quot;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tstage (&quot;build&quot;) {\n\t\t\tsteps {\n\t\t\t\tscript {\n\t\t\t\t\tgv.buildApp()\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tstage (&quot;test&quot;) {\n\t\t\twhen {\n\t\t\t\texpression {\n\t\t\t\t\tparams.executeTests\n\t\t\t\t}\n\t\t\t}\n\t\t\tsteps {\n\t\t\t\tscript {\n\t\t\t\t\tgv.testApp()\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tstage (&quot;deploy&quot;) {\n\t\t\tsteps {\n\t\t\t\tscript {\n\t\t\t\t\tgv.deployApp()\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n</code></pre>\n"
+      }
+    ]
+  },
+  {
+    "id": "system-design",
+    "title": "Help with System Design Interviews",
+    "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+    "date": "2023-02-08",
+    "tags": [
+      "System Design",
+      "Technology",
+      "MAANG"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Preparation for the Interview",
+        "htmlContent": "<p><img src=\"https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png\" alt=\"system-design\"></p>\n<p><em>Load Balancing from G4G</em></p>\n<p>Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.</p>\n<p>Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it&#39;s like working at their company. The tech blogs are <a href=\"https://engineering.fb.com/\">Engineering at Meta</a>, <a href=\"https://research.fb.com/\">Meta Research</a>, <a href=\"https://aws.amazon.com/blogs/architecture/\">AWS Architecture Blog</a>, <a href=\"https://www.amazon.science/blog\">Amazon Science Blog</a>, <a href=\"https://netflixtechblog.com/\">Netflix TechBlog</a>, <a href=\"https://research.google/\">Google Research</a>, <a href=\"https://quoraengineering.quora.com/\">Engineering at Quora</a>, <a href=\"https://eng.uber.com/\">Uber Engineering Blog</a>, <a href=\"https://databricks.com/blog/category/engineering\">Databricks Blog</a>, <a href=\"https://medium.com/@Pinterest_Engineering\">Pinterest Engineering</a>, <a href=\"https://medium.com/blackrock-engineering\">BlackRock Engineering</a>, <a href=\"https://eng.lyft.com/\">Lyft Engineering</a>, and <a href=\"https://engineering.salesforce.com/\">Salesforce Engineering</a>.</p>\n<p>Some thoughts that should happen when designing a system should be “Why does this system works?”. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction.</p>\n"
+      },
+      {
+        "title": "Stay on track",
+        "htmlContent": "<p>At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.</p>\n<p>Key things to remember when thinking of deliverables expected from the developed design </p>\n<ol>\n<li>Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.</li>\n<li>Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on.</li>\n</ol>\n"
+      },
+      {
+        "title": "The Interview",
+        "htmlContent": "<p>When going into an interview remember that the interview has ask these questions to other candidates. So, don&#39;t produce a design that sounds the same as other candidates.</p>\n<p>The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend&#39;s vs messaging service performance shouldn&#39;t degrade with increasing user load. To better understand the data, we should ask the following questions: </p>\n<ul>\n<li>What is the size of the data right now? (Guessing this is the size of data type)</li>\n<li>At what rate is the data expected to grow over time?</li>\n<li>How will the data be consumed by other subsystems or end users?</li>\n<li>Is the data read-heavy or write-heavy?</li>\n<li>Do we need strict consistency of data, or will eventual consistency work?</li>\n<li>What is the durability target of the data?</li>\n<li>What privacy and regulatory requirements do we require for storing or transmitting user data?</li>\n</ul>\n"
+      },
+      {
+        "title": "Abstraction",
+        "htmlContent": "<p>Abstraction is the process of hiding details that we don&#39;t need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system.</p>\n"
+      },
+      {
+        "title": "Remote Procedure Calls",
+        "htmlContent": "<p>Remote Procedure Calls (RPC) is an inter-process communication protocol that&#39;s widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.</p>\n"
+      },
+      {
+        "title": "Consistency",
+        "htmlContent": "<p>Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let&#39;s use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven&#39;t been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.</p>\n<p>There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn&#39;t exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don&#39;t care about the order in which some of our friends&#39; posts appear. However, we still anticipate a single friend&#39;s posts to appear in the correct order in which they were created). Similarly, we expect our friends&#39; comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities.</p>\n"
+      },
+      {
+        "title": "Availability",
+        "htmlContent": "<p>Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers.</p>\n"
+      },
+      {
+        "title": "Reliability",
+        "htmlContent": "<p>Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions.</p>\n"
+      },
+      {
+        "title": "Scalability",
+        "htmlContent": "<p>Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: </p>\n<ul>\n<li>Request workload: This is the number of requests served by the system.</li>\n<li>Data/storage workload: This is the amount of data stored by the system.</li>\n</ul>\n<p>There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. </p>\n<ul>\n<li>Vertical Scaling = more space in a single system</li>\n<li>Horizontal Scaling = more nodes that need to be in sync with one another</li>\n</ul>\n"
+      },
+      {
+        "title": "Maintainability",
+        "htmlContent": "<p>Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system&#39;s platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights.</p>\n"
+      },
+      {
+        "title": "Fault Tolerance",
+        "htmlContent": "<p>Fault tolerance refers to a system&#39;s ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures—a reality that is outlined in the CAP theorem.</p>\n<p>Checkpointing is a technique that saves the system&#39;s state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems.</p>\n"
+      },
+      {
+        "title": "Back-Of-The-Envelope",
+        "htmlContent": "<p>This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.</p>\n<p>For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.</p>\n<p><img src=\"/images/system-design/database_rates.png\" alt=\"system-design-db-rates\"></p>\n<p><em>Database Rates</em></p>\n<p><img src=\"/images/system-design/latency_values.png\" alt=\"system-design-latency-rates\"></p>\n<p><em>Latency Rates</em></p>\n<p><img src=\"/images/system-design/server_specs.png\" alt=\"system-design-server-specs\"></p>\n<p><em>Server Specs</em></p>\n"
+      }
+    ]
+  },
+  {
+    "id": "thankfulness",
+    "title": "Command for Thankfulness",
+    "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
+    "date": "2023-03-10",
+    "tags": [
+      "Christ",
+      "Salvation",
+      "Love",
+      "Thankful"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/thankful.png",
+      "alt": "thankful-icon"
+    },
+    "content": [
+      {
+        "title": "Command for Thankfulness",
+        "htmlContent": "<p>We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren’t. Prime example of this in scripture is Israel’s ungrateful heart throughout their time in the wilderness (Num. 14:1-4;20:3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2:24-25).</p>\n<p>The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1:8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They’re not the only ones that think this way.</p>\n<p>As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they’ve been wrong by someone and that person deserves it. As I was reminded by a brother, “We deserve much worse than what this person just said about us even though it may not be true.” God did not need to save Israel from Egypt nor did he need to save us from our sins.</p>\n<p>So, to close as the Apostle Paul commands, “Be Thankful”. We ought to always be thankful in all circumstances because we deserve much more than we are receiving.</p>\n"
+      }
+    ]
+  },
+  {
+    "id": "debugging-in-node",
+    "title": "Debugging in NodeJS",
+    "description": "How to properly debug in NodeJS",
+    "date": "2023-03-29",
+    "tags": [
+      "Technology",
+      "Engineer"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/web-dev.png",
+      "alt": "web-dev-img"
+    },
+    "content": [
+      {
+        "title": "Debugging in Node Using Chrome Devtools",
+        "htmlContent": "<p>As I'm writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you’re a web developer. It is done by adding simply <em>--</em> <em>inspect</em> flag. What happens is that when using <em>--</em> <em>inspect</em> flag Node opens a port to accept WebSocket connections. Now you will be presented with the following:<img src=\"/images/articles/node-inspect.png\" alt=\"\"></p>\n<p><em>node --inspect snippet</em></p>\n<p>Once successful, now open up Google Chrome and type the following URL <em>chrome</em> <em>://</em> <em>inspect</em> <em>/#</em> <em>devices</em> . This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure… which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.</p>\n<p>One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful.</p>\n"
+      },
+      {
+        "title": "Setting up Stack Trace",
+        "htmlContent": "<p>The basics behind displaying stack trace is simple in node. All one would have to do is.</p>\n"
+      },
+      {
+        "title": "Soli Deo Gloria",
+        "htmlContent": ""
+      }
+    ]
+  },
+  {
+    "id": "depth-first-search",
+    "title": "Depth First Search",
+    "description": "Article on the depth first search definition and its usage for a tree and a graph.",
+    "date": "2023-08-11",
+    "tags": [
+      "Data Structures",
+      "Algorithms",
+      "Tech Interview"
+    ],
+    "type": "article",
+    "image": {
+      "name": "images/algorithm.png",
+      "alt": "algo-img"
+    },
+    "content": [
+      {
+        "title": "Introduction",
+        "htmlContent": "<p>In this article, I will define the <strong>Depth First Search</strong> <strong>(DFS)</strong> algorithm. I will be explaining the definition and the uses of the search on a tree and a graph.</p>\n"
+      },
+      {
+        "title": "Definition",
+        "htmlContent": "<p>DFS is a tree and graph traversal algorithm used to explore node(s) in a tree or graph data structure. Depending on the data structure a node will have different meaning in regards to the relationship with other nodes. For example, a node in a tree is a single element in a tree that will either be connected to another node via parent-child relationship. While a node in graph will be connected to other nodes via neighbor relationship.</p>\n<p>DFS on a tree has three traversal methods: pre-order, in-order, and post-order. These tree traversals generally go from left to right. In the pre-order traversal, we would start from the current node, then traverse the left subtree, and finally traverse the right subtree. In-order traversal, we would start from the root node and traverse the left subtree, then the current node, and finally traverse the right subtree. The last traversal method post-order traversal, we would start from the root node and traverse the left subtree, then the right subtree, and finally visit the current node. Below is an example of in-order traversal these steps are basis for how each traversal method operates:</p>\n<ol>\n<li>Traverse the left subtree</li>\n<li>Visit the current node</li>\n<li>Traverse the right subtree</li>\n</ol>\n<p>We now get into using these same traversals with a graph data structure. The main difference in using these traversal methods with graphs are that you have to mark each visited node. The reason for the marking of nodes because graph contains cycles and we don’t want to get stuck in an infinite loop.</p>\n"
+      },
+      {
+        "title": "Uses",
+        "htmlContent": "<p>When determining when to use the following algorithm we chose by first understanding if the problem is a tree/graph problem or not. This can be difficult at first because all tree/graph problem don’t just same “I’m a tree” or “I’m a graph”. Determining whether a problem is a tree/graph is done by understanding what the problem is asking just like any other algorithm. Generally identifying DFS problem you will notice whether the question is asking for the following:</p>\n<ul>\n<li><p>Max Depth of Tree, <em>anything</em> tree</p>\n</li>\n<li><p>Combination Search </p>\n</li>\n<li><p>“Generate all possible”</p>\n</li>\n<li><p>“Number of ways”</p>\n</li>\n</ul>\n<p>The strategy to determining which traversal methods to use depends on the algorithm that is being design. When thinking about picking pre-order method, you may be thinking of exploring the root prior to the leaves. While using post-order method, you may be thinking of exploring the leaves before the root. In-order is best used, when you know that the tree has a sequence in the nodes.</p>\n"
+      },
+      {
+        "title": "Implementation",
+        "htmlContent": "<p>To implement DFS algorithm is simple for both a tree and a graph. It is implemented just as it is defined. See the example below written in Python:</p>\n<pre><code class=\"language-python\">def dfs(root):\n\tif not root:\n\t\treturn\n\t# Traverse the left subtree\n\tdfs(root.left)\n\t# Visit current node\n\tprint(root)\n\t# Traverse the right subtree\n\tdfs(root.right)\n\treturn\n</code></pre>\n<p>The difference in the implementation for a tree and a graph is including a visited set as a state. In the implementation of DFS in a graph you will add a visited set to store all the vertices/nodes that were already visited. Since a graph uses a visited set, you no longer need to used the goal state that a tree would used to find a left node. The python example below shows the basic implementation to start from: </p>\n<pre><code class=\"language-python\">def dfs(root, visited):\n\t# Visit all neighbors\n\tfor neighbor in get_neighbors(root):\n\t\t# Check if neighbor has been visited before\n\t\tif neighbor in visited:\n\t\t\tcontinue\n\n\t\t# Add neighbor to visited set\n\t\tvisited.add(neighbor)\n\n\t\t# Add neighbor to stack\n\t\tdfs(neighbor, visited)\n</code></pre>\n"
       }
     ]
   }

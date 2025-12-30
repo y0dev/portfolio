@@ -65,7 +65,17 @@ function getISOWeek(date: Date): number {
 
 export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
-  const targetYear = year || new Date().getFullYear();
+  let targetYear = year || new Date().getFullYear();
+
+   // If we're in the last few weeks of the current year (week 52 or later), use next year's plan
+   const now = new Date();
+   if (targetYear === now.getFullYear()) {
+     const currentWeek = getISOWeek(now);
+     // If we're in week 52 or 53 (last weeks of the year), use next year's plan
+     if (currentWeek == 1) {
+       targetYear = targetYear + 1;
+     }
+   }
   
   // Advent starts on December 1st and ends on December 25th (25 days)
   const startDate = new Date(targetYear, 11, 1); // Month 11 = December (0-indexed)
@@ -139,7 +149,6 @@ export function generateAdventBibleReadingPlan(year?: number): ReadingPlan {
 export function generateBibleReadingPlan(year?: number): ReadingPlan {
   const readings: BibleReading[] = [];
   let targetYear = year || new Date().getFullYear();
-  console.log("Generating Bible reading plan for year:", targetYear);
 
   // If we're in the last few weeks of the current year (week 52 or later), use next year's plan
   const now = new Date();
@@ -147,6 +156,7 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
     const currentWeek = getISOWeek(now);
     // If we're in week 52 or 53 (last weeks of the year), use next year's plan
     if (currentWeek == 1) {
+      targetYear = targetYear + 1;
     }
   }
   // Get ISO weeks for this year and next year to ensure rollover

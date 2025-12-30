@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { articles } from "@/data/articles";
-import {formatDateFull, parseDate} from "@/utils"
+import { formatDateFull, parseDate, calculateReadingTime } from "@/utils"
 import Link from "next/link";
 import Image from "next/image";
 import ContentRenderer from "@/components/ContentRenderer";
@@ -127,8 +127,10 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
                   />
                   <div className="author-details">
                     <span className="author-name">Devontae Reid</span>
-                    <div className="post-date">
+                    <div className="post-date flex items-center gap-3">
                       <span>{formatDateFull(note.date)}</span>
+                      <span className="text-gray-400 dark:text-gray-500">•</span>
+                      <span>{calculateReadingTime(note.content)} min read</span>
                     </div>
                   </div>
                 </div>

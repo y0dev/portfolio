@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BibleReading } from "@/data/bible-reading-plan";
 
 interface CalendarProps {
@@ -81,6 +81,26 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
     setSelectedDate(date);
     setShowDayDetails(true);
   };
+
+  const handleCloseModal = () => {
+    setShowDayDetails(false);
+  };
+
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showDayDetails) {
+        handleCloseModal();
+      }
+    };
+
+    if (showDayDetails) {
+      document.addEventListener("keydown", handleEscape);
+      return () => {
+        document.removeEventListener("keydown", handleEscape);
+      };
+    }
+  }, [showDayDetails]);
 
   // Month view data
   const daysInMonth = getDaysInMonth(currentDate);
@@ -428,33 +448,6 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
 
           {/* Summary Cards */}
           <div className="mt-4 grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3">
-            {/* Progress Summary */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 sm:p-6">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3 sm:text-lg sm:mb-4">
-                Reading Progress
-              </h3>
-              <div className="space-y-2 sm:space-y-3">
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center">
-                  <span className="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">Completed</span>
-                  <span className="text-xs font-medium text-green-600 dark:text-green-400 sm:text-sm">
-                    {completedReadings} / {totalReadings}
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-                  <div 
-                    className="bg-green-600 h-2 rounded-full transition-all duration-300 dark:bg-green-500"
-                    style={{ width: `${progressPercentage}%` }}
-                  ></div>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center">
-                  <span className="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">Progress</span>
-                  <span className="text-xs font-medium text-gray-900 dark:text-white sm:text-sm">
-                    {progressPercentage}%
-                  </span>
-                </div>
-              </div>
-            </div>
-
             {/* This Week's Readings */}
             <div className="bg-white rounded-lg border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 sm:p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3 sm:text-lg sm:mb-4">
@@ -543,8 +536,14 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
 
       {/* Day Details Modal */}
       {showDayDetails && selectedDate && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden dark:bg-gray-800">
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={handleCloseModal}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden dark:bg-gray-800"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                 {selectedDate.toLocaleDateString('en-US', { 
@@ -555,8 +554,9 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                 })}
               </h2>
               <button
-                onClick={() => setShowDayDetails(false)}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                onClick={handleCloseModal}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                aria-label="Close modal"
               >
                 <i className="bx bx-x text-2xl"></i>
               </button>
@@ -597,7 +597,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                         <div
                           className="flex items-center justify-between p-4 border border-orange-200 rounded-lg hover:bg-orange-50 dark:border-orange-600 dark:hover:bg-orange-900/20 cursor-pointer transition-colors duration-200 bg-orange-50 dark:bg-orange-900/10"
                           onClick={() => {
-                            setShowDayDetails(false);
+                            handleCloseModal();
                             onReadingClick(reading);
                           }}
                         >
@@ -625,7 +625,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                         <div
                           className="flex items-center justify-between p-4 border border-purple-200 rounded-lg hover:bg-purple-50 dark:border-purple-600 dark:hover:bg-purple-900/20 cursor-pointer transition-colors duration-200 bg-purple-50 dark:bg-purple-900/10"
                           onClick={() => {
-                            setShowDayDetails(false);
+                            handleCloseModal();
                             onReadingClick(reading);
                           }}
                         >
@@ -654,7 +654,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                         <div
                           className="flex items-center justify-between p-4 border border-blue-200 rounded-lg hover:bg-blue-50 dark:border-blue-600 dark:hover:bg-blue-900/20 cursor-pointer transition-colors duration-200 bg-blue-50 dark:bg-blue-900/10"
                           onClick={() => {
-                            setShowDayDetails(false);
+                            handleCloseModal();
                             onReadingClick(reading);
                           }}
                         >
@@ -682,7 +682,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                       {reading.advent && (
                         <div className="flex items-center justify-between p-4 border border-green-200 rounded-lg hover:bg-green-50 dark:border-green-600 dark:hover:bg-green-900/20 cursor-pointer transition-colors duration-200 bg-green-50 dark:bg-green-900/10"
                             onClick={() => {
-                              setShowDayDetails(false);
+                              handleCloseModal();
                               onReadingClick(reading);
                             }}  
                         >

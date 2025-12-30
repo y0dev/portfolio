@@ -81,6 +81,138 @@ function generateCodeCopyScript(): string {
   `;
 }
 
+function generateImageVideoProcessingScript(): string {
+  return `
+    <script>
+      // Process images and videos
+      (function() {
+        function processImagesAndVideos() {
+          // Process images and captions
+          const images = Array.from(document.querySelectorAll('img')).reverse();
+          images.forEach((img) => {
+            // Skip if already processed
+            if (img.closest('.article-image-wrapper')) {
+              return;
+            }
+
+            // Add article-image class
+            img.classList.add('article-image');
+
+            const imgParent = img.parentElement;
+            if (!imgParent) return;
+
+            // Check if next sibling paragraph contains italic text (caption)
+            const nextSibling = imgParent.nextElementSibling;
+            let captionText = null;
+
+            if (nextSibling && nextSibling.tagName === 'P') {
+              const italicElement = nextSibling.querySelector('em');
+              if (italicElement) {
+                captionText = italicElement.textContent || nextSibling.textContent || null;
+              }
+            }
+
+            // Create wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'article-image-wrapper';
+
+            // Extract image from its parent (paragraph)
+            if (imgParent.tagName === 'P') {
+              // Move image to wrapper
+              imgParent.removeChild(img);
+              wrapper.appendChild(img);
+              
+              // Add caption if found BEFORE replacing
+              if (captionText && nextSibling) {
+                const captionDiv = document.createElement('div');
+                captionDiv.className = 'article-image-caption';
+                captionDiv.textContent = captionText;
+                wrapper.appendChild(captionDiv);
+              }
+              
+              // Replace the paragraph with the wrapper
+              if (imgParent.parentNode) {
+                imgParent.parentNode.replaceChild(wrapper, imgParent);
+              }
+
+              // Remove caption paragraph after replacement (if it still exists)
+              if (captionText && nextSibling && nextSibling.parentNode) {
+                nextSibling.parentNode.removeChild(nextSibling);
+              }
+            } else {
+              // Image not in paragraph, just wrap it
+              imgParent.removeChild(img);
+              wrapper.appendChild(img);
+              
+              // Add caption if found
+              if (captionText && nextSibling) {
+                const captionDiv = document.createElement('div');
+                captionDiv.className = 'article-image-caption';
+                captionDiv.textContent = captionText;
+                wrapper.appendChild(captionDiv);
+              }
+              
+              // Insert wrapper where image was
+              if (imgParent.parentNode) {
+                imgParent.parentNode.insertBefore(wrapper, imgParent.nextSibling);
+              } else {
+                imgParent.appendChild(wrapper);
+              }
+              
+              // Remove caption paragraph after insertion (if it still exists)
+              if (captionText && nextSibling && nextSibling.parentNode) {
+                nextSibling.parentNode.removeChild(nextSibling);
+              }
+            }
+          });
+
+          // Process videos
+          const videos = document.querySelectorAll('video');
+          videos.forEach((video) => {
+            if (video.closest('.article-video-wrapper')) {
+              return;
+            }
+            
+            video.classList.add('article-video');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'article-video-wrapper';
+            video.parentNode?.replaceChild(wrapper, video);
+            wrapper.appendChild(video);
+          });
+
+          // Process YouTube embeds and iframes
+          const iframes = document.querySelectorAll('iframe');
+          iframes.forEach((iframe) => {
+            const src = iframe.getAttribute('src') || '';
+            const isYouTube = src.includes('youtube.com/embed/') || src.includes('youtu.be/') || src.includes('youtube-nocookie.com/embed/');
+
+            if (isYouTube && !iframe.closest('.article-youtube-embed')) {
+              // Create YouTube embed wrapper
+              const wrapper = document.createElement('div');
+              wrapper.className = 'article-youtube-embed';
+              iframe.parentNode?.replaceChild(wrapper, iframe);
+              wrapper.appendChild(iframe);
+            } else if (!iframe.closest('.article-video-wrapper') && !iframe.closest('.article-youtube-embed')) {
+              // Regular iframe (not YouTube), wrap as video
+              const wrapper = document.createElement('div');
+              wrapper.className = 'article-video-wrapper';
+              iframe.parentNode?.replaceChild(wrapper, iframe);
+              wrapper.appendChild(iframe);
+            }
+          });
+        }
+
+        // Run on load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', processImagesAndVideos);
+        } else {
+          processImagesAndVideos();
+        }
+      })();
+    </script>
+  `;
+}
+
 function generateTableResponsiveScript(): string {
   return `
     <script>
@@ -343,6 +475,107 @@ function generatePostHeroCSS(): string {
         object-fit: contain;
         border-radius: 8px;
       }
+
+      /* Image Styling with Captions */
+      .article-image,
+      .article-image-wrapper img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      html.dark-mode .article-image,
+      html.dark-mode .article-image-wrapper img,
+      .dark .article-image,
+      .dark .article-image-wrapper img {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      }
+
+      .article-image-wrapper {
+        margin: 1.5rem 0;
+        text-align: center;
+      }
+
+      .article-image-caption {
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        font-size: 0.875rem;
+        color: #6b7280;
+        text-align: center;
+      }
+
+      html.dark-mode .article-image-caption,
+      .dark .article-image-caption {
+        color: #9ca3af;
+      }
+
+      /* Video Styling */
+      .article-video,
+      .article-video-wrapper {
+        margin: 1.5rem 0;
+        width: 100%;
+      }
+
+      .article-video-wrapper video,
+      .article-video-wrapper iframe {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      html.dark-mode .article-video-wrapper video,
+      html.dark-mode .article-video-wrapper iframe,
+      .dark .article-video-wrapper video,
+      .dark .article-video-wrapper iframe {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      }
+
+      /* YouTube Embed Styling */
+      .article-youtube-embed {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        margin: 1.5rem 0;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      html.dark-mode .article-youtube-embed,
+      .dark .article-youtube-embed {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      }
+
+      .article-youtube-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0.75rem;
+      }
+
+      .article-video-caption {
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        font-size: 0.875rem;
+        color: #6b7280;
+        text-align: center;
+      }
+
+      html.dark-mode .article-video-caption,
+      .dark .article-video-caption {
+        color: #9ca3af;
+      }
     </style>
   `;
 }
@@ -586,6 +819,7 @@ export function generateNoteHTML(
       </main>
     ${generateCodeCopyScript()}
     ${generateTableResponsiveScript()}
+    ${generateImageVideoProcessingScript()}
 </body>
 </html>`;
 }
@@ -689,6 +923,7 @@ export function generateArticleHTML(
     </div>
     ${generateCodeCopyScript()}
     ${generateTableResponsiveScript()}
+    ${generateImageVideoProcessingScript()}
 </body>
 </html>`;
 }

@@ -4,7 +4,7 @@
     "title": "NFL Pool",
     "description": "An NFL application that allows you to create a NFL pool with your friends and family to see who can correctly guess the winner of each game. How this works is you create a pool, invite your friends to join, and then each week you can submit your guesses for each game along with confidence points. At the end of each week, the person with the highest confidence score wins that week. After every quarter in the season, the person with the highest score wins the pool for that quarter. Tie-breakers come into play if there is a tie at the end of that quarter. The final quarter is the Playoffs. The person with the highest score after the Playoffs wins the pool. The person with the highest score overall wins the pool for the season.",
     "technologies": ["Next.js", "TypeScript", "Supabase", "Vercel", "Tailwind CSS"],
-    "image": "images/nfl-pool.png",
+    "image": "images/National_Football_League_logo.svg",
     "link": "https://nfl-football-pool.vercel.app/",
     "github": "https://github.com/y0dev/nfl_football_pool",
     "isEmoji": false,

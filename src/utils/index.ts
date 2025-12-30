@@ -20,6 +20,34 @@ export function formatDate(date: string | number): string {
   });
 }
 
+/**
+ * Calculate reading time in minutes from article content
+ * Assumes average reading speed of 200 words per minute
+ */
+export function calculateReadingTime(content: { title?: string; htmlContent: string }[]): number {
+  // Combine all content sections
+  const fullText = content
+    .map((section) => section.htmlContent)
+    .join(' ');
+
+  // Strip HTML tags and decode HTML entities
+  const textContent = fullText
+    .replace(/<[^>]*>/g, ' ') // Remove HTML tags
+    .replace(/&[a-z]+;/gi, ' ') // Remove HTML entities (basic approach)
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim();
+
+  // Count words (split by whitespace and filter empty strings)
+  const wordCount = textContent.split(/\s+/).filter((word) => word.length > 0).length;
+
+  // Calculate reading time (200 words per minute)
+  const wordsPerMinute = 200;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+  // Return at least 1 minute
+  return Math.max(1, readingTime);
+}
+
 export function formatDateFull(date: string | number): string {
   if (!date) return "";
 

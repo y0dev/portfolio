@@ -274,6 +274,25 @@ export function styleHTMLContent(html: string): string {
     hr.className = 'border-gray-300 dark:border-gray-600 my-8';
   });
 
+  // Style images - add article-image class (wrapping and captions handled by ContentRenderer)
+  tempDiv.querySelectorAll('img').forEach(img => {
+    img.classList.add('article-image');
+  });
+
+  // Style videos - add article-video class
+  tempDiv.querySelectorAll('video').forEach(video => {
+    video.classList.add('article-video');
+  });
+
+  // Style iframes (including YouTube embeds) - classes handled by ContentRenderer
+  tempDiv.querySelectorAll('iframe').forEach(iframe => {
+    // YouTube embeds will be handled by ContentRenderer
+    // Just ensure they're not wrapped yet
+    if (!iframe.closest('.article-youtube-embed') && !iframe.closest('.article-video-wrapper')) {
+      // ContentRenderer will handle wrapping
+    }
+  });
+
   return tempDiv.innerHTML;
 }
 

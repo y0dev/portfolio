@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Create and preview articles and notes for your portfolio",
 };
 
+import Sidebar from '@/components/Sidebar';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="flex">
+          <Sidebar />
+          <main className="flex-1 ml-64">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

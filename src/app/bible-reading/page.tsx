@@ -57,9 +57,8 @@ export default function BibleReadingPlanPage() {
 
   // Calculate progress statistics based on calendar weeks and days
   const stats = useMemo(() => {
-    const totalReadings = 260; //readings.length;
+    const totalReadings = 260; 
     const today = new Date();
-    console.log(readingPlan.startDate);
     const planStartDate = new Date(readingPlan.startDate);
     
     // Calculate how many weeks have passed since start

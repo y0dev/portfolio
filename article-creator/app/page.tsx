@@ -7,6 +7,7 @@ import AddToPortfolioModal from '@/components/AddToPortfolioModal';
 import { parseMarkdownToSections, styleHTMLContent } from '@/lib/markdown';
 import { generateNoteHTML, generateArticleHTML } from '@/lib/html-generator';
 import { formatDate, slugifyTitle } from '@/lib/utils';
+import { stripCodeBlockWrappers } from '@/lib/html-cleaner';
 import type { Article } from '@/types';
 
 const SAMPLE_MARKDOWN = `This is the introduction section of your article or note. You can write content here without a section title, or add sections below.
@@ -143,7 +144,13 @@ export default function Home() {
 
     setGeneratedHTML(html);
     
-    // Generate JSON for upload (use styled sections)
+    // Generate JSON for portfolio (clean HTML - strip code wrappers and styling)
+    // The portfolio's ContentRenderer expects plain <pre><code> elements
+    const cleanedSections = styledSections.map(section => ({
+      ...section,
+      htmlContent: stripCodeBlockWrappers(section.htmlContent)
+    }));
+    
     const jsonData: Article = {
       id,
       title: data.title,
@@ -155,7 +162,7 @@ export default function Home() {
         alt: data.imageAlt || (data.type === 'note' ? 'Note image' : 'Article image'),
         name: data.imagePath || 'images/image.png'
       },
-      content: styledSections
+      content: cleanedSections
     };
 
     setArticleData(jsonData);
@@ -272,7 +279,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto p-8 max-w-7xl">
         <header className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Article & Note Editor</h1>
           <p className="text-gray-600 dark:text-gray-400">Create and preview articles/notes matching your portfolio design</p>

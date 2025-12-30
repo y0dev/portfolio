@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 
@@ -150,7 +150,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
-        <script type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js"></script>
+        <script src="https://static.esvmedia.org/crossref/crossref.min.js" type="text/javascript"></script>
       </body>
     </html>
   );
