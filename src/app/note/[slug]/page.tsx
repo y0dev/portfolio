@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { articles } from "@/data/articles";
+import { getArticleBySlug, getArticlesSync } from "@/lib/data/articles";
 import { formatDateFull, parseDate, calculateReadingTime } from "@/utils"
 import Link from "next/link";
 import Image from "next/image";
@@ -9,15 +9,18 @@ import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
 export async function generateStaticParams() {
-  return articles
+  // For static export, use static files synchronously
+  return getArticlesSync()
+    .filter(article => article.type === "note")
     .map(article => ({ slug: article.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const note = articles.find(a => a.id === slug && a.type === "note");
-
-  if (!note) {
+  const note = await getArticleBySlug(slug);
+  
+  // Ensure it's a note type
+  if (!note || note.type !== "note") {
     return {
       title: "Note Not Found",
       description: "The requested note could not be found.",
@@ -89,9 +92,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function NotePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const note = articles.find(a => a.id === slug && a.type === "note");
+  const note = await getArticleBySlug(slug);
 
-  if (!note) {
+  if (!note || note.type !== "note") {
     notFound();
   }
 

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { articles } from "@/data/articles";
+import { articles as staticArticles } from "@/data/articles";
+import { getArticleBySlug, getArticlesSync } from "@/lib/data/articles";
 import Link from "next/link";
 import Image from "next/image";
 import { formatDateFull, parseDate, calculateReadingTime } from "@/utils";
@@ -9,7 +10,9 @@ import ArticleSidebar from "@/components/ArticleSidebar";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
-  return articles
+  // For static export, use static files synchronously
+  return getArticlesSync()
+    .filter(article => article.type === "article")
     .map((article) => ({
       slug: article.id,
     }));
@@ -18,9 +21,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const article = articles.find(a => a.id === slug && a.type === "article");
-
-  if (!article) {
+  const article = await getArticleBySlug(slug);
+  
+  // Ensure it's an article type
+  if (!article || article.type !== "article") {
     return {
       title: "Article Not Found",
       description: "The requested article could not be found.",
@@ -92,9 +96,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = articles.find(a => a.id === slug && a.type === "article");
+  const article = await getArticleBySlug(slug);
 
-  if (!article) {
+  if (!article || article.type !== "article") {
     notFound();
   }
 
