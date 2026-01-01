@@ -151,14 +151,15 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
   let targetYear = year || new Date().getFullYear();
 
   // If we're in the last few weeks of the current year (week 52 or later), use next year's plan
-  const now = new Date();
-  if (targetYear === now.getFullYear()) {
-    const currentWeek = getISOWeek(now);
-    // If we're in week 52 or 53 (last weeks of the year), use next year's plan
-    if (currentWeek == 1) {
-      targetYear = targetYear + 1;
-    }
-  }
+  // const now = new Date();
+  // if (targetYear === now.getFullYear()) {
+  //   const currentWeek = getISOWeek(now);
+  //   // If we're in week 52 or 53 (last weeks of the year), use next year's plan
+  //   if (currentWeek == 1) {
+  //     targetYear = targetYear + 1;
+  //   }
+  // }
+
   // Get ISO weeks for this year and next year to ensure rollover
   const { firstWeekStart } = getISOWeeksOfYear(targetYear);
   const { firstWeekStart: nextYearFirstWeek, lastWeekNumber: nextYearLastWeek } = getISOWeeksOfYear(targetYear + 1);
@@ -278,7 +279,7 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
     year: targetYear,
     startDate: startDate.toISOString().split('T')[0],
     readings,
-    source: "https://www.fivedaybiblereading.com/wp-content/uploads/2024/12/2025-5-Day-Bible-Reading.pdf"
+    source: "https://www.fivedaybiblereading.com/wp-content/uploads/2025/12/2026-5-Day-Bible-Reading-Schedule.pdf"
   };
 }
 

@@ -116,14 +116,20 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
   const firstDay = getFirstDayOfMonth(currentDate);
   const monthDays = [];
 
-  // Add empty cells for days before the first day of the month
+  // Calculate previous month's last days to fill the first week
+  const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+  const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+  const daysInPrevMonth = getDaysInMonth(new Date(prevYear, prevMonth, 1));
+
+  // Add previous month's days (showing actual dates with lighter styling)
   for (let i = 0; i < firstDay; i++) {
-    monthDays.push(null);
+    const dayNumber = daysInPrevMonth - firstDay + i + 1;
+    monthDays.push({ day: dayNumber, month: prevMonth, year: prevYear, isPrevMonth: true });
   }
 
-  // Add days of the month
+  // Add days of the current month
   for (let i = 1; i <= daysInMonth; i++) {
-    monthDays.push(i);
+    monthDays.push({ day: i, month: currentMonth, year: currentYear, isPrevMonth: false });
   }
 
   // Week view data
@@ -154,7 +160,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+            <div className="flex flex-row gap-2 items-center">
               {/* View Mode Toggle */}
               <div className="flex items-center bg-white rounded-lg border border-gray-200 p-1 shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <button
@@ -223,35 +229,36 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
               {viewMode === 'month' ? (
 
                 // Month View
-                monthDays.map((day, index) => {
-                  const dayDate = day ? new Date(currentYear, currentMonth, day) : null;
-                  const reading = dayDate ? getReadingForDate(dayDate) : null;
-                  const isCurrentDay = dayDate ? isToday(dayDate) : false;
-                  const isWeekend = dayDate ? (dayDate.getDay() === 0 || dayDate.getDay() === 6) : false;
-                  // console.log(reading);
+                monthDays.map((dayInfo, index) => {
+                  const dayDate = new Date(dayInfo.year, dayInfo.month, dayInfo.day);
+                  const reading = getReadingForDate(dayDate);
+                  const isCurrentDay = isToday(dayDate);
+                  const isWeekend = dayDate.getDay() === 0 || dayDate.getDay() === 6;
+                  const isPrevMonth = dayInfo.isPrevMonth;
 
                   return (
                     <div
                       key={index}
                       className={`min-h-[80px] p-1 border-r border-b border-gray-200 dark:border-gray-700 sm:min-h-[120px] sm:p-2 ${
-                        day === null 
-                          ? 'bg-gray-50 dark:bg-gray-900' 
-                          : isCurrentDay
+                        isCurrentDay
                           ? 'bg-blue-50 dark:bg-blue-900/30 cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40'
+                          : isPrevMonth
+                          ? 'bg-gray-50/50 dark:bg-gray-900/50 cursor-pointer hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                           : 'hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer'
                       }`}
-                      onClick={() => dayDate && handleDateClick(dayDate)}
+                      onClick={() => handleDateClick(dayDate)}
                     >
-                      {day && (
-                        <div className="flex flex-col h-full">
-                          <div className="flex justify-between items-center mb-1">
-                            <div className={`text-xs font-medium sm:text-sm ${
-                              isCurrentDay 
-                                ? 'text-blue-700 dark:text-blue-300' 
-                                : 'text-gray-900 dark:text-white'
-                            }`}>
-                              {day}
-                            </div>
+                      <div className="flex flex-col h-full">
+                        <div className="flex justify-between items-center mb-1">
+                          <div className={`text-xs font-medium sm:text-sm ${
+                            isCurrentDay 
+                              ? 'text-blue-700 dark:text-blue-300' 
+                              : isPrevMonth
+                              ? 'text-gray-400 dark:text-gray-600'
+                              : 'text-gray-900 dark:text-white'
+                          }`}>
+                            {dayInfo.day}
+                          </div>
                             {reading && (
                               <div className={`w-2 h-2 rounded-full ${
                                 reading.completed 
@@ -269,7 +276,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                                       reading.completed
                                         ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/30'
                                         : 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/30'
-                                    }`}
+                                    } ${isPrevMonth ? 'opacity-60' : ''}`}
                                     title={`OT: ${reading.ot.reference}`}
                                     onClick={(e) => {
                                       e.stopPropagation();
@@ -285,7 +292,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                                       reading.completed
                                         ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400 hover:bg-purple-200 dark:hover:bg-purple-900/30'
                                         : 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400 hover:bg-purple-200 dark:hover:bg-purple-900/30'
-                                    }`}
+                                    } ${isPrevMonth ? 'opacity-60' : ''}`}
                                     title={`Psalm: ${reading.psalm.reference}`}
                                     onClick={(e) => {
                                       e.stopPropagation();
@@ -301,7 +308,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                                       reading.completed
                                         ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-900/30'
                                         : 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-900/30'
-                                    }`}
+                                    } ${isPrevMonth ? 'opacity-60' : ''}`}
                                     title={`NT: ${reading.nt.reference}`}
                                     onClick={(e) => {
                                       e.stopPropagation();
@@ -317,7 +324,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                                     reading.completed
                                       ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/30'
                                       : 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/30'
-                                  }`}
+                                  } ${isPrevMonth ? 'opacity-60' : ''}`}
                                   title={`Advent: ${reading.advent?.reference}`}
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -330,14 +337,13 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                               </div>
                             )}
                             {!reading && !isWeekend && (
-                              <div className="text-xs text-gray-400 dark:text-gray-500 italic">
+                              <div className={`text-xs italic ${isPrevMonth ? 'text-gray-300 dark:text-gray-700' : 'text-gray-400 dark:text-gray-500'}`}>
                                 Rest day
                               </div>
                             )}
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
                   );
                 })
               ) : (

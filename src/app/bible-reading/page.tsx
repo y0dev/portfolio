@@ -76,6 +76,7 @@ export default function BibleReadingPlanPage() {
     
     const expectedReadingsCompleted = actualCompletedReadings;
     const readingPercentage = Math.round((expectedReadingsCompleted / totalReadings) * 100);
+    // console.log(`expectedReadingsCompleted: ${expectedReadingsCompleted}, totalReadings: ${totalReadings}, readingPercentage: ${readingPercentage}`);
     
     // Calculate current week progress
     const currentWeekStart = new Date(planStartDate);
@@ -92,7 +93,22 @@ export default function BibleReadingPlanPage() {
       Math.max(0, Math.floor((today.getTime() - currentWeekStart.getTime()) / (1000 * 60 * 60 * 24))),
       currentWeekReadings.length
     );
-    
+    // console.log(`currentWeekCompleted: ${currentWeekCompleted}, currentWeekReadings: ${currentWeekReadings.length}`);
+    // console.log(`currentWeekStart: ${currentWeekStart.toISOString()}, currentWeekEnd: ${currentWeekEnd.toISOString()}`);
+    // console.log(`today: ${today.toISOString()}`);
+    // console.log(`todayMidnight: ${todayMidnight.toISOString()}`);
+    // console.log(`readings: ${readings.length}`);
+    // console.log(`actualCompletedReadings: ${actualCompletedReadings}`);
+    // console.log(`expectedReadingsCompleted: ${expectedReadingsCompleted}`);
+    // console.log(`readingPercentage: ${readingPercentage}`);
+    // console.log(`weekProgress: ${weekProgress}`);
+    // console.log(`totalWeeks: ${totalWeeks}`);
+    // console.log(`weekPercentage: ${weekPercentage}`);
+    // console.log(`currentWeekReadings: ${currentWeekReadings.length}`);
+    // console.log(`currentWeekCompleted: ${currentWeekCompleted}`);
+    // console.log(`currentWeekPercentage: ${currentWeekReadings.length > 0 
+    //   ? Math.round((currentWeekCompleted / currentWeekReadings.length) * 100) 
+    //   : 0}`);
     return {
       totalReadings,
       expectedReadingsCompleted,

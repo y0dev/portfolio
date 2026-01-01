@@ -91,13 +91,15 @@ export function parseDate(date: string | number): number {
       - lastWeekNumber: Total number of ISO weeks in the year (52 or 53)
 */
 export function getISOWeeksOfYear(year: number): { firstWeekStart: Date; lastWeekNumber: number } {
-  // Create a date for January 4th of the target year
-  const jan4 = new Date(year, 0, 4);
 
-  // Find the Monday of that week — ISO week starts on Monday
-  const dayOfWeek = jan4.getDay() || 7; // Sunday is 0, change to 7
-  const firstWeekStart = new Date(jan4);
-  firstWeekStart.setDate(jan4.getDate() - (dayOfWeek - 1));
+  // Get the first day of the year
+  const firstDayOfYear = new Date(year, 0, 1);
+
+  // Get the first day of the week
+  const firstDayOfWeek = firstDayOfYear.getDay() || 7; // Sunday is 0, change to 7
+  const firstWeekStart = new Date(firstDayOfYear);
+  firstWeekStart.setDate(firstDayOfYear.getDate() - (firstDayOfWeek - 1));
+
 
   // Find the Monday of the week containing December 28th
   // December 28th is always in the last ISO week of the year (since it's always a Thursday or later)
@@ -109,6 +111,7 @@ export function getISOWeeksOfYear(year: number): { firstWeekStart: Date; lastWee
   // Calculate week number by counting weeks from firstWeekStart to lastWeekMonday
   const daysDiff = Math.floor((lastWeekMonday.getTime() - firstWeekStart.getTime()) / (1000 * 60 * 60 * 24));
   const lastWeekNumber = Math.floor(daysDiff / 7) + 1;
+  // console.log(`firstWeekStart: ${firstWeekStart.toISOString()}, lastWeekNumber: ${lastWeekNumber}`);
   return {
     firstWeekStart,
     lastWeekNumber
