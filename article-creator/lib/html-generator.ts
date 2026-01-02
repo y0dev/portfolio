@@ -1,6 +1,10 @@
 import { ContentSection } from './markdown';
 import { formatDateFull, slugifyTitle } from './utils';
 
+/**
+ * Generate code copy script
+ * @returns The code copy script
+ */
 function generateCodeCopyScript(): string {
   return `
     <script>
@@ -81,19 +85,28 @@ function generateCodeCopyScript(): string {
   `;
 }
 
+/**
+ * Generate image and video processing script
+ * @returns The image and video processing script
+ */
 function generateImageVideoProcessingScript(): string {
   return `
     <script>
       // Process images and videos
       (function() {
         function processImagesAndVideos() {
-          // Process images and captions
-          const images = Array.from(document.querySelectorAll('img')).reverse();
-          images.forEach((img) => {
-            // Skip if already processed
-            if (img.closest('.article-image-wrapper')) {
-              return;
-            }
+            // Process images and captions
+            const images = Array.from(document.querySelectorAll('img')).reverse();
+            images.forEach((img) => {
+              // Skip if already processed
+              if (img.closest('.article-image-wrapper')) {
+                return;
+              }
+              
+              // Skip images that are already inside a carousel
+              if (img.closest('.article-carousel')) {
+                return;
+              }
 
             // Add article-image class
             img.classList.add('article-image');
@@ -207,6 +220,88 @@ function generateImageVideoProcessingScript(): string {
           document.addEventListener('DOMContentLoaded', processImagesAndVideos);
         } else {
           processImagesAndVideos();
+        }
+      })();
+    </script>
+  `;
+}
+
+function generateCarouselScript(): string {
+  return `
+    <script>
+      // Initialize carousels
+      (function() {
+        function initCarousels() {
+          document.querySelectorAll('.article-carousel').forEach((carousel) => {
+            if (carousel.dataset.initialized === 'true') {
+              return; // Already initialized
+            }
+            carousel.dataset.initialized = 'true';
+            
+            const container = carousel.querySelector('.article-carousel-container');
+            const items = Array.from(carousel.querySelectorAll('.article-carousel-item'));
+            const prevBtn = carousel.querySelector('.article-carousel-prev');
+            const nextBtn = carousel.querySelector('.article-carousel-next');
+            const currentSpan = carousel.querySelector('.article-carousel-current');
+            
+            if (!container || items.length === 0) return;
+            
+            let currentIndex = 0;
+            
+            // Set initial state
+            items.forEach((item, index) => {
+              item.style.display = index === 0 ? 'block' : 'none';
+            });
+            updateCounter();
+            
+            function updateCounter() {
+              if (currentSpan) {
+                currentSpan.textContent = String(currentIndex + 1);
+              }
+            }
+            
+            function showSlide(index) {
+              if (index < 0 || index >= items.length) return;
+              
+              items.forEach((item, i) => {
+                item.style.display = i === index ? 'block' : 'none';
+              });
+              currentIndex = index;
+              updateCounter();
+            }
+            
+            function nextSlide() {
+              showSlide((currentIndex + 1) % items.length);
+            }
+            
+            function prevSlide() {
+              showSlide((currentIndex - 1 + items.length) % items.length);
+            }
+            
+            if (prevBtn) {
+              prevBtn.addEventListener('click', prevSlide);
+            }
+            if (nextBtn) {
+              nextBtn.addEventListener('click', nextSlide);
+            }
+            
+            // Keyboard navigation
+            carousel.setAttribute('tabindex', '0');
+            carousel.addEventListener('keydown', (e) => {
+              if (e.key === 'ArrowLeft') {
+                prevSlide();
+              } else if (e.key === 'ArrowRight') {
+                nextSlide();
+              }
+            });
+          });
+        }
+
+        // Run on load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initCarousels);
+        } else {
+          initCarousels();
         }
       })();
     </script>
@@ -576,6 +671,119 @@ function generatePostHeroCSS(): string {
       .dark .article-video-caption {
         color: #9ca3af;
       }
+
+      /* Image Carousel Styling */
+      .article-carousel {
+        margin: 1.5rem 0;
+        position: relative;
+      }
+
+      .article-carousel-container {
+        position: relative;
+        width: 100%;
+      }
+
+      .article-carousel-item {
+        display: none;
+        text-align: center;
+      }
+
+      .article-carousel-item:first-child {
+        display: block;
+      }
+
+      .article-carousel-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        margin-bottom: 0.5rem;
+      }
+
+      html.dark-mode .article-carousel-item img,
+      .dark .article-carousel-item img {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      }
+
+      .article-carousel-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+        padding: 0.5rem;
+      }
+
+      .article-carousel-prev,
+      .article-carousel-next {
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        color: #3b82f6;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        line-height: 1;
+        padding: 0;
+      }
+
+      .article-carousel-prev:hover,
+      .article-carousel-next:hover {
+        background: #3b82f6;
+        color: white;
+        transform: scale(1.1);
+      }
+
+      .article-carousel-prev:active,
+      .article-carousel-next:active {
+        transform: scale(0.95);
+      }
+
+      html.dark-mode .article-carousel-prev,
+      html.dark-mode .article-carousel-next,
+      .dark .article-carousel-prev,
+      .dark .article-carousel-next {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: rgba(59, 130, 246, 0.3);
+        color: #60a5fa;
+      }
+
+      html.dark-mode .article-carousel-prev:hover,
+      html.dark-mode .article-carousel-next:hover,
+      .dark .article-carousel-prev:hover,
+      .dark .article-carousel-next:hover {
+        background: #3b82f6;
+        color: white;
+      }
+
+      .article-carousel-counter {
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-weight: 500;
+        min-width: 3rem;
+        text-align: center;
+      }
+
+      html.dark-mode .article-carousel-counter,
+      .dark .article-carousel-counter {
+        color: #9ca3af;
+      }
+
+      .article-carousel-current {
+        font-weight: 600;
+        color: #3b82f6;
+      }
+
+      html.dark-mode .article-carousel-current,
+      .dark .article-carousel-current {
+        color: #60a5fa;
+      }
     </style>
   `;
 }
@@ -820,6 +1028,7 @@ export function generateNoteHTML(
     ${generateCodeCopyScript()}
     ${generateTableResponsiveScript()}
     ${generateImageVideoProcessingScript()}
+    ${generateCarouselScript()}
 </body>
 </html>`;
 }
@@ -924,6 +1133,7 @@ export function generateArticleHTML(
     ${generateCodeCopyScript()}
     ${generateTableResponsiveScript()}
     ${generateImageVideoProcessingScript()}
+    ${generateCarouselScript()}
 </body>
 </html>`;
 }

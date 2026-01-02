@@ -10,6 +10,14 @@ import { formatDate, slugifyTitle } from '@/lib/utils';
 import { stripCodeBlockWrappers } from '@/lib/html-cleaner';
 import type { Article } from '@/types';
 
+/**
+ * Sample Markdown
+ * @description This is the introduction section of your article or note. You can write content here without a section title, or add sections below.
+ * 
+ * Section Title will always have ## at the beginning of the line
+ * 
+ * Subsection Title will always have ### at the beginning of the line
+ */
 const SAMPLE_MARKDOWN = `This is the introduction section of your article or note. You can write content here without a section title, or add sections below.
 
 ## Section Title

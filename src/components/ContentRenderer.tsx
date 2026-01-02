@@ -20,10 +20,15 @@ function processHTMLContent(html: string): string {
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
 
-  // Process images and captions
+  // Process images and captions (skip images inside carousels)
   const images = Array.from(tempDiv.querySelectorAll('img')).reverse();
   images.forEach((img) => {
     if (img.closest('.article-image-wrapper')) {
+      return;
+    }
+    
+    // Skip images that are already inside a carousel
+    if (img.closest('.article-carousel')) {
       return;
     }
 
@@ -312,6 +317,73 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
 
       // Replace the original pre element with our custom wrapper
       preElement.parentNode?.replaceChild(wrapper, preElement);
+    });
+
+    // Initialize carousels
+    const carousels = containerRef.current.querySelectorAll('.article-carousel');
+    carousels.forEach((carousel) => {
+      if ((carousel as HTMLElement).dataset.initialized === 'true') {
+        return; // Already initialized
+      }
+      (carousel as HTMLElement).dataset.initialized = 'true';
+      
+      const container = carousel.querySelector('.article-carousel-container') as HTMLElement;
+      const items = Array.from(carousel.querySelectorAll('.article-carousel-item')) as HTMLElement[];
+      const prevBtn = carousel.querySelector('.article-carousel-prev') as HTMLButtonElement;
+      const nextBtn = carousel.querySelector('.article-carousel-next') as HTMLButtonElement;
+      const currentSpan = carousel.querySelector('.article-carousel-current') as HTMLElement;
+      const total = parseInt(carousel.getAttribute('data-total') || '1', 10);
+      
+      if (!container || items.length === 0) return;
+      
+      let currentIndex = 0;
+      
+      // Set initial state
+      items.forEach((item, index) => {
+        item.style.display = index === 0 ? 'block' : 'none';
+      });
+      updateCounter();
+      
+      function updateCounter() {
+        if (currentSpan) {
+          currentSpan.textContent = String(currentIndex + 1);
+        }
+      }
+      
+      function showSlide(index: number) {
+        if (index < 0 || index >= items.length) return;
+        
+        items.forEach((item, i) => {
+          item.style.display = i === index ? 'block' : 'none';
+        });
+        currentIndex = index;
+        updateCounter();
+      }
+      
+      function nextSlide() {
+        showSlide((currentIndex + 1) % items.length);
+      }
+      
+      function prevSlide() {
+        showSlide((currentIndex - 1 + items.length) % items.length);
+      }
+      
+      if (prevBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+      }
+      
+      // Keyboard navigation
+      carousel.setAttribute('tabindex', '0');
+      carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+        }
+      });
     });
   }, [processedContent, isClient]);
 

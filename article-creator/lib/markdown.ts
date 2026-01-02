@@ -13,6 +13,18 @@ export interface ContentSection {
   htmlContent: string;
 }
 
+/**
+ * Parse markdown to sections
+ * Sections are defined by ## or ###
+ * Sections are split automatically
+ * Sections are processed for carousels
+ * Sections are processed for code blocks
+ * Sections are processed for images
+ * Sections are processed for videos
+ * Sections are processed for iframes
+ * @param markdown - The markdown to parse
+ * @returns The parsed sections
+ */
 export function parseMarkdownToSections(markdown: string): ContentSection[] {
   if (!markdown || markdown.trim() === '') {
     return [{ htmlContent: '' }];
@@ -32,7 +44,7 @@ export function parseMarkdownToSections(markdown: string): ContentSection[] {
       // Save previous section if it exists
       if (currentSection !== null) {
         if (currentLines.length > 0) {
-          const htmlContent = marked.parse(currentLines.join('\n'));
+          const htmlContent = processCarousels(currentLines.join('\n'));
           currentSection.htmlContent = typeof htmlContent === 'string' ? htmlContent : String(htmlContent);
         }
         sections.push(currentSection);
@@ -50,14 +62,14 @@ export function parseMarkdownToSections(markdown: string): ContentSection[] {
   // Add last section
   if (currentSection !== null) {
     if (currentLines.length > 0) {
-      const htmlContent = marked.parse(currentLines.join('\n'));
+      const htmlContent = processCarousels(currentLines.join('\n'));
       currentSection.htmlContent = typeof htmlContent === 'string' ? htmlContent : String(htmlContent);
     }
     sections.push(currentSection);
   } else {
     // No sections with titles, create one section with all content
     if (currentLines.length > 0) {
-      const htmlContent = marked.parse(currentLines.join('\n'));
+      const htmlContent = processCarousels(currentLines.join('\n'));
       sections.push({ htmlContent: typeof htmlContent === 'string' ? htmlContent : String(htmlContent) });
     } else {
       sections.push({ htmlContent: '' });
@@ -67,6 +79,123 @@ export function parseMarkdownToSections(markdown: string): ContentSection[] {
   return sections;
 }
 
+/**
+ * Process carousel blocks in markdown - convert to HTML before parsing
+ * Carousel blocks are defined by :::carousel ... ::::
+ * Images are defined by ![alt](src)
+ * Captions are defined by *caption* or _caption_
+ * Images and captions are grouped together
+ * Images and captions are displayed in the order they appear in the markdown
+ * Images and captions are displayed in a carousel
+ * 
+ * Example:
+ * :::carousel
+ * ![alt](src)
+ * *caption*
+ * :::
+ * 
+ * Will be converted to:
+ * <div class="article-carousel" data-total="1"><div class="article-carousel-container"><div class="article-carousel-item" data-index="0"><img src="src" alt="alt" class="article-image"><div class="article-image-caption">caption</div></div></div><div class="article-carousel-controls"><button class="article-carousel-prev" aria-label="Previous image">‹</button><span class="article-carousel-counter"><span class="article-carousel-current">1</span> / <span class="article-carousel-total">1</span></span><button class="article-carousel-next" aria-label="Next image">›</button></div></div>
+ * 
+ * The carousel will be displayed in the order the images and captions appear in the markdown
+ * The carousel will be displayed in a carousel
+ * @param markdown - The markdown to process
+ * @returns The processed markdown
+ */
+function processCarousels(markdown: string): string {
+  // Match carousel blocks: :::carousel ... ::::
+  const carouselRegex = /:::carousel\n([\s\S]*?)\n:::/g;
+  
+  // Replace carousel blocks with HTML (marked will pass HTML through)
+  const processedMarkdown = markdown.replace(carouselRegex, (match, content) => {
+    const carouselContent = content.trim();
+    const lines = carouselContent.split('\n');
+    
+    // Parse images and captions from carousel content
+    const images: Array<{ src: string; alt: string; caption?: string }> = [];
+    let currentImage: { src: string; alt: string; caption?: string } | null = null;
+    
+    for (const line of lines) {
+      // Check for image markdown: ![alt](src)
+      const imageMatch = line.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+      if (imageMatch) {
+        // Save previous image if exists
+        if (currentImage) {
+          images.push(currentImage);
+        }
+        currentImage = {
+          alt: imageMatch[1] || '',
+          src: imageMatch[2] || ''
+        };
+      } else if (currentImage) {
+        // Check for caption (italic text on next line)
+        const captionMatch = line.match(/^\*([^*]+)\*$|^_([^_]+)_$/);
+        if (captionMatch) {
+          currentImage.caption = captionMatch[1] || captionMatch[2] || '';
+        } else if (line.trim() && !line.match(/^\s*$/)) {
+          // If there's text but not a caption marker, still use it as caption
+          currentImage.caption = line.trim();
+        }
+      }
+    }
+    
+    // Add last image
+    if (currentImage) {
+      images.push(currentImage);
+    }
+    
+    // Generate carousel HTML structure (marked.parse will pass HTML through)
+    if (images.length > 0) {
+      const carouselItems = images.map((img, index) => {
+        const caption = img.caption ? `<div class="article-image-caption">${img.caption}</div>` : '';
+        return `<div class="article-carousel-item" data-index="${index}"><img src="${img.src}" alt="${img.alt}" class="article-image">${caption}</div>`;
+      }).join('');
+      
+      return `<div class="article-carousel" data-total="${images.length}"><div class="article-carousel-container">${carouselItems}</div><div class="article-carousel-controls"><button class="article-carousel-prev" aria-label="Previous image">‹</button><span class="article-carousel-counter"><span class="article-carousel-current">1</span> / <span class="article-carousel-total">${images.length}</span></span><button class="article-carousel-next" aria-label="Next image">›</button></div></div>`;
+    }
+    
+    return match; // Return original if no images found
+  });
+  
+  // Parse the markdown (carousel HTML will pass through)
+  const parsedHTML = marked.parse(processedMarkdown);
+  return typeof parsedHTML === 'string' ? parsedHTML : String(parsedHTML);
+}
+
+/**
+ * Style HTML content
+ * Paragraphs are styled with a space-y-2 mb-4 class
+ * Headings are styled with a text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7 class for h2 and a text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-6 class for other headings
+ * Lists are styled with a mb-2 space-y-1 list-disc list-outside ml-6 class for ul and a mb-4 space-y-2 list-decimal list-outside ml-6 class for ol
+ * Code blocks are styled with a p-4 rounded-lg overflow-x-auto class
+ * Inline code is styled with a bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono class
+ * Blockquotes are styled with a border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300 class
+ * Links are styled with a text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200 class
+ * Strong and em are styled with a font-bold text-gray-900 dark:text-white class for strong and a italic text-gray-800 dark:text-gray-100 class for em
+ * Tables are styled with a overflow-x-auto my-6 class
+ * Horizontal rules are styled with a border-gray-300 dark:border-gray-600 my-8 class
+ * Images are styled with a article-image class
+ * Videos are styled with a article-video class
+ * Iframes are styled with a article-iframe class
+ * 
+ * Example:
+ * <p>This is a paragraph with a <strong>bold</strong> and <em>italic</em> text.</p>
+ * 
+ * Will be converted to:
+ * <div class="space-y-2 mb-4"><p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-2">This is a paragraph with a <strong class="font-bold text-gray-900 dark:text-white">bold</strong> and <em class="italic text-gray-800 dark:text-gray-100">italic</em> text.</p></div>
+ * 
+ * The paragraph will be styled with a space-y-2 mb-4 class
+ * The bold text will be styled with a font-bold text-gray-900 dark:text-white class
+ * The italic text will be styled with a italic text-gray-800 dark:text-gray-100 class
+ * The paragraph will be displayed in a div with a space-y-2 mb-4 class
+ * The bold text will be displayed in a strong element with a font-bold text-gray-900 dark:text-white class
+ * The italic text will be displayed in a em element with a italic text-gray-800 dark:text-gray-100 class
+ * The paragraph will be displayed in a div with a space-y-2 mb-4 class
+ * The bold text will be displayed in a strong element with a font-bold text-gray-900 dark:text-white class
+ * The italic text will be displayed in a em element with a italic text-gray-800 dark:text-gray-100 class
+ * @param html - The HTML to style
+ * @returns The styled HTML
+ */
 export function styleHTMLContent(html: string): string {
   // This function should only be called on the client side
   if (typeof document === 'undefined') {
