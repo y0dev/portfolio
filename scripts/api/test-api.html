@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .loading { background-color: #fff3cd; border-color: #ffeaa7; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>API Connectivity Test</h1>
+    
+    <div class="test-section">
+        <h2>Test Endpoints</h2>
+        <button onclick="testQuick()">Test Quick Endpoint</button>
+        <button onclick="testCors()">Test CORS Endpoint</button>
+        <button onclick="testArticles()">Test Articles Endpoint</button>
+        <button onclick="testAll()">Test All Endpoints</button>
+    </div>
+    
+    <div id="results"></div>
+
+    <script>
+        const API_BASE = 'https://devontaereid.com/scripts/api';
+        
+        function showResult(title, data, isError = false) {
+            const resultsDiv = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-section ${isError ? 'error' : 'success'}`;
+            div.innerHTML = `
+                <h3>${title}</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+            resultsDiv.appendChild(div);
+        }
+        
+        function showLoading(title) {
+            const resultsDiv = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = 'test-section loading';
+            div.id = 'loading-' + title.replace(/\s+/g, '-').toLowerCase();
+            div.innerHTML = `<h3>${title}</h3><p>Testing...</p>`;
+            resultsDiv.appendChild(div);
+            return div;
+        }
+        
+        async function testEndpoint(url, title) {
+            const loadingDiv = showLoading(title);
+            
+            try {
+                console.log(`Testing: ${url}`);
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors'
+                });
+                
+                console.log(`Response status: ${response.status}`);
+                console.log(`Response headers:`, response.headers);
+                
+                const text = await response.text();
+                console.log(`Response text:`, text);
+                
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    data = { raw_response: text, parse_error: e.message };
+                }
+                
+                const result = {
+                    url: url,
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries()),
+                    data: data,
+                    timestamp: new Date().toISOString()
+                };
+                
+                loadingDiv.remove();
+                showResult(title, result, !response.ok);
+                
+            } catch (error) {
+                console.error(`Error testing ${url}:`, error);
+                loadingDiv.remove();
+                showResult(title, {
+                    url: url,
+                    error: error.message,
+                    timestamp: new Date().toISOString()
+                }, true);
+            }
+        }
+        
+        async function testQuick() {
+            await testEndpoint(`${API_BASE}/quick-test.php`, 'Quick Test Endpoint');
+        }
+        
+        async function testCors() {
+            await testEndpoint(`${API_BASE}/test-cors.php`, 'CORS Test Endpoint');
+        }
+        
+        async function testArticles() {
+            await testEndpoint(`${API_BASE}/articles`, 'Articles Endpoint');
+        }
+        
+        async function testAll() {
+            document.getElementById('results').innerHTML = '';
+            await testQuick();
+            await testCors();
+            await testArticles();
+        }
+        
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            testAll();
+        });
+    </script>
+</body>
+</html> 

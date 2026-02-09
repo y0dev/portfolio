@@ -37,6 +37,9 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
+*articles.json
+*.html
+*notes.json
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -50,6 +53,4 @@ package-lock.json
 *.tsbuildinfo
 next-env.d.ts
 
-scripts/
-
-notes.json
+config.php

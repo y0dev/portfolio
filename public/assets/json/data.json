@@ -1,0 +1,689 @@
+{
+  "personal": {
+    "name": "Devontae Reid",
+    "email": "devontae.reid@gmail.com",
+    "location": "Dallas, Texas, USA",
+    "title": "Senior Software Engineer",
+    "bio": "I am a Software Engineer currently working in embedded systems. I started in iOS development and eventually grew to enjoy web development—both front-end and back-end. Who would have known that user interfaces would be a love/hate relationship? There's a constant battle between finding inspiration and enjoying the final product.",
+    "socials": {
+      "github": "https://github.com/y0dev",
+      "linkedin": "https://linkedin.com/in/devontae-reid",
+      "twitter": "https://x.com/_yodev_"
+    },
+    "skills": ["React", "Node.js", "TypeScript", "Python", "C/C++", "Vue.js", "MongoDB", "Express", "Tailwind CSS", "ESPHome", "Linux", "Git", "Docker"],
+    "tools": [
+      {
+        "name": "VS Code",
+        "category": "Editor",
+        "description": "My primary code editor with custom extensions",
+        "icon": "💻"
+      },
+      {
+        "name": "Git",
+        "category": "Version Control",
+        "description": "Essential for version control and collaboration",
+        "icon": "📝"
+      },
+      {
+        "name": "Docker",
+        "category": "Containerization",
+        "description": "For containerized development and deployment",
+        "icon": "🐳"
+      },
+      {
+        "name": "Postman",
+        "category": "API Testing",
+        "description": "API development and testing tool",
+        "icon": "📮"
+      },
+      {
+        "name": "Xilinx Tools",
+        "category": "FPGA/Embedded",
+        "description": "Development tools for Xilinx platforms including Vivado and Vitis",
+        "icon": "⚙️"
+      }
+    ],
+    "dev_resources": [
+      {
+        "name": "MDN Web Docs",
+        "category": "Documentation",
+        "description": "Comprehensive web development documentation",
+        "url": "https://developer.mozilla.org/",
+        "icon": "🌐"
+      },
+      {
+        "name": "Stack Overflow",
+        "category": "Community",
+        "description": "Q&A platform for developers",
+        "url": "https://stackoverflow.com/",
+        "icon": "❓"
+      },
+      {
+        "name": "GitHub",
+        "category": "Platform",
+        "description": "Code hosting and collaboration platform",
+        "url": "https://github.com/",
+        "icon": "🐙"
+      }
+    ]
+  },
+  "photos": {
+    "about-me": [
+      {
+        "title": "First Family 4th of July",
+        "photo": "https://i.ibb.co/3yWwHxB/4oJ.jpg",
+        "slide_id": "slide-1"
+      },
+      {
+        "title": "Wedding Within A Pandemic",
+        "photo": "https://i.ibb.co/253vtTf/wed.jpg",
+        "slide_id": "slide-2"
+      },
+      {
+        "title": "Happy 3 Months Son",
+        "photo": "https://i.ibb.co/XzDTQrw/img-01.jpg",
+        "slide_id": "slide-3"
+      }
+    ]
+  },
+  "timeline": {
+    "experience": [
+      {
+        "company": "Raytheon Technologies",
+        "title": "Senior Software Engineer",
+        "start": "June 2024",
+        "end": "Present",
+        "location": "USA",
+        "description": [
+          "Collaborate with cross-functional teams, including hardware engineers and system architects, to ensure seamless integration.",
+          "Oversee technical design, strategy, and architectural decisions to ensure scalable, maintainable solutions that align with business goals.",
+          "Mentor junior developers by conducting technical onboarding, training, and performance reviews."
+        ]
+      },
+      {
+        "company": "Raytheon Technologies",
+        "title": "Software Engineer 2",
+        "start": "June 2022",
+        "end": "June 2024",
+        "location": "USA",
+        "description": [
+          "Customized Linux kernels and developed device drivers for new hardware platforms. Utilized Buildroot and Yocto Project to build custom Linux distributions tailored for specific embedded systems, enhancing system performance and compatibility.",
+          "Designed and integrated reliable socket-based communication solutions (TCP/UDP) in the C language, optimizing real-time data transmission and enhancing system reliability to meet customer needs.",
+          "Implemented continuous integration/continuous delivery (CI/CD) processes using Git, Jenkins, and Coverity. "
+        ]
+      },
+      {
+        "company": "Raytheon Technologies",
+        "title": "Software Engineer 1",
+        "start": "March 2019",
+        "end": "June 2022",
+        "location": "USA",
+        "description": [
+          "Maintained code for radar systems, ensuring stable and efficient performance in real-time environments.",
+          "Maintained and updated technical documentation for software features and processes.",
+          "Developed automation scripts using Python, Perl, and Batch files to streamline the build process and parse large datasets."
+        ]
+      },
+      {
+        "company": "Self-Employed",
+        "title": "Freelance Developer",
+        "start": "June 2014",
+        "end": "December 2018",
+        "location": "USA",
+        "description": [
+          "Designed and built mobile applications for Apple's iOS platform.",
+          "Ensured quality and performance of the application to specifications.",
+          "Maintained application by fixing bugs before the final release before publishing application on App Store."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "school": "California State University, Fullerton",
+        "degree": "B.S. in Computer Science",
+        "start": "2017",
+        "end": "2019",
+        "location": "California",
+        "description": [
+          "Relevant coursework: Algorithms, Web Development, Databases."
+        ]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "BitByBit",
+      "description": "A full-stack platform for learning embedded systems and low-level programming through structured lessons, quizzes, and code walkthroughs.",
+      "technologies": ["Next.js", "TypeScript", "MongoDB", "Express", "Tailwind CSS"],
+      "image": "📘",
+      "link": "https://bitbybit.dev",
+      "github": "https://github.com/y0dev/bitbybit",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "ESP Home Automation",
+      "description": "This ESPHome application manages a smart garage door opener with features like auto-closing, virtual locking, and real-time logging to a NAS server. It monitors door state through sensors, controls a relay for door operation, and logs events like door openings, closings, and errors. It also integrates with Home Assistant for remote management and supports secure Wi-Fi, OTA updates, and web-based monitoring.",
+      "technologies": [
+        "ESPHome",
+        "YAML",
+        "Home Assistant",
+        "MQTT",
+        "Wi-Fi",
+        "OTA Updates",
+        "Embedded Sensors",
+        "Relay Control",
+        "Web Interface"
+      ],
+      "image": "🏠",
+      "link": "",
+      "github": "",
+      "featured": false
+    },
+    {
+      "id": 3,
+      "title": "Home Deal Finder",
+      "description": "Looking for homes and organizing them in an excel document hasn't become more easier with this browser extension. This tool allows you to visit Zillow, Redfin, and Trulia, and gather the information (Address, Selling Price, Rooms and Square Footage) to place into an excel sheet and have your way with the data of the home.",
+      "technologies": ["JavaScript", "Browser Extensions", "DOM Parsing"],
+      "image": "🏠",
+      "link": "",
+      "github": "",
+      "featured": false
+    },
+    {
+      "id": 4,
+      "title": "Dev's Hotel Registry",
+      "description": "A simple iOS project that was used to test Swift programming language at release in 2017.",
+      "technologies": ["Swift", "Xcode", "iOS"],
+      "image": "🏨",
+      "link": "",
+      "github": "https://github.com/y0dev/DevHotel",
+      "featured": false
+    }
+  ],
+  "sports_favorites": {
+    "teams": [
+      {
+        "name": "Philadelphia Eagles",
+        "logo": "/images/sports/eagles.png",
+        "link": "https://www.philadelphiaeagles.com/",
+        "achievements": {
+          "trophies": 2,
+          "achievements": {
+            "Super Bowl Champion": 2,
+            "NFC Championships": 4,
+            "Established": 1933
+          }
+        }
+      },
+      {
+        "name": "LA Dodgers",
+        "logo": "/images/sports/dodgers.png",
+        "link": "https://www.mlb.com/dodgers",
+        "achievements": {
+          "trophies": 7,
+          "achievements": {
+            "World Series Titles": 7,
+            "National League Pennants": 24,
+            "Established": 1883
+          }
+        }
+      }
+    ],
+    "players": [
+      {
+        "name": "LeBron James",
+        "image": "/images/sports/lbj_jersey.jpg",
+        "achievements": {
+          "rings": 4,
+          "achievements": {
+            "NBA MVP": 4,
+            "NBA Championships": 4,
+            "All-time Leading Scorer": 1
+          }
+        },
+        "status": "active"
+      },
+      {
+        "name": "Derrick Rose",
+        "image": "",
+        "achievements": {
+          "rings": 0,
+          "achievements": {
+            "NBA MVP": 1,
+            "NBA All-Star": 3
+          }
+        },
+        "status": "retired"
+      },
+      {
+        "name": "Shai Gilgeous-Alexander",
+        "image": "",
+        "achievements": {
+          "rings": 1,
+          "achievements": {
+            "NBA MVP": 1,
+            "NBA Championships": 1,
+            "All-NBA First Team": 1,
+            "NBA All-Star": 1
+          }
+        },
+        "status": "active"
+      }
+    ]
+  },
+  "resources": {
+    "books": [
+      {
+        "id": 1,
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "category": "Programming",
+        "description": "A handbook of agile software craftsmanship",
+        "cover": "📚",
+        "rating": 5,
+        "status": "To Read",
+        "featured": true,
+        "link": "https://amzn.to/3qXYZclean",
+        "image": ""
+      },
+      {
+        "id": 2,
+        "title": "Biblical Doctrine",
+        "author": "John MacArthur & Richard Mayhue",
+        "category": "Theology",
+        "description": "A comprehensive resource on systematic theology from a reformed, biblical perspective.",
+        "cover": "📖",
+        "rating": 5,
+        "status": "Read",
+        "featured": true,
+        "link": "https://www.amazon.com/Biblical-Doctrine-Systematic-Summary-Bible/dp/1433545918",
+        "image": ""
+      },
+      {
+        "id": 3,
+        "title": "Design Patterns",
+        "author": "Gang of Four",
+        "category": "Programming",
+        "description": "Elements of reusable object-oriented software",
+        "cover": "🎨",
+        "rating": 5,
+        "status": "To Read",
+        "featured": false,
+        "link": "https://amzn.to/3qXYZdoctrine",
+        "image": ""
+      },
+      {
+        "id": 4,
+        "title": "The Pragmatic Programmer",
+        "author": "Andrew Hunt & David Thomas",
+        "category": "Programming",
+        "description": "Your journey to mastery",
+        "cover": "⚡",
+        "rating": 5,
+        "status": "To Read",
+        "featured": false,
+        "link": "https://amzn.to/3qXYZdoctrine",
+        "image": ""
+      },
+      {
+        "id": 5,
+        "title": "Refactoring",
+        "author": "Martin Fowler",
+        "category": "Programming",
+        "description": "Improving the design of existing code",
+        "cover": "🔧",
+        "rating": 4,
+        "status": "To Read",
+        "featured": false,
+        "link": "https://amzn.to/3qXYZdoctrine",
+        "image": ""
+      },
+      {
+        "id": 6,
+        "title": "JavaScript: The Good Parts",
+        "author": "Douglas Crockford",
+        "category": "Programming",
+        "description": "The beautiful, elegant, and expressive language",
+        "cover": "🟨",
+        "rating": 4,
+        "status": "To Read",
+        "featured": false,
+        "link": "https://amzn.to/3qXYZdoctrine",
+        "image": ""
+      },
+      {
+        "id": 7,
+        "title": "React: Up & Running",
+        "author": "Stoyan Stefanov",
+        "category": "Programming",
+        "description": "Building web applications",
+        "cover": "⚛️",
+        "rating": 4,
+        "status": "To Read",
+        "featured": false,
+        "link": "https://amzn.to/3qXYZdoctrine",
+        "image": ""
+      },
+      {
+        "id": 8,
+        "title": "Parenting by God's Promises",
+        "author": "Joel R. Beeke",
+        "category": "Theology",
+        "description": "Biblical principles for parenting grounded in God's covenant promises.",
+        "cover": "👨‍👩‍👧‍👦",
+        "rating": 5,
+        "status": "Read",
+        "featured": false,
+        "link": "https://www.amazon.com/dp/1601781426",
+        "image": ""
+      },
+      {
+        "id": 9,
+        "title": "Family Shepherds",
+        "author": "Voddie Baucham Jr.",
+        "category": "Theology",
+        "description": "Calling and equipping men to lead their homes in Christ.",
+        "cover": "👨‍👧‍👦",
+        "rating": 5,
+        "status": "Read",
+        "featured": false,
+        "link": "https://www.amazon.com/dp/1433523693",
+        "image": ""
+      }
+    ],
+    "podcasts": [
+      {
+        "name": "Syntax.fm",
+        "description": "A Tasty Treats Podcast for Web Developers.",
+        "url": "https://syntax.fm/",
+        "icon": "🎙️"
+      },
+      {
+        "name": "The Changelog",
+        "description": "Conversations with the hackers, leaders, and innovators of the software world.",
+        "url": "https://changelog.com/podcast",
+        "icon": "🎧"
+      },
+      {
+        "name": "Software Engineering Daily",
+        "description": "Daily interviews about technical software topics.",
+        "url": "https://softwareengineeringdaily.com/",
+        "icon": "📻"
+      },
+      {
+        "name": "JS Party",
+        "description": "A community celebration of JavaScript and the web.",
+        "url": "https://jsparty.fm/",
+        "icon": "🎉"
+      },
+      {
+        "name": "React Podcast",
+        "description": "Conversations about React with your favorite developers.",
+        "url": "https://reactpodcast.simplecast.fm/",
+        "icon": "⚛️"
+      }
+    ],
+    "youtube_channels": [
+      {
+        "name": "Fireship",
+        "description": "High-intensity web development tutorials.",
+        "url": "https://www.youtube.com/c/Fireship",
+        "icon": "🔥"
+      },
+      {
+        "name": "The Net Ninja",
+        "description": "Modern web development tutorials and courses.",
+        "url": "https://www.youtube.com/c/TheNetNinja",
+        "icon": "🥷"
+      },
+      {
+        "name": "Academind",
+        "description": "Web development and programming tutorials.",
+        "url": "https://www.youtube.com/c/Academind",
+        "icon": "🎓"
+      },
+      {
+        "name": "Traversy Media",
+        "description": "Web development and programming tutorials.",
+        "url": "https://www.youtube.com/c/TraversyMedia",
+        "icon": "📺"
+      },
+      {
+        "name": "Dev Ed",
+        "description": "Web development tutorials and coding challenges.",
+        "url": "https://www.youtube.com/c/DevEd",
+        "icon": "🎨"
+      }
+    ],
+    "theology_resources": [
+      {
+        "name": "Grace To You",
+        "category": "Sermons",
+        "description": "Biblical preaching and teaching from John MacArthur.",
+        "url": "https://www.gty.org/",
+        "icon": "📖"
+      },
+      {
+        "name": "Truth For Life",
+        "category": "Sermons",
+        "description": "Biblical teaching from Alistair Begg.",
+        "url": "https://www.truthforlife.org/",
+        "icon": "🎙️"
+      },
+      {
+        "name": "Desiring God",
+        "category": "Sermons",
+        "description": "Biblical resources from John Piper.",
+        "url": "https://www.desiringgod.org/",
+        "icon": "💝"
+      },
+      {
+        "name": "Ligonier Ministries",
+        "category": "Theology",
+        "description": "Biblical teaching and theological resources.",
+        "url": "https://www.ligonier.org/",
+        "icon": "⛪"
+      },
+      {
+        "name": "Got Questions",
+        "category": "Apologetics",
+        "description": "Biblical answers to theological questions.",
+        "url": "https://www.gotquestions.org/",
+        "icon": "❓"
+      },
+      {
+        "name": "Answers in Genesis",
+        "category": "Apologetics",
+        "description": "Biblical creation and apologetics resources.",
+        "url": "https://answersingenesis.org/",
+        "icon": "🌍"
+      },
+      {
+        "name": "Living Waters",
+        "category": "Evangelism",
+        "description": "Evangelism training and resources.",
+        "url": "https://www.livingwaters.com/",
+        "icon": "💧"
+      },
+      {
+        "name": "Way of the Master",
+        "category": "Evangelism",
+        "description": "Biblical evangelism training and resources.",
+        "url": "https://www.wayofthemaster.com/",
+        "icon": "🛤️"
+      },
+      {
+        "name": "Reasonable Faith",
+        "category": "Apologetics",
+        "description": "Christian apologetics from William Lane Craig.",
+        "url": "https://www.reasonablefaith.org/",
+        "icon": "🧠"
+      },
+      {
+        "name": "Stand to Reason",
+        "category": "Apologetics",
+        "description": "Christian apologetics and worldview training.",
+        "url": "https://www.str.org/",
+        "icon": "🛡️"
+      },
+      {
+        "name": "Apologia",
+        "category": "Apologetics",
+        "description": "Christ-centered apologetics and cultural engagement.",
+        "url": "https://apologiastudios.com/",
+        "icon": "📢"
+      },
+      {
+        "name": "Monergism",
+        "category": "Theology",
+        "description": "A rich collection of reformed theology articles and sermons.",
+        "url": "https://www.monergism.com/",
+        "icon": "📚"
+      }
+    ]
+  },
+  "testimonials": [
+    {
+      "name": "Kyle Rhodes",
+      "icon": "👨🏾‍🎓",
+      "content": "Ex eiusmod fugiat sit nulla. Id laboris sint velit velit qui ipsum reprehenderit adipisicing minim. Est officia mollit cillum id adipisicing nulla. Et minim deserunt ea cillum aliquip aliquip eiusmod sint. Ipsum dolor Lorem voluptate Lorem."
+    },
+    {
+      "name": "Chris Bess",
+      "icon": "👨🏾",
+      "content": "Ex eiusmod fugiat sit nulla. Id laboris sint velit velit qui ipsum reprehenderit adipisicing minim. Est officia mollit cillum id adipisicing nulla. Et minim deserunt ea cillum aliquip aliquip eiusmod sint. Ipsum dolor Lorem voluptate Lorem."
+    }
+  ],
+  "languages": {
+    "javascript": {
+      "keywords": ["function", "var", "let", "const", "if", "else", "for", "while", "return", "class", "import", "export", "default", "async", "await", "try", "catch", "finally", "throw", "new", "this", "super", "extends", "static", "public", "private", "protected", "interface", "type", "enum", "namespace", "module", "require", "console", "document", "window", "setTimeout", "setInterval", "fetch", "Promise", "Array", "Object", "String", "Number", "Boolean", "Date", "Math", "JSON", "parse", "stringify", "null", "undefined", "true", "false"],
+      "operators": ["+", "-", "*", "/", "%", "=", "==", "===", "!=", "!==", ">", "<", ">=", "<=", "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", ">>>", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", ">>>=", "++", "--", "?", ":", "=>", "...", "??", "?.", "||=", "&&=", "??="],
+      "punctuations": [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "'", "\"", "`", "@", "#", "$", "%", "&", "*", "\\", "/", "|", "`"]
+    },
+    "python": {
+      "keywords": ["def", "class", "if", "elif", "else", "for", "while", "try", "except", "finally", "with", "as", "import", "from", "return", "yield", "pass", "break", "continue", "raise", "assert", "del", "global", "nonlocal", "lambda", "True", "False", "None", "and", "or", "not", "is", "in", "print", "len", "range", "list", "dict", "set", "tuple", "str", "int", "float", "bool", "type", "super", "self"],
+      "operators": ["+", "-", "*", "/", "//", "%", "**", "=", "==", "!=", ">", "<", ">=", "<=", "and", "or", "not", "is", "in", "+=", "-=", "*=", "/=", "//=", "%=", "**=", "&=", "|=", "^=", "<<=", ">>=", "&", "|", "^", "~", "<<", ">>", "->", ":="],
+      "punctuations": [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "'", "\"", "#", "@", "\\", "/", "|", "`", "_"]
+    },
+    "java": {
+      "keywords": ["public", "private", "protected", "static", "final", "abstract", "class", "interface", "extends", "implements", "new", "this", "super", "if", "else", "switch", "case", "default", "for", "while", "do", "break", "continue", "return", "try", "catch", "finally", "throw", "throws", "import", "package", "synchronized", "volatile", "transient", "native", "strictfp", "enum", "assert", "const", "goto", "void", "boolean", "byte", "char", "short", "int", "long", "float", "double", "String", "Object", "null", "true", "false"],
+      "operators": ["+", "-", "*", "/", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", ">>>", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", ">>>=", "++", "--", "?", ":", "instanceof"],
+      "punctuations": [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "'", "\"", "@", "#", "$", "%", "&", "*", "\\", "/", "|", "`"]
+    },
+    "cpp": {
+      "keywords": ["auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while", "class", "namespace", "template", "typename", "public", "private", "protected", "virtual", "friend", "inline", "explicit", "mutable", "operator", "new", "delete", "this", "true", "false", "nullptr", "using", "try", "catch", "throw", "const_cast", "dynamic_cast", "reinterpret_cast", "static_cast", "typeid", "cout", "cin", "endl", "string", "vector", "map", "set", "pair", "make_pair"],
+      "operators": ["+", "-", "*", "/", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", "++", "--", "?", ":", "->", "::", ".*", "->*"],
+      "punctuations": [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "'", "\"", "#", "@", "$", "%", "&", "*", "\\", "/", "|", "`", "_"]
+    },
+    "html": {
+      "keywords": ["html", "head", "body", "title", "meta", "link", "script", "style", "div", "span", "p", "h1", "h2", "h3", "h4", "h5", "h6", "a", "img", "ul", "ol", "li", "table", "tr", "td", "th", "form", "input", "button", "textarea", "select", "option", "label", "fieldset", "legend", "iframe", "video", "audio", "canvas", "svg", "nav", "header", "footer", "main", "section", "article", "aside", "figure", "figcaption", "blockquote", "code", "pre", "em", "strong", "b", "i", "u", "br", "hr"],
+      "operators": ["=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", "++", "--", "?", ":"],
+      "punctuations": [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "'", "\"", "#", "@", "$", "%", "&", "*", "\\", "/", "|", "`", "_", "-"]
+    },
+    "css": {
+      "keywords": ["color", "background", "margin", "padding", "border", "width", "height", "display", "position", "top", "right", "bottom", "left", "float", "clear", "overflow", "visibility", "opacity", "z-index", "font", "font-family", "font-size", "font-weight", "font-style", "text-align", "text-decoration", "line-height", "letter-spacing", "word-spacing", "text-transform", "text-indent", "white-space", "vertical-align", "list-style", "list-style-type", "list-style-position", "list-style-image", "table-layout", "border-collapse", "border-spacing", "caption-side", "empty-cells", "content", "quotes", "counter-reset", "counter-increment", "cursor", "outline", "outline-width", "outline-style", "outline-color", "outline-offset", "box-shadow", "text-shadow", "transform", "transition", "animation", "flex", "grid", "justify-content", "align-items", "flex-direction", "flex-wrap", "order", "flex-grow", "flex-shrink", "flex-basis", "align-self", "justify-self", "grid-template-columns", "grid-template-rows", "grid-template-areas", "grid-area", "grid-column", "grid-row", "gap", "column-gap", "row-gap"],
+      "operators": ["=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", "++", "--", "?", ":", "+", "-", "*", "/", "%"],
+      "punctuations": [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "'", "\"", "#", "@", "$", "%", "&", "*", "\\", "/", "|", "`", "_", "-"]
+    }
+  },
+  "articles": [
+    {
+      "id": "why-am-i-presbyterian",
+      "title": "Why am I Presbyterian",
+      "description": "Many in the reformed camp seemed to be either Baptist or Presbyterian. This is article is to show my view in Reformed Theology.",
+      "date": "1677909600000",
+      "tags": [
+        "Christ",
+        "Covenant",
+        "Reformed",
+        "Gospel"
+      ],
+      "type": "article",
+      "image": {
+        "name": "/images/icons/bible-icon.png",
+        "alt": "bible-icon"
+      },
+      "content": [
+        {
+          "title": "Why am I Presbyterian",
+          "htmlContent": "<p>There is an endless debate on covenant membership. Who is a part of the covenant and who is not? This question is a good question to cause you to search the scriptures for answers. I would start from Genesis and end in Revelation. </p>"
+        }
+      ]
+    },
+    {
+      "id": "system-design",
+      "title": "Help with System Design Interviews",
+      "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+      "date": "1675836000000",
+      "tags": [
+        "System Design",
+        "Technology",
+        "MAANG"
+      ],
+      "type": "article",
+      "image": {
+        "name": "/images/icons/web-dev.png",
+        "alt": "web-dev-img"
+      },
+      "content": [
+        {
+          "title": "Preparation for the Interview",
+          "htmlContent": "<p>System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors. Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down.</p>"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "file-id": "note",
+      "date": 1644825601000,
+      "id": "theology-103-week-5",
+      "image": {
+        "name": "/images/icons/bible-icon.png",
+        "alt": "bible-icon"
+      },
+      "tags": [
+        "Theology",
+        "Christ",
+        "Sin",
+        "Angels",
+        "Demons"
+      ],
+      "title": "Theology 103"
+    },
+    {
+      "file-id": "note",
+      "date": 1644220801000,
+      "id": "theology-103-week-4",
+      "image": {
+        "name": "/images/icons/bible-icon.png",
+        "alt": "bible-icon"
+      },
+      "tags": [
+        "Theology",
+        "Christ",
+        "Sin",
+        "Angels",
+        "Demons"
+      ],
+      "title": "Theology 103"
+    },
+    {
+      "file-id": "note",
+      "date": 1643616001000,
+      "id": "theology-103-week-3",
+      "image": {
+        "name": "/images/icons/bible-icon.png",
+        "alt": "bible-icon"
+      },
+      "tags": [
+        "Theology",
+        "Christ",
+        "Sin"
+      ],
+      "title": "Theology 103"
+    }
+  ]
+} 
