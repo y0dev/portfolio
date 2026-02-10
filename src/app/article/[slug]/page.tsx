@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { articles as staticArticles } from "@/data/articles";
 import { getArticleBySlug, getArticlesSync } from "@/lib/data/articles";
 import Link from "next/link";
 import Image from "next/image";

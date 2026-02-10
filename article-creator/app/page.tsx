@@ -107,12 +107,13 @@ export default function Home() {
 
     // Parse markdown into sections
     const sections = parseMarkdownToSections(markdown);
-    
+
     // Style each section's HTML content (client-side only)
     const styledSections = sections.map(section => {
       if (section.htmlContent) {
         return {
           ...section,
+          id: section.id || '',
           htmlContent: styleHTMLContent(section.htmlContent)
         };
       }
@@ -156,9 +157,10 @@ export default function Home() {
     // The portfolio's ContentRenderer expects plain <pre><code> elements
     const cleanedSections = styledSections.map(section => ({
       ...section,
+      id: section.id || '',
       htmlContent: stripCodeBlockWrappers(section.htmlContent)
     }));
-    
+
     const jsonData: Article = {
       id,
       title: data.title,
@@ -172,7 +174,7 @@ export default function Home() {
       },
       content: cleanedSections
     };
-
+    
     setArticleData(jsonData);
   };
 

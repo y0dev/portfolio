@@ -10,6 +10,7 @@ export interface Article {
     name: string;
   };
   content: {
+    id?: string;
     title?: string;
     htmlContent: string;
   }[];

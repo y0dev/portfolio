@@ -1,4 +1,5 @@
 import { marked } from 'marked';
+import { slugifyTitle } from './utils';
 
 // Configure marked to support GFM (GitHub Flavored Markdown) including tables
 if (typeof marked !== 'undefined') {
@@ -9,6 +10,8 @@ if (typeof marked !== 'undefined') {
 }
 
 export interface ContentSection {
+  id?: string;
+  level?: number;
   title?: string;
   htmlContent: string;
 }
@@ -38,21 +41,29 @@ export function parseMarkdownToSections(markdown: string): ContentSection[] {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     
+    
     // Check if line is a heading (## or ###)
-    const headingMatch = line.match(/^(#{2,3})\s+(.+)$/);
+    const headingMatch = line.match(/^(#{2,4})\s+(.+)$/);
     if (headingMatch) {
       // Save previous section if it exists
       if (currentSection !== null) {
         if (currentLines.length > 0) {
           const htmlContent = processCarousels(currentLines.join('\n'));
           currentSection.htmlContent = typeof htmlContent === 'string' ? htmlContent : String(htmlContent);
+          currentSection.htmlContent = currentSection.htmlContent.replace(/\[([^\]]+)\]\(#([^)]+)\)/g,'<a href="#$2">$1</a>');
+          // console.log(currentSection.htmlContent);
+          // console.log('--------------------------------');
         }
         sections.push(currentSection);
       }
       
+      const level = headingMatch[1].length;
+      // console.log(`Level: ${level}`);
       // Start new section
       const title = headingMatch[2].trim();
-      currentSection = { title, htmlContent: '' };
+      // console.log(`Title: ${title}`);
+      // console.log(`Title length: ${title.length}`);
+      currentSection = { id: slugifyTitle(title), title, level, htmlContent: '' };
       currentLines = [];
     } else {
       currentLines.push(line);
@@ -64,12 +75,13 @@ export function parseMarkdownToSections(markdown: string): ContentSection[] {
     if (currentLines.length > 0) {
       const htmlContent = processCarousels(currentLines.join('\n'));
       currentSection.htmlContent = typeof htmlContent === 'string' ? htmlContent : String(htmlContent);
+      currentSection.htmlContent = currentSection.htmlContent.replace(/\[([^\]]+)\]\(#([^)]+)\)/g,'<a href="#$2">$1</a>');
     }
     sections.push(currentSection);
   } else {
     // No sections with titles, create one section with all content
     if (currentLines.length > 0) {
-      const htmlContent = processCarousels(currentLines.join('\n'));
+      const htmlContent = processCarousels(currentLines.join('\n')).replace(/\[([^\]]+)\]\(#([^)]+)\)/g,'<a href="#$2">$1</a>');
       sections.push({ htmlContent: typeof htmlContent === 'string' ? htmlContent : String(htmlContent) });
     } else {
       sections.push({ htmlContent: '' });
@@ -260,12 +272,22 @@ export function styleHTMLContent(html: string): string {
     p.className = 'text-gray-700 dark:text-gray-300 leading-relaxed mb-4';
   });
 
+  const usedIds = new Set();
   // Style headings
   tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(h => {
+    const title = h.textContent.trim();
+    let id = slugifyTitle(title);
+    if (usedIds.has(id)) {
+      // Generate a unique ID
+      id = `${id}-${usedIds.size + 1}`;
+    }
+    usedIds.add(id);
     if (h.tagName === 'H2') {
       h.className = 'text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7';
+      h.id = id;
     } else {
       h.className = 'text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-6';
+      h.id = id;
     }
   });
 

@@ -170,9 +170,12 @@ function formatArticleForTypeScript(article: Article): string {
     return JSON.stringify(str);
   };
   
-  const formatContent = (content: { title?: string; htmlContent: string }[]) => {
+  const formatContent = (content: { id?: string; title?: string; htmlContent: string }[]) => {
     return '[\n      ' + content.map(section => {
       const parts: string[] = [];
+      if (section.id) {
+        parts.push(`"id": ${escapeString(section.id)}`);
+      }
       if (section.title) {
         parts.push(`"title": ${escapeString(section.title)}`);
       }

@@ -955,7 +955,7 @@ export function generateNoteHTML(
     const titleId = section.title ? slugifyTitle(section.title) : '';
     const titleHTML = section.title ? `<h2 id="${titleId}" class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7">${section.title}</h2>` : '';
     return `
-          <section class="mb-12">
+          <section id="${section.id}" class="mb-12">
             ${titleHTML}
             <div>${section.htmlContent || ''}</div>
           </section>`;
@@ -1047,7 +1047,7 @@ export function generateArticleHTML(
     const titleId = section.title ? slugifyTitle(section.title) : '';
     const titleHTML = section.title ? `<h2 id="${titleId}" class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7">${section.title}</h2>` : '';
     return `
-          <section class="mb-12">
+          <section id="${section.id}" class="mb-12">
             ${titleHTML}
             <div>${section.htmlContent || ''}</div>
           </section>`;

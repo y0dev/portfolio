@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface ContentSection {
+  id?: string;
   title?: string;
   htmlContent: string;
 }
@@ -378,9 +379,9 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
       // Keyboard navigation
       carousel.setAttribute('tabindex', '0');
       carousel.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
+        if ((e as KeyboardEvent).key === 'ArrowLeft') {
           prevSlide();
-        } else if (e.key === 'ArrowRight') {
+        } else if ((e as KeyboardEvent).key === 'ArrowRight') {
           nextSlide();
         }
       });
@@ -393,7 +394,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
   return (
     <article ref={containerRef} className="prose prose-lg dark:prose-invert max-w-none">
       {contentToRender.map((section, sectionIndex) => (
-        <section key={sectionIndex} className="mb-12">
+        <section id={section.id} key={sectionIndex} className="mb-12">
           {section.title && (
             <h2 className="text-2xl font-bold mb-6">{section.title}</h2>
           )}
