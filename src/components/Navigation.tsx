@@ -45,7 +45,10 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+    <nav
+      className="sticky top-0 z-50 backdrop-blur-md border-b border-dr-border"
+      style={{ background: "color-mix(in oklch, var(--dr-surface) 85%, transparent)" }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-3 group">
@@ -56,7 +59,7 @@ export default function Navigation() {
               height={32}
               className="rounded-full group-hover:scale-110 transition-transform duration-300"
             />
-            <span className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <span className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
               DEVONTAE REID
             </span>
           </Link>
@@ -77,8 +80,8 @@ export default function Navigation() {
                   href={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                      ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300"
+                      : "text-gray-700 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-300"
                   }`}
                 >
                   {item.label}
@@ -91,7 +94,7 @@ export default function Navigation() {
               onClick={toggleTheme}
               id="theme-toggle-button"
               aria-label="Toggle theme"
-              className="ml-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
+              className="ml-4 p-2 rounded-full transition-colors text-gray-700 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-300" style={{ background: "var(--dr-cream)" }}
             >
               {theme === "dark" ? (
                 // Sun icon
@@ -115,7 +118,7 @@ export default function Navigation() {
               onClick={toggleTheme}
               id="theme-toggle-button-mobile"
               aria-label="Toggle theme"
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
+              className="p-2 rounded-full transition-colors text-gray-700 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-300" style={{ background: "var(--dr-cream)" }}
             >
               {theme === "dark" ? (
                 // Sun icon
@@ -132,7 +135,7 @@ export default function Navigation() {
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="ml-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="ml-2 text-gray-700 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-300"
             >
               {isMenuOpen ? (
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +153,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden" style={{ background: "color-mix(in oklch, var(--dr-surface) 95%, transparent)" }}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => {
               // Check if current path matches the nav item (exact match or starts with for sub-routes)
@@ -167,8 +170,8 @@ export default function Navigation() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300"
+                      : "text-gray-700 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-300"
                   }`}
                 >
                   {item.label}

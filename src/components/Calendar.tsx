@@ -162,14 +162,15 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
 
             <div className="flex flex-row gap-2 items-center">
               {/* View Mode Toggle */}
-              <div className="flex items-center bg-white rounded-lg border border-gray-200 p-1 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+              <div className="flex items-center rounded-lg border border-dr-border p-1 shadow-sm" style={{ background: "var(--dr-surface)" }}>
                 <button
                   onClick={() => setViewMode('month')}
                   className={`px-2 py-1 text-xs font-medium rounded-md transition-colors sm:px-3 sm:text-sm ${
                     viewMode === 'month'
-                      ? 'bg-blue-600 text-white'
+                      ? 'text-white'
                       : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
                   }`}
+                  style={viewMode === 'month' ? { background: "var(--dr-amber)" } : undefined}
                 >
                   Month
                 </button>
@@ -177,19 +178,20 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                   onClick={() => setViewMode('week')}
                   className={`px-2 py-1 text-xs font-medium rounded-md transition-colors sm:px-3 sm:text-sm ${
                     viewMode === 'week'
-                      ? 'bg-blue-600 text-white'
+                      ? 'text-white'
                       : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
                   }`}
+                  style={viewMode === 'week' ? { background: "var(--dr-amber)" } : undefined}
                 >
                   Week
                 </button>
               </div>
 
               {/* Period Navigation */}
-              <div className="flex items-center gap-1 bg-white rounded-lg border border-gray-200 p-1 shadow-sm dark:bg-gray-800 dark:border-gray-700 sm:gap-2 sm:p-2">
+              <div className="flex items-center gap-1 rounded-lg border border-dr-border p-1 shadow-sm sm:gap-2 sm:p-2" style={{ background: "var(--dr-surface)" }}>
                 <button
                   onClick={handlePrevPeriod}
-                  className="inline-flex items-center justify-center w-7 h-7 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 sm:w-8 sm:h-8"
+                  className="inline-flex items-center justify-center w-7 h-7 rounded-md text-gray-500 hover:bg-dr-hover sm:w-8 sm:h-8"
                 >
                   <i className="bx bx-chevron-left text-sm sm:text-lg"></i>
                 </button>
@@ -205,7 +207,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
 
                 <button
                   onClick={handleNextPeriod}
-                  className="inline-flex items-center justify-center w-7 h-7 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 sm:w-8 sm:h-8"
+                  className="inline-flex items-center justify-center w-7 h-7 rounded-md text-gray-500 hover:bg-dr-hover sm:w-8 sm:h-8"
                 >
                   <i className="bx bx-chevron-right text-sm sm:text-lg"></i>
                 </button>
@@ -214,9 +216,9 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
           </div>
 
           {/* Calendar Grid */}
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div className="rounded-lg border border-dr-border shadow-sm" style={{ background: "var(--dr-surface)" }}>
             {/* Calendar Header */}
-            <div className="grid grid-cols-7 border-b border-gray-200 dark:border-gray-700">
+            <div className="grid grid-cols-7 border-b border-dr-border">
               {dayNames.map((day) => (
                 <div key={day} className="p-2 text-center text-xs font-medium text-gray-500 dark:text-gray-400 sm:p-4 sm:text-sm">
                   {day}
@@ -239,20 +241,20 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                   return (
                     <div
                       key={index}
-                      className={`min-h-[80px] p-1 border-r border-b border-gray-200 dark:border-gray-700 sm:min-h-[120px] sm:p-2 ${
+                      className={`min-h-[80px] p-1 border-r border-b border-dr-border sm:min-h-[120px] sm:p-2 ${
                         isCurrentDay
-                          ? 'bg-blue-50 dark:bg-blue-900/30 cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40'
+                          ? 'cursor-pointer'
                           : isPrevMonth
-                          ? 'bg-gray-50/50 dark:bg-gray-900/50 cursor-pointer hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
-                          : 'hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer'
+                          ? 'bg-gray-50/50 dark:bg-[oklch(17%_0.01_72/0.5)] cursor-pointer hover:bg-gray-100/50 dark:hover:bg-[oklch(22%_0.01_72/0.5)]'
+                          : 'hover:bg-gray-50 dark:hover:bg-[oklch(25%_0.01_72)] cursor-pointer'
                       }`}
                       onClick={() => handleDateClick(dayDate)}
                     >
                       <div className="flex flex-col h-full">
                         <div className="flex justify-between items-center mb-1">
                           <div className={`text-xs font-medium sm:text-sm ${
-                            isCurrentDay 
-                              ? 'text-blue-700 dark:text-blue-300' 
+                            isCurrentDay
+                              ? 'text-amber-700 dark:text-amber-300'
                               : isPrevMonth
                               ? 'text-gray-400 dark:text-gray-600'
                               : 'text-gray-900 dark:text-white'
@@ -260,11 +262,10 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                             {dayInfo.day}
                           </div>
                             {reading && (
-                              <div className={`w-2 h-2 rounded-full ${
-                                reading.completed 
-                                  ? 'bg-green-500' 
-                                  : 'bg-blue-500 opacity-50'
-                              }`}></div>
+                              <div
+                                className="w-2 h-2 rounded-full"
+                                style={{ background: reading.completed ? "oklch(62% 0.15 145)" : "var(--dr-amber)", opacity: reading.completed ? 1 : 0.4 }}
+                              />
                             )}
                           </div>
                           <div className="flex-1 space-y-1">
@@ -357,26 +358,25 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                   return (
                     <div
                       key={index}
-                      className={`min-h-[150px] p-2 border-r border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 sm:min-h-[200px] sm:p-3 cursor-pointer ${
-                        isCurrentDay ? 'bg-blue-50 dark:bg-blue-900/30' : ''
+                      className={`min-h-[150px] p-2 border-r border-b border-dr-border hover:bg-gray-50 dark:hover:bg-[oklch(25%_0.01_72)] sm:min-h-[200px] sm:p-3 cursor-pointer ${
+                        isCurrentDay ? '' : ''
                       }`}
                       onClick={() => handleDateClick(day)}
                     >
                       <div className="flex flex-col h-full">
                         <div className="flex justify-between items-center mb-2">
                           <div className={`text-xs font-medium sm:text-sm ${
-                            isCurrentDay 
-                              ? 'text-blue-700 dark:text-blue-300' 
+                            isCurrentDay
+                              ? 'text-amber-700 dark:text-amber-300'
                               : 'text-gray-900 dark:text-white'
                           }`}>
                             {day.getDate()}
                           </div>
                           {reading && (
-                            <div className={`w-2 h-2 rounded-full ${
-                              reading.completed 
-                                ? 'bg-green-500' 
-                                : 'bg-blue-500 opacity-50'
-                            }`}></div>
+                            <div
+                              className="w-2 h-2 rounded-full"
+                              style={{ background: reading.completed ? "oklch(62% 0.15 145)" : "var(--dr-amber)", opacity: reading.completed ? 1 : 0.4 }}
+                            />
                           )}
                         </div>
                         <div className="flex-1 space-y-1 sm:space-y-2">
@@ -464,7 +464,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
           {/* Summary Cards */}
           <div className="mt-4 grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3">
             {/* This Week's Readings */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 sm:p-6">
+            <div className="rounded-lg border border-dr-border p-4 sm:p-6" style={{ background: "var(--dr-surface)" }}>
               <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3 sm:text-lg sm:mb-4">
                 This Week
               </h3>
@@ -489,7 +489,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                             ? 'bg-green-50 dark:bg-green-900/20'
                             : isPast || isToday
                             ? 'bg-yellow-50 dark:bg-yellow-900/20'
-                            : 'bg-blue-50 dark:bg-blue-900/20'
+                            : 'bg-amber-50 dark:bg-amber-900/20'
                         }`}
                       >
                         <div>
@@ -505,7 +505,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                             ? 'text-green-600 dark:text-green-400'
                             : isPast || isToday
                             ? 'text-yellow-600 dark:text-yellow-400'
-                            : 'text-blue-600 dark:text-blue-400'
+                            : 'text-amber-700 dark:text-amber-300'
                         }`}>
                           {reading.completed ? '✓ Done' : isPast || isToday ? 'Pending' : 'Upcoming'}
                         </span>
@@ -517,7 +517,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 dark:bg-gray-800 dark:border-gray-700 sm:p-6">
+            <div className="rounded-lg border border-dr-border p-4 sm:p-6" style={{ background: "var(--dr-surface)" }}>
               <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3 sm:text-lg sm:mb-4">
                 Recent Activity
               </h3>
@@ -530,7 +530,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                     .slice(0, 3)
                     .map((reading) => (
-                      <div key={reading.id} className="flex flex-col gap-1 p-2 bg-gray-50 rounded-lg dark:bg-gray-700 sm:flex-row sm:justify-between sm:items-center">
+                      <div key={reading.id} className="flex flex-col gap-1 p-2 rounded-lg sm:flex-row sm:justify-between sm:items-center" style={{ background: "var(--dr-cream)" }}>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-green-500"></div>
                           <div>
@@ -557,14 +557,15 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
       {/* Day Details Modal */}
       {showDayDetails && selectedDate && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ background: "oklch(17% 0.01 72 / 0.5)" }}
           onClick={handleCloseModal}
         >
           <div 
-            className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden dark:bg-gray-800"
+            className="rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+            style={{ background: "var(--dr-surface)" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between p-6 border-b border-dr-border">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                 {selectedDate.toLocaleDateString('en-US', { 
                   weekday: 'long', 
@@ -575,7 +576,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
               </h2>
               <button
                 onClick={handleCloseModal}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-[oklch(25%_0.01_72)]"
                 aria-label="Close modal"
               >
                 <i className="bx bx-x text-2xl"></i>
@@ -599,7 +600,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                 return (
                   <div className="space-y-4">
                     {/* Reading Details */}
-                    <div className="bg-gray-50 rounded-lg p-4 dark:bg-gray-700">
+                    <div className="rounded-lg p-4" style={{ background: "var(--dr-cream)" }}>
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Week {reading.week}, Day {reading.day}</span>
                         {reading.completed && (

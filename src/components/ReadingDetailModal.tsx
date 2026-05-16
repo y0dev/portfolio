@@ -51,17 +51,17 @@ export default function ReadingDetailModal({
       <div className="flex min-h-screen items-center justify-center p-4">
         {/* Backdrop */}
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+          className="fixed inset-0 transition-opacity" style={{ background: "oklch(17% 0.01 72 / 0.5)" }}
           onClick={onClose}
         />
         
         {/* Modal */}
         <div 
-          className="relative bg-white dark:bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+          className="relative rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden bg-dr-surface"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between p-6 border-b border-dr-border">
             <div>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                 {formatDate(reading.date)}
@@ -75,7 +75,7 @@ export default function ReadingDetailModal({
                 e.stopPropagation();
                 onClose();
               }}
-              className="ml-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="ml-4 p-2 rounded-full bg-dr-hover hover:bg-dr-border text-dr-text-faint hover:text-dr-text transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
               aria-label="Close modal"
               type="button"
             >
@@ -89,12 +89,12 @@ export default function ReadingDetailModal({
           <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
             <div className="space-y-6">
               {reading.readings.map((readingItem, index) => (
-                <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                <div key={index} className="bg-dr-cream rounded-lg p-6">
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                       {readingItem.title}
                     </h3>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>
                       Reading {index + 1}
                     </span>
                   </div>
@@ -103,7 +103,7 @@ export default function ReadingDetailModal({
                     <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
                       Reference:
                     </h4>
-                    <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                    <p className="text-lg font-semibold" style={{ color: "var(--dr-amber-deep)" }}>
                       {readingItem.reference}
                     </p>
                   </div>
@@ -119,7 +119,7 @@ export default function ReadingDetailModal({
                     </div>
                   )}
 
-                  <div className="bg-white dark:bg-gray-700 rounded-md p-4 border border-gray-200 dark:border-gray-600">
+                  <div className="bg-dr-surface rounded-md p-4 border border-dr-border">
                     <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Reading Notes:
                     </h4>
@@ -161,7 +161,7 @@ export default function ReadingDetailModal({
                     </div>
                   )}
 
-                  <div className="bg-white dark:bg-gray-700 rounded-md p-4 border border-gray-200 dark:border-gray-600">
+                  <div className="bg-dr-surface rounded-md p-4 border border-dr-border">
                     <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Reading Notes:
                     </h4>
@@ -186,13 +186,13 @@ export default function ReadingDetailModal({
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-end p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+          <div className="flex items-center justify-end p-6 border-t border-dr-border bg-dr-cream">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onClose();
               }}
-              className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              className="px-4 py-2 bg-dr-hover text-dr-text-muted rounded-md hover:bg-dr-border transition-colors"
               type="button"
             >
               Close

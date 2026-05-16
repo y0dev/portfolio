@@ -147,7 +147,8 @@ export default function RootLayout({
         
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ background: "var(--background)", color: "var(--foreground)" }}
       >
         <Navigation />
         <main className="min-h-screen">

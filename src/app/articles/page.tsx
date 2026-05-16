@@ -104,9 +104,9 @@ export default function ArticlesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen" style={{ background: "var(--dr-cream)" }}>
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 text-center">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 text-center" style={{ background: "var(--dr-surface)" }}>
         <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-4">
           Articles & Notes
         </h1>
@@ -126,7 +126,8 @@ export default function ArticlesPage() {
                 placeholder="Search articles and notes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 pl-10 pr-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md"
+                className="w-full px-4 py-3 pl-10 pr-4 border border-dr-border rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent shadow-md"
+                style={{ background: "var(--dr-surface)", ["--tw-ring-color" as string]: "var(--dr-amber)" }}
               />
               <svg
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
@@ -147,37 +148,21 @@ export default function ArticlesPage() {
           {/* Filters and Count */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mb-4">
             {/* Type Filter */}
-            <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-md">
-              <button
-                onClick={() => setFilter("all")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === "all"
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => setFilter("article")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === "article"
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                Articles
-              </button>
-              <button
-                onClick={() => setFilter("note")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === "note"
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                Notes
-              </button>
+            <div className="flex items-center space-x-2 p-2 rounded-lg shadow-md" style={{ background: "var(--dr-surface)" }}>
+              {(["all", "article", "note"] as const).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    filter === f
+                      ? "text-white"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  }`}
+                  style={filter === f ? { background: "var(--dr-amber)" } : undefined}
+                >
+                  {f === "all" ? "All" : f === "article" ? "Articles" : "Notes"}
+                </button>
+              ))}
             </div>
             {/* Tag Filter and Count */}
             <div className="flex items-center gap-4">
@@ -188,7 +173,8 @@ export default function ArticlesPage() {
                 <select
                   onChange={(e) => setTagFilter(e.target.value || null)}
                   value={tagFilter || ""}
-                  className="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg py-2 pl-4 pr-10 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md"
+                  className="appearance-none border border-dr-border rounded-lg py-2 pl-4 pr-10 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 shadow-md"
+                  style={{ background: "var(--dr-surface)" }}
                 >
                   <option value="">All Tags</option>
                   {allTags.map((tag) => (
@@ -205,22 +191,24 @@ export default function ArticlesPage() {
               {(tagFilter || searchQuery) && (
                 <div className="flex flex-wrap gap-2 items-center">
                   {tagFilter && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>
                       Tag: {tagFilter}
                       <button
                         onClick={() => setTagFilter(null)}
-                        className="ml-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
+                        className="ml-2 hover:opacity-70"
+                        style={{ color: "var(--dr-amber-deep)" }}
                       >
                         &times;
                       </button>
                     </span>
                   )}
                   {searchQuery && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>
                       Search: {searchQuery}
                       <button
                         onClick={() => setSearchQuery("")}
-                        className="ml-2 text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200"
+                        className="ml-2 hover:opacity-70"
+                        style={{ color: "var(--dr-amber-deep)" }}
                       >
                         &times;
                       </button>
@@ -246,7 +234,8 @@ export default function ArticlesPage() {
               <Link
                 key={article.id}
                 href={`/${article.type}/${article.id}`}
-                className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden"
+                className="group block rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-dr-border overflow-hidden"
+              style={{ background: "var(--dr-surface)" }}
               >
                 {/* Article Image */}
                 {article.image && (
@@ -264,11 +253,8 @@ export default function ArticlesPage() {
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span
-                      className={`inline-block px-2 py-1 rounded text-xs font-medium ${
-                        article.type === "article"
-                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
-                          : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
-                      }`}
+                      className="inline-block px-2 py-1 rounded text-xs font-medium"
+                      style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}
                     >
                       {article.type.charAt(0).toUpperCase() + article.type.slice(1)}
                     </span>
@@ -276,7 +262,7 @@ export default function ArticlesPage() {
                       {formatDate(article.date)}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors line-clamp-2">
                     {article.title}
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
@@ -286,7 +272,8 @@ export default function ArticlesPage() {
                     {article.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded text-xs"
+                        className="inline-block text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded text-xs"
+                        style={{ background: "var(--dr-cream)" }}
                       >
                         {tag}
                       </span>
@@ -311,9 +298,10 @@ export default function ArticlesPage() {
                     disabled={currentPage === 1}
                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                       currentPage === 1
-                        ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed"
-                        : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600"
+                        ? "text-gray-400 dark:text-gray-600 cursor-not-allowed"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-dr-hover border border-dr-border"
                     }`}
+                    style={{ background: "var(--dr-surface)" }}
                   >
                     Previous
                   </button>
@@ -338,9 +326,10 @@ export default function ArticlesPage() {
                           onClick={() => handlePageChange(pageNum)}
                           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                             currentPage === pageNum
-                              ? "bg-blue-600 text-white"
-                              : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600"
+                              ? "text-white"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-dr-hover border border-dr-border"
                           }`}
+                          style={currentPage === pageNum ? { background: "var(--dr-amber)" } : { background: "var(--dr-surface)" }}
                         >
                           {pageNum}
                         </button>
@@ -353,9 +342,10 @@ export default function ArticlesPage() {
                     disabled={currentPage === totalPages}
                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                       currentPage === totalPages
-                        ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed"
-                        : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600"
+                        ? "text-gray-400 dark:text-gray-600 cursor-not-allowed"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-dr-hover border border-dr-border"
                     }`}
+                    style={{ background: "var(--dr-surface)" }}
                   >
                     Next
                   </button>

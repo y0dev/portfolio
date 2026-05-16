@@ -114,7 +114,7 @@ export default function TestimoniesSection() {
   };
 
   return (
-    <section ref={testimonialRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section ref={testimonialRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-dr-surface">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -131,7 +131,7 @@ export default function TestimoniesSection() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="testimonial-card bg-gray-50 dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700"
+              className="testimonial-card bg-dr-cream rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border"
             >
               {/* Rating */}
               <div className="flex mb-4">
@@ -145,7 +145,7 @@ export default function TestimoniesSection() {
 
               {/* Author */}
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xl font-bold mr-4">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 bg-dr-amber-pale text-dr-amber-deep">
                   {testimonial.avatar}
                 </div>
                 <div>
@@ -168,7 +168,7 @@ export default function TestimoniesSection() {
           </p>
           <a
             href="mailto:devontae.reid@gmail.com"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 transform hover:scale-105"
+            className="inline-flex items-center px-6 py-3 text-white font-medium rounded-lg transition-opacity duration-200 hover:opacity-90 bg-dr-amber"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Gospel() {
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="text-center mb-16">
@@ -25,13 +25,13 @@ export default function Gospel() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               What is the Gospel?
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div className="rounded-lg shadow-lg p-8" style={{ background: "var(--dr-surface)" }}>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                 The word &quot;gospel&quot; means &quot;good news.&quot; The gospel is the good news that God has provided 
                 a way for sinful humanity to be reconciled to Him through the life, death, and resurrection 
                 of Jesus Christ.
               </p>
-              <blockquote className="border-l-4 border-blue-500 pl-6 my-8 italic text-gray-700 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/20 py-4 rounded-r-lg">
+              <blockquote className="pl-6 my-8 italic text-gray-700 dark:text-gray-300 py-4 px-6 rounded-lg border border-dr-border" style={{ background: "var(--dr-cream)" }}>
                 &quot;For God so loved the world, that he gave his only Son, that whoever believes in him 
                 should not perish but have eternal life.&quot; - John 3:16
               </blockquote>
@@ -43,7 +43,7 @@ export default function Gospel() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               The Problem: Sin and Separation
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div className="rounded-lg shadow-lg p-8" style={{ background: "var(--dr-surface)" }}>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -69,7 +69,7 @@ export default function Gospel() {
                     Sin has serious consequences. It separates us from God, brings death, and leads to 
                     eternal separation from God in hell.
                   </p>
-                  <blockquote className="border-l-4 border-red-500 pl-4 italic text-gray-700 dark:text-gray-300">
+                  <blockquote className="pl-4 italic text-gray-700 dark:text-gray-300 p-4 rounded-lg border border-dr-border" style={{ background: "var(--dr-cream)" }}>
                     &quot;For the wages of sin is death, but the free gift of God is eternal life in Christ 
                     Jesus our Lord.&quot; - Romans 6:23
                   </blockquote>
@@ -83,7 +83,7 @@ export default function Gospel() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               The Solution: Jesus Christ
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div className="rounded-lg shadow-lg p-8" style={{ background: "var(--dr-surface)" }}>
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="text-4xl mb-4">👑</div>
@@ -124,7 +124,7 @@ export default function Gospel() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               The Response: Repent and Believe
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div className="rounded-lg shadow-lg p-8" style={{ background: "var(--dr-surface)" }}>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -163,7 +163,7 @@ export default function Gospel() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               The Promise: New Life
             </h2>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div className="rounded-lg shadow-lg p-8" style={{ background: "var(--dr-surface)" }}>
               <div className="text-center">
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
                   What happens when you trust in Jesus?
@@ -200,18 +200,18 @@ export default function Gospel() {
 
           {/* Call to Action */}
           <section className="text-center">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-white">
+            <div className="rounded-lg p-8 text-white" style={{ background: "var(--dr-amber)" }}>
               <h2 className="text-3xl font-bold mb-6">
                 Will You Trust in Jesus Today?
               </h2>
-              <p className="text-xl mb-8 text-blue-100">
+              <p className="text-xl mb-8 text-white/90">
                 If you want to receive God&apos;s gift of salvation, you can pray something like this:
               </p>
               <div className="bg-white/10 rounded-lg p-6 mb-8 text-left max-w-2xl mx-auto">
                 <p className="text-lg italic">
-                  &quot;Dear God, I know I am a sinner and need your forgiveness. I believe that Jesus 
-                  died on the cross for my sins and rose from the dead. I want to turn from my sins 
-                  and trust in Jesus as my Savior and Lord. Please forgive me and give me eternal life. 
+                  &quot;Dear God, I know I am a sinner and need your forgiveness. I believe that Jesus
+                  died on the cross for my sins and rose from the dead. I want to turn from my sins
+                  and trust in Jesus as my Savior and Lord. Please forgive me and give me eternal life.
                   Thank you for your love and grace. In Jesus&apos; name, Amen.&quot;
                 </p>
               </div>
@@ -220,7 +220,8 @@ export default function Gospel() {
               </p>
               <a
                 href="mailto:devontae.reid@gmail.com"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors"
+                className="hover:opacity-90 px-8 py-3 rounded-lg font-medium transition-opacity"
+                style={{ background: "var(--dr-cream)", color: "var(--dr-amber-deep)" }}
               >
                 Get In Touch
               </a>
@@ -233,7 +234,7 @@ export default function Gospel() {
               Additional Resources
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <div className="bg-dr-surface rounded-lg shadow-lg p-6 border border-dr-border">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                   Bible Reading
                 </h3>
@@ -246,7 +247,7 @@ export default function Gospel() {
                   <li>• Psalms (for worship and prayer)</li>
                 </ul>
               </div>
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <div className="bg-dr-surface rounded-lg shadow-lg p-6 border border-dr-border">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                   Find a Church
                 </h3>

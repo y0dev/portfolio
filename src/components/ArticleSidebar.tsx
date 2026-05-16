@@ -26,7 +26,7 @@ export default function ArticleSidebar({ currentArticleId }: ArticleSidebarProps
 
   return (
     <aside className="hidden xl:block xl:sticky xl:top-24 xl:self-start xl:w-80 xl:ml-8">
-      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+      <div className="bg-dr-surface rounded-lg p-6 border border-dr-border">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           Latest Articles
         </h2>
@@ -49,7 +49,7 @@ export default function ArticleSidebar({ currentArticleId }: ArticleSidebarProps
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-sm font-semibold text-dr-text line-clamp-2 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
                     {article.title}
                   </h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">

@@ -30,7 +30,7 @@ export default function Bookshelf() {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -46,7 +46,7 @@ export default function Bookshelf() {
         {/* Categories */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
-            <span key={category} className="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-medium cursor-pointer hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition-colors duration-200">
+            <span key={category} className="px-4 py-2 rounded-full bg-dr-cream text-gray-700 dark:text-gray-200 font-medium cursor-pointer transition-colors duration-200 hover:text-amber-700 dark:hover:text-amber-300 border border-dr-border">
               {category}
             </span>
           ))}
@@ -60,7 +60,8 @@ export default function Bookshelf() {
               href={book.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 overflow-hidden p-6 flex flex-col"
+              className="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-dr-border overflow-hidden p-6 flex flex-col"
+              style={{ background: "var(--dr-surface)" }}
             >
               <div className="flex items-center mb-4">
                 <span className="text-3xl mr-4">{book.image}</span>
@@ -68,7 +69,7 @@ export default function Bookshelf() {
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                     {book.title}
                   </h3>
-                  <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">
+                  <p className="font-medium text-sm" style={{ color: "var(--dr-amber-deep)" }}>
                     by {book.author}
                   </p>
                 </div>
@@ -77,7 +78,7 @@ export default function Bookshelf() {
                 {book.description}
               </p>
               <div className="flex items-center justify-between mt-auto">
-                <span className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full text-xs font-medium">
+                <span className="inline-block bg-dr-cream text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full text-xs font-medium border border-dr-border">
                   {book.category}
                 </span>
                 <span className="text-yellow-400 text-sm ml-2">

@@ -99,14 +99,15 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen" style={{ background: "var(--dr-cream)" }}>
       <main className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
           <nav className="mb-8">
             <Link 
               href="/articles" 
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="hover:underline"
+              style={{ color: "var(--dr-amber-deep)" }}
             >
               ← Back to Articles & Notes
             </Link>

@@ -175,14 +175,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <ContentRenderer content={article.content} />
 
             {/* Footer */}
-            <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <footer className="mt-16 pt-8 border-t border-dr-border">
               <div className="flex flex-wrap gap-4">
                 <span className="text-gray-600 dark:text-gray-400">Tags:</span>
                 {article.tags.map((tag) => (
                   <Link
                     key={tag}
                     href={`/articles?tag=${tag}`}
-                    className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="bg-dr-cream text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm hover:text-amber-700 dark:hover:text-amber-300 transition-colors border border-dr-border"
                   >
                     {tag}
                   </Link>

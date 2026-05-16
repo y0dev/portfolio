@@ -125,7 +125,7 @@ export default function BibleReadingPlanPage() {
   }, [readings, readingPlan.startDate]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div className="min-h-screen py-8" style={{ background: "var(--dr-cream)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
@@ -140,7 +140,8 @@ export default function BibleReadingPlanPage() {
               href={readingPlan.source} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
+              className="inline-flex items-center px-4 py-2 text-white rounded-md transition-opacity hover:opacity-90 text-sm"
+              style={{ background: "var(--dr-amber)" }}
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -152,11 +153,11 @@ export default function BibleReadingPlanPage() {
 
         {/* Progress Statistics */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="rounded-lg shadow-md p-6" style={{ background: "var(--dr-surface)" }}>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "var(--dr-amber-pale)" }}>
+                  <svg className="w-5 h-5" style={{ color: "var(--dr-amber-deep)" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -172,20 +173,20 @@ export default function BibleReadingPlanPage() {
               </div>
             </div>
             <div className="mt-4">
-              <div className="bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${stats.readingPercentage}%` }}
+              <div className="bg-dr-border rounded-full h-2">
+                <div
+                  className="h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${stats.readingPercentage}%`, background: "var(--dr-amber)" }}
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="rounded-lg shadow-md p-6" style={{ background: "var(--dr-surface)" }}>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "var(--dr-amber-pale)" }}>
+                  <svg className="w-5 h-5" style={{ color: "var(--dr-amber-deep)" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -201,20 +202,20 @@ export default function BibleReadingPlanPage() {
               </div>
             </div>
             <div className="mt-4">
-              <div className="bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div 
-                  className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${stats.weekPercentage}%` }}
+              <div className="bg-dr-border rounded-full h-2">
+                <div
+                  className="h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${stats.weekPercentage}%`, background: "var(--dr-amber)" }}
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="rounded-lg shadow-md p-6" style={{ background: "var(--dr-surface)" }}>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "var(--dr-amber-pale)" }}>
+                  <svg className="w-5 h-5" style={{ color: "var(--dr-amber-deep)" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -230,10 +231,10 @@ export default function BibleReadingPlanPage() {
               </div>
             </div>
             <div className="mt-4">
-              <div className="bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div 
-                  className="bg-purple-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${stats.currentWeekPercentage}%` }}
+              <div className="bg-dr-border rounded-full h-2">
+                <div
+                  className="h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${stats.currentWeekPercentage}%`, background: "var(--dr-amber)" }}
                 />
               </div>
             </div>
@@ -254,7 +255,7 @@ export default function BibleReadingPlanPage() {
         />
 
         {/* Help Section */}
-        <div className="mt-8 sm:mt-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6">
+        <div className="mt-8 sm:mt-12 rounded-lg shadow-md p-4 sm:p-6" style={{ background: "var(--dr-surface)" }}>
           <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
             How to Use This Reading Plan
           </h2>

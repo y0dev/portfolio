@@ -65,20 +65,20 @@ export default function ResourcesPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Read":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200";
+        return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300";
       case "Reading":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200";
+        return "bg-amber-100 text-amber-800 dark:bg-amber-900/20 dark:text-amber-300";
       case "To Read":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-200";
+        return "bg-dr-cream text-dr-text-muted";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-200";
+        return "bg-dr-cream text-dr-text-muted";
     }
   };
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div ref={pageRef} className="min-h-screen" style={{ background: "var(--dr-cream)" }}>
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             Resources
@@ -91,7 +91,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Books Section Preview */}
-      <section className="resource-section bookshelf-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+      <section className="resource-section bookshelf-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -101,7 +101,8 @@ export default function ResourcesPage() {
               A few of my favorite books.{" "}
               <Link
                 href="/resources/books"
-                className="text-blue-600 dark:text-blue-400 underline"
+                className="underline"
+                style={{ color: "var(--dr-amber-deep)" }}
               >
                 See all books →
               </Link>
@@ -118,7 +119,7 @@ export default function ResourcesPage() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="book-card bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-600 overflow-hidden p-6 flex flex-col"
+                  className="book-card bg-dr-surface rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-dr-border overflow-hidden p-6 flex flex-col"
                 >
                   <div className="flex items-center mb-4">
                     <span className="text-3xl mr-4">{book.cover}</span>
@@ -126,7 +127,7 @@ export default function ResourcesPage() {
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                         {book.title}
                       </h3>
-                      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">
+                      <p className="font-medium text-sm" style={{ color: "var(--dr-amber-deep)" }}>
                         by {book.author}
                       </p>
                     </div>
@@ -153,7 +154,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Tools Section */}
-      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -168,14 +169,14 @@ export default function ResourcesPage() {
             {resources.tools.map((tool, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700"
+                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border"
               >
                 <div className="text-center">
                   <div className="text-3xl mb-3">{tool.icon}</div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                     {tool.name}
                   </h3>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
+                  <p className="text-sm mb-2" style={{ color: "var(--dr-amber-deep)" }}>
                     {tool.category}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -189,7 +190,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Developer Resources Section */}
-      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -207,14 +208,14 @@ export default function ResourcesPage() {
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
               >
                 <div className="text-center">
                   <div className="text-3xl mb-3">{resource.icon}</div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                     {resource.name}
                   </h3>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
+                  <p className="text-sm mb-2" style={{ color: "var(--dr-amber-deep)" }}>
                     {resource.category}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -228,7 +229,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Podcast Section */}
-      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -245,7 +246,7 @@ export default function ResourcesPage() {
                 href={podcast.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
               >
                 <div className="text-center">
                   <div className="text-3xl mb-3">{podcast.icon}</div>
@@ -263,7 +264,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* YouTube Channels Section */}
-      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -280,7 +281,7 @@ export default function ResourcesPage() {
                 href={channel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
               >
                 <div className="text-center">
                   <div className="text-3xl mb-3">{channel.icon}</div>
@@ -298,7 +299,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Theology Resources Section */}
-      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+      <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -315,14 +316,14 @@ export default function ResourcesPage() {
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-600 block"
+                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
               >
                 <div className="text-center">
                   <div className="text-3xl mb-3">{resource.icon}</div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                     {resource.name}
                   </h3>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
+                  <p className="text-sm mb-2" style={{ color: "var(--dr-amber-deep)" }}>
                     {resource.category}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -336,7 +337,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900">
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Have a Resource to Share?
@@ -347,7 +348,8 @@ export default function ResourcesPage() {
           </p>
           <a
             href="mailto:devontae.reid@gmail.com"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 transform hover:scale-105"
+            className="inline-flex items-center px-6 py-3 text-white font-medium rounded-lg transition-opacity duration-200 hover:opacity-90"
+            style={{ background: "var(--dr-amber)" }}
           >
             <svg
               className="w-5 h-5 mr-2"

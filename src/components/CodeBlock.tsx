@@ -39,7 +39,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
     <div className="relative group my-6">
       {/* Language badge */}
       <div className="absolute top-0 right-0 z-10">
-        <div className="bg-gray-800 dark:bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-bl-lg font-mono">
+        <div className="text-gray-300 text-xs px-3 py-1 rounded-bl-lg font-mono" style={{ background: "oklch(22% 0.01 72)" }}>
           {language}
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
       {/* Copy button */}
       <button
         onClick={copyToClipboard}
-        className="absolute top-2 right-12 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500 text-white p-2 rounded-md text-sm font-medium"
+        className="absolute top-2 right-12 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-white p-2 rounded-md text-sm font-medium" style={{ background: "oklch(30% 0.01 72)" }}
         title="Copy code"
       >
         {copied ? (
