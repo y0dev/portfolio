@@ -139,59 +139,33 @@ export default function FavoritesSection() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    gsap.fromTo(".sports-title",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".sports-title",
+        { y: 50, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 1, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
         }
-      }
-    );
+      );
 
-    gsap.fromTo(".team-card",
-      { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: teamsRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+      gsap.fromTo(".team-card",
+        { y: 100, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out",
+          scrollTrigger: { trigger: teamsRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
         }
-      }
-    );
+      );
 
-    gsap.fromTo(".player-card",
-      { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: playersRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+      gsap.fromTo(".player-card",
+        { y: 100, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out",
+          scrollTrigger: { trigger: playersRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
         }
-      }
-    );
+      );
+    });
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

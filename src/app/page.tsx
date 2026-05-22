@@ -26,89 +26,67 @@ export default function Home() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
 
-    // Hero section animations
-    const heroTl = gsap.timeline();
-    heroTl
-      .fromTo(".hero-title",
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }
-      )
-      .fromTo(".hero-subtitle",
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, "-=0.4"
-      )
-      .fromTo(".hero-buttons",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.3"
-      );
+    const ctx = gsap.context(() => {
+      const heroTl = gsap.timeline();
+      heroTl
+        .fromTo(".hero-title",
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }
+        )
+        .fromTo(".hero-subtitle",
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, "-=0.4"
+        )
+        .fromTo(".hero-buttons",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.3"
+        );
 
-    // About section animations
-    gsap.fromTo(".about-content",
-      { x: -60, opacity: 0 },
-      {
-        x: 0, opacity: 1, duration: 0.9, ease: "power3.out",
-        scrollTrigger: {
-          trigger: aboutRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    gsap.fromTo(".about-image",
-      { x: 60, opacity: 0 },
-      {
-        x: 0, opacity: 1, duration: 0.9, ease: "power3.out",
-        scrollTrigger: {
-          trigger: aboutRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    gsap.fromTo(".skill-tag",
-      { scale: 0.8, opacity: 0 },
-      {
-        scale: 1, opacity: 1, duration: 0.4, stagger: 0.08, ease: "power2.out",
-        scrollTrigger: {
-          trigger: aboutRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    gsap.fromTo(".featured-card",
-      { y: 40, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out",
-        scrollTrigger: {
-          trigger: featuredRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    const timelineSection = document.getElementById("timeline-section");
-    if (timelineSection) {
-      gsap.fromTo(".timeline-item",
-        { y: 30 },
+      gsap.fromTo(".about-content",
+        { x: -60, opacity: 0 },
         {
-          y: 0, duration: 0.5, stagger: 0.15, ease: "power3.out",
-          scrollTrigger: {
-            trigger: timelineSection,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
+          x: 0, opacity: 1, duration: 0.9, ease: "power3.out",
+          scrollTrigger: { trigger: aboutRef.current, start: "top 80%", toggleActions: "play none none reverse" }
         }
       );
-    }
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+      gsap.fromTo(".about-image",
+        { x: 60, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 0.9, ease: "power3.out",
+          scrollTrigger: { trigger: aboutRef.current, start: "top 80%", toggleActions: "play none none reverse" }
+        }
+      );
+
+      gsap.fromTo(".skill-tag",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1, opacity: 1, duration: 0.4, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: aboutRef.current, start: "top 70%", toggleActions: "play none none reverse" }
+        }
+      );
+
+      gsap.fromTo(".featured-card",
+        { y: 40, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out",
+          scrollTrigger: { trigger: featuredRef.current, start: "top 80%", toggleActions: "play none none reverse" }
+        }
+      );
+
+      const timelineSection = document.getElementById("timeline-section");
+      if (timelineSection) {
+        gsap.fromTo(".timeline-item",
+          { y: 30 },
+          {
+            y: 0, duration: 0.5, stagger: 0.15, ease: "power3.out",
+            scrollTrigger: { trigger: timelineSection, start: "top 80%", toggleActions: "play none none reverse" }
+          }
+        );
+      }
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -162,12 +140,12 @@ export default function Home() {
       <section ref={aboutRef} className="py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="about-content">
+            <div className="about-content max-w-[70ch]">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                 About Me
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                I am a Software Engineer currently working in embedded systems. I started in iOS development and eventually grew to enjoy web development—both front-end and back-end. Who would have known that user interfaces would be a love/hate relationship? There&apos;s a constant battle between finding inspiration and enjoying the final product.
+                I am a Software Engineer currently working in embedded systems. I started in iOS development and eventually grew to enjoy web development — both front-end and back-end. Who would have known that user interfaces would be a love/hate relationship? There&apos;s a constant battle between finding inspiration and enjoying the final product.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
                 While trying to discover inspiration for web design, I often spend my time building RESTful APIs. I&apos;m proficient in HTML, CSS, JavaScript, C/C++, and Python, and I work primarily in ReactJS and VueJS.

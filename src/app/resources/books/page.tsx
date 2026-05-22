@@ -81,7 +81,7 @@ export default function Bookshelf() {
                 <span className="inline-block bg-dr-cream text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full text-xs font-medium border border-dr-border">
                   {book.category}
                 </span>
-                <span className="text-yellow-400 text-sm ml-2">
+                <span className="text-sm ml-2" style={{ color: "var(--dr-amber)" }}>
                   {renderStars(book.rating)}
                 </span>
               </div>

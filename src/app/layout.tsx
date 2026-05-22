@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Devontae Reid | Full-Stack Developer & Creative Technologist",
-  description: "Full-stack developer and creative technologist passionate about building innovative web applications and sharing insights on technology and faith.",
+  description: "Software engineer working in embedded systems and full-stack web. Writes about technology, craft, and faith.",
   metadataBase: new URL('https://www.devontaereid.com'),
   keywords: ["full-stack developer", "web development", "react", "next.js", "typescript", "portfolio", "creative technologist", "devontae reid"],
   authors: [{ name: "Devontae Reid" }],
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Devontae Reid | Embedded Engineer & Full-Stack Developer",
-    description: "Full-stack developer and creative technologist passionate about building innovative web applications and sharing insights on technology and faith.",
+    description: "Software engineer working in embedded systems and full-stack web. Writes about technology, craft, and faith.",
     url: "https://www.devontaereid.com",
     siteName: "Devontae Reid",
     images: [
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Devontae Reid | Embedded Engineer & Full-Stack Developer",
-    description: "Full-stack developer and creative technologist passionate about building innovative web applications and sharing insights on technology and faith.",
+    description: "Software engineer working in embedded systems and full-stack web. Writes about technology, craft, and faith.",
     images: ["/logo512.png"],
     site: "@_yodev_",
     creator: "@_yodev_",
@@ -150,8 +150,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ background: "var(--background)", color: "var(--foreground)" }}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:text-white focus:rounded-md focus:shadow-lg"
+          style={{ background: "var(--dr-amber)" }}
+        >
+          Skip to main content
+        </a>
         <Navigation />
-        <main className="min-h-screen">
+        <main id="main-content" className="min-h-screen">
           {children}
         </main>
         <script src="https://static.esvmedia.org/crossref/crossref.min.js" type="text/javascript"></script>

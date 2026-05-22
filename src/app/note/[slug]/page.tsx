@@ -142,7 +142,7 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
             <div className="post-header-meta">
               <div className="author-info">
                 <Image
-                  src="https://i.ibb.co/HY4dx9s/headshot.jpg"
+                  src="/assets/images/headshot.jpeg"
                   alt="Devontae Reid"
                   width={48}
                   height={48}

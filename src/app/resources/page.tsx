@@ -143,7 +143,7 @@ export default function ResourcesPage() {
                     >
                       {book.status}
                     </span>
-                    <span className="text-yellow-400 text-sm ml-2">
+                    <span className="text-sm ml-2" style={{ color: "var(--dr-amber)" }}>
                       {"★".repeat(book.rating) + "☆".repeat(5 - book.rating)}
                     </span>
                   </div>
@@ -156,32 +156,29 @@ export default function ResourcesPage() {
       {/* Tools Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              🛠️ Tools & Software
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Tools & Software
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Essential tools and software I use in my daily development workflow
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
+              What I reach for daily when building embedded systems and web applications
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {resources.tools.map((tool, index) => (
               <div
                 key={index}
-                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border"
+                className="flex items-start gap-4 p-4 rounded-lg border border-dr-border hover:bg-dr-cream transition-colors duration-200"
+                style={{ background: "var(--dr-surface)" }}
               >
-                <div className="text-center">
-                  <div className="text-3xl mb-3">{tool.icon}</div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-                    {tool.name}
-                  </h3>
-                  <p className="text-sm mb-2" style={{ color: "var(--dr-amber-deep)" }}>
-                    {tool.category}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {tool.description}
-                  </p>
+                <span className="text-2xl flex-shrink-0 mt-0.5">{tool.icon}</span>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{tool.name}</h3>
+                    <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>{tool.category}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-snug">{tool.description}</p>
                 </div>
               </div>
             ))}
@@ -192,35 +189,31 @@ export default function ResourcesPage() {
       {/* Developer Resources Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              🌐 Developer Resources
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Developer Resources
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-              Websites and platforms I frequently visit for learning and development
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
+              Platforms and references I return to consistently
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {resources.dev_resources.map((resource, index) => (
               <a
                 key={index}
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
+                className="group flex items-start gap-4 p-5 rounded-lg border border-dr-border hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 bg-dr-surface"
               >
-                <div className="text-center">
-                  <div className="text-3xl mb-3">{resource.icon}</div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                <span className="text-2xl flex-shrink-0">{resource.icon}</span>
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-0.5 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
                     {resource.name}
                   </h3>
-                  <p className="text-sm mb-2" style={{ color: "var(--dr-amber-deep)" }}>
-                    {resource.category}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {resource.description}
-                  </p>
+                  <p className="text-xs mb-1.5" style={{ color: "var(--dr-amber-deep)" }}>{resource.category}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-snug">{resource.description}</p>
                 </div>
               </a>
             ))}
@@ -230,33 +223,34 @@ export default function ResourcesPage() {
 
       {/* Podcast Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              🎙️ Podcasts
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Podcasts
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-              Podcasts I recommend for developers and lifelong learners
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              For the commute, the workout, and the long drive
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="divide-y border-t border-b border-dr-border">
             {resources.podcasts.map((podcast, index) => (
               <a
                 key={index}
                 href={podcast.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
+                className="group flex items-center gap-5 py-5 hover:bg-dr-cream px-4 -mx-4 transition-colors duration-150"
               >
-                <div className="text-center">
-                  <div className="text-3xl mb-3">{podcast.icon}</div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                <span className="text-2xl flex-shrink-0 w-10 text-center">{podcast.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
                     {podcast.name}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {podcast.description}
-                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5">{podcast.description}</p>
                 </div>
+                <svg className="w-4 h-4 text-gray-400 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </a>
             ))}
           </div>
@@ -265,33 +259,34 @@ export default function ResourcesPage() {
 
       {/* YouTube Channels Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-cream)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              📺 YouTube Channels
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              YouTube Channels
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-              YouTube channels I recommend for learning and inspiration
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Channels worth subscribing to
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="divide-y border-t border-b border-dr-border">
             {resources.youtube_channels.map((channel, index) => (
               <a
                 key={index}
                 href={channel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
+                className="group flex items-center gap-5 py-5 hover:bg-dr-surface px-4 -mx-4 transition-colors duration-150"
               >
-                <div className="text-center">
-                  <div className="text-3xl mb-3">{channel.icon}</div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                <span className="text-2xl flex-shrink-0 w-10 text-center">{channel.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
                     {channel.name}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {channel.description}
-                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5">{channel.description}</p>
                 </div>
+                <svg className="w-4 h-4 text-gray-400 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </a>
             ))}
           </div>
@@ -301,32 +296,33 @@ export default function ResourcesPage() {
       {/* Theology Resources Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              ⛪ Theology Resources
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Theology Resources
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-              Biblical teaching, sermons, evangelism, and apologetics resources
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
+              Biblical teaching, sermons, and apologetics that have shaped how I read the Bible and understand the faith
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {resources.theology_resources.map((resource, index) => (
               <a
                 key={index}
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-dr-surface rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-dr-border block"
+                className="group flex gap-5 p-6 rounded-lg border border-dr-border hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+                style={{ background: "var(--dr-cream)" }}
               >
-                <div className="text-center">
-                  <div className="text-3xl mb-3">{resource.icon}</div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                <span className="text-3xl flex-shrink-0">{resource.icon}</span>
+                <div className="min-w-0">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
                     {resource.name}
                   </h3>
-                  <p className="text-sm mb-2" style={{ color: "var(--dr-amber-deep)" }}>
+                  <span className="inline-block text-xs px-2 py-0.5 rounded mb-2" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>
                     {resource.category}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                  </span>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                     {resource.description}
                   </p>
                 </div>

@@ -216,7 +216,8 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
           </div>
 
           {/* Calendar Grid */}
-          <div className="rounded-lg border border-dr-border shadow-sm" style={{ background: "var(--dr-surface)" }}>
+          <div className="overflow-x-auto">
+          <div className="rounded-lg border border-dr-border shadow-sm min-w-[320px]" style={{ background: "var(--dr-surface)" }}>
             {/* Calendar Header */}
             <div className="grid grid-cols-7 border-b border-dr-border">
               {dayNames.map((day) => (
@@ -459,6 +460,7 @@ export default function Calendar({ readings, onReadingClick }: CalendarProps) {
                 })
               )}
             </div>
+          </div>
           </div>
 
           {/* Summary Cards */}

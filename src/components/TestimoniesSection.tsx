@@ -104,9 +104,8 @@ export default function TestimoniesSection() {
     return Array.from({ length: 5 }, (_, i) => (
       <span
         key={i}
-        className={`star-rating text-lg ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
+        className="star-rating text-lg"
+        style={{ color: i < rating ? "var(--dr-amber)" : "oklch(80% 0.005 70)" }}
       >
         ★
       </span>

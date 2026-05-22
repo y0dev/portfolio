@@ -109,7 +109,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div className="flex-1 max-w-4xl">
             {/* Breadcrumb */}
             <nav className="mb-8">
-              <Link href="/articles" className="text-blue-600 dark:text-blue-400 hover:underline">
+              <Link href="/articles" className="hover:underline" style={{ color: "var(--dr-amber-deep)" }}>
                 ← Back to Articles
               </Link>
             </nav>
@@ -143,7 +143,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <div className="post-header-meta">
                 <div className="author-info">
                   <Image
-                    src="https://i.ibb.co/HY4dx9s/headshot.jpg"
+                    src="/assets/images/headshot.jpeg"
                     alt="Devontae Reid"
                     width={48}
                     height={48}

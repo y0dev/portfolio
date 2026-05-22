@@ -19,6 +19,11 @@
   --dr-text-muted:   oklch(44% 0.012 70);   /* secondary text */
   --dr-text-faint:   oklch(60% 0.009 70);   /* placeholder / tertiary */
   --dr-hover:        oklch(90% 0.009 75);   /* hover background */
+
+  /* Code block tokens — invariant dark surface for syntax highlighting */
+  --dr-code-surface:  oklch(14% 0.008 72);
+  --dr-code-badge:    oklch(22% 0.01 72);
+  --dr-code-button:   oklch(30% 0.01 72);
 }
 
 .dark {

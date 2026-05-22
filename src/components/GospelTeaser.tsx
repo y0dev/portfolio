@@ -18,77 +18,38 @@ export default function GospelTeaser() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    // Main content animation
-    gsap.fromTo(".gospel-content",
-      { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".gospel-content",
+        { y: 100, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
         }
-      }
-    );
+      );
 
-    // Staggered text animations
-    gsap.fromTo(".gospel-text",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.3,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+      gsap.fromTo(".gospel-text",
+        { y: 50, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.3, ease: "power3.out",
+          scrollTrigger: { trigger: contentRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
         }
-      }
-    );
+      );
 
-    // Button animation
-    gsap.fromTo(".gospel-button",
-      { scale: 0.8, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+      gsap.fromTo(".gospel-button",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1, opacity: 1, duration: 0.6, ease: "power3.out",
+          scrollTrigger: { trigger: contentRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
         }
-      }
-    );
+      );
 
-    // Floating animation for emojis
-    gsap.to(".floating-emoji", {
-      y: -15,
-      duration: 3,
-      ease: "power2.inOut",
-      yoyo: true,
-      repeat: -1,
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
-      }
+      gsap.to(".floating-emoji", {
+        y: -15, duration: 3, ease: "power2.inOut", yoyo: true, repeat: -1,
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%", end: "bottom 20%", toggleActions: "play none none reverse" }
+      });
     });
 
-    // Cleanup function
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

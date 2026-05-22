@@ -336,17 +336,17 @@ export function styleHTMLContent(html: string): string {
 
   // Style inline code
   tempDiv.querySelectorAll('code:not(pre code)').forEach(code => {
-    code.className = 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono';
+    code.className = 'bg-amber-50 dark:bg-amber-900 text-gray-800 dark:text-amber-100 px-2 py-1 rounded text-sm font-mono';
   });
 
   // Style blockquotes
   tempDiv.querySelectorAll('blockquote').forEach(blockquote => {
-    blockquote.className = 'border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300';
+    blockquote.className = 'border-l-4 border-amber-400 dark:border-amber-500 bg-amber-50 dark:bg-amber-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300';
   });
 
   // Style links
   tempDiv.querySelectorAll('a').forEach(a => {
-    a.className = 'text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200';
+    a.className = 'text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline hover:no-underline transition-colors duration-200';
   });
 
   // Style strong and em
@@ -367,11 +367,11 @@ export function styleHTMLContent(html: string): string {
     wrapper.appendChild(table);
     
     // Style the table
-    table.className = 'min-w-full divide-y divide-gray-200 dark:divide-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm';
+    table.className = 'min-w-full divide-y divide-dr-border border border-dr-border rounded-lg overflow-hidden shadow-sm';
     
     // Style table header
     table.querySelectorAll('thead').forEach(thead => {
-      thead.className = 'bg-gray-50 dark:bg-gray-800';
+      thead.className = 'bg-dr-cream';
     });
     
     // Style table header cells
@@ -385,22 +385,22 @@ export function styleHTMLContent(html: string): string {
         alignClass = 'text-right';
       }
       
-      th.className = `px-6 py-3 ${alignClass} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200 dark:border-gray-700`;
+      th.className = `px-6 py-3 ${alignClass} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-dr-border`;
       th.removeAttribute('align'); // Remove align attribute as we're using classes
     });
     
     // Style table body
     table.querySelectorAll('tbody').forEach(tbody => {
-      tbody.className = 'bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700';
+      tbody.className = 'bg-dr-surface divide-y divide-dr-border';
     });
     
     // Style table rows with alternating colors
     table.querySelectorAll('tbody tr').forEach((tr, index) => {
       // Alternate row colors for better readability
       if (index % 2 === 0) {
-        tr.className = 'bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors';
+        tr.className = 'bg-dr-surface hover:bg-dr-hover transition-colors';
       } else {
-        tr.className = 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors';
+        tr.className = 'bg-dr-cream hover:bg-dr-hover transition-colors';
       }
     });
     
@@ -415,14 +415,14 @@ export function styleHTMLContent(html: string): string {
         alignClass = 'text-right';
       }
       
-      td.className = `px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300 ${alignClass} border-b border-gray-200 dark:border-gray-700`;
+      td.className = `px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300 ${alignClass} border-b border-dr-border`;
       td.removeAttribute('align'); // Remove align attribute as we're using classes
     });
   });
 
   // Style horizontal rules
   tempDiv.querySelectorAll('hr').forEach(hr => {
-    hr.className = 'border-gray-300 dark:border-gray-600 my-8';
+    hr.className = 'border-dr-border my-8';
   });
 
   // Style images - add article-image class (wrapping and captions handled by ContentRenderer)

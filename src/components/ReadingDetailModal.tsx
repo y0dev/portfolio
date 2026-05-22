@@ -1,7 +1,7 @@
 "use client";
 
 import { BibleReading } from "@/data/bible-reading-plan";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface ReadingDetailModalProps {
   reading: BibleReading | null;
@@ -9,28 +9,33 @@ interface ReadingDetailModalProps {
   onClose: () => void;
 }
 
-export default function ReadingDetailModal({ 
-  reading, 
-  isOpen, 
+export default function ReadingDetailModal({
+  reading,
+  isOpen,
   onClose
 }: ReadingDetailModalProps) {
-  // Handle Escape key to close modal
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     if (!isOpen) return;
-    
+
+    previousFocusRef.current = document.activeElement as HTMLElement;
+
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
+      if (e.key === 'Escape') onClose();
     };
-    
+
     document.addEventListener('keydown', handleEscape);
-    // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
-    
+
+    // Move focus into modal
+    requestAnimationFrame(() => closeButtonRef.current?.focus());
+
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
+      previousFocusRef.current?.focus();
     };
   }, [isOpen, onClose]);
 
@@ -56,14 +61,17 @@ export default function ReadingDetailModal({
         />
         
         {/* Modal */}
-        <div 
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-date-heading"
           className="relative rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden bg-dr-surface"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-dr-border">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+              <h2 id="modal-date-heading" className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                 {formatDate(reading.date)}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -71,6 +79,7 @@ export default function ReadingDetailModal({
               </p>
             </div>
             <button
+              ref={closeButtonRef}
               onClick={(e) => {
                 e.stopPropagation();
                 onClose();

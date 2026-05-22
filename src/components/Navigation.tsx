@@ -135,6 +135,9 @@ export default function Navigation() {
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               className="ml-2 text-gray-700 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-300"
             >
               {isMenuOpen ? (
@@ -153,7 +156,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden" style={{ background: "color-mix(in oklch, var(--dr-surface) 95%, transparent)" }}>
+        <div id="mobile-menu" className="md:hidden" style={{ background: "color-mix(in oklch, var(--dr-surface) 95%, transparent)" }}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => {
               // Check if current path matches the nav item (exact match or starts with for sub-routes)

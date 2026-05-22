@@ -199,32 +199,57 @@ export default function Gospel() {
           </section>
 
           {/* Call to Action */}
-          <section className="text-center">
+          <section>
             <div className="rounded-lg p-8 text-white" style={{ background: "var(--dr-amber)" }}>
-              <h2 className="text-3xl font-bold mb-6">
-                Will You Trust in Jesus Today?
-              </h2>
-              <p className="text-xl mb-8 text-white/90">
-                If you want to receive God&apos;s gift of salvation, you can pray something like this:
-              </p>
-              <div className="bg-white/10 rounded-lg p-6 mb-8 text-left max-w-2xl mx-auto">
-                <p className="text-lg italic">
-                  &quot;Dear God, I know I am a sinner and need your forgiveness. I believe that Jesus
-                  died on the cross for my sins and rose from the dead. I want to turn from my sins
-                  and trust in Jesus as my Savior and Lord. Please forgive me and give me eternal life.
-                  Thank you for your love and grace. In Jesus&apos; name, Amen.&quot;
+              <div className="max-w-2xl mx-auto text-center mb-10">
+                <h2 className="text-3xl font-bold mb-4">
+                  Repent and Believe the Gospel
+                </h2>
+                <p className="text-white/90 text-lg leading-relaxed">
+                  This is not an invitation to recite a formula. It is the command of the risen Lord to every person: turn from sin and trust in Christ alone.
                 </p>
               </div>
-              <p className="text-lg mb-8">
-                If you prayed this prayer or have questions about the gospel, we&apos;d love to hear from you!
-              </p>
-              <a
-                href="mailto:devontae.reid@gmail.com"
-                className="hover:opacity-90 px-8 py-3 rounded-lg font-medium transition-opacity"
-                style={{ background: "var(--dr-cream)", color: "var(--dr-amber-deep)" }}
-              >
-                Get In Touch
-              </a>
+
+              <div className="grid md:grid-cols-2 gap-6 mb-10">
+                <div className="bg-white/10 rounded-lg p-6 text-left">
+                  <h3 className="text-xl font-semibold mb-3">What Repentance Means</h3>
+                  <p className="text-white/90 leading-relaxed mb-3">
+                    Repentance is not mere sorrow over consequences. It is a genuine turning of the heart from sin and toward God — forsaking your own way, your self-righteousness, and your rebellion against him.
+                  </p>
+                  <p className="text-white/80 text-sm italic">
+                    &quot;God commands all people everywhere to repent.&quot; — Acts 17:30
+                  </p>
+                </div>
+                <div className="bg-white/10 rounded-lg p-6 text-left">
+                  <h3 className="text-xl font-semibold mb-3">What Faith Rests On</h3>
+                  <p className="text-white/90 leading-relaxed mb-3">
+                    Faith is not a decision or a feeling — it is resting entirely on Christ and his finished work. He bore the wrath you deserved. He rose as Lord. Trust in him alone, not in your repentance or your sincerity.
+                  </p>
+                  <p className="text-white/80 text-sm italic">
+                    &quot;For by grace you have been saved through faith. And this is not your own doing; it is the gift of God.&quot; — Ephesians 2:8
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white/10 rounded-lg p-6 mb-10 text-center max-w-2xl mx-auto">
+                <p className="text-xl italic leading-relaxed">
+                  &quot;Whoever comes to me I will never cast out.&quot;
+                </p>
+                <p className="text-white/80 mt-2 text-sm">— John 6:37</p>
+              </div>
+
+              <div className="text-center">
+                <p className="text-white/90 text-lg mb-6 max-w-xl mx-auto">
+                  If God is drawing you, do not delay. Come to Christ now — cast yourself on his mercy, confess your sin, and trust his promise. He is faithful to receive all who come.
+                </p>
+                <a
+                  href="mailto:devontae.reid@gmail.com"
+                  className="hover:opacity-90 px-8 py-3 rounded-lg font-medium transition-opacity inline-block"
+                  style={{ background: "var(--dr-cream)", color: "var(--dr-amber-deep)" }}
+                >
+                  Have Questions? Reach Out
+                </a>
+              </div>
             </div>
           </section>
 
