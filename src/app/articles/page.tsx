@@ -239,7 +239,7 @@ export default function ArticlesPage() {
               >
                 {/* Article Image */}
                 {article.image && (
-                  <div className="relative w-full h-32 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
+                  <div className="relative w-full h-32 overflow-hidden">
                     <Image
                       src={`/assets/${article.image.name}`}
                       alt={article.image.alt}
