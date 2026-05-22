@@ -9,7 +9,7 @@ import GospelTeaser from "@/components/GospelTeaser";
 import TimelineSection from "@/components/TimelineSection";
 // import TestimoniesSection from "@/components/TestimoniesSection";
 import Footer from "@/components/Footer";
-import FavoritesSection from "@/components/FavoritesSection";
+import NowSection from "@/components/NowSection";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -315,8 +315,8 @@ export default function Home() {
       {/* Gospel Teaser Section */}
       <GospelTeaser />
 
-      {/* Favorite Sports Section */}
-      <FavoritesSection/>
+      {/* Now Section */}
+      <NowSection />
 
       {/* Footer */}
       <Footer />
