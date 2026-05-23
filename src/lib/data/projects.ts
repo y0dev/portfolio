@@ -1,5 +1,5 @@
 import { getPool, dbToProject } from '../db';
-import staticProjects from '@/data/projects.json';
+import { projects as staticProjects } from '@/data/projects';
 import { safeDataLoad } from '../data-loader';
 
 /**

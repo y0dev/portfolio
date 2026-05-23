@@ -1,5 +1,5 @@
 import { getPool, dbToResourceBook, dbToResource } from '../db';
-import staticResources from '@/data/resources.json';
+import { resources as staticResources } from '@/data/resources';
 import { safeDataLoad } from '../data-loader';
 
 /**

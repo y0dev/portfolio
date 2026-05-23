@@ -1,6 +1,7 @@
 
-import projects from '@/data/projects.json';
+import { projects } from '@/data/projects';
 import Image from 'next/image';
+import ExpandableDescription from '@/components/ExpandableDescription';
 
 export default function Projects() {
   const featuredProjects = projects.filter(project => project.featured);
@@ -59,9 +60,7 @@ export default function Projects() {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {project.description}
-                  </p>
+                  <ExpandableDescription text={project.description} />
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech) => (
                       <span
@@ -134,9 +133,7 @@ export default function Projects() {
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm">
-                    {project.description}
-                  </p>
+                  <ExpandableDescription text={project.description} className="text-sm" />
                   <div className="flex flex-wrap gap-1 mb-4">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <span

@@ -148,7 +148,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ background: "var(--background)", color: "var(--foreground)" }}
+        style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
       >
         <a
           href="#main-content"

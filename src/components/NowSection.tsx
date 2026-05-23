@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import resources from "@/data/resources.json";
+import { resources } from "@/data/resources";
 import { articles } from "@/data/articles";
 import { formatDateFull, parseDate } from "@/utils";
 
