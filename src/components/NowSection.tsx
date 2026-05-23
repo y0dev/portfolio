@@ -21,7 +21,7 @@ export default function NowSection() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Currently Reading */}
           <div>
             <h3 className="text-xs font-semibold tracking-widest uppercase mb-5 text-gray-400 dark:text-gray-500">
@@ -80,32 +80,6 @@ export default function NowSection() {
             </Link>
           </div>
 
-          {/* Working On */}
-          <div>
-            <h3 className="text-xs font-semibold tracking-widest uppercase mb-5 text-gray-400 dark:text-gray-500">
-              Working On
-            </h3>
-            <div className="space-y-4">
-              <div className="flex gap-3">
-                <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: "var(--dr-amber)" }} />
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Migrating this portfolio to Next.js with a full design system overhaul
-                </p>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: "var(--dr-amber)" }} />
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Embedded firmware work in PetaLinux and Yocto
-                </p>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: "var(--dr-amber)" }} />
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Working through <em>Design Patterns</em> by the Gang of Four
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
