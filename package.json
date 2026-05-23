@@ -14,10 +14,7 @@
     "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "gray-matter": "^4.0.3",
     "gsap": "^3.13.0",
-    "jsdom": "^26.1.0",
     "mysql2": "^3.16.0",
     "next": "^16.1.1",
     "react": "^19.2.3",
@@ -26,13 +23,10 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/jsdom": "^21.1.7",
     "@types/marked": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.21",
-    "basic-ftp": "^5.1.0",
     "eslint": "^9",
     "eslint-config-next": "^16.1.1",
     "marked": "^15.0.12",

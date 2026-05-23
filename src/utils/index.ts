@@ -117,20 +117,3 @@ export function getISOWeeksOfYear(year: number): { firstWeekStart: Date; lastWee
     lastWeekNumber
   };
 }
-
-/* 
-  * Returns the ISO week number for a given date.
-  * ISO weeks start on Monday and the first week of the year is the one that contains the first Thursday.
-  * Parameters:
-    - date: The target date
-  * Returns:
-    - The ISO week number (1-52 or 1-53)
-*/ 
-export function getISOWeekNumber(date: Date): number {
-  const target = new Date(date.valueOf());
-  const dayNr = (date.getDay() + 6) % 7; // Make Monday=0
-  target.setDate(target.getDate() - dayNr + 3); // Nearest Thursday
-  const jan4 = new Date(target.getFullYear(), 0, 4);
-  const dayDiff = (target.getTime() - jan4.getTime()) / 86400000;
-  return 1 + Math.floor(dayDiff / 7);
-}

@@ -31,6 +31,7 @@ export interface BibleReading {
   completed?: boolean;
 }
 
+// fallow-ignore-next-line unused-type
 export interface AdventBibleReading {
   id: string;
   date: string;
@@ -285,4 +286,5 @@ export function generateBibleReadingPlan(year?: number): ReadingPlan {
 
 // Legacy reading patterns removed - now using JSON data
 
+// fallow-ignore-next-line unused-export
 export const bibleReadingPlan = generateBibleReadingPlan();

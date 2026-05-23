@@ -20,7 +20,7 @@ import { shouldUseDatabase } from './db';
  * Check if we should use database for data loading
  * Returns false for static export mode (which doesn't support runtime DB access)
  */
-export function shouldUseDatabaseForData(): boolean {
+function shouldUseDatabaseForData(): boolean {
   // If output is set to "export", we can't use DB at runtime
   // This will be checked at build time via next.config.ts
   // For now, we respect USE_DATABASE env var, but in static export mode,
