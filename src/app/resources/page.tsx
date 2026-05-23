@@ -153,34 +153,41 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Tools Section */}
+      
+      {/* Theology Resources Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Tools & Software
+              Theology Resources
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
-              What I reach for daily when building embedded systems and web applications
+              Biblical teaching, sermons, and apologetics that have shaped how I read the Bible and understand the faith
             </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {resources.tools.map((tool, index) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {resources.theology_resources.map((resource, index) => (
+              <a
                 key={index}
-                className="flex items-start gap-4 p-4 rounded-lg border border-dr-border hover:bg-dr-cream transition-colors duration-200"
-                style={{ background: "var(--dr-surface)" }}
+                href={resource.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex gap-5 p-6 rounded-lg border border-dr-border hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+                style={{ background: "var(--dr-cream)" }}
               >
-                <span className="text-2xl flex-shrink-0 mt-0.5">{tool.icon}</span>
+                <span className="text-3xl flex-shrink-0">{resource.icon}</span>
                 <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{tool.name}</h3>
-                    <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>{tool.category}</span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-snug">{tool.description}</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
+                    {resource.name}
+                  </h3>
+                  <span className="inline-block text-xs px-2 py-0.5 rounded mb-2" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>
+                    {resource.category}
+                  </span>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {resource.description}
+                  </p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -293,40 +300,35 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Theology Resources Section */}
+
+      {/* Tools Section */}
       <section className="resource-section py-20 px-4 sm:px-6 lg:px-8" style={{ background: "var(--dr-surface)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Theology Resources
+              Tools & Software
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
-              Biblical teaching, sermons, and apologetics that have shaped how I read the Bible and understand the faith
+              What I reach for daily when building embedded systems and web applications
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {resources.theology_resources.map((resource, index) => (
-              <a
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {resources.tools.map((tool, index) => (
+              <div
                 key={index}
-                href={resource.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex gap-5 p-6 rounded-lg border border-dr-border hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
-                style={{ background: "var(--dr-cream)" }}
+                className="flex items-start gap-4 p-4 rounded-lg border border-dr-border hover:bg-dr-cream transition-colors duration-200"
+                style={{ background: "var(--dr-surface)" }}
               >
-                <span className="text-3xl flex-shrink-0">{resource.icon}</span>
+                <span className="text-2xl flex-shrink-0 mt-0.5">{tool.icon}</span>
                 <div className="min-w-0">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
-                    {resource.name}
-                  </h3>
-                  <span className="inline-block text-xs px-2 py-0.5 rounded mb-2" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>
-                    {resource.category}
-                  </span>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {resource.description}
-                  </p>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{tool.name}</h3>
+                    <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: "var(--dr-amber-pale)", color: "var(--dr-amber-deep)" }}>{tool.category}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-snug">{tool.description}</p>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
