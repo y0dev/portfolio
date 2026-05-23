@@ -1,0 +1,26 @@
+# Netlify Headers Configuration
+# This file is used by Netlify for header configuration
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.esvmedia.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';
+
+/*.html
+  Content-Type: text/html; charset=utf-8
+
+/*.css
+  Content-Type: text/css; charset=utf-8
+
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/*.json
+  Content-Type: application/json; charset=utf-8
+
+/*.xml
+  Content-Type: application/xml; charset=utf-8
+

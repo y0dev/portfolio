@@ -1,0 +1,52 @@
+{
+  "experience": [
+    {
+      "company": "Raytheon Technologies",
+      "title": "Senior Software Engineer",
+      "start": "June 2024",
+      "end": "Present",
+      "location": "USA",
+      "description": [
+        "Collaborate with cross-functional teams, including hardware engineers and system architects, to ensure seamless integration.",
+        "Oversee technical design, strategy, and architectural decisions to ensure scalable, maintainable solutions that align with business goals.",
+        "Mentor junior developers by conducting technical onboarding, training, and performance reviews."
+      ]
+    },
+    {
+      "company": "Raytheon Technologies",
+      "title": "Software Engineer 2",
+      "start": "June 2022",
+      "end": "June 2024",
+      "location": "USA",
+      "description": [
+        "Customized Linux kernels and developed device drivers for new hardware platforms. Utilized Buildroot and Yocto Project to build custom Linux distributions tailored for specific embedded systems, enhancing system performance and compatibility.",
+        "Designed and integrated reliable socket-based communication solutions (TCP/UDP) in the C language, optimizing real-time data transmission and enhancing system reliability to meet customer needs.",
+        "Implemented continuous integration/continuous delivery (CI/CD) processes using Git, Jenkins, and Coverity. "
+      ]
+    },
+    {
+      "company": "Raytheon Technologies",
+      "title": "Software Engineer 1",
+      "start": "March 2019",
+      "end": "June 2022",
+      "location": "USA",
+      "description": [
+        "Maintained code for radar systems, ensuring stable and efficient performance in real-time environments.",
+        "Maintained and updated technical documentation for software features and processes.",
+        "Developed automation scripts using Python, Perl, and Batch files to streamline the build process and parse large datasets."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "California State University, Fullerton",
+      "degree": "B.S. in Computer Science",
+      "start": "2017",
+      "end": "2019",
+      "location": "California",
+      "description": [
+        "Relevant coursework: Algorithms, Web Development, Databases."
+      ]
+    }
+  ]
+}

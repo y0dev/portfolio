@@ -1,0 +1,4340 @@
+[
+  {
+    "week": 1,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 1-2",
+        "description": "Creation"
+      },
+      "psalm": {
+        "reference": "Psalm 19",
+        "description": "God's Glory"
+      },
+      "nt": {
+        "reference": "Mark 1",
+        "description": "Jesus' Ministry Begins"
+      }
+    }
+  },
+  {
+    "week": 1,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 3-5",
+        "description": "The Fall of Man, Cain and Abel"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 2",
+        "description": "Jesus Heals a Man with a Paralyzed Arm"
+      }
+    }
+  },
+  {
+    "week": 1,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 6-8",
+        "description": "Noah's Ark"
+      },
+      "psalm": {
+        "reference": "Psalm 104",
+        "description": "God's Creation"
+      },
+      "nt": {
+        "reference": "Mark 3",
+        "description": "Jesus' Authority"
+      }
+    }
+  },
+  {
+    "week": 1,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 9-11",
+        "description": "Noah's Covenant, Tower of Babel"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 4",
+        "description": "Parables"
+      }
+    }
+  },
+  {
+    "week": 1,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 12-15",
+        "description": "Abraham's Call"
+      },
+      "psalm": {
+        "reference": "Psalm 148",
+        "description": "Praise God"
+      },
+      "nt": {
+        "reference": "Mark 5",
+        "description": "Miracles"
+      }
+    }
+  },
+  {
+    "week": 2,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 16-18",
+        "description": "Hagar and Ishmael, Abraham's Visitors"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 6",
+        "description": "Jesus' Rejection"
+      }
+    }
+  },
+  {
+    "week": 2,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 19-20",
+        "description": "Sodom and Gomorrah"
+      },
+      "psalm": {
+        "reference": "Psalm 1",
+        "description": "Blessed is the Man"
+      },
+      "nt": {
+        "reference": "Mark 7",
+        "description": "Traditions"
+      }
+    }
+  },
+  {
+    "week": 2,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 21-23",
+        "description": "Isaac Born"
+      },
+      "psalm": {
+        "reference": "Psalm 107",
+        "description": "God's Deliverance"
+      },
+      "nt": {
+        "reference": "Mark 8",
+        "description": "Feeding 4000"
+      }
+    }
+  },
+  {
+    "week": 2,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 24-25",
+        "description": "Isaac's Wife"
+      },
+      "psalm": {
+        "reference": "Psalm 4",
+        "description": "Evening Prayer"
+      },
+      "nt": {
+        "reference": "Mark 9",
+        "description": "Transfiguration"
+      }
+    }
+  },
+  {
+    "week": 2,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 26-27",
+        "description": "Isaac's Wells"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 10",
+        "description": "Rich Young Man"
+      }
+    }
+  },
+  {
+    "week": 3,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 28-29",
+        "description": "Jacob's Dream"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 11",
+        "description": "Triumphal Entry"
+      }
+    }
+  },
+  {
+    "week": 3,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 30-31",
+        "description": "Jacob's Children"
+      },
+      "psalm": {
+        "reference": "Psalm 11",
+        "description": "Trust in the Lord"
+      },
+      "nt": {
+        "reference": "Mark 12",
+        "description": "Render to Caesar"
+      }
+    }
+  },
+  {
+    "week": 3,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 32-34",
+        "description": "Jacob Wrestles God"
+      },
+      "psalm": {
+        "reference": "Psalm 145",
+        "description": "Great is the Lord"
+      },
+      "nt": {
+        "reference": "Mark 13",
+        "description": "End Times"
+      }
+    }
+  },
+  {
+    "week": 3,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 35-37",
+        "description": "Jacob Returns"
+      },
+      "psalm": {
+        "reference": "Psalm 12",
+        "description": "Help Lord"
+      },
+      "nt": {
+        "reference": "Mark 14",
+        "description": "Last Supper"
+      }
+    }
+  },
+  {
+    "week": 3,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 38-40",
+        "description": "Judah and Tamar, Joseph in Prison"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 15",
+        "description": "Crucifixion"
+      }
+    }
+  },
+  {
+    "week": 4,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 41-42",
+        "description": "Joseph Interprets Dreams"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Mark 16",
+        "description": "Resurrection"
+      }
+    }
+  },
+  {
+    "week": 4,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 43-44",
+        "description": "Joseph Tests Brothers"
+      },
+      "psalm": {
+        "reference": "Psalm 24",
+        "description": "King of Glory"
+      },
+      "nt": {
+        "reference": "Galatians 1",
+        "description": "Paul's Authority"
+      }
+    }
+  },
+  {
+    "week": 4,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 45-46",
+        "description": "Joseph Reveals Himself"
+      },
+      "psalm": {
+        "reference": "Psalm 108",
+        "description": "Steadfast Love"
+      },
+      "nt": {
+        "reference": "Galatians 2",
+        "description": "Paul's Ministry"
+      }
+    }
+  },
+  {
+    "week": 4,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 47-48",
+        "description": "Jacob in Egypt"
+      },
+      "psalm": {
+        "reference": "Psalm 25",
+        "description": "Teach Me"
+      },
+      "nt": {
+        "reference": "Galatians 3",
+        "description": "Faith vs. Works"
+      }
+    }
+  },
+  {
+    "week": 4,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Genesis 49-50",
+        "description": "Jacob's Blessings"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Galatians 4",
+        "description": "Sons of God"
+      }
+    }
+  },
+  {
+    "week": 5,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 1-3",
+        "description": "Moses' Birth"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Galatians 5",
+        "description": "Freedom in Christ"
+      }
+    }
+  },
+  {
+    "week": 5,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 4-6",
+        "description": "Moses' Call"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Galatians 6",
+        "description": "Bear One Another's Burdens"
+      }
+    }
+  },
+  {
+    "week": 5,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 7-9",
+        "description": "Plagues Begin"
+      },
+      "psalm": {
+        "reference": "Psalm 105",
+        "description": "God's Wonders"
+      },
+      "nt": {
+        "reference": "Ephesians 1",
+        "description": "Spiritual Blessings"
+      }
+    }
+  },
+  {
+    "week": 5,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 10-12",
+        "description": "More Plagues"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Ephesians 2",
+        "description": "Saved by Grace"
+      }
+    }
+  },
+  {
+    "week": 5,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 13-15",
+        "description": "Exodus from Egypt"
+      },
+      "psalm": {
+        "reference": "Psalm 114",
+        "description": "Tremble Earth"
+      },
+      "nt": {
+        "reference": "Ephesians 3",
+        "description": "Mystery Revealed"
+      }
+    }
+  },
+  {
+    "week": 6,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 16-18",
+        "description": "Manna and Quail"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Ephesians 4",
+        "description": "Unity in Christ"
+      }
+    }
+  },
+  {
+    "week": 6,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 19-21",
+        "description": "Ten Commandments"
+      },
+      "psalm": {
+        "reference": "Psalm 33",
+        "description": "Rejoice Righteous"
+      },
+      "nt": {
+        "reference": "Ephesians 5",
+        "description": "Walk in Love"
+      }
+    }
+  },
+  {
+    "week": 6,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 22-24",
+        "description": "Laws and Covenant"
+      },
+      "psalm": {
+        "reference": "Psalm 109",
+        "description": "Prayer Against Enemies"
+      },
+      "nt": {
+        "reference": "Ephesians 6",
+        "description": "Armor of God"
+      }
+    }
+  },
+  {
+    "week": 6,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 25-27",
+        "description": "Tabernacle Instructions"
+      },
+      "psalm": {
+        "reference": "Psalm 90",
+        "description": "Teach Us to Number"
+      },
+      "nt": {
+        "reference": "Philippians 1",
+        "description": "Partnership"
+      }
+    }
+  },
+  {
+    "week": 6,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 28-31",
+        "description": "Priestly Garments"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Philippians 2",
+        "description": "Christ's Humility"
+      }
+    }
+  },
+  {
+    "week": 7,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 32-34",
+        "description": "Golden Calf"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Philippians 3",
+        "description": "Press Toward Goal"
+      }
+    }
+  },
+  {
+    "week": 7,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 35-37",
+        "description": "Tabernacle Built"
+      },
+      "psalm": {
+        "reference": "Psalm 26",
+        "description": "Vindicate Me"
+      },
+      "nt": {
+        "reference": "Philippians 4",
+        "description": "Rejoice Always"
+      }
+    }
+  },
+  {
+    "week": 7,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Exodus 38-40",
+        "description": "Tabernacle Completed"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Hebrews 1",
+        "description": "Christ Superior to Angels"
+      }
+    }
+  },
+  {
+    "week": 7,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 1-3",
+        "description": "Burnt Offerings"
+      },
+      "psalm": {
+        "reference": "Psalm 27",
+        "description": "Light and Salvation"
+      },
+      "nt": {
+        "reference": "Hebrews 2",
+        "description": "Christ's Humanity"
+      }
+    }
+  },
+  {
+    "week": 7,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 4-7",
+        "description": "Sin Offerings"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Hebrews 3",
+        "description": "Christ Greater than Moses"
+      }
+    }
+  },
+  {
+    "week": 8,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 8-11",
+        "description": "Priesthood Ordained"
+      },
+      "psalm": {
+        "reference": "Psalm 110",
+        "description": "Lord's Priest"
+      },
+      "nt": {
+        "reference": "Hebrews 4",
+        "description": "Rest in Christ"
+      }
+    }
+  },
+  {
+    "week": 8,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 12-14",
+        "description": "Clean and Unclean"
+      },
+      "psalm": {
+        "reference": "Psalm 111",
+        "description": "Great Works"
+      },
+      "nt": {
+        "reference": "Hebrews 5",
+        "description": "High Priest"
+      }
+    }
+  },
+  {
+    "week": 8,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 15-18",
+        "description": "Purification Laws"
+      },
+      "psalm": {
+        "reference": "Psalm 31",
+        "description": "Refuge in You"
+      },
+      "nt": {
+        "reference": "Hebrews 6",
+        "description": "Maturity"
+      }
+    }
+  },
+  {
+    "week": 8,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 19-20",
+        "description": "Holiness Laws"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Hebrews 7",
+        "description": "Melchizedek Priesthood"
+      }
+    }
+  },
+  {
+    "week": 8,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 21-23",
+        "description": "Priestly Regulations"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Hebrews 8",
+        "description": "New Covenant"
+      }
+    }
+  },
+  {
+    "week": 9,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 24-25",
+        "description": "Lampstand and Sabbaths"
+      },
+      "psalm": {
+        "reference": "Psalm 81",
+        "description": "Hear My People"
+      },
+      "nt": {
+        "reference": "Hebrews 9",
+        "description": "Old vs. New"
+      }
+    }
+  },
+  {
+    "week": 9,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Leviticus 26-27",
+        "description": "Blessings and Curses"
+      },
+      "psalm": {
+        "reference": "Psalm 112",
+        "description": "Blessed Man"
+      },
+      "nt": {
+        "reference": "Hebrews 10",
+        "description": "Christ's Sacrifice"
+      }
+    }
+  },
+  {
+    "week": 9,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 1-2",
+        "description": "Census Taken"
+      },
+      "psalm": {
+        "reference": "Psalm 64",
+        "description": "Hide Me"
+      },
+      "nt": {
+        "reference": "Hebrews 11",
+        "description": "Faith Hall of Fame"
+      }
+    }
+  },
+  {
+    "week": 9,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 3-5",
+        "description": "Levite Duties"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Hebrews 12",
+        "description": "Run with Endurance"
+      }
+    }
+  },
+  {
+    "week": 9,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 6-7",
+        "description": "Nazirite Vow"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Hebrews 13",
+        "description": "Final Instructions"
+      }
+    }
+  },
+  {
+    "week": 10,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 8-11",
+        "description": "Levites Consecrated"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Colossians 1",
+        "description": "Supremacy of Christ"
+      }
+    }
+  },
+  {
+    "week": 10,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 12-14",
+        "description": "Miriam's Leprosy"
+      },
+      "psalm": {
+        "reference": "Psalm 28",
+        "description": "My Strength"
+      },
+      "nt": {
+        "reference": "Colossians 2",
+        "description": "Fullness in Christ"
+      }
+    }
+  },
+  {
+    "week": 10,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 15-18",
+        "description": "Laws and Rebellion"
+      },
+      "psalm": {
+        "reference": "Psalm 113",
+        "description": "Praise the Lord"
+      },
+      "nt": {
+        "reference": "Colossians 3",
+        "description": "New Life"
+      }
+    }
+  },
+  {
+    "week": 10,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 19-21",
+        "description": "Red Heifer"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Colossians 4",
+        "description": "Bronze Serpent, Final Greetings"
+      }
+    }
+  },
+  {
+    "week": 10,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 22-25",
+        "description": "Balaam's Donkey"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 1",
+        "description": "Birth of John"
+      }
+    }
+  },
+  {
+    "week": 11,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 26-29",
+        "description": "Second Census"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 2",
+        "description": "Birth of Jesus"
+      }
+    }
+  },
+  {
+    "week": 11,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 30-33",
+        "description": "Vows and Journeys"
+      },
+      "psalm": {
+        "reference": "Psalm 35",
+        "description": "Contend for Me"
+      },
+      "nt": {
+        "reference": "Luke 3",
+        "description": "John's Ministry"
+      }
+    }
+  },
+  {
+    "week": 11,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Numbers 34-36",
+        "description": "Land Boundaries"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 4",
+        "description": "Jesus' Temptation"
+      }
+    }
+  },
+  {
+    "week": 11,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 1-3",
+        "description": "Moses' First Speech"
+      },
+      "psalm": {
+        "reference": "Psalm 36",
+        "description": "Steadfast Love"
+      },
+      "nt": {
+        "reference": "Luke 5",
+        "description": "Calling Disciples"
+      }
+    }
+  },
+  {
+    "week": 11,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 4-5",
+        "description": "Obey God's Laws"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 6",
+        "description": "Sermon on the Plain"
+      }
+    }
+  },
+  {
+    "week": 12,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 6-9",
+        "description": "Love the Lord"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 7",
+        "description": "Centurion's Faith"
+      }
+    }
+  },
+  {
+    "week": 12,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 10-14",
+        "description": "Circumcise Hearts"
+      },
+      "psalm": {
+        "reference": "Psalm 5",
+        "description": "Hear My Words"
+      },
+      "nt": {
+        "reference": "Luke 8",
+        "description": "Parable of Sower"
+      }
+    }
+  },
+  {
+    "week": 12,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 15-18",
+        "description": "Year of Release"
+      },
+      "psalm": {
+        "reference": "Psalm 115",
+        "description": "Trust Not in Idols"
+      },
+      "nt": {
+        "reference": "Luke 9",
+        "description": "Feeding 5000"
+      }
+    }
+  },
+  {
+    "week": 12,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 19-22",
+        "description": "Cities of Refuge"
+      },
+      "psalm": {
+        "reference": "Psalm 6",
+        "description": "Have Mercy"
+      },
+      "nt": {
+        "reference": "Luke 10",
+        "description": "Seventy Sent"
+      }
+    }
+  },
+  {
+    "week": 12,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 23-26",
+        "description": "Exclusion Laws"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 11",
+        "description": "Lord's Prayer"
+      }
+    }
+  },
+  {
+    "week": 13,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 27-31",
+        "description": "Blessings and Curses"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 12",
+        "description": "Do Not Worry"
+      }
+    }
+  },
+  {
+    "week": 13,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Deuteronomy 32-34",
+        "description": "Song of Moses"
+      },
+      "psalm": {
+        "reference": "Psalm 13",
+        "description": "How Long Lord"
+      },
+      "nt": {
+        "reference": "Luke 13",
+        "description": "Repent or Perish"
+      }
+    }
+  },
+  {
+    "week": 13,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Joshua 1-4",
+        "description": "Joshua Takes Command"
+      },
+      "psalm": {
+        "reference": "Psalm 143",
+        "description": "Hear My Prayer"
+      },
+      "nt": {
+        "reference": "Luke 14",
+        "description": "Great Banquet"
+      }
+    }
+  },
+  {
+    "week": 13,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Joshua 5-8",
+        "description": "Jericho Falls"
+      },
+      "psalm": {
+        "reference": "Psalm 14",
+        "description": "Fool Says No God"
+      },
+      "nt": {
+        "reference": "Luke 15",
+        "description": "Lost Sheep"
+      }
+    }
+  },
+  {
+    "week": 13,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Joshua 9-13",
+        "description": "Gibeonites Deceive"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 16",
+        "description": "Rich Man and Lazarus"
+      }
+    }
+  },
+  {
+    "week": 14,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Joshua 14-17",
+        "description": "Land Division"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 17",
+        "description": "Faith and Forgiveness"
+      }
+    }
+  },
+  {
+    "week": 14,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Joshua 18-21",
+        "description": "More Land Division"
+      },
+      "psalm": {
+        "reference": "Psalm 15",
+        "description": "Who May Dwell"
+      },
+      "nt": {
+        "reference": "Luke 18",
+        "description": "Persistent Widow"
+      }
+    }
+  },
+  {
+    "week": 14,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Joshua 22-24",
+        "description": "Eastern Tribes"
+      },
+      "psalm": {
+        "reference": "Psalm 116",
+        "description": "Love the Lord"
+      },
+      "nt": {
+        "reference": "Luke 19",
+        "description": "Zacchaeus"
+      }
+    }
+  },
+  {
+    "week": 14,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Judges 1-3",
+        "description": "Judges Begin"
+      },
+      "psalm": {
+        "reference": "Psalm 16",
+        "description": "Preserve Me"
+      },
+      "nt": {
+        "reference": "Luke 20",
+        "description": "Authority Questioned"
+      }
+    }
+  },
+  {
+    "week": 14,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Judges 4-6",
+        "description": "Deborah and Gideon"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 21",
+        "description": "Signs of End Times"
+      }
+    }
+  },
+  {
+    "week": 15,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Judges 7-8",
+        "description": "Gideon's Victory"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Luke 22",
+        "description": "Last Supper"
+      }
+    }
+  },
+  {
+    "week": 15,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Judges 9-11",
+        "description": "Abimelech"
+      },
+      "psalm": {
+        "reference": "Psalm 17",
+        "description": "Hear Righteous Cause"
+      },
+      "nt": {
+        "reference": "Luke 23",
+        "description": "Crucifixion"
+      }
+    }
+  },
+  {
+    "week": 15,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Judges 12-16",
+        "description": "Samson"
+      },
+      "psalm": {
+        "reference": "Psalm 146",
+        "description": "Praise the Lord"
+      },
+      "nt": {
+        "reference": "Luke 24",
+        "description": "Resurrection"
+      }
+    }
+  },
+  {
+    "week": 15,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Judges 17-18",
+        "description": "Micah's Idol"
+      },
+      "psalm": {
+        "reference": "Psalm 21",
+        "description": "King Rejoices"
+      },
+      "nt": {
+        "reference": "Acts 1",
+        "description": "Ascension"
+      }
+    }
+  },
+  {
+    "week": 15,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Judges 19-21",
+        "description": "Civil War"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 2",
+        "description": "Pentecost"
+      }
+    }
+  },
+  {
+    "week": 16,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Ruth 1-2",
+        "description": "Ruth's Loyalty"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 3",
+        "description": "Healing at Gate"
+      }
+    }
+  },
+  {
+    "week": 16,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ruth 3-4",
+        "description": "Ruth and Boaz"
+      },
+      "psalm": {
+        "reference": "Psalm 37",
+        "description": "Trust in Lord"
+      },
+      "nt": {
+        "reference": "Acts 4",
+        "description": "Peter and John"
+      }
+    }
+  },
+  {
+    "week": 16,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 1-2",
+        "description": "Hannah's Prayer"
+      },
+      "psalm": {
+        "reference": "Psalm 120",
+        "description": "Deliver My Soul"
+      },
+      "nt": {
+        "reference": "Acts 5",
+        "description": "Ananias and Sapphira"
+      }
+    }
+  },
+  {
+    "week": 16,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 3-5",
+        "description": "Samuel Called"
+      },
+      "psalm": {
+        "reference": "Psalm 23",
+        "description": "Good Shepherd"
+      },
+      "nt": {
+        "reference": "Acts 6",
+        "description": "Seven Chosen"
+      }
+    }
+  },
+  {
+    "week": 16,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 6-8",
+        "description": "Ark Returned"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 7",
+        "description": "Stephen's Speech"
+      }
+    }
+  },
+  {
+    "week": 17,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 9-10",
+        "description": "Saul Anointed"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 8",
+        "description": "Philip in Samaria"
+      }
+    }
+  },
+  {
+    "week": 17,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 11-13",
+        "description": "Saul's Victory"
+      },
+      "psalm": {
+        "reference": "Psalm 38",
+        "description": "Discipline Me"
+      },
+      "nt": {
+        "reference": "Acts 9",
+        "description": "Paul's Conversion"
+      }
+    }
+  },
+  {
+    "week": 17,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 14",
+        "description": "Jonathan's Victory"
+      },
+      "psalm": {
+        "reference": "Psalm 124",
+        "description": "Help from Lord"
+      },
+      "nt": {
+        "reference": "Acts 10",
+        "description": "Cornelius"
+      }
+    }
+  },
+  {
+    "week": 17,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 15-16; 1 Chronicles 1",
+        "description": "Saul Rejected"
+      },
+      "psalm": {
+        "reference": "Psalm 39",
+        "description": "Genealogy"
+      },
+      "nt": {
+        "reference": "Acts 11",
+        "description": "Know My End, Gentiles"
+      }
+    }
+  },
+  {
+    "week": 17,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 17; 1 Chronicles 2",
+        "description": "David and Goliath"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 12",
+        "description": "More Genealogy, Peter Freed"
+      }
+    }
+  },
+  {
+    "week": 18,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 18-19; 1 Chronicles 3",
+        "description": "David and Jonathan"
+      },
+      "psalm": {
+        "reference": "Psalm 59",
+        "description": "David's Sons"
+      },
+      "nt": {
+        "reference": "Acts 13",
+        "description": "Deliver Me, Paul's Journey"
+      }
+    }
+  },
+  {
+    "week": 18,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 20; 1 Chronicles 4",
+        "description": "Covenant Renewed"
+      },
+      "psalm": {
+        "reference": "Psalm 56, 57, 142",
+        "description": "More Genealogy"
+      },
+      "nt": {
+        "reference": "Acts 14",
+        "description": "Trust in God, Iconium"
+      }
+    }
+  },
+  {
+    "week": 18,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 21-22; 1 Chronicles 5",
+        "description": "David Flees"
+      },
+      "psalm": {
+        "reference": "Psalm 52",
+        "description": "Gadites"
+      },
+      "nt": {
+        "reference": "Acts 15",
+        "description": "Mighty One, Council"
+      }
+    }
+  },
+  {
+    "week": 18,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 23-24; 1 Chronicles 6",
+        "description": "David Spares Saul"
+      },
+      "psalm": {
+        "reference": "Psalm 54",
+        "description": "Levites"
+      },
+      "nt": {
+        "reference": "Acts 16",
+        "description": "Save Me, Philippi"
+      }
+    }
+  },
+  {
+    "week": 18,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 25; 1 Chronicles 7",
+        "description": "Nabal and Abigail"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 17",
+        "description": "More Genealogy, Thessalonica"
+      }
+    }
+  },
+  {
+    "week": 19,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 26-27; 1 Chronicles 8",
+        "description": "David Spares Saul Again"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 18",
+        "description": "Benjaminites, Corinth"
+      }
+    }
+  },
+  {
+    "week": 19,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 28-29; 1 Chronicles 9",
+        "description": "Witch of Endor"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 19",
+        "description": "Jerusalem Dwellers, Ephesus"
+      }
+    }
+  },
+  {
+    "week": 19,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Samuel 30-31; 1 Chronicles 10",
+        "description": "Saul Dies"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 20",
+        "description": "Saul's Death, Ephesus Elders"
+      }
+    }
+  },
+  {
+    "week": 19,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 1-2; 1 Chronicles 11",
+        "description": "David Mourns"
+      },
+      "psalm": {
+        "reference": "Psalm 96, 106",
+        "description": "Mighty Men"
+      },
+      "nt": {
+        "reference": "Acts 21",
+        "description": "Sing to Lord, Jerusalem"
+      }
+    }
+  },
+  {
+    "week": 19,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 3-5; 1 Chronicles 12",
+        "description": "David King"
+      },
+      "psalm": {
+        "reference": "Psalm 122",
+        "description": "Warriors Join"
+      },
+      "nt": {
+        "reference": "Acts 22",
+        "description": "Jerusalem, Paul's Defense"
+      }
+    }
+  },
+  {
+    "week": 20,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 6; 1 Chronicles 13",
+        "description": "Ark Brought to Jerusalem"
+      },
+      "psalm": {
+        "reference": "Psalm 60",
+        "description": "Defeat Enemies"
+      },
+      "nt": {
+        "reference": "Acts 23",
+        "description": "Paul Before Council"
+      }
+    }
+  },
+  {
+    "week": 20,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Chronicles 14-16",
+        "description": "David's House"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 24",
+        "description": "Felix"
+      }
+    }
+  },
+  {
+    "week": 20,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 7-8; 1 Chronicles 17",
+        "description": "David's House"
+      },
+      "psalm": {
+        "reference": "Psalm 132",
+        "description": "Covenant"
+      },
+      "nt": {
+        "reference": "Acts 25",
+        "description": "Dwelling Place, Festus"
+      }
+    }
+  },
+  {
+    "week": 20,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 9-10; 1 Chronicles 18-19",
+        "description": "Mephibosheth"
+      },
+      "psalm": {
+        "reference": "Psalm 89",
+        "description": "Wars"
+      },
+      "nt": {
+        "reference": "Acts 26",
+        "description": "Steadfast Love, Agrippa"
+      }
+    }
+  },
+  {
+    "week": 20,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 11-12; 1 Chronicles 20",
+        "description": "David and Bathsheba"
+      },
+      "psalm": {
+        "reference": "Psalm 51, 32",
+        "description": "Wars"
+      },
+      "nt": {
+        "reference": "Acts 27",
+        "description": "Have Mercy, Shipwreck"
+      }
+    }
+  },
+  {
+    "week": 21,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 13-14",
+        "description": "Amnon and Tamar"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Acts 28",
+        "description": "Rome"
+      }
+    }
+  },
+  {
+    "week": 21,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 15-17",
+        "description": "Absalom's Rebellion"
+      },
+      "psalm": {
+        "reference": "Psalm 3, 63",
+        "description": "Trust in God"
+      },
+      "nt": {
+        "reference": "Romans 1",
+        "description": "Gospel Power"
+      }
+    }
+  },
+  {
+    "week": 21,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 18-20",
+        "description": "Absalom Dies"
+      },
+      "psalm": {
+        "reference": "Psalm 34",
+        "description": "Taste and See"
+      },
+      "nt": {
+        "reference": "Romans 2",
+        "description": "God's Judgment"
+      }
+    }
+  },
+  {
+    "week": 21,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 21-23",
+        "description": "David's Wars"
+      },
+      "psalm": {
+        "reference": "Psalm 18",
+        "description": "My Strength"
+      },
+      "nt": {
+        "reference": "Romans 3",
+        "description": "All Have Sinned"
+      }
+    }
+  },
+  {
+    "week": 21,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Samuel 24; 1 Chronicles 21",
+        "description": "Census"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Romans 4",
+        "description": "Abraham's Faith"
+      }
+    }
+  },
+  {
+    "week": 22,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Chronicles 22-25",
+        "description": "Temple Preparations"
+      },
+      "psalm": {
+        "reference": "Psalm 78",
+        "description": "Teach Children"
+      },
+      "nt": {
+        "reference": "Romans 5",
+        "description": "Justified by Faith"
+      }
+    }
+  },
+  {
+    "week": 22,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 1; 1 Chronicles 26-28",
+        "description": "Adonijah"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Romans 6",
+        "description": "Temple Organization, Dead to Sin"
+      }
+    }
+  },
+  {
+    "week": 22,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 2; 1 Chronicles 29",
+        "description": "David Dies"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Romans 7",
+        "description": "Temple Offerings, Law and Sin"
+      }
+    }
+  },
+  {
+    "week": 22,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 3; 2 Chronicles 1",
+        "description": "Solomon's Wisdom"
+      },
+      "psalm": {
+        "reference": "Psalm 42",
+        "description": "As Deer Pants"
+      },
+      "nt": {
+        "reference": "Romans 8",
+        "description": "No Condemnation"
+      }
+    }
+  },
+  {
+    "week": 22,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 4; Proverbs 1-2",
+        "description": "Solomon's Officials"
+      },
+      "psalm": {
+        "reference": "Psalm 43",
+        "description": "Wisdom Calls"
+      },
+      "nt": {
+        "reference": "Romans 9",
+        "description": "Send Light, God's Choice"
+      }
+    }
+  },
+  {
+    "week": 23,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 3-5",
+        "description": "Trust in Lord"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Romans 10",
+        "description": "Faith Comes by Hearing"
+      }
+    }
+  },
+  {
+    "week": 23,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 6-7",
+        "description": "Warnings"
+      },
+      "psalm": {
+        "reference": "Psalm 7",
+        "description": "Vindicate Me"
+      },
+      "nt": {
+        "reference": "Romans 11",
+        "description": "Israel's Future"
+      }
+    }
+  },
+  {
+    "week": 23,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 8-10",
+        "description": "Wisdom Calls"
+      },
+      "psalm": {
+        "reference": "Psalm 144",
+        "description": "Blessed People"
+      },
+      "nt": {
+        "reference": "Romans 12",
+        "description": "Living Sacrifice"
+      }
+    }
+  },
+  {
+    "week": 23,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 11-13",
+        "description": "Righteous vs. Wicked"
+      },
+      "psalm": {
+        "reference": "Psalm 8",
+        "description": "What is Man"
+      },
+      "nt": {
+        "reference": "Romans 13",
+        "description": "Submit to Authorities"
+      }
+    }
+  },
+  {
+    "week": 23,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 14-15",
+        "description": "Wise vs. Foolish"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Romans 14",
+        "description": "Accept One Another"
+      }
+    }
+  },
+  {
+    "week": 24,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 16-18",
+        "description": "Plans and Pride"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Romans 15",
+        "description": "Bear Weaknesses"
+      }
+    }
+  },
+  {
+    "week": 24,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 19-21",
+        "description": "Wealth and Wisdom"
+      },
+      "psalm": {
+        "reference": "Psalm 40",
+        "description": "Wait Patiently"
+      },
+      "nt": {
+        "reference": "Romans 16",
+        "description": "Final Greetings"
+      }
+    }
+  },
+  {
+    "week": 24,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 22-23",
+        "description": "Train Up Child"
+      },
+      "psalm": {
+        "reference": "Psalm 117",
+        "description": "Praise Lord"
+      },
+      "nt": {
+        "reference": "1 Thessalonians 1",
+        "description": "Faithful Work"
+      }
+    }
+  },
+  {
+    "week": 24,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 24-25",
+        "description": "Wisdom and Fools"
+      },
+      "psalm": {
+        "reference": "Psalm 41",
+        "description": "Blessed Poor"
+      },
+      "nt": {
+        "reference": "1 Thessalonians 2",
+        "description": "Gentle Ministry"
+      }
+    }
+  },
+  {
+    "week": 24,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 26-28",
+        "description": "Fools and Sluggards"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Thessalonians 3",
+        "description": "Timothy Sent"
+      }
+    }
+  },
+  {
+    "week": 25,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Proverbs 29-31",
+        "description": "Wise King"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Thessalonians 4",
+        "description": "Excellent Wife, Sanctification"
+      }
+    }
+  },
+  {
+    "week": 25,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Song of Songs 1-3",
+        "description": "Love Song"
+      },
+      "psalm": {
+        "reference": "Psalm 72",
+        "description": "King's Justice"
+      },
+      "nt": {
+        "reference": "1 Thessalonians 5",
+        "description": "Day of Lord"
+      }
+    }
+  },
+  {
+    "week": 25,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Song of Songs 4-6",
+        "description": "Love Described"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Thessalonians 1",
+        "description": "Christ's Return"
+      }
+    }
+  },
+  {
+    "week": 25,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Song of Songs 7-8",
+        "description": "Love's Power"
+      },
+      "psalm": {
+        "reference": "Psalm 127",
+        "description": "Children Heritage"
+      },
+      "nt": {
+        "reference": "2 Thessalonians 2",
+        "description": "Man of Lawlessness"
+      }
+    }
+  },
+  {
+    "week": 25,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 5; 2 Chronicles 2",
+        "description": "Temple Materials"
+      },
+      "psalm": {
+        "reference": "Psalm 127",
+        "description": "Unless Lord Builds"
+      },
+      "nt": {
+        "reference": "2 Thessalonians 3",
+        "description": "Work"
+      }
+    }
+  },
+  {
+    "week": 26,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 6; 2 Chronicles 3",
+        "description": "Temple Built"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Timothy 1",
+        "description": "False Teachers"
+      }
+    }
+  },
+  {
+    "week": 26,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 7; 2 Chronicles 4",
+        "description": "Temple Furnishings"
+      },
+      "psalm": {
+        "reference": "Psalm 44",
+        "description": "We Have Heard"
+      },
+      "nt": {
+        "reference": "1 Timothy 2",
+        "description": "Pray for All"
+      }
+    }
+  },
+  {
+    "week": 26,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 8",
+        "description": "Temple Dedicated"
+      },
+      "psalm": {
+        "reference": "Psalm 30",
+        "description": "Joy Comes"
+      },
+      "nt": {
+        "reference": "1 Timothy 3",
+        "description": "Church Leaders"
+      }
+    }
+  },
+  {
+    "week": 26,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 5-7",
+        "description": "Temple Dedicated"
+      },
+      "psalm": {
+        "reference": "Psalm 121",
+        "description": "Help from Hills"
+      },
+      "nt": {
+        "reference": "1 Timothy 4",
+        "description": "False Teaching"
+      }
+    }
+  },
+  {
+    "week": 26,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 9; 2 Chronicles 8",
+        "description": "God's Promise"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Timothy 5",
+        "description": "Widows and Elders"
+      }
+    }
+  },
+  {
+    "week": 27,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 10-11; 2 Chronicles 9",
+        "description": "Queen of Sheba"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Timothy 6",
+        "description": "Love of Money"
+      }
+    }
+  },
+  {
+    "week": 27,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ecclesiastes 1-3",
+        "description": "Vanity"
+      },
+      "psalm": {
+        "reference": "Psalm 45",
+        "description": "Royal Wedding"
+      },
+      "nt": {
+        "reference": "2 Timothy 1",
+        "description": "Guard Deposit"
+      }
+    }
+  },
+  {
+    "week": 27,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Ecclesiastes 4-6",
+        "description": "Oppression"
+      },
+      "psalm": {
+        "reference": "Psalm 125",
+        "description": "Trust in Lord"
+      },
+      "nt": {
+        "reference": "2 Timothy 2",
+        "description": "Good Soldier"
+      }
+    }
+  },
+  {
+    "week": 27,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Ecclesiastes 7-9",
+        "description": "Better Than"
+      },
+      "psalm": {
+        "reference": "Psalm 46",
+        "description": "God Our Refuge"
+      },
+      "nt": {
+        "reference": "2 Timothy 3",
+        "description": "Last Days"
+      }
+    }
+  },
+  {
+    "week": 27,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Ecclesiastes 10-12",
+        "description": "Wisdom and Folly"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Timothy 4",
+        "description": "Preach Word"
+      }
+    }
+  },
+  {
+    "week": 28,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 12; 2 Chronicles 10-11",
+        "description": "Kingdom Divides"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Titus 1",
+        "description": "Appoint Elders"
+      }
+    }
+  },
+  {
+    "week": 28,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 13-14; 2 Chronicles 12",
+        "description": "Jeroboam's Sin"
+      },
+      "psalm": {
+        "reference": "Psalm 47",
+        "description": "Clap Hands"
+      },
+      "nt": {
+        "reference": "Titus 2",
+        "description": "Sound Doctrine"
+      }
+    }
+  },
+  {
+    "week": 28,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 15; 2 Chronicles 13-14",
+        "description": "Kings of Judah"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Titus 3",
+        "description": "Good Works"
+      }
+    }
+  },
+  {
+    "week": 28,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 15-16; 1 Kings 16",
+        "description": "Asa's Reforms"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Philemon",
+        "description": "Onesimus"
+      }
+    }
+  },
+  {
+    "week": 28,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 17-18",
+        "description": "Elijah"
+      },
+      "psalm": {
+        "reference": "Psalm 119",
+        "description": "Your Word Lamp"
+      },
+      "nt": {
+        "reference": "Jude",
+        "description": "Contend for Faith"
+      }
+    }
+  },
+  {
+    "week": 29,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 19-21; 2 Chronicles 17",
+        "description": "Elijah Flees"
+      },
+      "psalm": {
+        "reference": "Psalm 129",
+        "description": "Jehoshaphat"
+      },
+      "nt": {
+        "reference": "Matthew 1",
+        "description": "Afflicted, Genealogy"
+      }
+    }
+  },
+  {
+    "week": 29,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "1 Kings 22; 2 Chronicles 18",
+        "description": "Ahab Dies"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 2",
+        "description": "Wise Men"
+      }
+    }
+  },
+  {
+    "week": 29,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 19-20; 2 Kings 1",
+        "description": "Jehoshaphat's Reforms"
+      },
+      "psalm": {
+        "reference": "Psalm 20",
+        "description": "Answer Us"
+      },
+      "nt": {
+        "reference": "Matthew 3",
+        "description": "John Baptizes"
+      }
+    }
+  },
+  {
+    "week": 29,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 2-3",
+        "description": "Elijah Taken"
+      },
+      "psalm": {
+        "reference": "Psalm 48",
+        "description": "Great City"
+      },
+      "nt": {
+        "reference": "Matthew 4",
+        "description": "Temptation"
+      }
+    }
+  },
+  {
+    "week": 29,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 4-6",
+        "description": "Elisha's Miracles"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 5",
+        "description": "Sermon on Mount"
+      }
+    }
+  },
+  {
+    "week": 30,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 7-8; 2 Chronicles 21",
+        "description": "Famine Ends"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 6",
+        "description": "Give Us Bread"
+      }
+    }
+  },
+  {
+    "week": 30,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 9-10",
+        "description": "Jehu Anointed"
+      },
+      "psalm": {
+        "reference": "Psalm 49",
+        "description": "Hear This"
+      },
+      "nt": {
+        "reference": "Matthew 7",
+        "description": "Judge Not"
+      }
+    }
+  },
+  {
+    "week": 30,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 22-23; 2 Kings 11",
+        "description": "Athaliah"
+      },
+      "psalm": {
+        "reference": "Psalm 131",
+        "description": "Quiet Soul"
+      },
+      "nt": {
+        "reference": "Matthew 8",
+        "description": "Healings"
+      }
+    }
+  },
+  {
+    "week": 30,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 24; 2 Kings 12",
+        "description": "Joash Repairs Temple"
+      },
+      "psalm": {
+        "reference": "Psalm 50",
+        "description": "Mighty One"
+      },
+      "nt": {
+        "reference": "Matthew 9",
+        "description": "More Healings"
+      }
+    }
+  },
+  {
+    "week": 30,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Joel 1-3",
+        "description": "Day of Lord"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 10",
+        "description": "Twelve Sent"
+      }
+    }
+  },
+  {
+    "week": 31,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Jonah 1-4",
+        "description": "Great Fish"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 11",
+        "description": "John's Question"
+      }
+    }
+  },
+  {
+    "week": 31,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 13-14; 2 Chronicles 25",
+        "description": "Elisha Dies"
+      },
+      "psalm": {
+        "reference": "Psalm 53",
+        "description": "No One Good"
+      },
+      "nt": {
+        "reference": "Matthew 12",
+        "description": "Sabbath"
+      }
+    }
+  },
+  {
+    "week": 31,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Amos 1-3",
+        "description": "Judgment on Nations"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 13",
+        "description": "Parables"
+      }
+    }
+  },
+  {
+    "week": 31,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Amos 4-6",
+        "description": "Israel's Sins"
+      },
+      "psalm": {
+        "reference": "Psalm 55",
+        "description": "Cast Burden"
+      },
+      "nt": {
+        "reference": "Matthew 14",
+        "description": "Feeding 5000"
+      }
+    }
+  },
+  {
+    "week": 31,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Amos 7-9",
+        "description": "Visions"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 15",
+        "description": "Traditions"
+      }
+    }
+  },
+  {
+    "week": 32,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Hosea 1-3",
+        "description": "Unfaithful Wife"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 16",
+        "description": "Peter's Confession"
+      }
+    }
+  },
+  {
+    "week": 32,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Hosea 4-6",
+        "description": "No Knowledge"
+      },
+      "psalm": {
+        "reference": "Psalm 58",
+        "description": "Break Teeth"
+      },
+      "nt": {
+        "reference": "Matthew 17",
+        "description": "Transfiguration"
+      }
+    }
+  },
+  {
+    "week": 32,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Hosea 7-10",
+        "description": "Israel's Corruption"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 18",
+        "description": "Greatest in Kingdom"
+      }
+    }
+  },
+  {
+    "week": 32,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Hosea 11-13",
+        "description": "God's Love"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 19",
+        "description": "Rich Young Man"
+      }
+    }
+  },
+  {
+    "week": 32,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Hosea 14; 2 Chronicles 26-27",
+        "description": "Return to Lord"
+      },
+      "psalm": {
+        "reference": "Psalm 61",
+        "description": "Uzziah"
+      },
+      "nt": {
+        "reference": "Matthew 20",
+        "description": "Hear My Cry, Workers"
+      }
+    }
+  },
+  {
+    "week": 33,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 15-16",
+        "description": "Kings of Israel"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 21",
+        "description": "Triumphal Entry"
+      }
+    }
+  },
+  {
+    "week": 33,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 1-3",
+        "description": "Judgment on Judah"
+      },
+      "psalm": {
+        "reference": "Psalm 9",
+        "description": "Sing Praises"
+      },
+      "nt": {
+        "reference": "Matthew 22",
+        "description": "Wedding Feast"
+      }
+    }
+  },
+  {
+    "week": 33,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 4-6",
+        "description": "Holy Mountain"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 23",
+        "description": "Woe to Pharisees"
+      }
+    }
+  },
+  {
+    "week": 33,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Micah 1-4",
+        "description": "Judgment on Samaria"
+      },
+      "psalm": {
+        "reference": "Psalm 10",
+        "description": "Why Hide"
+      },
+      "nt": {
+        "reference": "Matthew 24",
+        "description": "End Times"
+      }
+    }
+  },
+  {
+    "week": 33,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Micah 5-7",
+        "description": "Ruler from Bethlehem"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 25",
+        "description": "Sheep and Goats"
+      }
+    }
+  },
+  {
+    "week": 34,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 7-10",
+        "description": "Immanuel"
+      },
+      "psalm": {
+        "reference": "Psalm 22",
+        "description": "My God Why"
+      },
+      "nt": {
+        "reference": "Matthew 26",
+        "description": "Last Supper"
+      }
+    }
+  },
+  {
+    "week": 34,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 11-13",
+        "description": "Branch from Jesse"
+      },
+      "psalm": {
+        "reference": "Psalm 118",
+        "description": "Give Thanks"
+      },
+      "nt": {
+        "reference": "Matthew 27",
+        "description": "Crucifixion"
+      }
+    }
+  },
+  {
+    "week": 34,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 14-16",
+        "description": "Fall of Babylon"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Matthew 28",
+        "description": "Resurrection"
+      }
+    }
+  },
+  {
+    "week": 34,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 17-19",
+        "description": "Damascus Fallen"
+      },
+      "psalm": {
+        "reference": "Psalm 62",
+        "description": "Wait Silently"
+      },
+      "nt": {
+        "reference": "1 Corinthians 1",
+        "description": "Divisions"
+      }
+    }
+  },
+  {
+    "week": 34,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 20-22",
+        "description": "Egypt and Cush"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 2",
+        "description": "Wisdom of God"
+      }
+    }
+  },
+  {
+    "week": 35,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 23-25",
+        "description": "Tyre's Fall"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 3",
+        "description": "God's Building"
+      }
+    }
+  },
+  {
+    "week": 35,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 26-29",
+        "description": "Song of Salvation"
+      },
+      "psalm": {
+        "reference": "Psalm 65",
+        "description": "Praise Waits"
+      },
+      "nt": {
+        "reference": "1 Corinthians 4",
+        "description": "Servants"
+      }
+    }
+  },
+  {
+    "week": 35,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 30-32",
+        "description": "Woe to Obstinate"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 5",
+        "description": "Immorality"
+      }
+    }
+  },
+  {
+    "week": 35,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 33-35",
+        "description": "Woe to Destroyer"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 6",
+        "description": "Lawsuits"
+      }
+    }
+  },
+  {
+    "week": 35,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 28; 2 Kings 17",
+        "description": "Ahaz's Sins"
+      },
+      "psalm": {
+        "reference": "Psalm 66",
+        "description": "Israel Exiled"
+      },
+      "nt": {
+        "reference": "1 Corinthians 7",
+        "description": "Shout Joy, Marriage"
+      }
+    }
+  },
+  {
+    "week": 36,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 29-31",
+        "description": "Hezekiah's Reforms"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 8",
+        "description": "Food Sacrificed"
+      }
+    }
+  },
+  {
+    "week": 36,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 18-19; 2 Chronicles 32",
+        "description": "Hezekiah"
+      },
+      "psalm": {
+        "reference": "Psalm 67",
+        "description": "God Be Gracious"
+      },
+      "nt": {
+        "reference": "1 Corinthians 9",
+        "description": "Paul's Rights"
+      }
+    }
+  },
+  {
+    "week": 36,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 36-37",
+        "description": "Assyrian Threat"
+      },
+      "psalm": {
+        "reference": "Psalm 123",
+        "description": "Lift Eyes"
+      },
+      "nt": {
+        "reference": "1 Corinthians 10",
+        "description": "Warnings"
+      }
+    }
+  },
+  {
+    "week": 36,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 20; Isaiah 38-40",
+        "description": "Hezekiah's Illness"
+      },
+      "psalm": {
+        "reference": "Psalm 68",
+        "description": "Comfort My People"
+      },
+      "nt": {
+        "reference": "1 Corinthians 11",
+        "description": "God Arises, Head Coverings"
+      }
+    }
+  },
+  {
+    "week": 36,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 41-44",
+        "description": "Servant Songs"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 12",
+        "description": "Spiritual Gifts"
+      }
+    }
+  },
+  {
+    "week": 37,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 45-48",
+        "description": "Cyrus Anointed"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Corinthians 13",
+        "description": "Love Chapter"
+      }
+    }
+  },
+  {
+    "week": 37,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 49-52",
+        "description": "Servant Songs"
+      },
+      "psalm": {
+        "reference": "Psalm 69",
+        "description": "Save Me"
+      },
+      "nt": {
+        "reference": "1 Corinthians 14",
+        "description": "Tongues"
+      }
+    }
+  },
+  {
+    "week": 37,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 53-55",
+        "description": "Suffering Servant"
+      },
+      "psalm": {
+        "reference": "Psalm 128",
+        "description": "Blessed Family"
+      },
+      "nt": {
+        "reference": "1 Corinthians 15",
+        "description": "Resurrection"
+      }
+    }
+  },
+  {
+    "week": 37,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 56-59",
+        "description": "Salvation for All"
+      },
+      "psalm": {
+        "reference": "Psalm 70",
+        "description": "Hasten Help"
+      },
+      "nt": {
+        "reference": "1 Corinthians 16",
+        "description": "Collection"
+      }
+    }
+  },
+  {
+    "week": 37,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 60-63",
+        "description": "Glory of Zion"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Corinthians 1",
+        "description": "Comfort"
+      }
+    }
+  },
+  {
+    "week": 38,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Isaiah 64-66",
+        "description": "New Heavens"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Corinthians 2",
+        "description": "Forgiveness"
+      }
+    }
+  },
+  {
+    "week": 38,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 21; 2 Chronicles 33",
+        "description": "Manasseh's Sins"
+      },
+      "psalm": {
+        "reference": "Psalm 71",
+        "description": "Deliver Me"
+      },
+      "nt": {
+        "reference": "2 Corinthians 3",
+        "description": "New Covenant"
+      }
+    }
+  },
+  {
+    "week": 38,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Nahum 1-3",
+        "description": "Nineveh's Fall"
+      },
+      "psalm": {
+        "reference": "Psalm 149",
+        "description": "Praise Lord"
+      },
+      "nt": {
+        "reference": "2 Corinthians 4",
+        "description": "Treasure in Jars"
+      }
+    }
+  },
+  {
+    "week": 38,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 22-23",
+        "description": "Josiah's Reforms"
+      },
+      "psalm": {
+        "reference": "Psalm 73",
+        "description": "Envy Wicked"
+      },
+      "nt": {
+        "reference": "2 Corinthians 5",
+        "description": "New Creation"
+      }
+    }
+  },
+  {
+    "week": 38,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Chronicles 34-35",
+        "description": "Josiah's Reforms"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Corinthians 6",
+        "description": "God's Fellow Workers"
+      }
+    }
+  },
+  {
+    "week": 39,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Habakkuk 1-3",
+        "description": "Why Wicked Prosper"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Corinthians 7",
+        "description": "Godly Sorrow"
+      }
+    }
+  },
+  {
+    "week": 39,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Zephaniah 1-3",
+        "description": "Day of Lord"
+      },
+      "psalm": {
+        "reference": "Psalm 74",
+        "description": "Remember Mount Zion"
+      },
+      "nt": {
+        "reference": "2 Corinthians 8",
+        "description": "Generosity"
+      }
+    }
+  },
+  {
+    "week": 39,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 1-4",
+        "description": "Jeremiah Called"
+      },
+      "psalm": {
+        "reference": "Psalm 130",
+        "description": "Out of Depths"
+      },
+      "nt": {
+        "reference": "2 Corinthians 9",
+        "description": "Sowing"
+      }
+    }
+  },
+  {
+    "week": 39,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 5-7",
+        "description": "Judah's Sins"
+      },
+      "psalm": {
+        "reference": "Psalm 75",
+        "description": "God Judges"
+      },
+      "nt": {
+        "reference": "2 Corinthians 10",
+        "description": "Spiritual Weapons"
+      }
+    }
+  },
+  {
+    "week": 39,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 8-10",
+        "description": "False Prophets"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Corinthians 11",
+        "description": "Paul's Boasting"
+      }
+    }
+  },
+  {
+    "week": 40,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 11-13",
+        "description": "Broken Covenant"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Corinthians 12",
+        "description": "Thorn in Flesh"
+      }
+    }
+  },
+  {
+    "week": 40,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 14-16",
+        "description": "Drought"
+      },
+      "psalm": {
+        "reference": "Psalm 76",
+        "description": "God Known"
+      },
+      "nt": {
+        "reference": "2 Corinthians 13",
+        "description": "Final Warnings"
+      }
+    }
+  },
+  {
+    "week": 40,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 17-20",
+        "description": "Heart Deceitful"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "James 1",
+        "description": "Trials"
+      }
+    }
+  },
+  {
+    "week": 40,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 22, 23, 26",
+        "description": "False Shepherds"
+      },
+      "psalm": {
+        "reference": "Psalm 77",
+        "description": "Remember Deeds"
+      },
+      "nt": {
+        "reference": "James 2",
+        "description": "Faith and Works"
+      }
+    }
+  },
+  {
+    "week": 40,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 25, 35, 36, 45",
+        "description": "Seventy Years"
+      },
+      "psalm": {
+        "reference": "Psalm 133",
+        "description": "Unity"
+      },
+      "nt": {
+        "reference": "James 3",
+        "description": "Taming Tongue"
+      }
+    }
+  },
+  {
+    "week": 41,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 27, 28, 29, 24",
+        "description": "False Prophets"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "James 4",
+        "description": "Submit to God"
+      }
+    }
+  },
+  {
+    "week": 41,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 37, 21, 34",
+        "description": "Zedekiah"
+      },
+      "psalm": {
+        "reference": "Psalm 79",
+        "description": "Help Us"
+      },
+      "nt": {
+        "reference": "James 5",
+        "description": "Patience"
+      }
+    }
+  },
+  {
+    "week": 41,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 30-33",
+        "description": "New Covenant"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Peter 1",
+        "description": "Living Hope"
+      }
+    }
+  },
+  {
+    "week": 41,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 38, 39, 52",
+        "description": "Jerusalem Falls"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 Peter 2",
+        "description": "Living Stones"
+      }
+    }
+  },
+  {
+    "week": 41,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "2 Kings 24-25; 2 Chronicles 36",
+        "description": "Exile"
+      },
+      "psalm": {
+        "reference": "Psalm 126",
+        "description": "Restore Fortunes"
+      },
+      "nt": {
+        "reference": "1 Peter 3",
+        "description": "Wives and Husbands"
+      }
+    }
+  },
+  {
+    "week": 42,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Lamentations 1-5",
+        "description": "Jerusalem's Fall"
+      },
+      "psalm": {
+        "reference": "Psalm 137",
+        "description": "By Rivers"
+      },
+      "nt": {
+        "reference": "1 Peter 4",
+        "description": "Suffering"
+      }
+    }
+  },
+  {
+    "week": 42,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Obadiah; Jeremiah 40-42",
+        "description": "Edom's Fall"
+      },
+      "psalm": {
+        "reference": "Psalm 147",
+        "description": "Remnant"
+      },
+      "nt": {
+        "reference": "1 Peter 5",
+        "description": "Praise Lord, Elders"
+      }
+    }
+  },
+  {
+    "week": 42,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 43, 44, 46",
+        "description": "Egypt"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Peter 1",
+        "description": "False Prophets, Add to Faith"
+      }
+    }
+  },
+  {
+    "week": 42,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 47, 48, 49",
+        "description": "Nations Judged"
+      },
+      "psalm": {
+        "reference": "Psalm 80",
+        "description": "Restore Us"
+      },
+      "nt": {
+        "reference": "2 Peter 2",
+        "description": "False Teachers"
+      }
+    }
+  },
+  {
+    "week": 42,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Jeremiah 50-51",
+        "description": "Babylon Falls"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "2 Peter 3",
+        "description": "Scoffers"
+      }
+    }
+  },
+  {
+    "week": 43,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 1-3",
+        "description": "Vision of Glory"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 1",
+        "description": "Word Made Flesh"
+      }
+    }
+  },
+  {
+    "week": 43,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 4-6",
+        "description": "Siege"
+      },
+      "psalm": {
+        "reference": "Psalm 82",
+        "description": "God Among Gods"
+      },
+      "nt": {
+        "reference": "John 2",
+        "description": "Wedding"
+      }
+    }
+  },
+  {
+    "week": 43,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 7-9",
+        "description": "End Has Come"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 3",
+        "description": "Born Again"
+      }
+    }
+  },
+  {
+    "week": 43,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 10-12",
+        "description": "Glory Departs"
+      },
+      "psalm": {
+        "reference": "Psalm 83",
+        "description": "Do Not Keep Silent"
+      },
+      "nt": {
+        "reference": "John 4",
+        "description": "Samaritan Woman"
+      }
+    }
+  },
+  {
+    "week": 43,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 13-15",
+        "description": "False Prophets"
+      },
+      "psalm": {
+        "reference": "Psalm 136",
+        "description": "Give Thanks"
+      },
+      "nt": {
+        "reference": "John 5",
+        "description": "Healing"
+      }
+    }
+  },
+  {
+    "week": 44,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 16-18",
+        "description": "Jerusalem's Unfaithfulness"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 6",
+        "description": "Bread of Life"
+      }
+    }
+  },
+  {
+    "week": 44,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 19-21",
+        "description": "Lament"
+      },
+      "psalm": {
+        "reference": "Psalm 84",
+        "description": "Lovely Dwelling"
+      },
+      "nt": {
+        "reference": "John 7",
+        "description": "Living Water"
+      }
+    }
+  },
+  {
+    "week": 44,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 22-24",
+        "description": "Bloody City"
+      },
+      "psalm": {
+        "reference": "Psalm 134",
+        "description": "Praise Lord"
+      },
+      "nt": {
+        "reference": "John 8",
+        "description": "Light of World"
+      }
+    }
+  },
+  {
+    "week": 44,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 25-27",
+        "description": "Nations Judged"
+      },
+      "psalm": {
+        "reference": "Psalm 85",
+        "description": "Restore Us"
+      },
+      "nt": {
+        "reference": "John 9",
+        "description": "Blind Man"
+      }
+    }
+  },
+  {
+    "week": 44,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 28-30",
+        "description": "Tyre's Fall"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 10",
+        "description": "Good Shepherd"
+      }
+    }
+  },
+  {
+    "week": 45,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 31-33",
+        "description": "Egypt's Fall"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 11",
+        "description": "Watchman, Lazarus"
+      }
+    }
+  },
+  {
+    "week": 45,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 34-36",
+        "description": "Shepherds"
+      },
+      "psalm": {
+        "reference": "Psalm 86",
+        "description": "Hear Me"
+      },
+      "nt": {
+        "reference": "John 12",
+        "description": "Triumphal Entry"
+      }
+    }
+  },
+  {
+    "week": 45,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 37-39",
+        "description": "Dry Bones"
+      },
+      "psalm": {
+        "reference": "Psalm 87",
+        "description": "Zion's Glory"
+      },
+      "nt": {
+        "reference": "John 13",
+        "description": "Foot Washing"
+      }
+    }
+  },
+  {
+    "week": 45,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 40-42",
+        "description": "New Temple"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 14",
+        "description": "Way Truth Life"
+      }
+    }
+  },
+  {
+    "week": 45,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 43-45",
+        "description": "Glory Returns"
+      },
+      "psalm": {
+        "reference": "Psalm 135",
+        "description": "Praise Lord"
+      },
+      "nt": {
+        "reference": "John 15",
+        "description": "Vine"
+      }
+    }
+  },
+  {
+    "week": 46,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Ezekiel 46-48",
+        "description": "Temple Worship"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 16",
+        "description": "Spirit of Truth"
+      }
+    }
+  },
+  {
+    "week": 46,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Daniel 1-3",
+        "description": "Exile"
+      },
+      "psalm": {
+        "reference": "Psalm 88",
+        "description": "Dark Place"
+      },
+      "nt": {
+        "reference": "John 17",
+        "description": "High Priestly Prayer"
+      }
+    }
+  },
+  {
+    "week": 46,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Daniel 4-6",
+        "description": "Nebuchadnezzar's Dream"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 18",
+        "description": "Arrest"
+      }
+    }
+  },
+  {
+    "week": 46,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Daniel 7-9",
+        "description": "Beasts"
+      },
+      "psalm": {
+        "reference": "Psalm 91",
+        "description": "Refuge"
+      },
+      "nt": {
+        "reference": "John 19",
+        "description": "Crucifixion"
+      }
+    }
+  },
+  {
+    "week": 46,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Daniel 10-12",
+        "description": "End Times"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 20",
+        "description": "Resurrection"
+      }
+    }
+  },
+  {
+    "week": 47,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Ezra 1-2",
+        "description": "Return from Exile"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "John 21",
+        "description": "Breakfast"
+      }
+    }
+  },
+  {
+    "week": 47,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ezra 3-4",
+        "description": "Temple Rebuilt"
+      },
+      "psalm": {
+        "reference": "Psalm 92",
+        "description": "Good to Praise"
+      },
+      "nt": {
+        "reference": "1 John 1",
+        "description": "Walking in Light"
+      }
+    }
+  },
+  {
+    "week": 47,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Haggai; Zechariah 1",
+        "description": "Rebuild Temple"
+      },
+      "psalm": {
+        "reference": "Psalm 138",
+        "description": "Visions"
+      },
+      "nt": {
+        "reference": "1 John 2",
+        "description": "Give Thanks, Antichrist"
+      }
+    }
+  },
+  {
+    "week": 47,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Zechariah 2-5",
+        "description": "More Visions"
+      },
+      "psalm": {
+        "reference": "Psalm 93",
+        "description": "Lord Reigns"
+      },
+      "nt": {
+        "reference": "1 John 3",
+        "description": "Children of God"
+      }
+    }
+  },
+  {
+    "week": 47,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Zechariah 6-8",
+        "description": "More Visions"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 John 4",
+        "description": "Test Spirits"
+      }
+    }
+  },
+  {
+    "week": 48,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Zechariah 9-11",
+        "description": "More Visions"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "1 John 5",
+        "description": "Overcome World"
+      }
+    }
+  },
+  {
+    "week": 48,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Zechariah 12-14",
+        "description": "Jerusalem"
+      },
+      "psalm": {
+        "reference": "Psalm 94",
+        "description": "Vengeance"
+      },
+      "nt": {
+        "reference": "2 John",
+        "description": "Truth"
+      }
+    }
+  },
+  {
+    "week": 48,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Ezra 5-6",
+        "description": "Temple Completed"
+      },
+      "psalm": {
+        "reference": "Psalm 95",
+        "description": "Come Worship"
+      },
+      "nt": {
+        "reference": "3 John",
+        "description": "Hospitality"
+      }
+    }
+  },
+  {
+    "week": 48,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Esther 1-3",
+        "description": "Queen Deposed"
+      },
+      "psalm": {
+        "reference": "Psalm 139",
+        "description": "Search Me"
+      },
+      "nt": {
+        "reference": "Revelation 1",
+        "description": "Alpha Omega"
+      }
+    }
+  },
+  {
+    "week": 48,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Esther 4-6",
+        "description": "Mordecai's Plan"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 2",
+        "description": "Letters to Churches"
+      }
+    }
+  },
+  {
+    "week": 49,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Esther 7-10",
+        "description": "Haman Hanged"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 3",
+        "description": "More Letters"
+      }
+    }
+  },
+  {
+    "week": 49,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Ezra 7-10",
+        "description": "Ezra Returns"
+      },
+      "psalm": {
+        "reference": "Psalm 97",
+        "description": "Lord Reigns"
+      },
+      "nt": {
+        "reference": "Revelation 4",
+        "description": "Throne Room"
+      }
+    }
+  },
+  {
+    "week": 49,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Nehemiah 1-3",
+        "description": "Wall Rebuilt"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 5",
+        "description": "Scroll"
+      }
+    }
+  },
+  {
+    "week": 49,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Nehemiah 4-6",
+        "description": "Opposition"
+      },
+      "psalm": {
+        "reference": "Psalm 98",
+        "description": "Sing New Song"
+      },
+      "nt": {
+        "reference": "Revelation 6",
+        "description": "Seals"
+      }
+    }
+  },
+  {
+    "week": 49,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Nehemiah 7-9",
+        "description": "Genealogy"
+      },
+      "psalm": {
+        "reference": "Psalm 140",
+        "description": "Deliver Me"
+      },
+      "nt": {
+        "reference": "Revelation 7",
+        "description": "144, 000"
+      }
+    }
+  },
+  {
+    "week": 50,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Nehemiah 10-13",
+        "description": "Covenant Renewed"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 8",
+        "description": "Trumpets"
+      }
+    }
+  },
+  {
+    "week": 50,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Malachi",
+        "description": "Messenger"
+      },
+      "psalm": {
+        "reference": "Psalm 2",
+        "description": "Son Given"
+      },
+      "nt": {
+        "reference": "Revelation 9",
+        "description": "Locusts"
+      }
+    }
+  },
+  {
+    "week": 50,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Job 1-3",
+        "description": "Job's Trials"
+      },
+      "psalm": {
+        "reference": "Psalm 29",
+        "description": "Voice of Lord"
+      },
+      "nt": {
+        "reference": "Revelation 10",
+        "description": "Little Scroll"
+      }
+    }
+  },
+  {
+    "week": 50,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Job 4-7",
+        "description": "Eliphaz Speaks"
+      },
+      "psalm": {
+        "reference": "Psalm 99",
+        "description": "Holy is He"
+      },
+      "nt": {
+        "reference": "Revelation 11",
+        "description": "Two Witnesses"
+      }
+    }
+  },
+  {
+    "week": 50,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Job 8-11",
+        "description": "Bildad Speaks"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 12",
+        "description": "Woman and Dragon"
+      }
+    }
+  },
+  {
+    "week": 51,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Job 12-14",
+        "description": "Job Responds"
+      },
+      "psalm": {
+        "reference": "Psalm 100",
+        "description": "Serve with Joy"
+      },
+      "nt": {
+        "reference": "Revelation 13",
+        "description": "Beast"
+      }
+    }
+  },
+  {
+    "week": 51,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Job 15-17",
+        "description": "Eliphaz Again"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 14",
+        "description": "Lamb on Mount Zion"
+      }
+    }
+  },
+  {
+    "week": 51,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Job 18-20",
+        "description": "Bildad Again"
+      },
+      "psalm": {
+        "reference": "Psalm 141",
+        "description": "Set Guard"
+      },
+      "nt": {
+        "reference": "Revelation 15",
+        "description": "Seven Angels"
+      }
+    }
+  },
+  {
+    "week": 51,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Job 21-23",
+        "description": "Job Responds"
+      },
+      "psalm": {
+        "reference": "Psalm 101",
+        "description": "Blameless"
+      },
+      "nt": {
+        "reference": "Revelation 16",
+        "description": "Bowls"
+      }
+    }
+  },
+  {
+    "week": 51,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Job 24-27",
+        "description": "Job Continues"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 17",
+        "description": "Babylon"
+      }
+    }
+  },
+  {
+    "week": 52,
+    "day": 1,
+    "reading": {
+      "ot": {
+        "reference": "Job 28-30",
+        "description": "Wisdom"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 18",
+        "description": "Babylon Falls"
+      }
+    }
+  },
+  {
+    "week": 52,
+    "day": 2,
+    "reading": {
+      "ot": {
+        "reference": "Job 31-33",
+        "description": "Job's Defense"
+      },
+      "psalm": {
+        "reference": "Psalm 102",
+        "description": "Hear Prayer"
+      },
+      "nt": {
+        "reference": "Revelation 19",
+        "description": "Wedding"
+      }
+    }
+  },
+  {
+    "week": 52,
+    "day": 3,
+    "reading": {
+      "ot": {
+        "reference": "Job 34-36",
+        "description": "Elihu Speaks"
+      },
+      "psalm": null,
+      "nt": {
+        "reference": "Revelation 20",
+        "description": "Millennium"
+      }
+    }
+  },
+  {
+    "week": 52,
+    "day": 4,
+    "reading": {
+      "ot": {
+        "reference": "Job 37-39",
+        "description": "God Speaks"
+      },
+      "psalm": {
+        "reference": "Psalm 103",
+        "description": "Bless Lord"
+      },
+      "nt": {
+        "reference": "Revelation 21",
+        "description": "New Heaven"
+      }
+    }
+  },
+  {
+    "week": 52,
+    "day": 5,
+    "reading": {
+      "ot": {
+        "reference": "Job 40-42",
+        "description": "God's Power"
+      },
+      "psalm": {
+        "reference": "Psalm 150",
+        "description": "Praise Lord"
+      },
+      "nt": {
+        "reference": "Revelation 22",
+        "description": "New Jerusalem"
+      }
+    }
+  }
+]

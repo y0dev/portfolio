@@ -1,0 +1,20 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install ALL dependencies (needed for build, includes basic-ftp)
+RUN npm ci
+
+# Copy deployment scripts to a location we can access
+COPY scripts/deploy.sh /app/deploy.sh
+RUN chmod +x /app/deploy.sh
+
+# The actual portfolio source code and scripts will be mounted as volumes in docker-compose
+# This image just provides the environment
+
+# Default command (can be overridden)
+CMD ["/app/deploy.sh"]
+

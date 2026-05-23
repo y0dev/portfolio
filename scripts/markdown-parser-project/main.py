@@ -73,9 +73,13 @@ def process_markdown_file(file_path: str):
     bible_refs = find_bible_references(md_text)
     ttr = estimate_reading_time(md_text)
 
+<<<<<<< HEAD
+    output_base_dir = 'output'
+=======
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_base_dir = os.path.join(script_dir, 'output')  
+>>>>>>> dev
     new_entry = None
     doc_info = None
 
@@ -121,8 +125,13 @@ def process_markdown_file(file_path: str):
     # update_js_json_data(article_js_path, new_entry, entry_type=doc_info["type"].lower())
 
     # # Upload generated content to FTP server
+<<<<<<< HEAD
+    # remote_folder_path = os.path.join(ftp_base_path, doc_info["type"].lower() + 's', os.path.basename(html_dir))
+    # upload_folder_to_ftp(ftp_host, ftp_user, ftp_pass, html_dir, remote_folder_path)
+=======
     remote_folder_path = os.path.join(ftp_base_path, doc_info["type"].lower() + 's', os.path.basename(html_dir))
     upload_folder_to_ftp(ftp_host, ftp_user, ftp_pass, html_dir, remote_folder_path)
+>>>>>>> dev
     # upload_file_to_ftp(ftp_host, ftp_user, ftp_pass, article_js_path)
 
 def main():

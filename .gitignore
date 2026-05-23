@@ -10,6 +10,10 @@
 !.yarn/releases
 !.yarn/versions
 
+# Markdown files
+/**/*.md
+!README.mds
+
 # next.js
 /.next/
 /out/

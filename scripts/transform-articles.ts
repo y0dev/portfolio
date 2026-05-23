@@ -194,7 +194,7 @@ function enhanceOrderedLists(html: string): string {
 function enhanceListItems(html: string): string {
   return html.replace(
     /<li([^>]*)>/g,
-    '<li$1 class="mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">'
+    '<li$1 class="mb-1 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-200">'
   );
 }
 
@@ -253,7 +253,7 @@ function enhanceEmphasizedText(html: string): string {
 function enhanceBlockquotes(html: string): string {
   return html.replace(
     /<blockquote([^>]*)>/g,
-    '<blockquote$1 class="border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300">'
+    '<blockquote$1 class="border-l-4 border-amber-400 dark:border-amber-500 bg-amber-50 dark:bg-amber-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300">'
   );
 }
 
@@ -264,7 +264,7 @@ function enhanceBlockquotes(html: string): string {
 function enhanceLinks(html: string): string {
   return html.replace(
     /<a([^>]*)>/g,
-    '<a$1 class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline hover:no-underline transition-colors duration-200">'
+    '<a$1 class="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline hover:no-underline transition-colors duration-200">'
   );
 }
 
@@ -275,7 +275,7 @@ function enhanceLinks(html: string): string {
 function enhanceInlineCode(html: string): string {
   return html.replace(
     /<code([^>]*)>/g,
-    '<code$1 class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono">'
+    '<code$1 class="bg-amber-50 dark:bg-amber-900 text-gray-800 dark:text-amber-100 px-2 py-1 rounded text-sm font-mono">'
   );
 }
 
