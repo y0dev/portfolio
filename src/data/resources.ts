@@ -30,6 +30,19 @@ export const resources: Resources = {
     },
     {
       id: 3,
+      title: "The Westminster Confession of Faith",
+      author: "Westminster Assembly",
+      category: "Theology",
+      description: "The definitive Reformed confession of faith, covering the doctrines of Scripture, God, salvation, the church, and the sacraments.",
+      cover: "⛪",
+      rating: 5,
+      status: "Reading",
+      featured: true,
+      link: "https://www.amazon.com/Westminster-Confession-Faith-Westminster-Assembly/dp/0990516210",
+      image: "",
+    },
+    {
+      id: 4,
       title: "Design Patterns",
       author: "Gang of Four",
       category: "Programming",
@@ -42,7 +55,7 @@ export const resources: Resources = {
       image: "",
     },
     {
-      id: 4,
+      id: 5,
       title: "The Pragmatic Programmer",
       author: "Andrew Hunt & David Thomas",
       category: "Programming",
@@ -55,7 +68,7 @@ export const resources: Resources = {
       image: "",
     },
     {
-      id: 5,
+      id: 6,
       title: "Refactoring",
       author: "Martin Fowler",
       category: "Programming",
@@ -68,7 +81,7 @@ export const resources: Resources = {
       image: "",
     },
     {
-      id: 6,
+      id: 7,
       title: "JavaScript: The Good Parts",
       author: "Douglas Crockford",
       category: "Programming",
@@ -81,7 +94,7 @@ export const resources: Resources = {
       image: "",
     },
     {
-      id: 7,
+      id: 8,
       title: "React: Up & Running",
       author: "Stoyan Stefanov",
       category: "Programming",
@@ -147,6 +160,12 @@ export const resources: Resources = {
   ],
 
   podcasts: [
+    {
+      name: "Daily Doctrine",
+      description: "Short daily episodes on Christian theology and doctrine with Kevin DeYoung.",
+      url: "https://podcasts.apple.com/us/podcast/daily-doctrine/id1683859873",
+      icon: "📖",
+    },
     {
       name: "Syntax.fm",
       description: "A Tasty Treats Podcast for Web Developers.",

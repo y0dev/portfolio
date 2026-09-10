@@ -150,36 +150,27 @@ function enhanceCodeBlocks(html: string): string {
 }
 
 function enhanceTables(html: string): string {
-  // Add custom-table class for better styling
-  return html.replace(
-    /<table>/g,
-    '<table class="custom-table table table-striped table-hover">'
-  );
+  return html
+    .replace(/<table>/g, '<table class="w-full border-collapse my-6 text-sm" style="border-color: var(--dr-border);">')
+    .replace(/<thead>/g, '<thead style="background: var(--dr-surface);">')
+    .replace(/<th>/g, '<th class="px-4 py-2 text-left font-semibold border-b" style="border-color: var(--dr-border); color: var(--dr-text);">')
+    .replace(/<td>/g, '<td class="px-4 py-2 border-b" style="border-color: var(--dr-border); color: var(--dr-text-muted);">');
 }
 
 function enhanceImages(html: string): string {
-  // Add responsive image classes and lazy loading
   return html.replace(
     /<img([^>]*)>/g,
-    '<img$1 class="img-fluid rounded shadow-sm" loading="lazy">'
+    '<img$1 class="rounded shadow-sm max-w-full h-auto my-4" loading="lazy">'
   );
 }
 
-/**
- * Enhances unordered lists with Bootstrap styling and better spacing
- * Adds classes for consistent list appearance and hover effects
- */
 function enhanceUnorderedLists(html: string): string {
   return html.replace(
     /<ul([^>]*)>/g,
-    '<ul$1 class="list-unstyled mb-4 space-y-2">'
+    '<ul$1 class="mb-4 space-y-2 pl-5 list-disc">'
   );
 }
 
-/**
- * Enhances ordered lists with Bootstrap styling and better spacing
- * Adds classes for consistent list appearance and hover effects
- */
 function enhanceOrderedLists(html: string): string {
   return html.replace(
     /<ol([^>]*)>/g,
@@ -187,73 +178,48 @@ function enhanceOrderedLists(html: string): string {
   );
 }
 
-/**
- * Enhances list items with better styling and hover effects
- * Adds classes for consistent item appearance and spacing
- */
 function enhanceListItems(html: string): string {
   return html.replace(
     /<li([^>]*)>/g,
-    '<li$1 class="mb-1 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-200">'
+    '<li$1 class="mb-1 hover:text-dr-amber-deep transition-colors duration-200" style="color: var(--dr-text-muted);">'
   );
 }
 
-/**
- * Enhances headings (h1-h6) with better typography and spacing
- * Adds responsive text sizes and consistent styling
- */
 function enhanceHeadings(html: string): string {
   return html
-    .replace(/<h1([^>]*)>/g, '<h1$1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 mt-8">')
-    .replace(/<h2([^>]*)>/g, '<h2$1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7">')
-    .replace(/<h3([^>]*)>/g, '<h3$1 class="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4 mt-6">')
-    .replace(/<h4([^>]*)>/g, '<h4$1 class="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-3 mt-5">')
-    .replace(/<h5([^>]*)>/g, '<h5$1 class="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-200 mb-2 mt-4">')
-    .replace(/<h6([^>]*)>/g, '<h6$1 class="text-base md:text-lg font-medium text-gray-700 dark:text-gray-200 mb-2 mt-4">');
+    .replace(/<h1([^>]*)>/g, '<h1$1 class="text-4xl md:text-5xl font-bold mb-6 mt-8" style="color: var(--dr-text);">')
+    .replace(/<h2([^>]*)>/g, '<h2$1 class="text-3xl md:text-4xl font-bold mb-5 mt-7" style="color: var(--dr-text);">')
+    .replace(/<h3([^>]*)>/g, '<h3$1 class="text-2xl md:text-3xl font-semibold mb-4 mt-6" style="color: var(--dr-text);">')
+    .replace(/<h4([^>]*)>/g, '<h4$1 class="text-xl md:text-2xl font-semibold mb-3 mt-5" style="color: var(--dr-text);">')
+    .replace(/<h5([^>]*)>/g, '<h5$1 class="text-lg md:text-xl font-medium mb-2 mt-4" style="color: var(--dr-text-muted);">')
+    .replace(/<h6([^>]*)>/g, '<h6$1 class="text-base md:text-lg font-medium mb-2 mt-4" style="color: var(--dr-text-muted);">');
 }
 
-/**
- * Enhances paragraphs with better typography and spacing
- * Adds consistent line height and margin for better readability
- * Only applies to actual paragraph content, not block elements
- */
 function enhanceParagraphs(html: string): string {
   return html.replace(
     /<p([^>]*)>/g,
-    '<p$1 class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">'
+    '<p$1 class="leading-relaxed mb-4" style="color: var(--dr-text-muted);">'
   );
 }
 
-/**
- * Enhances strong/bold text with better styling
- * Adds emphasis styling and hover effects
- */
 function enhanceStrongText(html: string): string {
   return html.replace(
     /<strong([^>]*)>/g,
-    '<strong$1 class="font-bold text-gray-900 dark:text-white">'
+    '<strong$1 class="font-bold" style="color: var(--dr-text);">'
   );
 }
 
-/**
- * Enhances italic/emphasized text with better styling
- * Adds emphasis styling for better visual hierarchy
- */
 function enhanceEmphasizedText(html: string): string {
   return html.replace(
     /<em([^>]*)>/g,
-    '<em$1 class="italic text-gray-800 dark:text-gray-100">'
+    '<em$1 class="italic" style="color: var(--dr-text);">'
   );
 }
 
-/**
- * Enhances blockquotes with better styling and visual appeal
- * Adds left border, background, and proper spacing
- */
 function enhanceBlockquotes(html: string): string {
   return html.replace(
     /<blockquote([^>]*)>/g,
-    '<blockquote$1 class="border-l-4 border-amber-400 dark:border-amber-500 bg-amber-50 dark:bg-amber-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300">'
+    '<blockquote$1 class="border-l-4 pl-6 py-4 my-6 italic" style="border-color: var(--dr-amber); background: var(--dr-amber-pale); color: var(--dr-text-muted);">'
   );
 }
 
@@ -264,7 +230,7 @@ function enhanceBlockquotes(html: string): string {
 function enhanceLinks(html: string): string {
   return html.replace(
     /<a([^>]*)>/g,
-    '<a$1 class="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline hover:no-underline transition-colors duration-200">'
+    '<a$1 class="underline hover:no-underline transition-colors duration-200" style="color: var(--dr-amber-deep);">'
   );
 }
 
@@ -275,7 +241,7 @@ function enhanceLinks(html: string): string {
 function enhanceInlineCode(html: string): string {
   return html.replace(
     /<code([^>]*)>/g,
-    '<code$1 class="bg-amber-50 dark:bg-amber-900 text-gray-800 dark:text-amber-100 px-2 py-1 rounded text-sm font-mono">'
+    '<code$1 class="px-2 py-1 rounded text-sm font-mono" style="background: var(--dr-amber-pale); color: var(--dr-amber-deep);">'
   );
 }
 
@@ -286,18 +252,14 @@ function enhanceInlineCode(html: string): string {
 function enhanceHorizontalRules(html: string): string {
   return html.replace(
     /<hr([^>]*)>/g,
-    '<hr$1 class="border-gray-300 dark:border-gray-600 my-8">'
+    '<hr$1 class="my-8" style="border-color: var(--dr-border);">'
   );
 }
 
-/**
- * Enhances preformatted text blocks with better styling
- * Adds background, padding, and proper spacing
- */
 function enhancePreformattedText(html: string): string {
   return html.replace(
     /<pre([^>]*)>/g,
-    '<pre$1 class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4">'
+    '<pre$1 class="p-4 rounded-lg overflow-x-auto my-4" style="background: var(--dr-code-surface);">'
   );
 }
 

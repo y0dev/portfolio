@@ -283,10 +283,12 @@ export function styleHTMLContent(html: string): string {
     }
     usedIds.add(id);
     if (h.tagName === 'H2') {
-      h.className = 'text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 mt-7';
+      h.className = 'text-3xl md:text-4xl font-bold mb-5 mt-7';
+      (h as HTMLElement).style.color = 'var(--dr-text)';
       h.id = id;
     } else {
-      h.className = 'text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-6';
+      h.className = 'text-2xl font-bold mb-4 mt-6';
+      (h as HTMLElement).style.color = 'var(--dr-text)';
       h.id = id;
     }
   });
@@ -305,15 +307,18 @@ export function styleHTMLContent(html: string): string {
     }
     
     list.querySelectorAll('li').forEach(li => {
-      li.className = 'mb-2 text-gray-700 dark:text-gray-300 transition-colors duration-200';
+      li.className = 'mb-2 transition-colors duration-200';
+      (li as HTMLElement).style.color = 'var(--dr-text-muted)';
       // Style nested paragraphs in list items
       li.querySelectorAll('p').forEach(p => {
-        p.className = 'text-gray-700 dark:text-gray-300 leading-relaxed mb-2';
+        p.className = 'leading-relaxed mb-2';
+        (p as HTMLElement).style.color = 'var(--dr-text-muted)';
         (p as HTMLElement).style.display = 'block';
       });
       // Ensure list items with bold text display properly
       li.querySelectorAll('strong').forEach(strong => {
-        strong.className = 'font-bold text-gray-900 dark:text-white';
+        strong.className = 'font-bold';
+        (strong as HTMLElement).style.color = 'var(--dr-text)';
       });
     });
   });
@@ -336,26 +341,34 @@ export function styleHTMLContent(html: string): string {
 
   // Style inline code
   tempDiv.querySelectorAll('code:not(pre code)').forEach(code => {
-    code.className = 'bg-amber-50 dark:bg-amber-900 text-gray-800 dark:text-amber-100 px-2 py-1 rounded text-sm font-mono';
+    code.className = 'px-2 py-1 rounded text-sm font-mono';
+    (code as HTMLElement).style.background = 'var(--dr-amber-pale)';
+    (code as HTMLElement).style.color = 'var(--dr-amber-deep)';
   });
 
   // Style blockquotes
   tempDiv.querySelectorAll('blockquote').forEach(blockquote => {
-    blockquote.className = 'border-l-4 border-amber-400 dark:border-amber-500 bg-amber-50 dark:bg-amber-900/20 pl-6 py-4 my-6 italic text-gray-700 dark:text-gray-300';
+    blockquote.className = 'border-l-4 pl-6 py-4 my-6 italic';
+    (blockquote as HTMLElement).style.borderColor = 'var(--dr-amber)';
+    (blockquote as HTMLElement).style.background = 'var(--dr-amber-pale)';
+    (blockquote as HTMLElement).style.color = 'var(--dr-text-muted)';
   });
 
   // Style links
   tempDiv.querySelectorAll('a').forEach(a => {
-    a.className = 'text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline hover:no-underline transition-colors duration-200';
+    a.className = 'underline hover:no-underline transition-colors duration-200';
+    (a as HTMLElement).style.color = 'var(--dr-amber-deep)';
   });
 
   // Style strong and em
   tempDiv.querySelectorAll('strong').forEach(strong => {
-    strong.className = 'font-bold text-gray-900 dark:text-white';
+    strong.className = 'font-bold';
+    (strong as HTMLElement).style.color = 'var(--dr-text)';
   });
 
   tempDiv.querySelectorAll('em').forEach(em => {
-    em.className = 'italic text-gray-800 dark:text-gray-100';
+    em.className = 'italic';
+    (em as HTMLElement).style.color = 'var(--dr-text)';
   });
 
   // Style tables - wrap in responsive container and style all elements
@@ -385,7 +398,9 @@ export function styleHTMLContent(html: string): string {
         alignClass = 'text-right';
       }
       
-      th.className = `px-6 py-3 ${alignClass} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-dr-border`;
+      (th as HTMLElement).style.color = 'var(--dr-text-muted)';
+      (th as HTMLElement).style.borderColor = 'var(--dr-border)';
+      th.className = `px-6 py-3 ${alignClass} text-xs font-medium uppercase tracking-wider border-b`;
       th.removeAttribute('align'); // Remove align attribute as we're using classes
     });
     
@@ -415,7 +430,9 @@ export function styleHTMLContent(html: string): string {
         alignClass = 'text-right';
       }
       
-      td.className = `px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300 ${alignClass} border-b border-dr-border`;
+      (td as HTMLElement).style.color = 'var(--dr-text-muted)';
+      (td as HTMLElement).style.borderColor = 'var(--dr-border)';
+      td.className = `px-6 py-4 whitespace-nowrap text-sm ${alignClass} border-b`;
       td.removeAttribute('align'); // Remove align attribute as we're using classes
     });
   });
