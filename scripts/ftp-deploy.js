@@ -48,6 +48,7 @@ const {
   FTP_REMOTE_PATH = '/public_html',
   FTP_AUTO_OVERRIDE = 'false',
   FTP_SKIP_CONFIRM = 'false',
+  FTP_IGNORE_IMAGES = 'false',
 } = process.env;
 
 if (!FTP_HOST || !FTP_USER || !FTP_PASSWORD) {
@@ -58,6 +59,9 @@ if (!FTP_HOST || !FTP_USER || !FTP_PASSWORD) {
 const LOCAL_DIR = path.join(__dirname, '..', 'out');
 const AUTO_OVERRIDE = FTP_AUTO_OVERRIDE === 'true';
 const SKIP_CONFIRM = FTP_SKIP_CONFIRM === 'true';
+const IGNORE_IMAGES = FTP_IGNORE_IMAGES === 'true';
+
+const IMAGE_PREFIXES = ['assets/images', 'assets/photos'];
 
 // Paths relative to the remote root that need a confirmation prompt.
 // These are matched as prefixes of the remote path being uploaded.
@@ -98,9 +102,16 @@ async function uploadDir(client, localDir, remoteDir, overrideDecisions) {
   const entries = fs.readdirSync(localDir, { withFileTypes: true });
 
   for (const entry of entries) {
+    if (entry.name === '.DS_Store') continue;
+
     const localPath = path.join(localDir, entry.name);
     const remotePath = remoteDir ? `${remoteDir}/${entry.name}` : entry.name;
     const remoteFullPath = `${FTP_REMOTE_PATH}/${remotePath}`.replace(/\/+/g, '/');
+
+    // Silently skip image directories when FTP_IGNORE_IMAGES=true
+    if (IGNORE_IMAGES && IMAGE_PREFIXES.some(p => remotePath === p || remotePath.startsWith(p + '/'))) {
+      continue;
+    }
 
     if (entry.isDirectory()) {
       if (!AUTO_OVERRIDE && isProtected(remotePath)) {
