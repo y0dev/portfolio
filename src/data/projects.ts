@@ -6,7 +6,7 @@ export const projects: Project[] = [
     title: "Sunday Huddle",
     description: "An NFL confidence pool app for friends and family. Create a pool, invite players, and each week submit picks with confidence points. Points are tallied weekly and quarterly — including playoffs — with tie-breakers determining the season champion.",
     technologies: ["Next.js", "TypeScript", "Supabase", "Vercel"],
-    image: "assets/images/sh-logo.png",
+    image: "images/sh-logo.png",
     link: "https://www.sundayhuddle.net",
     github: "https://github.com/y0dev/nfl_football_pool",
     isEmoji: false,

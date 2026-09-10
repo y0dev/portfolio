@@ -11,7 +11,9 @@
     "start": "next start",
     "lint": "next lint",
     "transform-articles": "ts-node scripts/transform-articles.ts",
-    "generate-sitemap": "node scripts/generate-sitemap.js"
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "deploy": "npm run build:export && node scripts/ftp-deploy.js",
+    "deploy:ftp": "node scripts/ftp-deploy.js"
   },
   "dependencies": {
     "gsap": "^3.13.0",
