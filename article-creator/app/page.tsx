@@ -300,10 +300,9 @@ export default function Home() {
           <div className="space-y-6">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Article/Note Details</h2>
-              <ArticleForm 
-                onSubmit={handleFormSubmit} 
+              <ArticleForm
+                onSubmit={handleFormSubmit}
                 onChange={setFormData}
-                initialData={formData}
                 onMarkdownImport={handleMarkdownImport}
               />
             </div>

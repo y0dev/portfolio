@@ -67,6 +67,7 @@ export interface Project {
   link?: string;
   github?: string;
   isEmoji?: boolean;
+  coverImage?: boolean;
   featured: boolean;
 }
 

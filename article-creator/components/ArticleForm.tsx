@@ -38,6 +38,10 @@ export default function ArticleForm({ onSubmit, onChange, initialData, onMarkdow
   const [idManuallyEdited, setIdManuallyEdited] = useState(false);
   const [isFocusedOnIdField, setIsFocusedOnIdField] = useState(false);
 
+  // Keep a stable ref to onChange so it never triggers the sync effect
+  const onChangeRef = useRef(onChange);
+  useEffect(() => { onChangeRef.current = onChange; });
+
   // Update form data when initialData changes (e.g., on import)
   const prevDataRef = useRef<string>('');
   useEffect(() => {
@@ -91,10 +95,10 @@ export default function ArticleForm({ onSubmit, onChange, initialData, onMarkdow
 
   // Sync form data to parent whenever it changes
   useEffect(() => {
-    if (onChange) {
-      onChange(formData);
+    if (onChangeRef.current) {
+      onChangeRef.current(formData);
     }
-  }, [formData, onChange]);
+  }, [formData]);
 
   // Auto-generate slug from title
   useEffect(() => {
@@ -336,11 +340,15 @@ export default function ArticleForm({ onSubmit, onChange, initialData, onMarkdow
       {formData.category && (
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Tags (auto-filled from category)
+            Tags <span className="text-xs text-gray-500 dark:text-gray-400">(auto-filled, editable)</span>
           </label>
-          <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-gray-900 dark:text-gray-300">
-            {formData.tags || 'No tags'}
-          </div>
+          <input
+            type="text"
+            value={formData.tags}
+            onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="tag1, tag2, tag3"
+          />
         </div>
       )}
 

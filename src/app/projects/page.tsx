@@ -40,15 +40,15 @@ export default function Projects() {
                       ? "border-b border-dr-border"
                       : ""
                   }`}
-                  style={!project.isEmoji ? { background: "var(--dr-ink)" } : { background: "var(--dr-cream)" }}
+                  style={!project.isEmoji ? { background: project.coverImage ? "var(--dr-ink)" : "var(--dr-surface)" } : { background: "var(--dr-cream)" }}
                 >
                   {!project.isEmoji ? (
-                    <div className="relative w-full h-full max-w-[80%] max-h-[80%] flex items-center justify-center p-4">
+                    <div className={`relative ${project.coverImage ? "w-full h-full" : "w-full h-full max-w-[80%] max-h-[80%] flex items-center justify-center p-4"}`}>
                       <Image
                         src={`/assets/${project.image}`}
                         alt={project.title}
                         fill
-                        className="object-contain"
+                        className={project.coverImage ? "object-cover" : "object-contain"}
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
@@ -113,15 +113,15 @@ export default function Projects() {
                   className={`h-40 flex items-center justify-center relative overflow-hidden ${
                     project.isEmoji ? "border-b border-dr-border" : ""
                   }`}
-                  style={!project.isEmoji ? { background: "var(--dr-ink)" } : { background: "var(--dr-cream)" }}
+                  style={!project.isEmoji ? { background: project.coverImage ? "var(--dr-ink)" : "var(--dr-surface)" } : { background: "var(--dr-cream)" }}
                 >
                   {!project.isEmoji ? (
-                    <div className="relative w-full h-full max-w-[80%] max-h-[80%] flex items-center justify-center p-4">
+                    <div className={`relative ${project.coverImage ? "w-full h-full" : "w-full h-full max-w-[80%] max-h-[80%] flex items-center justify-center p-4"}`}>
                       <Image
                         src={`/assets/${project.image}`}
                         alt={project.title}
                         fill
-                        className="object-contain"
+                        className={project.coverImage ? "object-cover" : "object-contain"}
                         sizes="(max-width: 768px) 50vw, 33vw"
                       />
                     </div>

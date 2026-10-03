@@ -15,19 +15,27 @@ export default function ArticlesPage() {
   }, []);
 
   const fetchArticles = async () => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('/api/articles/db');
+      const response = await fetch('/api/articles/db', { signal: controller.signal });
       if (!response.ok) {
-        throw new Error('Failed to fetch articles');
+        const body = await response.json().catch(() => ({}));
+        throw new Error(body.details || body.error || `Server error ${response.status}`);
       }
       const data = await response.json();
       setArticles(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load articles');
+      const message = err instanceof Error
+        ? (err.name === 'AbortError' ? 'Request timed out — database may be unreachable' : err.message)
+        : 'Failed to load articles';
+      setError(message);
       console.error('Error fetching articles:', err);
     } finally {
+      clearTimeout(timeout);
       setLoading(false);
     }
   };
